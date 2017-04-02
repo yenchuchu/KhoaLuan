@@ -72,14 +72,17 @@
 <div class="container">
     <div>
         <h3>Listen and repeat</h3>
-        <p id="text_demo">{{$speak_items[0]->content}}</p>
+        <input type="hidden" id="level-tesing-hidden" value="{{$get_next_level}}">
+        <input type="hidden" id="skill-code-tesing-hidden" value="Speak">
+
+        <p id="text_demo">{{$item->content}}</p>
         @if(isset($speak_items[0]->url_mp3_create))
             <audio controls>
-                <source src="{{$speak_items[0]->url_mp3_create}}" type="audio/mpeg">
+                <source src="{{$item->url_mp3_create}}" type="audio/mpeg">
             </audio>
         @else
             <audio controls>
-                <source src="{{URL::asset($speak_items[0]->url_mp3)}}" type="audio/mpeg">
+                <source src="{{URL::asset($item->url_mp3)}}" type="audio/mpeg">
             </audio>
         @endif
 
@@ -111,7 +114,10 @@
         <ul  class="list-unstyled" id='ul'></ul>
     </div>
 
-    <button id="check_diff" class="btn btn-success" style="margin-top: 10px;">Check</button>
+    <button id="check_diff" class="btn btn-success" style="margin-top: 10px;" disabled>Check</button>
+    {{--<button id="next-level-speck" class="btn btn-success"--}}
+            {{--style="margin-top: 10px;" onclick="next_level_speaking('{{$get_next_level}}')">Next</button>--}}
+    <a class="btn btn-success" href="{{route('frontend.dashboard.student.learn.speak', [])}}">Next</a>
 </div>
 
 @stop
@@ -126,6 +132,7 @@
                 ul = id('ul'),
                 start = id('start'),
                 stop = id('stop'),
+                check_diff = id('check_diff'),
                 stream,
                 recorder,
                 counter=1,
@@ -189,6 +196,8 @@
             stop.disabled = true;
             recorder.stop();
             start.removeAttribute('disabled');
+            check_diff.removeAttribute('disabled');
+
             record_recognition.stop();
         }
 
@@ -299,6 +308,20 @@
                     alert("Không lấy được thông tin này!");
                 }
             });
+            return false;
+        }
+
+        function next_level_speaking() {
+            $.ajax({
+                url: '{{route("frontend.dashboard.student.learn.speak")}}',
+                type: "get",
+                data: {},
+                success: function (data) {},
+                error: function () {
+                    alert("Không lấy được thông tin này!");
+                }
+            });
+
             return false;
         }
     </script>

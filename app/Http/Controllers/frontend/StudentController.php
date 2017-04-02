@@ -44,33 +44,88 @@ class StudentController extends Controller
         return view('frontend.student.index', compact('class_id', 'levels'));
     }
 
-    public function learn_speak()
+    public function learn_speak(Request $request)
     {
+//        $all_request = $request->all();
+//
+//        if(!empty($all_request)) {
+//            $get_next_level =
+//        } else {
+//
+//        }
+
+        $skill_id = $this->getSkillIdByCode('Speak');
+
+        $user = Auth::user();
+        $user_id = $user->id;
+
         $class_id = Auth::user()->class_id;
-        $speak_items = Speaking::where(['class_id' => $class_id])->get();
-
-
-        foreach ($speak_items as $item) {
-            if ($item->url_mp3 == null) {
-                $tts = new VoiceRSS;
-                $voice = $tts->speech([
-                    'key' => 'd78f3419c63f4a35978e295ec139fc06',
-                    'hl' => 'en-us',
-                    'src' => $item->content,
-                    'r' => '0',
-                    'c' => 'mp3',
-                    'f' => '44khz_16bit_stereo',
-                    'ssml' => 'false',
-                    'b64' => 'true'
-                ]);
-
-                $item->url_mp3_create = $voice['response'];
-            }
-        }
-
         $levels = $this->levels;
 
-        return view('frontend.student.speak_skill', compact('class_id', 'levels', 'speak_items'));
+        $skills = $user->user_skills()->where(['skill_id' => $skill_id])->get();
+        $max_code = $this->getMaxCodeTest($skills);
+
+        // Lấy kết quả lần thi gần đây nhất.
+        $filter_skills = $skills->filter(function ($skill) use ($user_id, $max_code) {
+            $test_id = $user_id . '_' . $max_code;
+
+            return $skill->user_id == $user_id && $skill->test_id == $test_id;
+        })->all();
+
+        if(!empty($filter_skills)) {
+            foreach ($filter_skills as $filter) {
+                $get_next_level = $this->checkLevel($filter['point'], $filter['level_id']);
+            }
+        } else {
+            $code_level = 'L2';
+            $level = Level::where(['code' => $code_level])->first();
+            $get_next_level = $level->id;
+        }
+
+        $speak_items = Speaking::where(['class_id' => $class_id,
+            'type_user' => $this->code_student,
+            'level_id' => $get_next_level])
+            ->get()->toArray();
+
+        $key_speak_item = array_rand($speak_items, 1);
+        $speak_item = $speak_items[$key_speak_item];
+
+        $item = Speaking::where(['id' => $speak_item['id']])->first();
+        if ($item->url_mp3 == null) {
+            $tts = new VoiceRSS;
+            $voice = $tts->speech([
+                'key' => 'd78f3419c63f4a35978e295ec139fc06',
+                'hl' => 'en-us',
+                'src' => $item->content,
+                'r' => '0',
+                'c' => 'mp3',
+                'f' => '44khz_16bit_stereo',
+                'ssml' => 'false',
+                'b64' => 'true'
+            ]);
+
+            $item->url_mp3_create = $voice['response'];
+        }
+//
+//        foreach ($speak_items as $item) {
+//            if ($item->url_mp3 == null) {
+//                $tts = new VoiceRSS;
+//                $voice = $tts->speech([
+//                    'key' => 'd78f3419c63f4a35978e295ec139fc06',
+//                    'hl' => 'en-us',
+//                    'src' => $item->content,
+//                    'r' => '0',
+//                    'c' => 'mp3',
+//                    'f' => '44khz_16bit_stereo',
+//                    'ssml' => 'false',
+//                    'b64' => 'true'
+//                ]);
+//
+//                $item->url_mp3_create = $voice['response'];
+//            }
+//        }
+//dd($get_next_level);
+        return view('frontend.student.speak_skill', compact('class_id', 'levels', 'get_next_level', 'item'));
     }
 
     public function check_text_speech(Request $request)
@@ -80,22 +135,63 @@ class StudentController extends Controller
         $text_speak = $all_request['text_speak'];
 
         if (strcmp($text_demo, $text_speak) == 0) {
-            return response()->json([
-                'code' => 200,
-                'result' => null,
-                'message' => 'Score: 10'
-            ]);
+            $point = 10;
+            $result_diff = null;
         } else {
             $diff = $this->get_decorated_diff($text_demo, $text_speak);
             $result_diff = $diff['new'];
             $point = $diff['point'];
-
-            return response()->json([
-                'code' => 200,
-                'result' => $result_diff,
-                'message' => 'Score: ' . $point
-            ]);
         }
+
+        $level = Level::get()->pluck('id')->toArray();
+        $key_max = count($level) -1;
+
+        foreach ($level as $key => $lv) {
+            if($lv == $level_now) {
+                $key_now = $key;
+            }
+        }
+
+        if($point < 50) {
+            if($key_now == 0) {
+                $level_next = $level[$key_now];
+            } else {
+                $level_next = $level[$key_now-1];
+            }
+        } else {
+            if($key_now == $key_max) {
+                $level_next = $level[$key_now];
+            } else {
+                $level_next = $level[$key_now+1];
+            }
+
+        }
+
+        $add_user_skill = new UserSkill();
+
+        $user = Auth::user();
+        $user_id = $user->id;
+
+        // lấy số lần đã thi của user
+        $skills = $user->user_skills()->get();
+        $max_code = $this->getMaxCodeTest($skills) + 1;
+        $test_id = $user_id . "_" . $max_code;
+
+        $add_user_skill->user_id = $user_id;
+        $add_user_skill->level_id = $level_id;
+        $add_user_skill->status = 1;
+        $add_user_skill->test_id = $test_id;
+
+        $add_user_skill->point = $point;
+        $add_user_skill->skill_id = $skill_id;
+
+        $add_user_skill->save();
+
+        return response()->json([
+            'code' => 200,
+            'result' => $result_diff,
+            'message' => 'Score: ' . $point
+        ]);
 
     }
 
@@ -136,7 +232,7 @@ class StudentController extends Controller
 
         $level = Level::get()->pluck('id')->toArray();
         $key_max = count($level) -1;
-//dd($level);
+
         foreach ($level as $key => $lv) {
             if($lv == $level_now) {
                 $key_now = $key;

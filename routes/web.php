@@ -205,8 +205,12 @@ Route::group(['middleware' => 'auth'], function () {
 
             // dashboard
             Route::get('/', 'frontend\StudentController@index')->name('frontend.dashboard.student.index');
+
             Route::get('/learn-speak',
                 'frontend\StudentController@learn_speak')->name('frontend.dashboard.student.learn.speak');
+            Route::post('/next-level-speak',
+                'frontend\StudentController@learn_speak')->name('frontend.dashboard.student.next-level.speak');
+
             Route::get('/redirect-to-test-page/{skill_code}', 'frontend\StudentController@redirectToTest')
                 ->name('frontend.dashboard.student.redirect');
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\frontend;
 
+use App\Classes;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Item;
@@ -14,8 +15,10 @@ use Auth;
 use Config;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Route;
 use Session;
+use Illuminate\Support\Facades\Input;
 
 
 class StudentController extends Controller
@@ -44,15 +47,8 @@ class StudentController extends Controller
         return view('frontend.student.index', compact('class_id', 'levels'));
     }
 
-    public function learn_speak(Request $request)
+    public function learn_speak()
     {
-//        $all_request = $request->all();
-//
-//        if(!empty($all_request)) {
-//            $get_next_level =
-//        } else {
-//
-//        }
 
         $skill_id = $this->getSkillIdByCode('Speak');
 
@@ -74,7 +70,7 @@ class StudentController extends Controller
 
         if(!empty($filter_skills)) {
             foreach ($filter_skills as $filter) {
-                $get_next_level = $this->checkLevel($filter['point'], $filter['level_id']);
+                $get_next_level = $this->checkLevel($filter['point'], $filter['level_id'], 5);
             }
         } else {
             $code_level = 'L2';
@@ -87,44 +83,30 @@ class StudentController extends Controller
             'level_id' => $get_next_level])
             ->get()->toArray();
 
-        $key_speak_item = array_rand($speak_items, 1);
-        $speak_item = $speak_items[$key_speak_item];
+        if(!empty($speak_items)) {
+            $key_speak_item = array_rand($speak_items, 1);
+            $speak_item = $speak_items[$key_speak_item];
 
-        $item = Speaking::where(['id' => $speak_item['id']])->first();
-        if ($item->url_mp3 == null) {
-            $tts = new VoiceRSS;
-            $voice = $tts->speech([
-                'key' => 'd78f3419c63f4a35978e295ec139fc06',
-                'hl' => 'en-us',
-                'src' => $item->content,
-                'r' => '0',
-                'c' => 'mp3',
-                'f' => '44khz_16bit_stereo',
-                'ssml' => 'false',
-                'b64' => 'true'
-            ]);
+            $item = Speaking::where(['id' => $speak_item['id']])->first();
+            if ($item->url_mp3 == null) {
+                $tts = new VoiceRSS;
+                $voice = $tts->speech([
+                    'key' => 'd78f3419c63f4a35978e295ec139fc06',
+                    'hl' => 'en-us',
+                    'src' => $item->content,
+                    'r' => '0',
+                    'c' => 'mp3',
+                    'f' => '44khz_16bit_stereo',
+                    'ssml' => 'false',
+                    'b64' => 'true'
+                ]);
 
-            $item->url_mp3_create = $voice['response'];
+                $item->url_mp3_create = $voice['response'];
+            }
+        } else {
+            $item = null;
         }
-//
-//        foreach ($speak_items as $item) {
-//            if ($item->url_mp3 == null) {
-//                $tts = new VoiceRSS;
-//                $voice = $tts->speech([
-//                    'key' => 'd78f3419c63f4a35978e295ec139fc06',
-//                    'hl' => 'en-us',
-//                    'src' => $item->content,
-//                    'r' => '0',
-//                    'c' => 'mp3',
-//                    'f' => '44khz_16bit_stereo',
-//                    'ssml' => 'false',
-//                    'b64' => 'true'
-//                ]);
-//
-//                $item->url_mp3_create = $voice['response'];
-//            }
-//        }
-//dd($get_next_level);
+
         return view('frontend.student.speak_skill', compact('class_id', 'levels', 'get_next_level', 'item'));
     }
 
@@ -133,6 +115,7 @@ class StudentController extends Controller
         $all_request = $request->all();
         $text_demo = $all_request['text_demo'];
         $text_speak = $all_request['text_speak'];
+        $level_now = $all_request['level_now'];
 
         if (strcmp($text_demo, $text_speak) == 0) {
             $point = 10;
@@ -143,42 +126,20 @@ class StudentController extends Controller
             $point = $diff['point'];
         }
 
-        $level = Level::get()->pluck('id')->toArray();
-        $key_max = count($level) -1;
-
-        foreach ($level as $key => $lv) {
-            if($lv == $level_now) {
-                $key_now = $key;
-            }
-        }
-
-        if($point < 50) {
-            if($key_now == 0) {
-                $level_next = $level[$key_now];
-            } else {
-                $level_next = $level[$key_now-1];
-            }
-        } else {
-            if($key_now == $key_max) {
-                $level_next = $level[$key_now];
-            } else {
-                $level_next = $level[$key_now+1];
-            }
-
-        }
-
         $add_user_skill = new UserSkill();
 
+        $skill_id = $this->getSkillIdByCode('Speak');
         $user = Auth::user();
         $user_id = $user->id;
 
-        // lấy số lần đã thi của user
-        $skills = $user->user_skills()->get();
+        $skills = $user->user_skills()->where(['skill_id' => $skill_id])->get();
         $max_code = $this->getMaxCodeTest($skills) + 1;
+
+        // lấy số lần đã thi của user
         $test_id = $user_id . "_" . $max_code;
 
         $add_user_skill->user_id = $user_id;
-        $add_user_skill->level_id = $level_id;
+        $add_user_skill->level_id = $level_now;
         $add_user_skill->status = 1;
         $add_user_skill->test_id = $test_id;
 
@@ -192,7 +153,6 @@ class StudentController extends Controller
             'result' => $result_diff,
             'message' => 'Score: ' . $point
         ]);
-
     }
 
     function get_decorated_diff($old, $new)
@@ -209,8 +169,9 @@ class StudentController extends Controller
         $end = substr($new, $new_end);
         $new_diff = substr($new, $from_start, $new_end - $from_start);
 //        $old_diff = substr($old, $from_start, $old_end - $from_start);
-
-        $count_word_correct = str_word_count($start) + str_word_count($end);
+//dd($new_diff);
+        $count_word_correct = str_word_count($start) + str_word_count($end); // nên check cả số từ sai nữa để trừ điểm.
+//        dd($count_word_correct);
 //        var_dump($count_word_correct);
         if ($count_word_correct == 0) {
             $point = 0;
@@ -219,16 +180,17 @@ class StudentController extends Controller
         }
 
         $new = "<span id='final_span' class='final'>$start<span style='background-color: rgba(249, 150, 117, 0.49);'>$new_diff</span>$end</span>";
+
 //        dd($new_diff);
 //        $new = $start . " - " . $new_diff . " - " . $end;
 //        $old = "$start<del style='background-color:#ffcccc'>$old_diff</del>$end";
-        return array("old" => $old, "new" => $new, "point" => round($point, 2));
+        return array("old" => $old, "new" => $new, "point" => round($point, 2), "new_diff" => $new_diff);
 //
 //        return array('1','2');
 
     }
 
-    public function checkLevel($point, $level_now) {
+    public function checkLevel($point, $level_now, $point_item) {
 
         $level = Level::get()->pluck('id')->toArray();
         $key_max = count($level) -1;
@@ -239,7 +201,7 @@ class StudentController extends Controller
             }
         }
 
-        if($point < 50) {
+        if($point < $point_item) {
             if($key_now == 0) {
                 $level_next = $level[$key_now];
             } else {
@@ -295,7 +257,7 @@ class StudentController extends Controller
 
         if(!empty($filter_skills)) {
             foreach ($filter_skills as $filter) {
-                $get_next_level = $this->checkLevel($filter['point'], $filter['level_id']);
+                $get_next_level = $this->checkLevel($filter['point'], $filter['level_id'], 50);
             }
         } else {
             $code_level = 'L2';
@@ -310,7 +272,7 @@ class StudentController extends Controller
             $random_type_read = array_rand($type_exam_read, 3);
 
             $items = [];
-            var_dump($random_type_read);
+//            var_dump($random_type_read);
 
             if (!isset($check_read)) {
 //                echo " k ton tai";
@@ -656,7 +618,7 @@ class StudentController extends Controller
 
         if(!empty($filter_skills)) {
             foreach ($filter_skills as $filter) {
-                $get_next_level = $this->checkLevel($filter['point'], $filter['level_id']);
+                $get_next_level = $this->checkLevel($filter['point'], $filter['level_id'], 50);
             }
         } else {
             $code_level = 'L2';
@@ -673,9 +635,7 @@ class StudentController extends Controller
 //            $random_type_read = ['listen_ticks'];
 
             $items = [];
-            var_dump($random_type_read);
 
-//            die;
             if (!isset($check_read)) {
 //                echo " k ton tai";
                 foreach ($random_type_read as $read) {
@@ -1078,21 +1038,6 @@ class StudentController extends Controller
         return $code;
     }
 
-    public function ShowTest()
-    {
-
-    }
-
-    public function create()
-    {
-
-    }
-
-    public function store(Request $request)
-    {
-
-    }
-
     public function show_results()
     {
         $user_id = Auth::user()->id;
@@ -1127,6 +1072,65 @@ class StudentController extends Controller
         $skill = Skill::where(['code' => $code_skill])->first();
 
         return $skill->id;
+    }
+
+    public function profile() {
+        $user = Auth::user();
+        $classes = Classes::all();
+
+        return view('frontend.student.profile', compact('user', 'classes'));
+    }
+
+    public function change_avatar(Request $request, $user_id) {
+        $user = User::where(['id' => $user_id])->first();
+        $classes = Classes::all();
+
+        $data = $request->all();
+
+        if (isset($data['change_avatar'])) {
+            $file_cover = Input::file('change_avatar');
+            $destinationPath_cover = public_path('img/img-avatar'); // upload path
+            $extension_cover = $file_cover->getClientOriginalExtension(); // getting image extension
+            $filename_cover = $user->id . '-avatar' . '.' . $extension_cover;
+            $file_cover->move($destinationPath_cover, $filename_cover);
+            $convert_save['avatar'] = "img/img-avatar/" . $filename_cover;
+
+            DB::table('users')
+                ->where('id', $user_id)
+                ->update($convert_save);
+
+            Session::flash('message', 'To change your avatar successful!');
+        } else {
+            Session::flash('message', 'No change!');
+        }
+
+        return Redirect()->route('frontend.student.show.profile', ['user' => $user, 'classes' => $classes]);
+    }
+
+    public function change_infomation(Request $request, $user_id) {
+        $user = User::where(['id' => $user_id])->first();
+        $classes = Classes::all();
+
+        $data = $request->all();
+
+        if($user->user_name == $data['change_user_name'] && $user->full_name == $data['change_full_name'] && $user->email == $data['change_email'] && $user->class_id ==  $data['change_class']) {
+            Session::flash('message', 'No change!');
+        } else {
+            $change_data = [
+                'user_name' => $data['change_user_name'],
+                'full_name' => $data['change_full_name'],
+                'email' => $data['change_email'],
+                'class_id' => $data['change_class'],
+            ];
+
+            DB::table('users')
+                ->where('id', $user_id)
+                ->update($change_data);
+
+            Session::flash('message', 'To change your information successful!');
+        }
+
+        return Redirect()->route('frontend.student.show.profile', ['user' => $user, 'classes' => $classes]);
     }
 
     public function edit($id)

@@ -1,5 +1,4 @@
 <div class="row wrap-test-class" id="title-level-testing">
-    <h3>Testing {{$skill_code}}</h3>
     <input type="hidden" id="level-tesing-hidden" value="{{$get_next_level}}">
     <input type="hidden" id="skill-code-tesing-hidden" value="{{$skill_code}}">
 </div>

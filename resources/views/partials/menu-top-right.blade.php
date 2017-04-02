@@ -212,7 +212,8 @@
                 </a>
                 <!-- dropdown user-->
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
+                    <li>
+                        <a href="{{route('frontend.student.show.profile')}}"><i class="fa fa-user fa-fw"></i>User Profile</a>
                     </li>
                     <li>
                         <a href="{{ url('/logout') }}"
@@ -244,10 +245,16 @@
             @else
                 <div class="dropdown" id="dropdown-menu-top">
                     <a href="#" class="dropbtn" id="username-auth">
-                        {{ Auth::user()->user_name }} <span class="caret"></span>
+                        @if(Auth::user()->avatar != null)
+                            <img src="{{URL::asset(Auth::user()->avatar)}}" id="avatar_img" alt="Avatar">
+                        @else
+                            <img src="{{URL::asset('imgs-dashboard/avatar.png')}}" id="avatar_img" alt="Avatar">
+                        @endif
+                            {{ Auth::user()->user_name }} <span class="caret"></span>
                     </a>
                     <div class="dropdown-content">
-                        <a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
+                        <a href="{{route('frontend.student.show.profile')}}"><i class="fa fa-user fa-fw"></i>
+                            User Profile</a>
                         <a href="{{ url('/logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -261,17 +268,6 @@
                     </div>
                 </div>
 
-                <li class="dropdown">
-
-
-                    <ul class="dropdown-menu dropdown-user">
-                        <li></a>
-                        </li>
-                        <li>
-
-                        </li>
-                    </ul>
-                </li>
             @endif
     @endif
 @endif

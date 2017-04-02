@@ -54,6 +54,11 @@
             color: white !important;
         }
 
+        #username-auth:focus,
+        #username-auth:active {
+            text-decoration: none;
+        }
+
         #menu-nav-top .nav a:hover,
         #menu-nav-top .nav a:active {
             background-color: #2aadda;
@@ -63,6 +68,7 @@
             background-color: #f6f6f6;
             height: 55px;
             z-index: 40;
+            margin-bottom: 30px;
         }
 
         .navbar-default .navbar-nav > .active > a,
@@ -120,7 +126,7 @@
         }
 
         .dropdown-content {
-            margin-top: 22px;
+            margin-top: 4px;
             display: none;
             position: relative;
             background-color: #f9f9f9;
@@ -144,6 +150,14 @@
 
         #dropdown-menu-top:hover .dropbtn {
            text-decoration: none;
+        }
+
+        #avatar_img {
+            width: 40px;
+            height: 40px;
+            border-radius: 5%;
+            position: relative;
+            top: -5px;
         }
 
     </style>

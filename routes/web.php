@@ -208,8 +208,8 @@ Route::group(['middleware' => 'auth'], function () {
 
             Route::get('/learn-speak',
                 'frontend\StudentController@learn_speak')->name('frontend.dashboard.student.learn.speak');
-            Route::post('/next-level-speak',
-                'frontend\StudentController@learn_speak')->name('frontend.dashboard.student.next-level.speak');
+//            Route::post('/next-level-speak',
+//                'frontend\StudentController@learn_speak')->name('frontend.dashboard.student.next-level.speak');
 
             Route::get('/redirect-to-test-page/{skill_code}', 'frontend\StudentController@redirectToTest')
                 ->name('frontend.dashboard.student.redirect');
@@ -233,6 +233,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('show_results', 'frontend\StudentController@show_results')
                 ->name('frontend.student.show.results');
 
+            // show profile
+            Route::get('profile', 'frontend\StudentController@profile')
+                ->name('frontend.student.show.profile');
+            Route::post('change/profile/avatar/{id}', 'frontend\StudentController@change_avatar')
+                ->name('frontend.student.change.profile.avatar');
+            Route::post('change/profile/infomation/{id}', 'frontend\StudentController@change_infomation')
+                ->name('frontend.student.change.profile.infomation');
 
         });
 

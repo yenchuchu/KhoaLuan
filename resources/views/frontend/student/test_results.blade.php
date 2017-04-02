@@ -36,12 +36,13 @@
 
 @section('content')
     <div class="container">
+        <div><h3>Kết quả thi</h3></div>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Reading
+                        Reading / 100
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive" id="reload-table-results">
@@ -71,11 +72,11 @@
             </div>
 
             {{--LISTENING--}}
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Listening
+                        Listening / 100
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive" id="reload-table-listening-results">
@@ -103,19 +104,17 @@
                 </div>
                 <!--End Advanced Tables -->
             </div>
-        </div>
 
-        <div class="row">
             {{--Speaking--}}
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Speaking
+                        Speaking / 10
                     </div>
                     <div class="panel-body">
-                        <div class="table-responsive" id="reload-table-Speaking-results">
-                            <table class="table table-hover" id="manager_results_Speaking_users">
+                        <div class="table-responsive" id="reload-table-speaking-results">
+                            <table class="table table-hover" id="manager_results_speaking_users">
                                 <thead>
                                 <tr>
                                     <th>Lần thi</th>
@@ -140,6 +139,7 @@
                 <!--End Advanced Tables -->
             </div>
         </div>
+
     </div>
 @stop
 
@@ -148,6 +148,7 @@
     <script type="text/javascript">
         setTableInitStudent('manager_results_users');
         setTableInitStudent('manager_results_listening_users');
+        setTableInitStudent('manager_results_speaking_users');
     </script>
 
 @stop

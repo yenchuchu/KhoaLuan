@@ -70,13 +70,14 @@
         padding: 7px 13px;
         right: 0;
         margin-right: 4px;
+        margin-top: 55px;
         position: fixed;
     }
 
     .reload-exam-btn  {
-        right: 28px;
+        right: 27px;
         position: fixed;
-        margin-top: 40px;
+        margin-top: 97px;
     }
 
     #demnguoc>i {

@@ -41,7 +41,7 @@ class ListenTableMatchsTableSeeder extends Seeder
                 ];
 
                 $record->title = $faker->sentence(5);
-                $record->url = 'English\Grade5\Audios\Unit1\LISTENING\Task4\t4_ex.mp3';
+                $record->url = 'English\Grade5\Audios\Unit3\LISTENING\Task2\t2_c2.mp3';
                 $record->content_json = json_encode($array_option_answers);
                 $record->point = 100;
                 $record->type_user = 'ST';

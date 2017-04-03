@@ -161,8 +161,16 @@
 
 <script src="{{URL::asset('sweetalert/dist/sweetalert.min.js')}}"></script>
 
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-messaging.js"></script>
+
+<!-- Leave out Storage -->
+<!-- <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-storage.js"></script> -->
 
 <script>
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -170,6 +178,18 @@
             'Pragma': 'no-cache'
         }
     });
+
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDGy7M0b1gqm7bo9ly7XmZcI2PqBH6h9BE",
+        authDomain: "englishtest-9ce81.firebaseapp.com",
+        databaseURL: "https://englishtest-9ce81.firebaseio.com",
+        projectId: "englishtest-9ce81",
+        storageBucket: "englishtest-9ce81.appspot.com",
+        messagingSenderId: "163105165893"
+    };
+    firebase.initializeApp(config);
+
 </script>
 <script>
     function setTableInit(table_id) {

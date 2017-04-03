@@ -18,7 +18,7 @@ class AnswerQuestion extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'content', 'point','content_json', 'type_user'
+        'title', 'content', 'point','content_json', 'type_user', 'type_code'
     ];
 
     public function answer_question_details()

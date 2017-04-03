@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Speaking;
-use Illuminate\Http\Request;
+use App\Classes;
 use App\Http\Controllers\Controller;
+use App\Level;
+use App\Speaking;
 use App\User;
-use Route;
-use Config;
 use Auth;
+use Config;
 use DB;
+use Illuminate\Http\Request;
+use Route;
 
 class AuthorController extends Controller
 {
@@ -34,11 +36,12 @@ class AuthorController extends Controller
         return view('backend.author.index');
     }
 
-    public function show_post() {
+    public function show_post()
+    {
 
         $all_posts = [];
         $type_reads = $this->skill_read;
-        $user_id =  Auth::user()->id;
+        $user_id = Auth::user()->id;
 
         foreach ($type_reads as $name_table => $item) {
             $data_table = DB::table($name_table)
@@ -65,7 +68,7 @@ class AuthorController extends Controller
             }
         }
 
-       $data_table_speaks = Speaking::where(['user_id' => $user_id])->orderBy('created_at', 'desc')->get();
+        $data_table_speaks = Speaking::where(['user_id' => $user_id])->orderBy('created_at', 'desc')->get();
         foreach ($data_table_speaks as $item) {
             $item->table = 'speakings';
             $all_posts['speak'][] = $item;
@@ -74,12 +77,16 @@ class AuthorController extends Controller
         return view('backend.author.show-post', compact('all_posts'));
     }
 
-    public function post_detail() {
+    public function post_detail()
+    {
         $url_parameters = Route::getCurrentRoute()->parameters();
 
         $record = DB::table($url_parameters['table'])->where(['id' => $url_parameters['id']])->get();
+        $record->table = $url_parameters['table'];
+        $levels = Level::all();
+        $classes = Classes::all();
 
-        return view('backend.author.post-detail', compact('record'));
+        return view('backend.author.post-detail', compact('record', 'levels', 'classes'));
     }
 
     public function answer_question()
@@ -139,7 +146,7 @@ class AuthorController extends Controller
             $name_code = 'High School ';
         }
 
-        return view('backend.author.grade-menu',compact('class_code', 'name_code'));
+        return view('backend.author.grade-menu', compact('class_code', 'name_code'));
     }
 
 //    public function create() {
@@ -165,7 +172,7 @@ class AuthorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
@@ -173,7 +180,7 @@ class AuthorController extends Controller
         $user_id = $request->all();
         $user = User::whereId($user_id)->with('roles')->first();
 
-        if(count($user) != 1) {
+        if (count($user) != 1) {
             return response()->json([
                 'code' => 404,
                 'message' => 'Không tìm thấy người dùng!',
@@ -181,7 +188,7 @@ class AuthorController extends Controller
         }
         $roles = $user->roles()->get();
 
-        if(!isset($roles)) {
+        if (!isset($roles)) {
             return response()->json([
                 'code' => 404,
                 'message' => 'Không thực hiện được hành động này!',

@@ -136,6 +136,8 @@ class AnswerQuestionsController extends Controller
         $class_id = $all_data['class_id'];
         $classes = Classes::whereId($class_id)->first();
 
+        $type_code_next = get_typecode_next('answer_questions');
+
         foreach ($all_data['answer_question'] as $data) {
 
             $answer_question_content_question = $data['content-choose-ans-question'];
@@ -143,7 +145,6 @@ class AnswerQuestionsController extends Controller
 
             $answer_question->title = $data['title-answer-question'];
             $answer_question->content = $data['content-answer-question'];
-//            $answer_question->point = $data['point'];
             $answer_question->user_id = Auth::user()->id;
             $answer_question->type_user = $code_user;
             $answer_question->content_json = json_encode($answer_question_content_question);
@@ -151,8 +152,8 @@ class AnswerQuestionsController extends Controller
             $answer_question->exam_type_id = $exam_type_id;
             $answer_question->level_id = $level_id;
             $answer_question->class_id = $class_id;
-//            $answer_question->bookmap_json_id = json_encode($book_map_id);
             $answer_question->bookmap_id = $book_map_id;
+            $answer_question->type_code = $type_code_next;
 
             $answer_question->save();
         }
@@ -160,76 +161,14 @@ class AnswerQuestionsController extends Controller
         return Redirect()->route('backend.manager.author.answer-question', $classes->code);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    // mỗi lần add -> tạo 1 code.
+    public function get_typecode_next($name_table) {
+        $type_code = DB::table($name_table)->max('type_code');
+
+        $type_next = $type_code + 1;
+
+        return $type_code;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request)
-    {
-        $user_id = $request->all();
-        $user = User::whereId($user_id)->with('roles')->first();
-
-        if (count($user) != 1) {
-            return response()->json([
-                'code' => 404,
-                'message' => 'Không tìm thấy người dùng!',
-            ]);
-        }
-        $roles = $user->roles()->get();
-
-        if (!isset($roles)) {
-            return response()->json([
-                'code' => 404,
-                'message' => 'Không thực hiện được hành động này!',
-            ]);
-        }
-
-        $roles_ids = [];
-        foreach ($roles as $rol) {
-            $roles_ids[] = $rol->id;
-        }
-
-        $user->roles()->detach($roles_ids);
-        $user->delete();
-
-        $users = User::with('roles', 'classes')->get();
-        return view('backend.users.table-index', compact('users'));
-
-    }
 }

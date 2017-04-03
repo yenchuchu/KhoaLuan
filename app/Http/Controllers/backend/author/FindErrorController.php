@@ -150,6 +150,7 @@ class FindErrorController extends Controller
 
             $find_error = new FindError();
 
+            $find_error->user_id = Auth::user()->id;
             $find_error->title = $data['title-find-errors'];
 //            $find_error->point = $data['point'];
             $find_error->type_user = $code_user;

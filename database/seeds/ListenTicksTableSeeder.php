@@ -43,6 +43,7 @@ class ListenTicksTableSeeder extends Seeder
                     ];
                 }
 
+                $record->user_id = 3;
                 $record->title = $faker->sentence(5);
                 $record->url = '';
                 $record->content_json = json_encode($array_option_answers);

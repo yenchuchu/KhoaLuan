@@ -32,6 +32,7 @@ class TickTrueFalseTableSeeder extends Seeder
                     ];
                 }
 
+                $book->user_id = 3;
                 $book->title = $faker->sentence(5);
                 $book->content = $faker->paragraph($nbSentences = 15, $variableNbSentences = true);
                 $book->content_json = json_encode($array_option_answers);

@@ -4,40 +4,18 @@
     <h1 class="page-header">Dashboard</h1>
 @stop
 @section('content')
-    <div class="row">
-        <!-- Welcome -->
-        <div class="col-lg-12">
-            <div class="alert alert-info">
-                <i class="fa fa-folder-open"></i><b>&nbsp;Hello ! </b>Welcome Back <b>Jonny Deen </b>
-                <i class="fa  fa-pencil"></i><b>&nbsp;2,000 </b>Support Tickets Pending to Answere. nbsp;
-            </div>
-        </div>
-        <!--end  Welcome -->
-    </div>
 
     <div class="row">
-        <div class="col-lg-12">
-            <!-- Advanced Tables -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Advanced Tables
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive" id="reload-table-manager-users">
-                        @include('backend.users.table-index')
-                    </div>
-
-                </div>
-            </div>
-            <!--End Advanced Tables -->
-        </div>
+        @include('backend.users.table-index')
     </div>
 
 @stop
 
 @section('script')
     <script>
-        setTableInit('manager_users')
+        setTableInit('manager_users_student')
+        setTableInit('manager_users_author')
+        setTableInit('manager_users_admin')
     </script>
 
     @include('backend.users.script-users')

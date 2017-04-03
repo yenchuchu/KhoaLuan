@@ -143,6 +143,7 @@ class CompleteWordController extends Controller
 
             $complete_word = new CompleteWord();
 
+            $complete_word->user_id = Auth::user()->id;
             $complete_word->title = $data['title-complete-word'];
 //            $complete_word->point = $data['point'];
             $complete_word->type_user = $code_user;

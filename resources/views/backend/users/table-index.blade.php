@@ -1,72 +1,164 @@
-<table class="table table-hover" id="manager_users">
-    <thead>
-    <tr>
-        <th>STT</th>
-        <th>Full Name</th>
-        <th>Email</th>
-        <th>Roles</th>
-        <th>Class</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach($users as $user)
-        <tr class="odd gradeX">
-            <td></td>
-            <td>{{$user->full_name}}</td>
-            <td>{{$user->email}}</td>
-            <td class="center">
-                <?php
-                $roles = $user->roles()->get();
-                foreach ($roles as $role) {
-                    echo $role->name . '<br>';
-                }
-                ?>
-            </td>
-            <td class="center">
-                <?php
-                $class = $user->classes()->first();
-                echo $class->title;
-                ?>
-            </td>
-            <td>
-                <!-- nút hiện form sửa -->
-                <button class="btn btn-sm btn-primary" id="btn-edit-school">
-                    <a href="#" target="_blank" title="Edit">
-                        <i class="fa fa-pencil" style="color: white" data-toggle="tooltip"
-                           data-placement="top" title="Edit"></i>
-                    </a>
-                </button>
+<div class="col-lg-12">
+    <!-- Advanced Tables -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Manager Student
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive" id="reload-table-manager-users">
+                <table class="table table-hover" id="manager_users_student">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Class</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($user_student as $user)
 
-                <!-- Thêm user manager/admin cho schools -->
+                        <tr class="odd gradeX">
+                            <td></td>
+                            <td>{{$user->full_name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td class="center">
+                                <?php $class = $user->classes()->first();
+                                if(!empty($class)) { ?>
+                                {{$class->title}}
+                                <?php } else { ?>
+                                <span class="huge-null">null</span>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <!-- nút hiện form sửa -->
+                            {{--<button class="btn btn-sm btn-primary" id="btn-edit-school">--}}
+                            {{--<a href="#" target="_blank" title="Edit">--}}
+                            {{--<i class="fa fa-pencil" style="color: white" data-toggle="tooltip"--}}
+                            {{--data-placement="top" title="Edit"></i>--}}
+                            {{--</a>--}}
+                            {{--</button>--}}
 
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-users" data-toggle="tooltip" data-placement="top"
-                           style="color: white" title="Add managers"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <li>
-                            <a href="#" title="Add roles " data-toggle="modal"
-                               data-target="#connect-user-admin"
-                               onclick="">Add User
-                                Admin
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                            <!-- nút xóa gửi ajax lên sau đó remove cả dòng role này đi (thẻ tr) -->
+                                <button class="btn btn-sm btn-danger" id="user_{{$user->id}}" title="Delete"
+                                        onclick="deleteUser({{$user->id}})">
+                                    <i class="fa fa-times" data-toggle="tooltip" data-placement="top"
+                                       title="Delete"> </i>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
 
-                <!-- nút xóa gửi ajax lên sau đó remove cả dòng role này đi (thẻ tr) -->
-                <button class="btn btn-sm btn-danger" id="user_{{$user->id}}" title="Delete"
-                        onclick="deleteUser({{$user->id}})">
-                    <i class="fa fa-times" data-toggle="tooltip" data-placement="top"
-                       title="Delete"> </i>
-                </button>
+                    </tbody>
+                </table>
+            </div>
 
-            </td>
-        </tr>
-    @endforeach
+        </div>
+    </div>
+    <!--End Advanced Tables -->
+</div>
 
-    </tbody>
-</table>
+<div class="col-lg-12">
+    <!-- Advanced Tables -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Manager Author
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive" id="reload-table-manager-users">
+                <table class="table table-hover" id="manager_users_author">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($user_author as $user)
+
+                        <tr class="odd gradeX">
+                            <td></td>
+                            <td>{{$user->full_name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>
+                                <!-- nút hiện form sửa -->
+                            {{--<button class="btn btn-sm btn-primary" id="btn-edit-school">--}}
+                            {{--<a href="#" target="_blank" title="Edit">--}}
+                            {{--<i class="fa fa-pencil" style="color: white" data-toggle="tooltip"--}}
+                            {{--data-placement="top" title="Edit"></i>--}}
+                            {{--</a>--}}
+                            {{--</button>--}}
+
+                            <!-- nút xóa gửi ajax lên sau đó remove cả dòng role này đi (thẻ tr) -->
+                                <button class="btn btn-sm btn-danger" id="user_{{$user->id}}" title="Delete"
+                                        onclick="deleteUser({{$user->id}})">
+                                    <i class="fa fa-times" data-toggle="tooltip" data-placement="top"
+                                       title="Delete"> </i>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!--End Advanced Tables -->
+</div>
+
+<div class="col-lg-12">
+    <!-- Advanced Tables -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Manager Admin
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive" id="reload-table-manager-users">
+                <table class="table table-hover" id="manager_users_admin">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($user_admin as $user)
+
+                        <tr class="odd gradeX">
+                            <td></td>
+                            <td>{{$user->full_name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>
+                                <!-- nút hiện form sửa -->
+                            {{--<button class="btn btn-sm btn-primary" id="btn-edit-school">--}}
+                            {{--<a href="#" target="_blank" title="Edit">--}}
+                            {{--<i class="fa fa-pencil" style="color: white" data-toggle="tooltip"--}}
+                            {{--data-placement="top" title="Edit"></i>--}}
+                            {{--</a>--}}
+                            {{--</button>--}}
+
+                            <!-- nút xóa gửi ajax lên sau đó remove cả dòng role này đi (thẻ tr) -->
+                                <button class="btn btn-sm btn-danger" id="user_{{$user->id}}" title="Delete"
+                                        onclick="deleteUser({{$user->id}})">
+                                    <i class="fa fa-times" data-toggle="tooltip" data-placement="top"
+                                       title="Delete"> </i>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!--End Advanced Tables -->
+</div>

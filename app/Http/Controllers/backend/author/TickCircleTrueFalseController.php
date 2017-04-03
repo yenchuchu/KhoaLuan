@@ -141,6 +141,7 @@ class TickCircleTrueFalseController extends Controller
             $tick_true_false_content_question = $data['content-choose-ans-question'];
             $tick_true_false = new TickCircleTrueFalse();
 
+            $tick_true_false->user_id = Auth::user()->id;
             $tick_true_false->title = $data['title-tick-true-false'];
             $tick_true_false->content = $data['content-tick-true-false'];
             $tick_true_false->point = $data['point'];

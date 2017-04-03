@@ -9,7 +9,7 @@
                     <div class="user-section-inner">
                         <?php
                         if(!empty(Auth::user()->avatar)) { ?>
-                            <img src="{{URL::asset(Auth::user()->avatar)}}" alt="">
+                        <img src="{{URL::asset(Auth::user()->avatar)}}" alt="">
                         <?php } else { ?>
                         <img src="{{URL::asset('backend/assets/img/user.jpg')}}" alt="">
                         <?php } ?>
@@ -26,7 +26,13 @@
             @if ( Auth::user()->hasRole('AT'))
 
                 <li class="selected">
-                    <a href="{{route('backend.manager.author.index')}}"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                    <a href="{{route('backend.manager.author.index')}}"><i
+                                class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                </li>
+
+                <li class="selected">
+                    <a href="{{route('backend.manager.author.show.post')}}"><i
+                                class="fa fa-dashboard fa-fw"></i>Posts</a>
                 </li>
 
             @endif

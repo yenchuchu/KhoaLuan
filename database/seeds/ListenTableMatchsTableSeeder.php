@@ -40,6 +40,7 @@ class ListenTableMatchsTableSeeder extends Seeder
                     'answer' => ["1-C", "2-A", "3-B"]
                 ];
 
+                $record->user_id = 3;
                 $record->title = $faker->sentence(5);
                 $record->url = 'English\Grade5\Audios\Unit3\LISTENING\Task2\t2_c2.mp3';
                 $record->content_json = json_encode($array_option_answers);

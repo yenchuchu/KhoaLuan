@@ -71,6 +71,14 @@
             float: right;
         }
 
+        .huge-null {
+            background: #d9534f;
+            padding: 3px 7px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 600;
+        }
+
     </style>
 
 </head>

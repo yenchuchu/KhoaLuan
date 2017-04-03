@@ -53,6 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::group(array('prefix' => 'manager-author'), function () {
 
                 Route::get('/', 'backend\AuthorController@index')->name('backend.manager.author.index');
+                Route::get('/show-post', 'backend\AuthorController@show_post')->name('backend.manager.author.show.post');
+                Route::get('/post-detail/{table}/{id}', 'backend\AuthorController@post_detail')->name('backend.manager.author.post.detail');
 
                 // go to elementary
                 Route::group(array('prefix' => 'grade'), function () {

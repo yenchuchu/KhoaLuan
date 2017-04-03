@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Speaking;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Route;
+use Config;
+use Auth;
+use DB;
 
 class AuthorController extends Controller
 {
 
     protected $posts;
+    protected $skill_read;
+    protected $skill_listen;
+
     public function __construct()
     {
-
+        $this->skill_read = Config::get('constants.skill.Read');
+        $this->skill_listen = Config::get('constants.skill.Listen');
     }
 
     /**
@@ -24,6 +32,54 @@ class AuthorController extends Controller
     public function index()
     {
         return view('backend.author.index');
+    }
+
+    public function show_post() {
+
+        $all_posts = [];
+        $type_reads = $this->skill_read;
+        $user_id =  Auth::user()->id;
+
+        foreach ($type_reads as $name_table => $item) {
+            $data_table = DB::table($name_table)
+                ->where(['user_id' => $user_id])
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            foreach ($data_table as $item) {
+                $item->table = $name_table;
+                $all_posts['read'][] = $item;
+            }
+        }
+
+        $type_listens = $this->skill_listen;
+        foreach ($type_listens as $name_table => $item) {
+            $data_table = DB::table($name_table)
+                ->where(['user_id' => $user_id])
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            foreach ($data_table as $item) {
+                $item->table = $name_table;
+                $all_posts['listen'][] = $item;
+            }
+        }
+
+       $data_table_speaks = Speaking::where(['user_id' => $user_id])->orderBy('created_at', 'desc')->get();
+        foreach ($data_table_speaks as $item) {
+            $item->table = 'speakings';
+            $all_posts['speak'][] = $item;
+        }
+
+        return view('backend.author.show-post', compact('all_posts'));
+    }
+
+    public function post_detail() {
+        $url_parameters = Route::getCurrentRoute()->parameters();
+
+        $record = DB::table($url_parameters['table'])->where(['id' => $url_parameters['id']])->get();
+
+        return view('backend.author.post-detail', compact('record'));
     }
 
     public function answer_question()

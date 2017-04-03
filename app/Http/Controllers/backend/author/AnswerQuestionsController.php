@@ -144,6 +144,7 @@ class AnswerQuestionsController extends Controller
             $answer_question->title = $data['title-answer-question'];
             $answer_question->content = $data['content-answer-question'];
 //            $answer_question->point = $data['point'];
+            $answer_question->user_id = Auth::user()->id;
             $answer_question->type_user = $code_user;
             $answer_question->content_json = json_encode($answer_question_content_question);
             $answer_question->skill_id = $skill->id;

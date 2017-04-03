@@ -151,6 +151,7 @@ class MultipleChoiceController extends Controller
             $multiple_choice->title = $data['title-multiple-choice'];
 //            $multiple_choice->content = $data['content-multiple-choice'];
 //            $multiple_choice->point = $data['point'];
+            $multiple_choice->user_id = Auth::user()->id;
             $multiple_choice->type_user = $code_user;
             $multiple_choice->content_json = json_encode($multiple_choice_content_question);
             $multiple_choice->skill_id = $skill->id;

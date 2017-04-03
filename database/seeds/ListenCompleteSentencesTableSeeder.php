@@ -42,6 +42,7 @@ class ListenCompleteSentencesTableSeeder extends Seeder
                 $record->point = 100;
                 $record->type_user = 'ST';
 
+                $record->user_id = 3;
                 $record->skill_id = 1;
                 $record->level_id = $level;
                 $record->class_id = $faker->numberBetween($min = 1, $max = 10);

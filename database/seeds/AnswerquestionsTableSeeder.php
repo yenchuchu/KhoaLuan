@@ -38,6 +38,7 @@ class AnswerquestionsTableSeeder extends Seeder
             $book->point = 100;
             $book->type_user = 'ST';
 
+            $book->user_id = 3;
             $book->skill_id = 3;
             $book->level_id = $faker->numberBetween($min = 1, $max = 6);
             $book->class_id = $faker->numberBetween($min = 1, $max = 10);

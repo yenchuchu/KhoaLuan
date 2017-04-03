@@ -139,6 +139,7 @@ class SpeakingController extends Controller
 
             $skill = Skill::where('code', $this->skill)->first();
 
+            $speak_item->user_id = Auth::user()->id;
             $speak_item->type_user = $all_data['code_user'];
             $speak_item->skill_id = $skill->id;
             $speak_item->exam_type_id = $all_data['exam_type_id'];

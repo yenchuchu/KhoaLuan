@@ -141,6 +141,7 @@ class ClassifyWordController extends Controller
             $answer_question_content_question = $data['content-choose-ans-question'];
             $answer_question = new AnswerQuestion();
 
+            $answer_question->user_id = Auth::user()->id;
             $answer_question->title = $data['title-answer-question'];
             $answer_question->content = $data['content-answer-question'];
             $answer_question->point = $data['point'];

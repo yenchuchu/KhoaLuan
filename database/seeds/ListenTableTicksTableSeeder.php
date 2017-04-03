@@ -44,6 +44,7 @@ class ListenTableTicksTableSeeder extends Seeder
                     'answer' => ["River", "Village yard", "Vegetables"]
                 ];
 
+                $record->user_id = 3;
                 $record->title = $faker->sentence(5);
                 $record->url = 'English\Grade5\Audios\Unit3\LISTENING\Task2\t2_c2.mp3';
                 $record->content_json = json_encode($array_option_answers);

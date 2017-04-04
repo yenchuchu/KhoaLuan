@@ -99,6 +99,20 @@
                 <div class="col-lg-6">
                     <div class="main-body">
                         <h1>Listening</h1>
+                        <div class="main-body">
+                            <div class="col-lg-5 type-exam">
+                                <a href="{{route('backend.manager.author.listen.listen_table_ticks', $class_code)}}">
+                                    <i class="fa fa-dashboard fa-fw"></i>listen_table_ticks</a>
+                            </div>
+                            <div class="col-lg-5 type-exam">
+                                <a href="{{route('backend.manager.author.listen.listen_complete_sentences', $class_code)}}">
+                                    <i class="fa fa-dashboard fa-fw"></i>listen_complete_sentences</a>
+                            </div>
+                            <div class="col-lg-5 type-exam">
+                                <a href="{{route('backend.manager.author.listen.listen_ticks', $class_code)}}">
+                                    <i class="fa fa-dashboard fa-fw"></i>listen_ticks</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

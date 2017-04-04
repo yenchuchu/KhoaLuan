@@ -230,7 +230,34 @@
             });
         }).draw();
     }
+    $()
 
+    function redirect_post_detail(table, array_id) {
+        url = '{{route('backend.manager.author.post.detail')}}';
+        CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: url,
+            type: "post",
+            data: {
+                table: table,
+                array_id: array_id,
+                _token: CSRF_TOKEN
+            },
+            success: function (data) {
+                if (data.code == 404) {
+                    swal('', data.message, 'error').catch(swal.noop);
+                    return false;
+                } else if (data.code == 200) {
+                    window.location = document.getElementById('href_' + skill_code).href;
+
+                }
+            },
+            error: function () {
+                swal('', 'Không thực hiện được hành động này!', 'error');
+            }
+        });
+    }
 
 </script>
 

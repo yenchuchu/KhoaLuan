@@ -54,7 +54,9 @@ Route::group(['middleware' => 'auth'], function () {
 
                 Route::get('/', 'backend\AuthorController@index')->name('backend.manager.author.index');
                 Route::get('/show-post', 'backend\AuthorController@show_post')->name('backend.manager.author.show.post');
-                Route::get('/post-detail/{table}/{id}', 'backend\AuthorController@post_detail')->name('backend.manager.author.post.detail');
+
+//                Route::get('/get-detail', 'backend\AuthorController@get_detail')->name('backend.manager.author.get.detail');
+                Route::post('/post-detail', 'backend\AuthorController@post_detail')->name('backend.manager.author.post.detail');
 
                 // go to elementary
                 Route::group(array('prefix' => 'grade'), function () {
@@ -146,6 +148,47 @@ Route::group(['middleware' => 'auth'], function () {
                         ->name('backend.manager.author.find-errors.store');
                 });
 
+                /**
+                 * Route: LISTENING
+                 */
+                Route::group(array('prefix' => 'listening'), function () {
+                    Route::group(array('prefix' => 'listen_complete_sentences'), function () {
+                        Route::get('/{class_code}', 'backend\author\ListenCompleteSentencesController@index')
+                            ->name('backend.manager.author.listen.listen_complete_sentences');
+
+                        Route::get('/create/{code_user}/{class_code}', 'backend\author\ListenCompleteSentencesController@create')
+                            ->name('backend.manager.author.listen.listen_complete_sentences.create');
+
+                        Route::post('/store', 'backend\author\ListenCompleteSentencesController@store')
+                            ->name('backend.manager.author.listen.listen_complete_sentences.store');
+                    });
+
+                    Route::group(array('prefix' => 'listen_table_ticks'), function () {
+                        Route::get('/{class_code}', 'backend\author\ListenTableTicksController@index')
+                            ->name('backend.manager.author.listen.listen_table_ticks');
+
+                        Route::get('/create/{code_user}/{class_code}', 'backend\author\ListenTableTicksController@create')
+                            ->name('backend.manager.author.listen.listen_table_ticks.create');
+
+                        Route::post('/store', 'backend\author\ListenTableTicksController@store')
+                            ->name('backend.manager.author.listen.listen_table_ticks.store');
+                    });
+
+                    Route::group(array('prefix' => 'listen_ticks'), function () {
+                        Route::get('/{class_code}', 'backend\author\ListenTicksController@index')
+                            ->name('backend.manager.author.listen.listen_ticks');
+
+                        Route::get('/create/{code_user}/{class_code}', 'backend\author\ListenTicksController@create')
+                            ->name('backend.manager.author.listen.listen_ticks.create');
+
+                        Route::post('/store', 'backend\author\ListenTicksController@store')
+                            ->name('backend.manager.author.listen.listen_ticks.store');
+                    });
+                });
+
+                /**
+                 * Route: SPEAKING
+                 */
                 Route::group(array('prefix' => 'speaking'), function () {
                     Route::get('/{class_code}', 'backend\author\SpeakingController@index')
                         ->name('backend.manager.author.speaking');

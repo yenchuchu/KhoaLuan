@@ -2,7 +2,7 @@
 
 @section('header')
     <h1 class="page-header">
-        Listen Complete Sentences for {{$name_code}}
+        Listen Ticks for {{$name_code}}
     </h1>
 @stop
 @section('content')
@@ -22,12 +22,12 @@
             <!-- Advanced Tables -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Listen Complete Sentences's Students Tables
-                    <a href="{{route('backend.manager.author.listen.listen_complete_sentences.create', ['ST' , $class_code])}}" target="_blank">Add Student Test</a>
+                    Listen Ticks's Students Tables
+                    <a href="{{route('backend.manager.author.listen.listen_ticks.create', ['ST' , $class_code])}}" target="_blank">Add Student Test</a>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive" id="reload_table_ans_for_students">
-                        @include('backend.author.listen.complete-sentences.table-students-index')
+                        @include('backend.author.listen.listen-tick.table-students-index')
                     </div>
 
                 </div>
@@ -40,7 +40,7 @@
 
 @section('script')
     <script>
-        setTableInit('manager_listen_complete_sentences_students');
+        setTableInit('manager_listen_ticks_students');
 
     </script>
 @stop

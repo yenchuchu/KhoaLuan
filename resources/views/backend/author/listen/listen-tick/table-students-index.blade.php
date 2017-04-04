@@ -1,4 +1,4 @@
-<table class="table table-hover" id="manager_listen_complete_sentences_students">
+<table class="table table-hover" id="manager_listen_ticks_students">
     <thead>
     <tr>
         <th>STT</th>
@@ -35,7 +35,7 @@
                 <?php
                 $test = json_encode($item['id']);
                 ?>
-                <a id="" onclick="redirect_post_detail('listen_complete_sentences', '{{$test}}')"> Go to link</a>
+                <a id="" onclick="redirect_post_detail('listen_ticks', '{{$test}}')"> Go to link</a>
 
             </td>
             <td>{{Carbon\Carbon::parse($item['created_at'][0])->format('d/m/Y - H:i')}}</td>

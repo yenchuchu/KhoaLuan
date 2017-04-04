@@ -32,6 +32,7 @@
     .save-multiple-choice,
     .save-complete-word,
     .save-find-errors,
+    .save-listen-complete-sentences,
     .save-speaking {
         background: rgb(69, 224, 32);
         border-radius: 24px;
@@ -51,6 +52,7 @@
     .save-multiple-choice:hover, .save-multiple-choice:focus,
     .save-complete-word:hover, .save-complete-word:focus,
     .save-find-errors:hover, .save-find-errors:focus,
+    .save-listen-complete-sentences:hover, .save-listen-complete-sentences:focus,
     .save-speaking:hover, .save-speaking:focus {
         color: snow;
         text-decoration: underline;

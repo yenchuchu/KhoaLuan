@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers\backend\author;
 
-use App\AnswerQuestion;
 use App\BookMap;
 use App\Classes;
 use App\ExamType;
 use App\Http\Controllers\Controller;
 use App\Level;
+use App\ListenTicks;
 use App\Skill;
 use App\User;
 use Illuminate\Http\Request;
 use Route;
 use Config;
+use DB;
+use Auth;
+use Illuminate\Support\Facades\Input;
 
-class AnswerQuestionsController extends Controller
+class ListenTicksController extends Controller
 {
     protected $levels;
     protected $skill;
@@ -32,14 +35,14 @@ class AnswerQuestionsController extends Controller
     {
         $this->levels = Level::all();
         $this->classes = Classes::all();
-        $this->skill = 'Read';
+        $this->skill = 'Listen';
 
         $this->url_parameters = Route::getCurrentRoute()->parameters();
     }
 
     public function index()
     {
-        $ans_questions_all = AnswerQuestion::where(['type_user' => 'ST'])->with('skills', 'levels')
+        $ans_questions_all = ListenTicks::where(['type_user' => 'ST'])->with('skills', 'levels')
             ->orderBy('type_code', 'desc')
             ->get();
 
@@ -48,20 +51,13 @@ class AnswerQuestionsController extends Controller
         $array_id_intypecode = [];
         foreach ($type_codes as $code=> $item) {
             $array_id_intypecode[$code]['id'] = $item->pluck('id')->toArray();
-            $array_id_intypecode[$code]['class_id'] = $item->pluck('class_id')->toArray();
-            $array_id_intypecode[$code]['level_id'] = $item->pluck('level_id')->toArray();
-            $array_id_intypecode[$code]['status'] = $item->pluck('status')->toArray();
-            $array_id_intypecode[$code]['created_at'] = $item->pluck('created_at')->toArray();
+            $array_id_intypecode[$code]['class_id'] = array_unique($item->pluck('class_id')->toArray());
+            $array_id_intypecode[$code]['level_id'] = array_unique($item->pluck('level_id')->toArray());
+            $array_id_intypecode[$code]['status'] = array_unique($item->pluck('status')->toArray());
+            $array_id_intypecode[$code]['created_at'] = array_unique($item->pluck('created_at')->toArray());
         }
 
-//        $ans_for_students = [];
-//        foreach ($for_students as $ans) {
-//            $ans->content_json = json_decode($ans->content_json);
-//            $ans->skills = $ans->skills->first();
-//            $ans->levels = $ans->levels->first();
-//
-//            $ans_for_students[] = $ans;
-//        }
+        dd($array_id_intypecode);
 
         $class_code = $this->url_parameters['class_code'];
         if ($class_code == 1) {
@@ -72,7 +68,7 @@ class AnswerQuestionsController extends Controller
             $name_code = 'High School ';
         }
 
-        return view('backend.author.answer_question.index',
+        return view('backend.author.listen.complete-sentences.index',
             compact('ans_for_students', 'ans_for_teachers', 'class_code', 'name_code', 'array_id_intypecode'));
     }
 
@@ -97,7 +93,7 @@ class AnswerQuestionsController extends Controller
                 compact('levels', 'class_code', 'code_user', 'classes', 'exam_types', 'book_maps'));
         }
 
-        return view('backend.author.answer_question.create', compact('levels', 'class_code', 'code_user', 'classes'));
+        return view('backend.author.listen.complete-sentences.create', compact('levels', 'class_code', 'code_user', 'classes'));
     }
 
     /**
@@ -109,6 +105,7 @@ class AnswerQuestionsController extends Controller
     public function store(Request $request)
     {
         $all_data = $request->all();
+//        dd($all_data);
 
         if (!isset($all_data['level_id'])) {
             $all_data['level_id'] = null;
@@ -131,38 +128,50 @@ class AnswerQuestionsController extends Controller
         $class_id = $all_data['class_id'];
         $classes = Classes::whereId($class_id)->first();
 
-        $type_code_next = get_typecode_next('answer_questions');
+        $type_code_next = $this->get_typecode_next('listen_complete_sentences');
 
-        foreach ($all_data['answer_question'] as $data) {
+        foreach ($all_data['listen_complete_sentences'] as $key => $data) {
 
-            $answer_question_content_question = $data['content-choose-ans-question'];
-            $answer_question = new AnswerQuestion();
+            $listen_content_question = $data['content-choose-ans-question'];
 
-            $answer_question->title = $data['title-answer-question'];
-            $answer_question->content = $data['content-answer-question'];
-            $answer_question->user_id = Auth::user()->id;
-            $answer_question->type_user = $code_user;
-            $answer_question->content_json = json_encode($answer_question_content_question);
-            $answer_question->skill_id = $skill->id;
-            $answer_question->exam_type_id = $exam_type_id;
-            $answer_question->level_id = $level_id;
-            $answer_question->class_id = $class_id;
-            $answer_question->bookmap_id = $book_map_id;
-            $answer_question->type_code = $type_code_next;
+            $listen = new ListenCompleteSentences();
 
-            $answer_question->save();
+            $listen->title = $data['title-listen-complete-sentences'];
+            $listen->user_id = Auth::user()->id;
+            $listen->type_user = $code_user;
+            $listen->content_json = json_encode($listen_content_question);
+            $listen->skill_id = $skill->id;
+            $listen->exam_type_id = $exam_type_id;
+            $listen->level_id = $level_id;
+            $listen->class_id = $class_id;
+            $listen->bookmap_id = $book_map_id;
+            $listen->type_code = $type_code_next;
+
+            $audio_files = Input::file();
+            if (!empty($audio_files)) {
+
+                if (isset($audio_files['listen_complete_sentences'][$key])) {
+                    $audio = $audio_files['listen_complete_sentences'][$key];
+
+                    $filename = $audio['audio']->getClientOriginalName();
+                    $location = public_path('backend/audio-listening/');
+                    $audio['audio']->move($location, $filename);
+                    $listen->url = 'backend/audio-listening/'.$filename;
+                }
+            }
+
+            $listen->save();
         }
 
-        return Redirect()->route('backend.manager.author.answer-question', $classes->code);
+        return Redirect()->route('backend.manager.author.listen.listen_complete_sentences', $classes->code);
     }
 
     // mỗi lần add -> tạo 1 code.
     public function get_typecode_next($name_table) {
         $type_code = DB::table($name_table)->max('type_code');
-
         $type_next = $type_code + 1;
 
-        return $type_code;
+        return $type_next;
     }
 
 

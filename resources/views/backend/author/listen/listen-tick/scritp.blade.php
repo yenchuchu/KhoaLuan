@@ -56,7 +56,7 @@
         j++;
     });
 
-     function add_item_question_LCS(id) {
+     function add_item_question_LT(id) {
 
          item = $('#' + id).attr('item');
          item_this =  $('#' + id).attr('item_this');

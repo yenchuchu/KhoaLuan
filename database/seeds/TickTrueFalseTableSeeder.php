@@ -38,6 +38,73 @@ class TickTrueFalseTableSeeder extends Seeder
                 $book->content_json = json_encode($array_option_answers);
                 $book->point = 100;
                 $book->type_user = 'ST';
+                $book->type_code = 1;
+
+                $book->skill_id = 3;
+                $book->level_id = $level;
+                $book->class_id = $faker->numberBetween($min = 1, $max = 10);
+                $book->exam_type_id = null;
+                $book->bookmap_id = null;
+
+                $book->created_at = null;
+                $book->updated_at = null;
+
+                $book->save();
+            }
+            foreach (range(1, 30) as $index) {
+                $book = new TickCircleTrueFalse();
+
+                $num_question = $faker->numberBetween($min = 3, $max = 5);
+                $array_option_answers = [];
+                for ($i = 1; $i <= $num_question; $i++) {
+
+                    $array_option_answers[$i] = [
+                        'id' => $i,
+                        'content' => $faker->sentence(7),
+                        'answer' =>  $faker->randomElement($array = array ('T', 'F'))
+                    ];
+                }
+
+                $book->user_id = 3;
+                $book->title = $faker->sentence(5);
+                $book->content = $faker->paragraph($nbSentences = 15, $variableNbSentences = true);
+                $book->content_json = json_encode($array_option_answers);
+                $book->point = 100;
+                $book->type_user = 'ST';
+                $book->type_code = 2;
+
+                $book->skill_id = 3;
+                $book->level_id = $level;
+                $book->class_id = $faker->numberBetween($min = 1, $max = 10);
+                $book->exam_type_id = null;
+                $book->bookmap_id = null;
+
+                $book->created_at = null;
+                $book->updated_at = null;
+
+                $book->save();
+            }
+            foreach (range(1, 30) as $index) {
+                $book = new TickCircleTrueFalse();
+
+                $num_question = $faker->numberBetween($min = 3, $max = 5);
+                $array_option_answers = [];
+                for ($i = 1; $i <= $num_question; $i++) {
+
+                    $array_option_answers[$i] = [
+                        'id' => $i,
+                        'content' => $faker->sentence(7),
+                        'answer' =>  $faker->randomElement($array = array ('T', 'F'))
+                    ];
+                }
+
+                $book->user_id = 3;
+                $book->title = $faker->sentence(5);
+                $book->content = $faker->paragraph($nbSentences = 15, $variableNbSentences = true);
+                $book->content_json = json_encode($array_option_answers);
+                $book->point = 100;
+                $book->type_user = 'ST';
+                $book->type_code = 3;
 
                 $book->skill_id = 3;
                 $book->level_id = $level;

@@ -142,7 +142,7 @@
             <span class="add-item">+</span>
         </div>
         <div class="col-lg-12 col-md-12">
-            <button class="save-find-errors btn" title="Save" type="submit">
+            <button class="save-find-errors btn style-save" title="Save" type="submit">
                 <i class="fa fa-floppy-o" aria-hidden="true"></i></button>
         </div>
     </div>

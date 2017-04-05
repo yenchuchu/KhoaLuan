@@ -3,6 +3,10 @@
 @section('header')
     <h1 class="page-header">
         Listen Ticks for {{$name_code}}
+        <a href="{{route('backend.manager.author.listen.listen_ticks.create', ['ST' , $class_code])}}" target="_blank"
+           class="btn btn-success btn-create-new-test" style="float:right;">
+            {{trans('label.backend.author.speaking.index.add')}}
+        </a>
     </h1>
 @stop
 @section('content')
@@ -23,7 +27,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Listen Ticks's Students Tables
-                    <a href="{{route('backend.manager.author.listen.listen_ticks.create', ['ST' , $class_code])}}" target="_blank">Add Student Test</a>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive" id="reload_table_ans_for_students">

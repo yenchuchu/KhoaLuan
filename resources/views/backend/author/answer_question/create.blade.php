@@ -144,7 +144,7 @@
             <span class="add-item">+</span>
         </div>
         <div class="col-lg-12 col-md-12">
-            <button class="save-answer-questions btn" title="Save" type="submit">
+            <button class="save-answer-questions btn style-save" title="Save" type="submit">
                 <i class="fa fa-floppy-o" aria-hidden="true"></i></button>
         </div>
     </div>

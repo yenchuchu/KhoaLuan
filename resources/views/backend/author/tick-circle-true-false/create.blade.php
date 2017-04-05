@@ -91,13 +91,13 @@
                                        class="form-control" required>
                             </div>
                         </div>
-                        <div class="col-lg-2" style=" padding-right: 0;">
-                            <div class="form-group">
-                                <label class="lable-point">Point: </label>
-                                <input type="number" name="tick_true_false[1][point]"
-                                       class="form-control input-point" required>
-                            </div>
-                        </div>
+                        {{--<div class="col-lg-2" style=" padding-right: 0;">--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label class="lable-point">Point: </label>--}}
+                                {{--<input type="number" name="tick_true_false[1][point]"--}}
+                                       {{--class="form-control input-point" required>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
                         <div class="form-group">
                                 <textarea type="text" class="form-control"
@@ -149,7 +149,7 @@
             <spam class="add-item">+</spam>
         </div>
         <div class="col-lg-12 col-md-12">
-            <button class="save-tick-true-false btn" title="Save" type="submit">
+            <button class="save-tick-true-false btn style-save" title="Save" type="submit">
                 <i class="fa fa-floppy-o" aria-hidden="true"></i></button>
         </div>
     </div>

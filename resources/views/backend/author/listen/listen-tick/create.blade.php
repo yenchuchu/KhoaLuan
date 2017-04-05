@@ -1,16 +1,16 @@
 @extends('layouts.app-backend')
 
 @section('style')
-    @include('backend.author.answer_question.style')
+    @include('backend.author.listen.listen-tick.style')
     @include('backend.author.style-common')
 @stop
 
 @section('header')
     <h1 class="page-header">
         @if($code_user == 'ST')
-            Add exam 'Listen Complete Sentences' for Student test online
+            Tạo bài dạng "Nghe và chọn ảnh" cho học sinh.
         @elseif($code_user == 'TC')
-            Add exam 'Listen Complete Sentences' for Teacher
+            Add exam 'Listen Ticks' for Teacher
         @endif
     </h1>
 @stop
@@ -90,30 +90,47 @@
                         <div class="col-lg-12" style="padding-left: 0;">
                             <div class="form-group">
                                 <input type="text" name="listen_ticks[1][title-listen-ticks]"
-                                       class="form-control" required>
+                                       class="form-control" placeholder="Cập nhật đề bài" required>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            {{ Form::file('listen_ticks[1][audio]', array()) }}
                         </div>
                         <div class="form-group" style="width:100%; float:left;">
                             <div class="span-numb-question" id="id-numb-question-1">
                                 1
                                 <input type="hidden" name="listen_ticks[1][content-choose-ans-question][1][id]" value="1">
                             </div>
-                            <div class="form-group" style="width:98%; float:left;">
-                                <div class="span-text-question">
-                                    <textarea type="text" class="form-control"
-                                              name="listen_ticks[1][content-choose-ans-question][1][content]"
-                                              placeholder="this is ___ a kind. there are three character _" required></textarea>
-                                </div>
+
+                            <div class="form-group">
+                                <label>Upload Audio</label>
+                                {{ Form::file('listen_ticks[1][content-choose-ans-question][1][url_audio]', array()) }}
                             </div>
 
-                            <div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="enter answer"
-                                    name="listen_ticks[1][content-choose-ans-question][1][answer]">
-                                </div>
+                            <div class="span-choose-listen-tick">
+                                <span class="img-listen-tick">
+                                    <input type="radio" id="check-answer_1_1_A" required
+                                           name="listen_ticks[1][content-choose-ans-question][1][answer]" value="A"
+                                           class="ans-true">
+                                    <label for="check-answer_1_1_A" style="cursor: pointer">
+                                        <img src="{{URL::asset('imgs-dashboard/avatar.png')}}" style="height: 180px;"
+                                             id="change_uploadListenImgOne_1_1_A" alt="image suggest">
+                                    </label>
+
+                                    <input type="file" id="uploadListenImgOne_1_1_A" onclick="choose_img_upload(this.id)"
+                                           name="listen_ticks[1][content-choose-ans-question][1][A]"
+                                           required style="margin-left: 17px; margin-top: 10px;">
+                                </span>
+                                <span class="img-listen-tick">
+                                     <input type="radio" id="check-answer_1_1_B" required
+                                            name="listen_ticks[1][content-choose-ans-question][1][answer]" value="B"
+                                            class="ans-false">
+                                    <label for="check-answer_1_1_B" style="cursor: pointer">
+                                         <img src="{{URL::asset('imgs-dashboard/avatar.png')}}" style="height: 180px;"
+                                              id="change_uploadListenImgOther_1_1_B" alt="image suggest">
+                                    </label>
+
+                                    <input type="file" id="uploadListenImgOther_1_1_B" onclick="choose_img_upload(this.id)"
+                                           name="listen_ticks[1][content-choose-ans-question][1][B]"
+                                           required style="margin-left: 17px; margin-top: 10px;">
+                                </span>
                             </div>
                         </div>
 
@@ -123,12 +140,12 @@
 
                 <div class="form-group">
                     <span id="add_item_question_1" item_this="1" item="1"
-                       class="add-question" onclick="add_item_question_LT(this.id)" title="Add">+</span>
+                          class="add-question" onclick="add_item_question_LT(this.id)" title="Add">+</span>
                 </div>
 
             </div>
         </div>
-            <!--End Advanced Tables -->
+        <!--End Advanced Tables -->
     </div>
 
     <div class="row">
@@ -136,7 +153,7 @@
             <span class="add-item">+</span>
         </div>
         <div class="col-lg-12 col-md-12">
-            <button class="save-listen-ticks btn" title="Save" type="submit">
+            <button class="save-listen-ticks btn style-save" title="Save" type="submit">
                 <i class="fa fa-floppy-o" aria-hidden="true"></i></button>
         </div>
     </div>

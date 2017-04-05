@@ -27,13 +27,7 @@
         box-shadow: 0px 2px 10px rgba(0, 0, 0, .3), 0px 0px 1px rgba(0, 0, 0, .1), inset 0px 1px 0px rgba(255, 255, 255, .25), inset 0px -1px 0px rgba(0, 0, 0, .15);
     }
 
-    .save-answer-questions,
-    .save-tick-true-false,
-    .save-multiple-choice,
-    .save-complete-word,
-    .save-find-errors,
-    .save-listen-complete-sentences,
-    .save-speaking {
+    .style-save{
         background: rgb(69, 224, 32);
         border-radius: 24px;
         color: white;
@@ -47,13 +41,7 @@
         box-shadow: 0px 2px 10px rgba(0, 0, 0, .3), 0px 0px 1px rgba(0, 0, 0, .1), inset 0px 1px 0px rgba(255, 255, 255, .25), inset 0px -1px 0px rgba(0, 0, 0, .15);
     }
 
-    .save-answer-questions:hover, .save-answer-questions:focus,
-    .save-tick-true-false:hover, .save-tick-true-false:focus,
-    .save-multiple-choice:hover, .save-multiple-choice:focus,
-    .save-complete-word:hover, .save-complete-word:focus,
-    .save-find-errors:hover, .save-find-errors:focus,
-    .save-listen-complete-sentences:hover, .save-listen-complete-sentences:focus,
-    .save-speaking:hover, .save-speaking:focus {
+    .style-save:hover, .style-save:focus {
         color: snow;
         text-decoration: underline;
         background: rgba(69, 224, 32, 0.69);

@@ -21,4 +21,15 @@
         text-align: center;
     }
 
+    .span-choose-listen-tick {
+        float: left;
+        width:95%;
+    }
+
+    .img-listen-tick {
+        float: left;
+        width:50%;
+    }
+
+
 </style>

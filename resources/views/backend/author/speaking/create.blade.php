@@ -115,7 +115,7 @@
 {{--            {{ Form::submit('', array(--}}
             {{--'class' => 'save-speaking btn',--}}
             {{--'title' => 'Save')) }}--}}
-            <button class="save-speaking btn" title="Save" type="submit">
+            <button class="save-speaking btn style-save" title="Save" type="submit">
             <i class="fa fa-floppy-o" aria-hidden="true"></i>
 {{--                            {{trans('label.backend.author.speaking.create.button.add-radio')}}--}}
             </button>

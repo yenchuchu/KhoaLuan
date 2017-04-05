@@ -21,7 +21,7 @@
                 '<div class="col-lg-2" style=" padding-right: 0;">' +
                 '<div class="form-group">' +
                 '<label class="lable-point">Point: </label>' +
-                '<input type="number" name="tick_true_false[' + j + '][point]" class="form-control input-point" required>' +
+                '<input type="number" name="tick_true_false[' + j + '][point]" class="form-control input-point" >' +
                 '</div>' +
                 '</div>' +
 

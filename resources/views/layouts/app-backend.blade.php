@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
     <title>{{ config('app.name', 'English App - Free') }}</title>
     <!-- Core CSS - Include with every page -->
-    <link href="{{URL::asset('backend/assets/plugins/bootstrap/bootstrap.css')}}" rel="stylesheet" />
-    <link href="{{URL::asset('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
-    <link href="{{URL::asset('backend/assets/plugins/pace/pace-theme-big-counter.css')}}" rel="stylesheet" />
-    <link href="{{URL::asset('backend/assets/css/style.css')}}" rel="stylesheet" />
-    <link href="{{URL::asset('backend/assets/css/main-style.css')}}" rel="stylesheet" />
+    <link href="{{URL::asset('backend/assets/plugins/bootstrap/bootstrap.css')}}" rel="stylesheet"/>
+    <link href="{{URL::asset('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet"/>
+    <link href="{{URL::asset('backend/assets/plugins/pace/pace-theme-big-counter.css')}}" rel="stylesheet"/>
+    <link href="{{URL::asset('backend/assets/css/style.css')}}" rel="stylesheet"/>
+    <link href="{{URL::asset('backend/assets/css/main-style.css')}}" rel="stylesheet"/>
 
     <!-- sweet alert -->
     <link rel="stylesheet" href="{{URL::asset('sweetalert/dist/sweetalert.css')}}"/>
@@ -19,8 +19,8 @@
 {{--    <link rel="stylesheet" href="{{URL::asset('css/sweet-alert/page_loaders.css')}}"/>--}}
 {{--    <link rel="stylesheet" href="{{URL::asset('css/sweet-alert/sweetalert2.min.css')}}"/>--}}
 
-    <!-- Page-Level CSS -->
-    <link href="{{URL::asset('backend/assets/plugins/morris/morris-0.4.3.min.css')}}" rel="stylesheet" />
+<!-- Page-Level CSS -->
+    <link href="{{URL::asset('backend/assets/plugins/morris/morris-0.4.3.min.css')}}" rel="stylesheet"/>
 
     @yield('style')
 
@@ -79,6 +79,14 @@
             font-weight: 600;
         }
 
+        .huge-done {
+            background: #04b173;
+            padding: 3px 7px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 600;
+        }
+
     </style>
 
 </head>
@@ -96,7 +104,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">
-                <img src="{{URL::asset('backend/assets/img/logo.png')}}" alt="" />
+                <img src="{{URL::asset('backend/assets/img/logo.png')}}" alt=""/>
             </a>
         </div>
         <!-- end navbar-header -->
@@ -137,7 +145,6 @@
         </div>
 
         @include('errors.errors')
-
         @yield('content')
 
     </div>
@@ -148,7 +155,7 @@
 
 <!-- Core Scripts - Include with every page -->
 <script src="{{URL::asset('backend/assets/plugins/jquery-1.10.2.js')}}"></script>
-<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="{{URL::asset('backend/assets/plugins/bootstrap/bootstrap.min.js')}}"></script>
 <script src="{{URL::asset('backend/assets/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
 <script src="{{URL::asset('backend/assets/plugins/pace/pace.js')}}"></script>
@@ -190,11 +197,99 @@
     };
     firebase.initializeApp(config);
 
+    var database = firebase.database();
+
+    //    var starCountRef = database.ref('notification/');
+
+    // Find all dinosaurs whose height is exactly 25 meters.
+    var ref = database.ref("notification");
+
+    ref.on("value", function (snap) {
+        var count_noti = [];
+        var all_data = snap.val();
+        for (var prop in all_data) {
+            if (!all_data.hasOwnProperty(prop)) continue;
+
+            var end_obj = all_data[prop];
+            ref_child = database.ref("notification/" + prop);
+            ref_child.orderByChild("status").equalTo('0').on("child_added", function (snapshot) {
+//                console.log(snapshot.val());
+                count_noti.push(snapshot.val());
+            });
+        }
+
+        var noti_length = count_noti.length;
+        $('#sum-noti-admin').text(noti_length);
+        count_noti.sort(function (x, y) {
+            var xDate = new Date(x.created_at);
+            var yDate = new Date(y.created_at);
+
+            return yDate - xDate;
+        });
+        if (noti_length > 10) {
+            for(var i = 0; i<= 9; i++) {
+                console.log(count_noti[i]);
+                $('#alert_notifications').append('<li>' +
+                '<a href="#">' +
+                        '<div>' +
+                        '<i class="fa fa-comment fa-fw"></i>New Comment' +
+                '<span class="pull-right text-muted small">4 minutes ago</span>' +
+                '</div>' +
+                '</a>' +
+                '</li>' +
+                '<li class="divider"></li>');
+            }
+
+            $('#alert_notifications').append('<li id="see-all">' +
+                    '<a class="text-center" href="#">' +
+                    '<strong>See All Alerts</strong>' +
+                    '<i class="fa fa-angle-right"></i>' +
+                    '</a>' +
+                    '</li>');
+        } else {
+            for(noti in count_noti) {
+                if (!count_noti.hasOwnProperty(noti)) continue;
+
+                var end_obj = count_noti[noti];
+                $('#alert_notifications').append('<li>' +
+                        '<a href="' + end_obj['url'] + '" target="_blank">' +
+                        '<div>' +
+                        '<img src="' + end_obj['url_avatar_user'] + '" style="height: 34px; margin-right: 10px">' +
+                         ' <span>' + end_obj['content'] + '</span>' +
+                        '<span class="pull-right text-muted small"> at ' + end_obj['created_at'] + '</span>' +
+                        '</div>' +
+                        '</a>' +
+                        '</li>' +
+                        '<li class="divider"></li>');
+            }
+        }
+    });
+
 </script>
+
+@if(Session::has('notification_new'))
+    <?php $post_data = Session::get('notification_new'); ?>
+
+    <script>
+        //       A post entry.var
+        postData = {
+            status: '{{$post_data["status"]}}',
+            created_at: '{{$post_data["created_at"]}}',
+            url_avatar_user: '{{$post_data["url_avatar_user"]}}',
+            url: '{{$post_data["url"]}}',
+            content: '{{$post_data["content"]}}'
+        };
+
+        //      Get a key for a new Post.
+        var newPostKey = firebase.database().ref().child('notification/{{$post_data["user_id"]}}').push(postData).key;
+        //        console.log(newPostKey);
+    </script>
+@endif
+
 <script>
     function setTableInit(table_id) {
         var set_name = 'manager_set' + table_id;
-        set_name = $('#'+ table_id).DataTable({
+        set_name = $('#' + table_id).DataTable({
             responsive: true,
             language: {
                 "sProcessing": "Đang xử lý...",
@@ -230,7 +325,6 @@
             });
         }).draw();
     }
-    $()
 
     function redirect_post_detail(table, array_id) {
         url = '{{route('backend.manager.author.post.detail')}}';
@@ -258,6 +352,34 @@
             }
         });
     }
+
+    setTimeout(function () {
+        $(".alert-success").hide();
+    }, 5000);
+
+
+    //    starCountRef.on("value", function(snap) {
+    //        var all_data = snap.val();
+    //        var notification = [];
+    //        for (var prop in all_data) {
+    //            // skip loop if the property is from prototype
+    //            if (!all_data.hasOwnProperty(prop)) continue;
+    //
+    //            var end_obj = all_data[prop];
+    //            for (var item in end_obj) {
+    //                console.log(end_obj);
+    //                // skip loop if the property is from prototype
+    //                if (!end_obj.hasOwnProperty(item)) continue;
+    //
+    //                if(end_obj['status'] == 0) {
+    //                    notification.push(end_obj);
+    //                }
+    ////                console.log(end_obj['status']);.length
+    //            }
+    //        }
+    //        console.log(notification);
+    //    });
+
 
 </script>
 

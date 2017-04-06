@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
 //         $this->call(AnswerquestionsTableSeeder::class);
 //         $this->call(TickTrueFalseTableSeeder::class);
 //         $this->call(ListenCompleteSentencesTableSeeder::class);
-//         $this->call(ListenTableTicksTableSeeder::class);
+         $this->call(ListenTableTicksTableSeeder::class);
 //         $this->call(ListenTableMatchsTableSeeder::class);
-         $this->call(ListenTicksTableSeeder::class);
+//         $this->call(ListenTicksTableSeeder::class);
     }
 }

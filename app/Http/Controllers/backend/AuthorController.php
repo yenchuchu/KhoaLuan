@@ -77,6 +77,28 @@ class AuthorController extends Controller
         return view('backend.author.show-post', compact('all_posts'));
     }
 
+    public function get_detail() {
+        $url_parameters = Route::getCurrentRoute()->parameters();
+
+        $name_table = $url_parameters['name_table'];
+        $type_code = $url_parameters['type_code'];
+        $id_string = $url_parameters['id_string'];
+
+        $id_string =  str_replace("[","",$id_string);
+        $id_string =  str_replace("]","",$id_string);
+        $array_id = explode(",",$id_string);
+        $id_all = [];
+        foreach ($array_id as $id_s) {
+            $id_all[] = (int)$id_s;
+        }
+
+        $records = DB::table($name_table)->whereIn('id', $id_all)->orderBy('created_at', 'desc')->get();
+        $levels = Level::all();
+        $classes = Classes::all();
+
+        return view('backend.author.show-post.index', compact('records', 'levels', 'classes', 'name_table'));
+    }
+
     public function post_detail(Request $request)
     {
        $data = $request->all();

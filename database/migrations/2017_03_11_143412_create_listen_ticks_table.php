@@ -16,9 +16,9 @@ class CreateListenTicksTable extends Migration
         Schema::create('listen_ticks', function (Blueprint $table) {
             $table->increments('id');
             $table->text('title');
-            $table->text('example_json')->comment('{ {id, url_image} , answer}');
+            $table->text('example_json')->nullable()->comment('{ {id, url_image} , answer}');
             $table->text('content_json')->comment('{ { {id, url_image} , answer} }');
-            $table->text('url');
+            $table->text('url')->nullable();;
             $table->integer('point')->default(0);
             $table->tinyInteger('status')->defaul(0)->comment('0-chua active, 1-active');
 

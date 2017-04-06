@@ -7,18 +7,20 @@ use App\Classes;
 use App\ExamType;
 use App\Http\Controllers\Controller;
 use App\Level;
-use App\ListenTicks;
+use App\ListenTableTicks;
 use App\Skill;
 use App\User;
 use Illuminate\Http\Request;
 use Route;
 use Config;
 use DB;
+use Session;
 use Auth;
+use Carbon\Carbon;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Input;
 
-class ListenTicksController extends Controller
+class ListenTableTicksController extends Controller
 {
     protected $levels;
     protected $skill;
@@ -43,7 +45,7 @@ class ListenTicksController extends Controller
 
     public function index()
     {
-        $ans_questions_all = ListenTicks::where(['type_user' => 'ST'])->with('skills', 'levels')
+        $ans_questions_all = ListenTableTicks::where(['type_user' => 'ST'])->with('skills', 'levels')
             ->orderBy('type_code', 'desc')
             ->get();
 
@@ -67,7 +69,7 @@ class ListenTicksController extends Controller
             $name_code = 'High School ';
         }
 
-        return view('backend.author.listen.listen-tick.index',
+        return view('backend.author.listen.table-tick.index',
             compact('ans_for_students', 'ans_for_teachers', 'class_code', 'name_code', 'array_id_intypecode'));
     }
 
@@ -92,7 +94,7 @@ class ListenTicksController extends Controller
                 compact('levels', 'class_code', 'code_user', 'classes', 'exam_types', 'book_maps'));
         }
 
-        return view('backend.author.listen.listen-tick.create', compact('levels', 'class_code', 'code_user', 'classes'));
+        return view('backend.author.listen.table-tick.create', compact('levels', 'class_code', 'code_user', 'classes'));
     }
 
     /**
@@ -126,55 +128,35 @@ class ListenTicksController extends Controller
         $class_id = $all_data['class_id'];
         $classes = Classes::whereId($class_id)->first();
 
-        $type_code_next = $this->get_typecode_next('listen_ticks');
-        $user_auth_id = Auth::user()->id;
+        $type_code_next = $this->get_typecode_next('listen_table_ticks');
+        $user =  Auth::user();
+        $user_auth_id = $user->id;
 
-        foreach ($all_data['listen_ticks'] as $key => $data) {
-            $listen = new ListenTicks();
+        $data_new = [];
+        $new_id = [];
+        $data_new['user_id'] = $user_auth_id;
+//        $data_new['name_table'] = 'listen_table_ticks';
+        $data_new['status'] = 0;
+//        $data_new['type_code'] = $type_code_next;
+
+        foreach ($all_data['listen_table_ticks'] as $key => $data) {
+            $listen = new ListenTableTicks();
 
             $listen_content_question = $data['content-choose-ans-question'];
 
+            $array_json = [];
             foreach ($listen_content_question as $idx => $item) {
-                $faker = Faker::create();
-                $maxTime = $faker->unixTime($max = 'now');
+                $array_json['suggest_choose'][] = $item['suggest'];
 
-                $file = Input::file();
-                if (isset($file['listen_ticks'][$key]['content-choose-ans-question'][$idx]['content']['A'])) {
-                    $file_a = $file['listen_ticks'][$key]['content-choose-ans-question'][$idx]['content']['A'];
-                    $destinationPath_a = public_path('backend/img-listen'); // upload path
-                    $extension_a = $file_a->getClientOriginalExtension(); // getting image extension
-                    $filename_img_a = $user_auth_id . '-listen-ticks-A-' .$maxTime. '-'. $key. '-'. $idx. '.'. $extension_a;
-
-                    $listen_content_question[$idx]['content']['A'] = $filename_img_a;
-                    $file_a->move($destinationPath_a, $filename_img_a);
-                }
-
-                if (isset($file['listen_ticks'][$key]['content-choose-ans-question'][$idx]['content']['B'])) {
-                    $file_b = $file['listen_ticks'][$key]['content-choose-ans-question'][$idx]['content']['B'];
-                    $destinationPath_b = public_path('backend/img-listen'); // upload path
-                    $extension_b = $file_b->getClientOriginalExtension(); // getting image extension
-                    $filename_img_b = $user_auth_id . '-listen-ticks-B-' .$maxTime. '-'. $key. '-'. $idx. '.' . $extension_b;
-
-                    $listen_content_question[$idx]['content']['B'] = $filename_img_b;
-                    $file_b->move($destinationPath_b, $filename_img_b);
-                }
-
-                if (isset($file['listen_ticks'][$key]['content-choose-ans-question'][$idx]['url_audio'])) {
-                    $audio = $file['listen_ticks'][$key]['content-choose-ans-question'][$idx]['url_audio'];
-
-                    $filename_audio = $maxTime. '-'. $key. '-'. $idx. '-'. $audio->getClientOriginalName();
-                    $location_audio = public_path('backend/audio-listening/listen-ticks/');
-                    $listen_content_question[$idx]['url_audio'] = 'backend/audio-listening/listen-ticks/'.$filename_audio;
-
-                    $audio->move($location_audio, $filename_audio);
+                if(isset($item['answer'])) {
+                    $array_json['answer'][] = $item['suggest'];
                 }
             }
 
-            $listen->title = $data['title-listen-ticks'];
-            var_dump($data['title-listen-ticks']);
+            $listen->title = $data['title-listen-table-ticks'];
             $listen->user_id = $user_auth_id;
             $listen->type_user = $code_user;
-            $listen->content_json = json_encode($listen_content_question);
+            $listen->content_json = json_encode($array_json);
             $listen->skill_id = $skill->id;
             $listen->exam_type_id = $exam_type_id;
             $listen->level_id = $level_id;
@@ -182,11 +164,42 @@ class ListenTicksController extends Controller
             $listen->bookmap_id = $book_map_id;
             $listen->type_code = $type_code_next;
 
+            $faker = Faker::create();
+            $maxTime = $faker->unixTime($max = 'now');
+
+            $file = Input::file();
+            if (isset($file['listen_table_ticks'][$key]['url_audio'])) {
+                $audio = $file['listen_table_ticks'][$key]['url_audio'];
+
+                $filename_audio = $maxTime. '-'. $key. '-'. '-'. $audio->getClientOriginalName();
+                $location_audio = public_path('backend/audio-listening/listen-table-ticks/');
+                $audio->move($location_audio, $filename_audio);
+
+                $path_url = 'backend/audio-listening/listen-table-ticks/'.$filename_audio;
+                $listen->url = $path_url;
+            }
+
             $listen->save();
+
+            $new_id[] = $listen->id;
+            $data_new['created_at'] = $listen->created_at;
+//            $data_new['user_name'] = $user->user_name;
+            $data_new['url_avatar_user'] = $user->avatar;
+
+
         }
 
+        $data_new['url'] = route('backend.manager.author.get.detail', ['listen_table_ticks', $type_code_next ,json_encode($new_id)]);
+        $data_new['content'] = $user->user_name.' posted a exam.';
+
+
+
+//        $data_new_json = json_encode($data_new);
+//        dd($data_new_json);
+
         Session::flash('message', 'Tạo thành công!');
-        return Redirect()->route('backend.manager.author.listen.listen_ticks', $classes->code);
+        Session::flash('notification_new', $data_new);
+        return Redirect()->route('backend.manager.author.listen.listen_table_ticks', $classes->code);
     }
 
     // mỗi lần add -> tạo 1 code.

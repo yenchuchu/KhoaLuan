@@ -16,7 +16,7 @@
 
                 '<div class="col-lg-12" style="padding-left: 0;">' +
                 '<div class="form-group">' +
-                '<input type="text" name="listen_ticks[' + j + '][title-listen-complete-sentences] " class="form-control" required>' +
+                '<input type="text" name="listen_ticks[' + j + '][title-listen-ticks] " class="form-control" required>' +
                 '</div>' +
                 '</div>' +
 
@@ -43,7 +43,7 @@
                 '</label>' +
 
                 '<input type="file" id="uploadListenImgOne_' + j + '_1_A" onclick="choose_img_upload(this.id)"' +
-                'name="listen_ticks[' + j + '][content-choose-ans-question][1][A]"' +
+                'name="listen_ticks[' + j + '][content-choose-ans-question][1][content][A]"' +
                 'required style="margin-left: 17px; margin-top: 10px;">' +
                 '</span>' +
                 '<span class="img-listen-tick">' +
@@ -56,7 +56,7 @@
                 '</label>' +
 
                 '<input type="file" id="uploadListenImgOther_' + j + '_1_B" onclick="choose_img_upload(this.id)"' +
-                'name="listen_ticks[' + j + '][content-choose-ans-question][1][B]"' +
+                'name="listen_ticks[' + j + '][content-choose-ans-question][1][content][B]"' +
                 'required style="margin-left: 17px; margin-top: 10px;">' +
                 '</span>' +
                 '</div>' +
@@ -108,7 +108,7 @@
 
                 '<input type="file" id="uploadListenImgOne_' + item + '_' + item_this + '_A"' +
                         ' onclick="choose_img_upload(this.id)"' +
-                'name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][A]"' +
+                'name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][content][A]"' +
                 'required style="margin-left: 17px; margin-top: 10px;">' +
                 '</span>' +
 
@@ -123,7 +123,7 @@
 
                 '<input type="file" id="uploadListenImgOther_' + item + '_' + item_this + '_B"' +
                         ' onclick="choose_img_upload(this.id)"' +
-                'name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][B]"' +
+                'name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][content][B]"' +
                 'required style="margin-left: 17px; margin-top: 10px;">' +
                 '</span>' +
 

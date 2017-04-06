@@ -55,9 +55,6 @@ Route::group(['middleware' => 'auth'], function () {
                 Route::get('/', 'backend\AuthorController@index')->name('backend.manager.author.index');
                 Route::get('/show-post', 'backend\AuthorController@show_post')->name('backend.manager.author.show.post');
 
-//                Route::get('/get-detail', 'backend\AuthorController@get_detail')->name('backend.manager.author.get.detail');
-                Route::post('/post-detail', 'backend\AuthorController@post_detail')->name('backend.manager.author.post.detail');
-
                 // go to elementary
                 Route::group(array('prefix' => 'grade'), function () {
                     Route::get('/{class_code}', 'backend\AuthorController@grade')->name('backend.author.grade');
@@ -203,6 +200,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         });
 
+        Route::get('/get-detail/{name_table}/{type_code}/{id_string}', 'backend\AuthorController@get_detail')->name('backend.manager.author.get.detail');
+        Route::post('/post-detail', 'backend\AuthorController@post_detail')->name('backend.manager.author.post.detail');
 
     });
 

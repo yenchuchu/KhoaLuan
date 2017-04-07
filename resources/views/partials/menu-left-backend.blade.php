@@ -11,7 +11,7 @@
                         if(!empty(Auth::user()->avatar)) { ?>
                         <img src="{{URL::asset(Auth::user()->avatar)}}" alt="">
                         <?php } else { ?>
-                        <img src="{{URL::asset('backend/assets/img/user.jpg')}}" alt="">
+                        <img src="{{URL::asset('imgs-dashboard/avatar.png')}}" alt="">
                         <?php } ?>
                     </div>
                     <div class="user-info">

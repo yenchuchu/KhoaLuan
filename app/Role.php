@@ -28,4 +28,15 @@ class Role extends Model
     {
         return $this->belongsToMany('App\Permission', 'permission_roles', 'role_id', 'permission_id');
     }
+
+    public static function getRoleByCode($code_role)
+    {
+        $role = Role::where(['code' => $code_role])->first();
+
+//        if($role == null) {
+//            return 0;
+//        }
+
+        return $role;
+    }
 }

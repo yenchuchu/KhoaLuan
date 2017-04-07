@@ -70,7 +70,7 @@
 @section('content')
 
     <div class="container">
-        <div><h3>Listen and repeat</h3></div>
+        {{--<div><h3>Listen and repeat</h3></div>--}}
         @if(count($item) == 0)
             <p>Chưa cập nhật đề bài.</p>
         @else
@@ -80,13 +80,13 @@
                 <input type="hidden" id="skill-code-tesing-hidden" value="Speak">
 
                 <p id="text_demo">{{$item->content}}</p>
-                @if(isset($speak_items[0]->url_mp3_create))
+                @if($item->url_mp3 != null)
                     <audio controls>
-                        <source src="{{$item->url_mp3_create}}" type="audio/mpeg">
+                        <source src="{{$item->url_mp3}}" type="audio/mpeg">
                     </audio>
                 @else
                     <audio controls>
-                        <source src="{{URL::asset($item->url_mp3)}}" type="audio/mpeg">
+                        <source src="{{$item->url_mp3_create}}" type="audio/mpeg">
                     </audio>
                 @endif
 
@@ -119,8 +119,11 @@
                 <ul class="list-unstyled" id='ul'></ul>
             </div>
 
-            <button id="check_diff" class="btn btn-success" style="margin-top: 10px;" disabled>Check</button>
+        <div class="row" style="margin-bottom: 30px;">
+            <button id="check_diff" class="btn btn-success" disabled>Check</button>
             <a class="btn btn-success" href="{{route('frontend.dashboard.student.learn.speak', [])}}">Next</a>
+        </div>
+
         @endif
 
     </div>
@@ -133,9 +136,7 @@
         'use strict'
 
         let log = console.log.bind(console),
-                id = val =
-        >
-        document.getElementById(val),
+                id = val => document.getElementById(val),
                 ul = id('ul'),
                 start = id('start'),
                 stop = id('stop'),
@@ -155,25 +156,22 @@
             }
         };
         media = mv.audio;
-        navigator.mediaDevices.getUserMedia(media.gUM).then(_stream = > {
+        navigator.mediaDevices.getUserMedia(media.gUM).then(_stream => {
             stream = _stream;
         id('gUMArea').style.display = 'none';
         id('btns').style.display = 'inherit';
         start.removeAttribute('disabled');
 
         recorder = new MediaRecorder(stream);
-        recorder.ondataavailable = e =
-        >
+        recorder.ondataavailable = e =>
         {
             chunks.push(e.data);
             if (recorder.state == 'inactive')  makeLink();
-        }
-        ;
-        //            log('got media successfully');
+        };
+                    log('got media successfully');
         }).catch(log);
         console.log(record_recognition);
-        start.onclick = e =
-        >
+        start.onclick = e =>
         {
             start.disabled = true;
             stop.removeAttribute('disabled');
@@ -205,8 +203,7 @@
                 interim_span.innerHTML = linebreak(interim_transcript);
             }
         }
-        stop.onclick = e =
-        >
+        stop.onclick = e =>
         {
             stop.disabled = true;
             recorder.stop();
@@ -226,8 +223,8 @@
             mt.controls = true;
             mt.src = url;
             hf.href = url;
-            hf.download = `${counter++}${media.ext}`;
-            hf.innerHTML = `<i class="fa fa-download" aria-hidden="true"></i> ${hf.download}`;
+            hf.download = '${counter++}${media.ext}';
+            hf.innerHTML = '<i class="fa fa-download" aria-hidden="true"></i> ${hf.download}';
             li.appendChild(mt);
             li.appendChild(hf);
             ul.appendChild(li);

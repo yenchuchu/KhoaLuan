@@ -62,10 +62,10 @@
                             <a href="{{route('backend.manager.author.answer-question', $class_code)}}">
                                 <i class="fa fa-dashboard fa-fw"></i>Answer Questions</a>
                         </div>
-                        <div class="col-lg-5 type-exam">
-                            <a href="{{route('backend.manager.author.complete-word', $class_code)}}">
-                                <i class="fa fa-dashboard fa-fw"></i>Complete Words</a>
-                        </div>
+                        {{--<div class="col-lg-5 type-exam">--}}
+                            {{--<a href="{{route('backend.manager.author.complete-word', $class_code)}}">--}}
+                                {{--<i class="fa fa-dashboard fa-fw"></i>Complete Words</a>--}}
+                        {{--</div>--}}
                         <div class="col-lg-5 type-exam">
                             <a href="{{route('backend.manager.author.find-errors', $class_code)}}">
                                 <i class="fa fa-dashboard fa-fw"></i>Find Errors</a>

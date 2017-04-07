@@ -1,11 +1,12 @@
 <table class="table table-hover" id="manager_answer_questions_students">
     <thead>
     <tr>
-        <th>STT</th> 
+        <th>STT</th>
         <th>Class</th>
         <th>Level</th>
         <th>Link</th>
         <th>Date</th>
+        <th>Status</th>
     </tr>
     </thead>
     <tbody>
@@ -22,7 +23,6 @@
                  <?php } ?>
              </td>
              <td>
-{{--                 <div id="array_item_id">{{json_encode}}</div>--}}
                  <?php
                  if(!empty($item['level_id'])) {
                      $level = \App\Level::where(['id' => $item['level_id'][0]])->first();
@@ -32,13 +32,18 @@
                  <?php } ?>
                  </td>
             <td>
-                 <?php
-                $test = json_encode($item['id']);
-                ?>
-                <a id="" onclick="redirect_post_detail('answer_questions', '{{$test}}')"> Go to link</a>
+
+                <a href="{{route('backend.manager.author.get.detail', ['answer_questions' , Auth::user()->id, $item['id']])}}">
+                    Go to link</a>
 
             </td>
             <td>{{Carbon\Carbon::parse($item['created_at'][0])->format('d/m/Y - H:i')}}</td>
+            <td><?php
+                if($item['status'][0] == 0) { ?>
+                <span class="huge-null">Wait</span>
+                <?php } else if($item['status'][0] == 1) { ?>
+                <span class="huge-done">Done</span>
+                <?php } ?></td>
         </tr>
     @endforeach
 

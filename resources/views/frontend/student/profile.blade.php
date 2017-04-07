@@ -1,22 +1,30 @@
-@extends('layouts.app')
+@if (Auth::user()->hasRole('ST'))
+    @extends('layouts.app')
 
-@section('header')
-    <h1 class="page-header">Test Speak</h1>
-@stop
+    @section('menu-main')
+         @include('frontend.student.partials.menu-main')
+    @stop
+
+<style>
+    #home-id .col-lg-6 {
+        margin-right: 20px;
+    }
+
+    #home-id .col-lg-6,
+    #home-id .col-lg-5 {
+        background: #fafaf3;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+</style>
+
+@else
+    @extends('layouts.app-backend')
+@endif
 
 @section('style-menu-main')
     <style>
-        #home-id .col-lg-6 {
-            margin-right: 20px;
-        }
-
-        #home-id .col-lg-6,
-        #home-id .col-lg-5 {
-            background: #fafaf3;
-            padding-top: 16px;
-            padding-bottom: 16px;
-        }
-
         #edit_avatar_img {
             width: 100%;
         }
@@ -29,9 +37,6 @@
     </style>
 @stop
 
-@section('menu-main')
-    @include('frontend.student.partials.menu-main')
-@stop
 
 @section('content')
 
@@ -104,6 +109,7 @@
                 {!! Form::close() !!}
             </div>
         </div>
+        <div class="row" style="margin-bottom: 40px"></div>
 
     </div>
 

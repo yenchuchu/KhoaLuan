@@ -1,28 +1,4 @@
-<div class="row">
-        <div class="col-lg-3">
-            <div class="form-group">
 
-                <select name="level_id" class="form-control" id="add-answer-question-level">
-                    @foreach($levels as $level)
-                        <option value="{{$level->id}}">{{$level->title}} - {{$level->point}}  </option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="form-group">
-
-                <select name="class_id" class="form-control" id="answer-question-class">
-                    @foreach($classes as $class)
-                        <option value="{{$class->id}}">{{$class->title}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-    {{--<input type="hidden" value="{{$code_user}}" name="code_user">--}}
-    {{--<input type="hidden" value="{{$class_code}}" name="class_code">--}}
-</div>
 <div class="row" id="wrap_add_answer_question">
     <div class="col-lg-12 col_add_answer_question">
 
@@ -30,39 +6,48 @@
         <div class="panel panel-default">
 
             <div class="panel-body">
-                <div class="table-responsive" id="wrap-content-exam-1">
+                <div class="table-responsive" id="wrap-content-exam-{{$key_idx}}">
 
                     <div class="col-lg-12" style="padding-left: 0;">
                         <div class="form-group">
-                            <input type="text" name="answer_question[1][title-answer-question]"
-                                   class="form-control" required>
+                            <input type="text" name="answer_question[{{$key_idx}}][title-answer-question]"
+                                   class="form-control" required value="{{$record->title}}">
                         </div>
                     </div>
 
                     <div class="form-group">
                                 <textarea type="text" class="form-control"
-                                          name="answer_question[1][content-answer-question]"
-                                          placeholder="enter content" required></textarea>
+                                          name="answer_question[{{$key_idx}}][content-answer-question]"
+                                          placeholder="enter content" required>{{$record->content}}</textarea>
                     </div>
                     <div class="form-group" style="width:100%; float:left;">
-                        <div class="span-numb-question" id="id-numb-question-1">
-                            1
-                            <input type="hidden" name="answer_question[1][content-choose-ans-question][1][id]" value="1">
-                        </div>
-                        <div class="form-group" style="width:98%; float:left;">
-                            <div class="span-text-question">
-                                    <textarea type="text" class="form-control"
-                                              name="answer_question[1][content-choose-ans-question][1][content]"
-                                              placeholder="enter content" required></textarea>
-                            </div>
-                        </div>
 
-                        <div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="enter answer"
-                                       name="answer_question[1][content-choose-ans-question][1][answer]">
-                            </div>
-                        </div>
+                        <?php
+                        $content_json = json_decode($record->content_json);
+                        ?>
+
+                            @foreach($content_json as $item_this => $sug)
+                                <div class="span-numb-question" id="id-numb-question-{{$key_idx}}">
+                                    {{$item_this}}
+                                    <input name="answer_question[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][id]"
+                                           type="hidden" value="{{$sug->id}}">
+                                </div>
+                                <div class="form-group" style="width:98%; float:left;">
+                                    <div class="span-text-question">
+                                    <textarea type="text" class="form-control"
+                                              name="answer_question[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][content]"
+                                              placeholder="enter content" required>{{$sug->content}}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="enter answer" value="{{$sug->answer}}"
+                                               name="answer_question[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][answer]">
+                                    </div>
+                                </div>
+                            @endforeach
+
                     </div>
 
                 </div>
@@ -70,7 +55,7 @@
             </div>
 
             <div class="form-group">
-                    <span id="add_item_question_1" item_this="1" item="1"
+                    <span id="add_item_question_{{$key_idx}}" item_this="{{count((array)$content_json)}}" item="{{$key_idx}}"
                           class="add-question" onclick="add_item_question_AQ(this.id)" title="Add">+</span>
             </div>
 

@@ -25,4 +25,10 @@ class Level extends Model
     {
         return $this->belongsTo(AnswerQuestion::class);
     }
+
+    public static function getLevelbyId($level_id) {
+        $level = Level::where(['id' => $level_id])->first();
+
+        return $level;
+    }
 }

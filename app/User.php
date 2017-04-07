@@ -65,4 +65,31 @@ class User extends Authenticatable
         return $this->hasMany(UserSkill::class, 'user_id');
     }
 
+    public static function type_user()
+    {
+        $users = User::with('roles', 'classes')->get();
+
+        $user_author = $users->filter(function ($user) {
+            return $user->type == Role::getRoleByCode('AT')->id;
+        })->all();
+
+        $user_student = $users->filter(function ($user) {
+            return $user->type == Role::getRoleByCode('ST')->id;
+        })->all();
+
+        $user_admin = $users->filter(function ($user) {
+            return $user->type == Role::getRoleByCode('AD')->id;
+        })->all();
+
+        return ['user_author' => $user_author, 'user_student' => $user_student, 'user_admin' => $user_admin];
+    }
+
+    public static function find_all_userId_by_code($code_user) {
+        $role = Role::where(['code' => $code_user])->first();
+        $users = User::where('type', $role->id)->get();
+        $user_ids = $users->pluck('id')->toArray();
+
+        return $user_ids;
+    }
+
 }

@@ -23,7 +23,6 @@
                 <?php } ?>
             </td>
             <td>
-                {{--                 <div id="array_item_id">{{json_encode}}</div>--}}
                 <?php
                 if(!empty($item['level_id'])) {
                     $level = \App\Level::where(['id' => $item['level_id'][0]])->first();

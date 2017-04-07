@@ -204,8 +204,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/post-detail', 'backend\AuthorController@post_detail')->name('backend.manager.author.post.detail');
 
 
-        Route::post('/update', 'backend\author\ListenTableTicksController@update')
+        Route::post('/update-listen-table-ticks', 'backend\author\ListenTableTicksController@update')
             ->name('backend.manager.author.listen.listen_table_ticks.update');
+
+        Route::post('/update/answer-questions', 'backend\author\AnswerQuestionsController@update')
+            ->name('backend.manager.author.listen.answer_questions.update');
+
+        Route::post('/update/find-errors', 'backend\author\FindErrorController@update')
+            ->name('backend.manager.author.listen.find_errors.update');
 
 
     });
@@ -281,21 +287,20 @@ Route::group(['middleware' => 'auth'], function () {
 
             Route::get('show_results', 'frontend\StudentController@show_results')
                 ->name('frontend.student.show.results');
-
-            // show profile
-            Route::get('profile', 'frontend\StudentController@profile')
-                ->name('frontend.student.show.profile');
-            Route::post('change/profile/avatar/{id}', 'frontend\StudentController@change_avatar')
-                ->name('frontend.student.change.profile.avatar');
-            Route::post('change/profile/infomation/{id}', 'frontend\StudentController@change_infomation')
-                ->name('frontend.student.change.profile.infomation');
-
         });
 
     });
 
     Route::get('/setup/roles', 'SetupRoleController@setupRole')->name('get.setup.roles');
     Route::post('post/setup/roles', 'SetupRoleController@postSetupRole')->name('post.setup.roles');
+
+    // show profile
+    Route::get('profile', 'frontend\StudentController@profile')
+        ->name('frontend.student.show.profile');
+    Route::post('change/profile/avatar/{id}', 'frontend\StudentController@change_avatar')
+        ->name('frontend.student.change.profile.avatar');
+    Route::post('change/profile/infomation/{id}', 'frontend\StudentController@change_infomation')
+        ->name('frontend.student.change.profile.infomation');
 
 });
 

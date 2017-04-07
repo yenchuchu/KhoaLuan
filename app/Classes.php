@@ -23,4 +23,10 @@ class Classes extends Model
     {
         return $this->belongsTo(AnswerQuestion::class);
     }
+
+    public static function getClassById($class_id) {
+        $class = Classes::where(['id' => $class_id])->first();
+
+        return $class;
+    }
 }

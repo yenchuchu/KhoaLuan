@@ -87,6 +87,63 @@
             font-weight: 600;
         }
 
+        /* custom avatar */
+        .dropbtn {
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /*@media screen and (min-width: 769px){*/
+        /*#dropdown-menu-top {*/
+        /*position: relative;*/
+        /*}*/
+        /*}*/
+
+        #dropdown-menu-top {
+            position: relative;
+            display: inline-block;
+            left: 78%;
+            margin-top: 15px;
+        }
+
+        .dropdown-content {
+            margin-top: 4px;
+            display: none;
+            position: relative;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        #dropdown-menu-top:hover .dropdown-content {
+            display: block;
+        }
+
+        #dropdown-menu-top:hover .dropbtn {
+            text-decoration: none;
+        }
+
+        #avatar_img {
+            width: 40px;
+            height: 40px;
+            border-radius: 5%;
+            position: relative;
+            top: -5px;
+        }
+
     </style>
 
 </head>
@@ -200,7 +257,7 @@
     var database = firebase.database();
 
     var user_auth_id = '{{Auth::user()->id}}';
-    console.log(user_auth_id);
+//    console.log(user_auth_id);
     // Find all dinosaurs whose height is exactly 25 meters.
     var ref = database.ref("notification/" + user_auth_id);
 
@@ -216,7 +273,7 @@
 //            return yDate - xDate;
 //        });
 //
-        console.log(all_data);
+//        console.log(all_data);
         var count = 0;
         for (var prop in all_data) {
             if (!all_data.hasOwnProperty(prop)) continue;

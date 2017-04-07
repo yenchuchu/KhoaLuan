@@ -91,13 +91,6 @@
                                        class="form-control" placeholder="enter topic content" required>
                             </div>
                         </div>
-                        {{--<div class="col-lg-2" style=" padding-right: 0;">--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label class="lable-point">Point: </label>--}}
-                                {{--<input type="number" name="find_errors[1][point]"--}}
-                                       {{--class="form-control input-point" required>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
 
                         <div class="form-group" style="width:100%; float:left;">
                             <div class="span-numb-question" id="id-numb-question-1">
@@ -106,9 +99,11 @@
                             </div>
                             <div class="form-group" style="width:98%; float:left;">
                                 <div class="span-text-question">
-                                    <textarea type="text" class="form-control"
+                                    <textarea type="text" class="form-control"  required
                                               name="find_errors[1][content-choose-ans-question][1][content]"
-                                              placeholder="This <u>is</u> a <u>example</u> for <u>this</u> question format" required></textarea>
+                                              placeholder="This <u>is</u> a <u>example</u> for <u>this</u> question format">
+
+                                    </textarea>
                                 </div>
                             </div>
                             <div class="col-lg-12 div-wrap-option-answers" >

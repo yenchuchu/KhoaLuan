@@ -33,10 +33,9 @@
                 <?php } ?>
             </td>
             <td>
-                <?php
-                $test = json_encode($item['id']);
-                ?>
-                <a id="" onclick="redirect_post_detail('listen_table_ticks', '{{$test}}')"> Go to link</a>
+
+                <a href="{{route('backend.manager.author.get.detail', ['listen_table_ticks' , Auth::user()->id, $item['id']])}}">
+                    Go to link</a>
 
             </td>
             <td>{{Carbon\Carbon::parse($item['created_at'][0])->format('d/m/Y - H:i')}}</td>

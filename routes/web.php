@@ -200,8 +200,13 @@ Route::group(['middleware' => 'auth'], function () {
 
         });
 
-        Route::get('/get-detail/{name_table}/{type_code}/{id_string}', 'backend\AuthorController@get_detail')->name('backend.manager.author.get.detail');
+        Route::get('/get-detail/{name_table}/{user_auth_id}/{id_string}', 'backend\AuthorController@get_detail')->name('backend.manager.author.get.detail');
         Route::post('/post-detail', 'backend\AuthorController@post_detail')->name('backend.manager.author.post.detail');
+
+
+        Route::post('/update', 'backend\author\ListenTableTicksController@update')
+            ->name('backend.manager.author.listen.listen_table_ticks.update');
+
 
     });
 

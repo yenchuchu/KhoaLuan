@@ -32,8 +32,6 @@ class UserController extends Controller
         $user_student = $user['user_student'];
         $user_admin = $user['user_admin'];
 
-
-
         return view('backend.users.index', compact('user_author', 'user_student', 'user_admin'));
     }
 

@@ -81,7 +81,7 @@ class AuthorController extends Controller
         $url_parameters = Route::getCurrentRoute()->parameters();
 
         $name_table = $url_parameters['name_table'];
-        $type_code = $url_parameters['type_code'];
+        $author_id = $url_parameters['user_auth_id'];
         $id_string = $url_parameters['id_string'];
 
         $id_string =  str_replace("[","",$id_string);
@@ -93,10 +93,26 @@ class AuthorController extends Controller
         }
 
         $records = DB::table($name_table)->whereIn('id', $id_all)->orderBy('created_at', 'desc')->get();
+        $class_id = $records[0]->class_id;
+        $level_id = $records[0]->level_id;
+        $status = $records[0]->status;
+
+        $class_code = $this->get_code_class($class_id);
+
         $levels = Level::all();
         $classes = Classes::all();
+        $code_user = 'ST'; // default
 
-        return view('backend.author.show-post.index', compact('records', 'levels', 'classes', 'name_table'));
+        return view('backend.author.show-post.index', compact(
+            'records', 'levels', 'classes', 'name_table', 'class_code', 'code_user',
+            'class_id', 'level_id', 'id_string', 'author_id', 'status'));
+    }
+
+    public function get_code_class($class_id) {
+        $class = Classes::where(['id' => $class_id])->first();
+        $code_class = $class->code;
+
+        return $code_class;
     }
 
     public function post_detail(Request $request)

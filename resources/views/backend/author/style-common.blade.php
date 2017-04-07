@@ -27,7 +27,7 @@
         box-shadow: 0px 2px 10px rgba(0, 0, 0, .3), 0px 0px 1px rgba(0, 0, 0, .1), inset 0px 1px 0px rgba(255, 255, 255, .25), inset 0px -1px 0px rgba(0, 0, 0, .15);
     }
 
-    .style-save{
+    .style-save {
         background: rgb(69, 224, 32);
         border-radius: 24px;
         color: white;
@@ -114,6 +114,26 @@
         padding-top: 15px;
         color: #f0ad4e;
         cursor: pointer;
+    }
+
+    .admin-lable-audio {
+        float: left;
+        margin-top: 5px;
+        margin-right: 8px;
+    }
+
+    table input {
+        padding-left: 8px;
+        width: 50% !important;
+    }
+
+    .admin-confirm,
+    .admin-save-confirm {
+        float: right;
+    }
+
+    .admin-confirm {
+        margin-bottom: 10px;
     }
 
 </style>

@@ -199,81 +199,86 @@
 
     var database = firebase.database();
 
-    //    var starCountRef = database.ref('notification/');
-
+    var user_auth_id = '{{Auth::user()->id}}';
+    console.log(user_auth_id);
     // Find all dinosaurs whose height is exactly 25 meters.
-    var ref = database.ref("notification");
+    var ref = database.ref("notification/" + user_auth_id);
 
     ref.on("value", function (snap) {
+        $('#alert_notifications').text('');
         var count_noti = [];
+
         var all_data = snap.val();
+//        all_data.sort(function (x, y) {
+//            var xDate = new Date(x.created_at);
+//            var yDate = new Date(y.created_at);
+//
+//            return yDate - xDate;
+//        });
+//
+        console.log(all_data);
+        var count = 0;
         for (var prop in all_data) {
             if (!all_data.hasOwnProperty(prop)) continue;
 
             var end_obj = all_data[prop];
-            ref_child = database.ref("notification/" + prop);
-            ref_child.orderByChild("status").equalTo('0').on("child_added", function (snapshot) {
-//                console.log(snapshot.val());
-                count_noti.push(snapshot.val());
-            });
+
+            $('#alert_notifications').append('<li>' +
+                    '<a href="' + end_obj['url'] + '" target="_blank">' +
+                    '<div>' +
+                    '<img src="' + end_obj['url_avatar_user'] + '" style="height: 34px; margin-right: 10px">' +
+                    ' <span>' + end_obj['content'] + '</span>' +
+                    '<span class="pull-right text-muted small"> at ' + end_obj['created_at'] + '</span>' +
+                    '</div>' +
+                    '</a>' +
+                    '</li>' +
+                    '<li class="divider"></li>');
+            count++;
         }
 
-        var noti_length = count_noti.length;
-        $('#sum-noti-admin').text(noti_length);
-        count_noti.sort(function (x, y) {
-            var xDate = new Date(x.created_at);
-            var yDate = new Date(y.created_at);
-
-            return yDate - xDate;
-        });
-        if (noti_length > 10) {
-            for(var i = 0; i<= 9; i++) {
-                console.log(count_noti[i]);
-                $('#alert_notifications').append('<li>' +
-                '<a href="#">' +
-                        '<div>' +
-                        '<i class="fa fa-comment fa-fw"></i>New Comment' +
-                '<span class="pull-right text-muted small">4 minutes ago</span>' +
-                '</div>' +
-                '</a>' +
-                '</li>' +
-                '<li class="divider"></li>');
-            }
-
+        if (count >= 5) {
             $('#alert_notifications').append('<li id="see-all">' +
                     '<a class="text-center" href="#">' +
                     '<strong>See All Alerts</strong>' +
                     '<i class="fa fa-angle-right"></i>' +
                     '</a>' +
                     '</li>');
-        } else {
-            for(noti in count_noti) {
-                if (!count_noti.hasOwnProperty(noti)) continue;
+        }
 
-                var end_obj = count_noti[noti];
-                $('#alert_notifications').append('<li>' +
-                        '<a href="' + end_obj['url'] + '" target="_blank">' +
-                        '<div>' +
-                        '<img src="' + end_obj['url_avatar_user'] + '" style="height: 34px; margin-right: 10px">' +
-                         ' <span>' + end_obj['content'] + '</span>' +
-                        '<span class="pull-right text-muted small"> at ' + end_obj['created_at'] + '</span>' +
-                        '</div>' +
-                        '</a>' +
-                        '</li>' +
-                        '<li class="divider"></li>');
-            }
+        if (count == 0) {
+            $('#alert_notifications').append('<li>' +
+                    '<p style="text-align: center; margin-top: 10px;"> No notification </p>' +
+                    '</li>');
+        }
+
+        ref.orderByChild("status").equalTo('0').on("child_added", function (snapshot) {
+            count_noti.push(snapshot.val());
+
+            $('#read-noti').click(function () {
+                firebase.database().ref("notification/" + user_auth_id + "/" + snapshot.key + "/status").set('1');
+            });
+
+        });
+
+        var noti_length = count_noti.length;
+        if (noti_length > 0) {
+            $('#sum-noti-admin').text(noti_length);
+        } else {
+            $('#sum-noti-admin').text('');
         }
     });
 
 </script>
 
 @if(Session::has('notification_new'))
-    <?php $post_data = Session::get('notification_new'); ?>
+    <?php $post_data = Session::get('notification_new');
+
+    foreach ($post_data['user_id_receive'] as $user_id) { ?>
 
     <script>
         //       A post entry.var
         postData = {
-            status: '{{$post_data["status"]}}',
+            status: '0',
             created_at: '{{$post_data["created_at"]}}',
             url_avatar_user: '{{$post_data["url_avatar_user"]}}',
             url: '{{$post_data["url"]}}',
@@ -281,9 +286,11 @@
         };
 
         //      Get a key for a new Post.
-        var newPostKey = firebase.database().ref().child('notification/{{$post_data["user_id"]}}').push(postData).key;
-        //        console.log(newPostKey);
+        var newPostKey = firebase.database().ref().child('notification/{{$user_id}}').push(postData).key;
     </script>
+
+    <?php } ?>
+
 @endif
 
 <script>
@@ -356,30 +363,6 @@
     setTimeout(function () {
         $(".alert-success").hide();
     }, 5000);
-
-
-    //    starCountRef.on("value", function(snap) {
-    //        var all_data = snap.val();
-    //        var notification = [];
-    //        for (var prop in all_data) {
-    //            // skip loop if the property is from prototype
-    //            if (!all_data.hasOwnProperty(prop)) continue;
-    //
-    //            var end_obj = all_data[prop];
-    //            for (var item in end_obj) {
-    //                console.log(end_obj);
-    //                // skip loop if the property is from prototype
-    //                if (!end_obj.hasOwnProperty(item)) continue;
-    //
-    //                if(end_obj['status'] == 0) {
-    //                    notification.push(end_obj);
-    //                }
-    ////                console.log(end_obj['status']);.length
-    //            }
-    //        }
-    //        console.log(notification);
-    //    });
-
 
 </script>
 

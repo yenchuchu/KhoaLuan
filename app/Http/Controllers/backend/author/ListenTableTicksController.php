@@ -8,6 +8,7 @@ use App\ExamType;
 use App\Http\Controllers\Controller;
 use App\Level;
 use App\ListenTableTicks;
+use App\Role;
 use App\Skill;
 use App\User;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ use Auth;
 use Carbon\Carbon;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class ListenTableTicksController extends Controller
 {
@@ -53,7 +55,7 @@ class ListenTableTicksController extends Controller
 
         $array_id_intypecode = [];
         foreach ($type_codes as $code=> $item) {
-            $array_id_intypecode[$code]['id'] = $item->pluck('id')->toArray();
+            $array_id_intypecode[$code]['id'] = json_encode($item->pluck('id')->toArray());
             $array_id_intypecode[$code]['class_id'] = array_unique($item->pluck('class_id')->toArray());
             $array_id_intypecode[$code]['level_id'] = array_unique($item->pluck('level_id')->toArray());
             $array_id_intypecode[$code]['status'] = array_unique($item->pluck('status')->toArray());
@@ -135,9 +137,7 @@ class ListenTableTicksController extends Controller
         $data_new = [];
         $new_id = [];
         $data_new['user_id'] = $user_auth_id;
-//        $data_new['name_table'] = 'listen_table_ticks';
-        $data_new['status'] = 0;
-//        $data_new['type_code'] = $type_code_next;
+//        $data_new['status'] = 0;
 
         foreach ($all_data['listen_table_ticks'] as $key => $data) {
             $listen = new ListenTableTicks();
@@ -183,23 +183,36 @@ class ListenTableTicksController extends Controller
 
             $new_id[] = $listen->id;
             $data_new['created_at'] = $listen->created_at;
-//            $data_new['user_name'] = $user->user_name;
             $data_new['url_avatar_user'] = $user->avatar;
-
-
         }
+        $title_class = $this->get_title_class($class_id);
+        $level = Level::where(['id' => $level_id])->first();
+        $level_title = $level->title;
 
-        $data_new['url'] = route('backend.manager.author.get.detail', ['listen_table_ticks', $type_code_next ,json_encode($new_id)]);
-        $data_new['content'] = $user->user_name.' posted a exam.';
-
-
-
-//        $data_new_json = json_encode($data_new);
-//        dd($data_new_json);
+        $data_new['user_id_receive'] = $this->find_user_id_by_code('AD');
+        $data_new['url'] = route('backend.manager.author.get.detail', ['listen_table_ticks', $user_auth_id ,json_encode($new_id)]);
+        $data_new['content'] = $user->user_name.' đã tạo câu hỏi cho phần Listen Table Ticks mức '.$level_title. ' cho ' . $title_class;
 
         Session::flash('message', 'Tạo thành công!');
         Session::flash('notification_new', $data_new);
+
         return Redirect()->route('backend.manager.author.listen.listen_table_ticks', $classes->code);
+    }
+
+    public function find_user_id_by_code($code_user) {
+        $role = Role::where(['code' => $code_user])->first();
+        $users = User::where('type', $role->id)->get();
+        $user_ids = $users->pluck('id')->toArray();
+
+        return $user_ids;
+    }
+
+    // lấy tên lớp qua id
+    public function get_title_class($class_id) {
+        $class = Classes::where(['id' => $class_id])->first();
+        $class_title = $class->title;
+
+        return $class_title;
     }
 
     // mỗi lần add -> tạo 1 code.
@@ -210,5 +223,180 @@ class ListenTableTicksController extends Controller
         return $type_next;
     }
 
+    public function update(Request $request) {
+        $all_data = $request->all();
+
+        if (!isset($all_data['level_id'])) {
+            $all_data['level_id'] = null;
+        }
+
+        if (!isset($all_data['book_map_id'])) {
+            $all_data['book_map_id'] = null;
+        }
+
+        if (!isset($all_data['exam_type_id'])) {
+            $all_data['exam_type_id'] = null;
+        }
+
+        $skill = Skill::where('code', $this->skill)->first();
+        $level_id = $all_data['level_id'];
+        $code_user = $all_data['code_user'];
+        $book_map_id = $all_data['book_map_id'];
+        $exam_type_id = $all_data['exam_type_id'];
+
+        $class_id = $all_data['class_id'];
+        $classes = Classes::whereId($class_id)->first();
+
+        $user =  Auth::user();
+        $user_auth_id = $user->id;
+
+        $data_new = [];
+        $new_id = [];
+
+        foreach ($all_data['listen_table_ticks'] as $key => $data) {
+            $id_record = $data['id_record'];
+            $listen = ListenTableTicks::where(['id' => $id_record])->first();
+
+            $listen_content_question = $data['content-choose-ans-question'];
+
+            $array_json = [];
+            foreach ($listen_content_question as $idx => $item) {
+                $array_json['suggest_choose'][] = $item['suggest'];
+
+                if(isset($item['answer'])) {
+                    $array_json['answer'][] = $item['suggest'];
+                }
+            }
+
+            $listen->title = $data['title-listen-table-ticks'];
+//            $listen->user_id_edit = $user_auth_id;
+            $listen->type_user = $code_user;
+            $listen->content_json = json_encode($array_json);
+            $listen->skill_id = $skill->id;
+            $listen->exam_type_id = $exam_type_id;
+            $listen->level_id = $level_id;
+            $listen->class_id = $class_id;
+            $listen->bookmap_id = $book_map_id;
+            if (Auth::user()->hasRole('AD')) {
+                $listen->status = 1;
+            } else {
+                $listen->status = 0;
+            }
+
+            if(isset($data['url_audio'])) {
+                $file = Input::file();
+
+                if (isset($file['listen_table_ticks'][$key]['url_audio'])) {
+                    $faker = Faker::create();
+                    $maxTime = $faker->unixTime($max = 'now');
+
+                    $audio = $file['listen_table_ticks'][$key]['url_audio'];
+
+                    $filename_audio = $maxTime. '-'. $key. '-'. '-'. $audio->getClientOriginalName();
+                    $location_audio = public_path('backend/audio-listening/listen-table-ticks/');
+                    $audio->move($location_audio, $filename_audio);
+
+                    $path_url = 'backend/audio-listening/listen-table-ticks/'.$filename_audio;
+                    $listen->url = $path_url;
+                }
+            }
+
+            $listen->save();
+
+            $new_id[] = $listen->id;
+            $data_new['created_at'] = $listen->created_at;
+            $data_new['url_avatar_user'] = $user->avatar;
+        }
+        $title_class = $this->get_title_class($class_id);
+        $level = Level::where(['id' => $level_id])->first();
+        $level_title = $level->title;
+        $json_encode_id = json_encode($new_id);
+//        dd();
+//        dd($json_encode_id);
+
+        $data_new['user_id_receive'] = ['0' => $all_data['authorspost']];
+        $data_new['url'] = route('backend.manager.author.get.detail', ['listen_table_ticks' , $all_data['authorspost'], $json_encode_id]);
+        $data_new['content'] = 'Bài viết về Listen Table Ticks mức '. $level_title.  ' cho '. $title_class .' của bạn đã được chấp nhận ';
+
+        Session::flash('message', 'Cập nhật thành công!');
+
+        if (Auth::user()->hasRole('AD')) {
+
+            Session::flash('notification_new', $data_new);
+
+            $user = $this->type_user();
+            $user_author = $user['user_author'];
+            $user_student = $user['user_student'];
+            $user_admin = $user['user_admin'];
+
+            $route = route('backend.manager.author.get.detail', ['listen_table_ticks' , $all_data['authorspost'], $json_encode_id]);
+            return Redirect::to($route)
+                ->with(['user_author' => $user_author,
+                    'user_student' => $user_student,
+                    'user_admin' => $user_admin]);
+
+//            return view('backend.users.index', compact('user_author', 'user_student', 'user_admin'));
+
+        } else {
+            $ans_questions_all = ListenTableTicks::where(['type_user' => 'ST'])->with('skills', 'levels')
+                ->orderBy('type_code', 'desc')
+                ->get();
+
+            $type_codes = $ans_questions_all->groupBy('type_code');
+
+            $array_id_intypecode = [];
+            foreach ($type_codes as $code=> $item) {
+                $array_id_intypecode[$code]['id'] = json_encode($item->pluck('id')->toArray());
+                $array_id_intypecode[$code]['class_id'] = array_unique($item->pluck('class_id')->toArray());
+                $array_id_intypecode[$code]['level_id'] = array_unique($item->pluck('level_id')->toArray());
+                $array_id_intypecode[$code]['status'] = array_unique($item->pluck('status')->toArray());
+                $array_id_intypecode[$code]['created_at'] = array_unique($item->pluck('created_at')->toArray());
+            }
+
+            $class_find = Classes::where(['id' => $class_id])->first();
+            $class_code = $class_find->code;
+            if ($class_code == 1) {
+                $name_code = 'Elementary';
+            } elseif ($class_code == 2) {
+                $name_code = 'Secondary';
+            } elseif ($class_code == 3) {
+                $name_code = 'High School ';
+            }
+//            backend/manager-author/listening/listen_table_ticks/1
+            return Redirect::to('backend/manager-author/listening/listen_table_ticks/'.$class_code)
+                ->with(['class_code' => $class_code,
+                    'name_code' => $name_code,
+                    'array_id_intypecode' => $array_id_intypecode]);
+
+//            return view('backend.author.listen.table-tick.index',
+//                compact('ans_for_students', 'ans_for_teachers', 'class_code', 'name_code', 'array_id_intypecode'));
+        }
+    }
+
+    public function type_user()
+    {
+        $users = User::with('roles', 'classes')->get();
+
+        $user_author = $users->filter(function ($user) {
+            return $user->type == $this->getRoleIdByCode('AT');
+        })->all();
+
+        $user_student = $users->filter(function ($user) {
+            return $user->type == $this->getRoleIdByCode('ST');
+        })->all();
+
+        $user_admin = $users->filter(function ($user) {
+            return $user->type == $this->getRoleIdByCode('AD');
+        })->all();
+
+        return ['user_author' => $user_author, 'user_student' => $user_student, 'user_admin' => $user_admin];
+    }
+
+    public function getRoleIdByCode($code_role)
+    {
+        $role = Role::where(['code' => $code_role])->first();
+
+        return $role->id;
+    }
 
 }

@@ -56,40 +56,6 @@
         j++;
     });
 
-     function add_item_question_LCS(id) {
-
-         item = $('#' + id).attr('item');
-         item_this =  $('#' + id).attr('item_this');
-
-         item_this++;
-
-         $("#wrap-content-exam-" + item ).append('<div class="form-group" style="width:100%; float:left;">' +
-                 '<div class="span-numb-question" id="id-numb-question-'+ item_this +'">' +
-                 item_this +
-                 '<input type="hidden" value="'+ item_this +'"' +
-                 'name="listen_complete_sentences['+ item +'][content-choose-ans-question]['+ item_this +'][id]">' +
-                 '</div>' +
-
-                 '<div class="form-group" style="width:98%; float:left;">'+
-                 '<div class="span-text-question">' +
-                 '<textarea type="text" class="form-control" ' +
-                 'name="listen_complete_sentences['+ item +'][content-choose-ans-question]['+ item_this +'][content]"' +
-                 'placeholder="this is ___ a kind. there are three character _" ></textarea>' +
-                 '</div>' +
-                 '</div>' +
-
-                 '<div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">' +
-                 '<div class="form-group">' +
-                 '<input type="text" class="form-control" placeholder="enter answer" ' +
-                 'name="listen_complete_sentences['+ item +'][content-choose-ans-question]['+ item_this +'][answer]">' +
-                 '</div>' +
-                 '</div>' +
-
-                 '</div>');
-
-         $('#add_item_question_'+ item).attr('item_this', item_this);
-     }
-
     /**
      * hiển thị các unit khi chọn kiểm tra thường xuyên
      * @type {any}

@@ -76,67 +76,6 @@
         j++;
     });
 
-    function add_item_question_LT(id) {
-
-        item = $('#' + id).attr('item');
-        item_this = $('#' + id).attr('item_this');
-
-        item_this++;
-
-        $("#wrap-content-exam-" + item).append('<div class="form-group" style="width:100%; float:left;">' +
-                '<div class="span-numb-question" id="id-numb-question-' + item_this + '">' +
-                item_this +
-                '<input type="hidden" value="' + item_this + '"' +
-                'name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][id]">' +
-                '</div>' +
-
-                '<div class="form-group">' +
-                '<label>Upload Audio</label>' +
-                '<input name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][url_audio]" ' +
-                ' required type="file">' +
-                '</div>' +
-
-                '<div class="span-choose-listen-tick">' +
-                '<span class="img-listen-tick">' +
-                '<input type="radio" id="check-answer_' + item + '_' + item_this + '_A" required ' +
-                'name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][answer]" value="A"' +
-                'class="ans-true">' +
-                '<label for="check-answer_' + item + '_' + item_this + '_A" style="cursor: pointer">' +
-                '<img src="{{URL::asset('imgs-dashboard/avatar.png')}}" style="height: 180px;"' +
-                'id="change_uploadListenImgOne_' + item + '_' + item_this + '_A" alt="image suggest">' +
-                '</label>' +
-
-                '<input type="file" id="uploadListenImgOne_' + item + '_' + item_this + '_A"' +
-                        ' onclick="choose_img_upload(this.id)"' +
-                'name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][content][A]"' +
-                'required style="margin-left: 17px; margin-top: 10px;">' +
-                '</span>' +
-
-                '<span class="img-listen-tick">' +
-                '<input type="radio" id="check-answer_' + item + '_' + item_this + '_B" required ' +
-                'name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][answer]" value="B"' +
-                'class="ans-false">' +
-                '<label for="check-answer_' + item + '_' + item_this + '_B" style="cursor: pointer">' +
-                '<img src="{{URL::asset('imgs-dashboard/avatar.png')}}" style="height: 180px;"' +
-                'id="change_uploadListenImgOther_' + item + '_' + item_this + '_B" alt="image suggest">' +
-                '</label>' +
-
-                '<input type="file" id="uploadListenImgOther_' + item + '_' + item_this + '_B"' +
-                        ' onclick="choose_img_upload(this.id)"' +
-                'name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][content][B]"' +
-                'required style="margin-left: 17px; margin-top: 10px;">' +
-                '</span>' +
-
-                '</div>' +
-                '</div>' +
-
-                '</div>'
-
-        );
-
-        $('#add_item_question_' + item).attr('item_this', item_this);
-    }
-
     // change image when choose image.
     <!-- HTML5 Speech Recognition API -->
     function readURL_change_img(input, id_img) {

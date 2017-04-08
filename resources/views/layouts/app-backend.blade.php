@@ -279,11 +279,11 @@
             if (!all_data.hasOwnProperty(prop)) continue;
 
             var end_obj = all_data[prop];
-
+            var path_ava = document.location.origin + '/allProjects/KhoaLuan/KLTN-EnglishTest/public/' + end_obj['url_avatar_user'];
             $('#alert_notifications').append('<li>' +
                     '<a href="' + end_obj['url'] + '" target="_blank">' +
                     '<div>' +
-                    '<img src="' + end_obj['url_avatar_user'] + '" style="height: 34px; margin-right: 10px">' +
+                    '<img src="'+ path_ava +'" style="height: 34px; margin-right: 10px">' +
                     ' <span>' + end_obj['content'] + '</span>' +
                     '<span class="pull-right text-muted small"> at ' + end_obj['created_at'] + '</span>' +
                     '</div>' +
@@ -292,7 +292,12 @@
                     '<li class="divider"></li>');
             count++;
         }
-
+//        console.log("document.URL : "+document.URL);
+//        console.log("document.location.href : "+document.location.href);
+//        console.log("document.location.origin : "+document.location.origin);
+//        console.log("document.location.hostname : "+document.location.hostname);
+//        console.log("document.location.host : "+document.location.host);
+//        console.log("document.location.pathname : "+document.location.pathname);
         if (count >= 5) {
             $('#alert_notifications').append('<li id="see-all">' +
                     '<a class="text-center" href="#">' +

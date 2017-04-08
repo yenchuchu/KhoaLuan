@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use DB;
 
 class User extends Authenticatable
 {
@@ -82,6 +83,15 @@ class User extends Authenticatable
         })->all();
 
         return ['user_author' => $user_author, 'user_student' => $user_student, 'user_admin' => $user_admin];
+    }
+
+    // mỗi lần add -> tạo 1 code.
+    public static function get_typecode_next($name_table) {
+        $type_code = DB::table($name_table)->max('type_code');
+
+        $type_next = $type_code + 1;
+
+        return $type_next;
     }
 
     public static function find_all_userId_by_code($code_user) {

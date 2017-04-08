@@ -78,6 +78,7 @@ class RegisterController extends Controller
             'class_id' => $data['class'],
             'user_name' => $data['user_name'],
             'password' => bcrypt($data['password']),
+            'avatar' => 'imgs-dashboard/avatar.png',
         ]);
 
 

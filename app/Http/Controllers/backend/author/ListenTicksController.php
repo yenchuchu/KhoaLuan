@@ -51,7 +51,7 @@ class ListenTicksController extends Controller
 
         $array_id_intypecode = [];
         foreach ($type_codes as $code=> $item) {
-            $array_id_intypecode[$code]['id'] = $item->pluck('id')->toArray();
+            $array_id_intypecode[$code]['id'] = json_encode($item->pluck('id')->toArray());
             $array_id_intypecode[$code]['class_id'] = array_unique($item->pluck('class_id')->toArray());
             $array_id_intypecode[$code]['level_id'] = array_unique($item->pluck('level_id')->toArray());
             $array_id_intypecode[$code]['status'] = array_unique($item->pluck('status')->toArray());

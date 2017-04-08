@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\backend\author;
 
-use App\AnswerQuestion;
 use App\BookMap;
 use App\Classes;
 use App\ExamType;
@@ -14,6 +13,10 @@ use App\User;
 use Illuminate\Http\Request;
 use Route;
 use Config;
+use Auth;
+use Session;
+use DB;
+use Illuminate\Support\Facades\Redirect;
 
 class FindErrorController extends Controller
 {
@@ -102,7 +105,6 @@ class FindErrorController extends Controller
     public function store(Request $request)
     {
         $all_data = $request->all();
-//        dd($all_data);
 
         if (!isset($all_data['level_id'])) {
             $all_data['level_id'] = null;
@@ -118,10 +120,21 @@ class FindErrorController extends Controller
 
         $skill = Skill::where('code', $this->skill)->first();
         $level_id = $all_data['level_id'];
-        $class_id = $all_data['class_id'];
         $code_user = $all_data['code_user'];
         $book_map_id = $all_data['book_map_id'];
         $exam_type_id = $all_data['exam_type_id'];
+
+        $class_id = $all_data['class_id'];
+        $classes = Classes::getClassById($class_id);
+
+        $type_code_next = User::get_typecode_next('find_errors');
+
+        $user =  Auth::user();
+        $user_auth_id = $user->id;
+
+        $data_new = [];
+        $new_id = [];
+        $data_new['user_id'] = $user_auth_id;
 
         foreach ($all_data['find_errors'] as $data) {
 
@@ -139,20 +152,35 @@ class FindErrorController extends Controller
 
             $find_error->user_id = Auth::user()->id;
             $find_error->title = $data['title-find-errors'];
-//            $find_error->point = $data['point'];
             $find_error->type_user = $code_user;
             $find_error->content_json = json_encode($find_error_content_question);
             $find_error->skill_id = $skill->id;
             $find_error->exam_type_id = $exam_type_id;
             $find_error->level_id = $level_id;
             $find_error->class_id = $class_id;
-//            $find_error->bookmap_json_id = json_encode($book_map_id);
             $find_error->bookmap_id = $book_map_id;
+            $find_error->type_code = $type_code_next;
 
             $find_error->save();
+
+            $new_id[] = $find_error->id;
+            $data_new['created_at'] = $find_error->created_at;
+            $data_new['url_avatar_user'] = $user->avatar;
         }
 
-        return Redirect()->route('backend.manager.author.find-errors', $class_id);
+        $title_class = $classes->title;
+
+        $level = Level::getLevelbyId($level_id);
+        $level_title = $level->title;
+
+        $data_new['user_id_receive'] = User::find_all_userId_by_code('AD');
+        $data_new['url'] = route('backend.manager.author.get.detail', ['find_errors', $user_auth_id ,json_encode($new_id)]);
+        $data_new['content'] = $user->user_name.' đã tạo câu hỏi cho phần Find Errors mức '.$level_title. ' cho ' . $title_class;
+
+        Session::flash('message', 'Tạo thành công!');
+        Session::flash('notification_new', $data_new);
+
+        return Redirect()->route('backend.manager.author.find-errors', $classes->code);
     }
 
     function get_string_between($string, $start, $end){
@@ -162,28 +190,6 @@ class FindErrorController extends Controller
         $ini += strlen($start);
         $len = strpos($string, $end, $ini) - $ini;
         return substr($string, $ini, $len);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -221,14 +227,15 @@ class FindErrorController extends Controller
 
         $data_new = [];
         $new_id = [];
+//        dd($all_data);
 
-        foreach ($all_data['answer_question'] as $key => $data) {
+        foreach ($all_data['find_errors'] as $key => $data) {
             $id_record = $data['id_record'];
-            $read = AnswerQuestion::where(['id' => $id_record])->first();
+            $read = FindError::where(['id' => $id_record])->first();
 
             $read_content_question = $data['content-choose-ans-question'];
 
-            $read->title = $data['title-answer-question'];
+            $read->title = $data['title-find-errors'];
             $read->type_user = $code_user;
             $read->content_json = json_encode($read_content_question);
             $read->skill_id = $skill->id;
@@ -278,7 +285,7 @@ class FindErrorController extends Controller
                     'user_admin' => $user_admin]);
 
         } else {
-            $ans_questions_all = AnswerQuestion::where(['type_user' => 'ST'])->with('skills', 'levels')
+            $ans_questions_all = FindError::where(['type_user' => 'ST'])->with('skills', 'levels')
                 ->orderBy('type_code', 'desc')
                 ->get();
 

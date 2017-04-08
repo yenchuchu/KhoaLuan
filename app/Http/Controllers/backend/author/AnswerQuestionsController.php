@@ -124,9 +124,9 @@ class AnswerQuestionsController extends Controller
         $exam_type_id = $all_data['exam_type_id'];
 
         $class_id = $all_data['class_id'];
-        $classes = Classes::whereId($class_id)->first();
+        $classes = Classes::getClassById($class_id);
 
-        $type_code_next = $this->get_typecode_next('answer_questions');
+        $type_code_next = User::get_typecode_next('answer_questions');
 
         $user =  Auth::user();
         $user_auth_id = $user->id;
@@ -172,15 +172,6 @@ class AnswerQuestionsController extends Controller
         Session::flash('notification_new', $data_new);
 
         return Redirect()->route('backend.manager.author.answer-question', $classes->code);
-    }
-
-    // mỗi lần add -> tạo 1 code.
-    public function get_typecode_next($name_table) {
-        $type_code = DB::table($name_table)->max('type_code');
-
-        $type_next = $type_code + 1;
-
-        return $type_code;
     }
 
     public function update(Request $request) {

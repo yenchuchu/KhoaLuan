@@ -29,6 +29,7 @@ class UsersTableSeeder extends Seeder
             $user->remember_token =  str_random(10);
             $user->class_id = $faker->numberBetween($min = 1, $max = 10);
             $user->type = 2; // student
+            $user->avatar = 'imgs-dashboard/avatar.png'; // student
             $user->created_at = null;
             $user->updated_at = null;
 

@@ -42,7 +42,7 @@
                     switch ($name_table) {
                     case "answer_questions": ?>
 
-                        {{ Form::open(['route' => 'backend.manager.author.listen.answer_questions.update',
+                        {{ Form::open(['route' => 'backend.manager.author.read.answer_questions.update',
                             'method' => 'post']) }}
 
                         <div class="row">
@@ -118,7 +118,7 @@
 
                     case "find_errors": ?>
 
-                        {{ Form::open(['route' => 'backend.manager.author.listen.find_errors.update',
+                        {{ Form::open(['route' => 'backend.manager.author.read.find_errors.update',
                             'method' => 'post']) }}
 
                         <div class="row">
@@ -194,38 +194,301 @@
 
                     case "multiple_choices": ?>
 
-                    @foreach($records as $record)
-                        @include('backend.author.show-post.show-answer-question')
+                        {{ Form::open(['route' => 'backend.manager.author.read.multiple_choices.update',
+                            'method' => 'post']) }}
+
+                        <div class="row">
+                            @if($code_user == 'ST')
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+
+                                        <select name="level_id" class="form-control" id="admin-levels">
+                                            @foreach($levels as $level)
+                                                <option value="{{$level->id}}">{{$level->title}}
+                                                    - {{$level->point}}  </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+
+                                        <select name="class_id" class="form-control" id="admin-classes">
+                                            @foreach($classes as $class)
+                                                <option value="{{$class->id}}">{{$class->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @elseif($code_user == 'TC')
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+
+                                        <select name="class_id" class="form-control" id="find-errors-class">
+                                            @foreach($classes as $class)
+                                                <option value="{{$class->id}}">{{$class->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+
+                                        <select name="exam_type_id" class="form-control" id="find-errors-examtype">
+                                            @foreach($exam_types as $types)
+                                                <option value="{{$types->id}}"
+                                                        code="{{$types->code}}">{{$types->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" id="wrap_bookmap_form">
+
+                                    <select name="book_map_id" class="form-control" id="find-errors-bookmap">
+                                        @foreach($book_maps as $book)
+                                            <option value="{{$book->id}}">{{$book->title}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            @endif
+
+                            <input type="hidden" value="{{$code_user}}" name="code_user">
+                            <input type="hidden" value="{{$class_code}}" name="class_code">
+                            <input type="hidden" value="{{$author_id}}" name="authorspost">
+                        </div>
+
+                    @foreach($records as $key => $record)
+
+                            <?php $key_idx = $key + 1; ?>
+                            <input type="hidden" value="{{$record->id}}" name="multiple_choice[{{$key_idx}}][id_record]">
+
+                        @include('backend.author.show-post.show-multiple-choices')
                     @endforeach
 
                     <?php break;
 
                     case "tick_circle_true_falses": ?>
+                        {{ Form::open(['route' => 'backend.manager.author.read.tick_circle_true_falses.update',
+                            'method' => 'post']) }}
 
-                    @foreach($records as $record)
-                        @include('backend.author.show-post.show-answer-question')
+                        <div class="row">
+                            @if($code_user == 'ST')
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+
+                                        <select name="level_id" class="form-control" id="admin-levels">
+                                            @foreach($levels as $level)
+                                                <option value="{{$level->id}}">{{$level->title}}
+                                                    - {{$level->point}}  </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+
+                                        <select name="class_id" class="form-control" id="admin-classes">
+                                            @foreach($classes as $class)
+                                                <option value="{{$class->id}}">{{$class->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @elseif($code_user == 'TC')
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+
+                                        <select name="class_id" class="form-control" id="find-errors-class">
+                                            @foreach($classes as $class)
+                                                <option value="{{$class->id}}">{{$class->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+
+                                        <select name="exam_type_id" class="form-control" id="find-errors-examtype">
+                                            @foreach($exam_types as $types)
+                                                <option value="{{$types->id}}"
+                                                        code="{{$types->code}}">{{$types->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" id="wrap_bookmap_form">
+
+                                    <select name="book_map_id" class="form-control" id="find-errors-bookmap">
+                                        @foreach($book_maps as $book)
+                                            <option value="{{$book->id}}">{{$book->title}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            @endif
+
+                            <input type="hidden" value="{{$code_user}}" name="code_user">
+                            <input type="hidden" value="{{$class_code}}" name="class_code">
+                            <input type="hidden" value="{{$author_id}}" name="authorspost">
+                        </div>
+                        @foreach($records as $key => $record)
+
+                            <?php $key_idx = $key + 1; ?>
+                            <input type="hidden" value="{{$record->id}}" name="tick_true_false[{{$key_idx}}][id_record]">
+
+                        @include('backend.author.show-post.show-tick-true-false')
                     @endforeach
 
-                    <?php break;
-                    case "complete_tables": ?>
+                    <?php  break;
 
-                    @foreach($records as $record)
-                        @include('backend.author.show-post.show-answer-question')
-                    @endforeach
+                    case "listen_complete_sentences": ?>
+                        {{ Form::open(['route' => 'backend.manager.author.listen.listen_complete_sentences.update',
+                            'method' => 'post', 'files'=>true,
+                            'enctype' => 'multipart/form-data']) }}
 
-                    <?php   break;
+                        <div class="row">
+                            @if($code_user == 'ST')
+                                <div class="col-lg-3">
+                                    <div class="form-group">
 
-                    case "table_matchs":
-                        echo "classify_words!";
-                        break;
+                                        <select name="level_id" class="form-control" id="admin-levels">
+                                            @foreach($levels as $level)
+                                                <option value="{{$level->id}}">{{$level->title}}
+                                                    - {{$level->point}}  </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
 
-                    case "complete_sentences":
-                        echo "classify_words!";
-                        break;
+                                        <select name="class_id" class="form-control" id="admin-classes">
+                                            @foreach($classes as $class)
+                                                <option value="{{$class->id}}">{{$class->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @elseif($code_user == 'TC')
+                                <div class="col-lg-3">
+                                    <div class="form-group">
 
-                    case "listen_ticks":
-                        echo "classify_words!";
-                        break;
+                                        <select name="class_id" class="form-control" id="listen-table-ticks-class">
+                                            @foreach($classes as $class)
+                                                <option value="{{$class->id}}">{{$class->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+
+                                        <select name="exam_type_id" class="form-control" id="listen-table-ticks-examtype">
+                                            @foreach($exam_types as $types)
+                                                <option value="{{$types->id}}"
+                                                        code="{{$types->code}}">{{$types->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" id="wrap_bookmap_form">
+
+                                    <select name="book_map_id" class="form-control" id="listen-table-ticks-bookmap">
+                                        @foreach($book_maps as $book)
+                                            <option value="{{$book->id}}">{{$book->title}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            @endif
+
+                            <input type="hidden" value="{{$code_user}}" name="code_user">
+                            <input type="hidden" value="{{$class_code}}" name="class_code">
+                            <input type="hidden" value="{{$author_id}}" name="authorspost">
+                        </div>
+
+                        @foreach($records as $key => $record)
+                            <?php $key_idx = $key + 1; ?>
+                            <input type="hidden" value="{{$record->id}}" name="listen_complete_sentences[{{$key_idx}}][id_record]">
+                            @include('backend.author.show-post.show-listen-complete-sentences')
+                        @endforeach
+
+                        <?php break;
+
+                    case "listen_ticks": ?>
+                        {{ Form::open(['route' => 'backend.manager.author.listen.listen_ticks.update',
+                            'method' => 'post', 'files'=>true,
+                            'enctype' => 'multipart/form-data']) }}
+
+                        <div class="row">
+                            @if($code_user == 'ST')
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+
+                                        <select name="level_id" class="form-control" id="admin-levels">
+                                            @foreach($levels as $level)
+                                                <option value="{{$level->id}}">{{$level->title}}
+                                                    - {{$level->point}}  </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+
+                                        <select name="class_id" class="form-control" id="admin-classes">
+                                            @foreach($classes as $class)
+                                                <option value="{{$class->id}}">{{$class->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @elseif($code_user == 'TC')
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+
+                                        <select name="class_id" class="form-control" id="listen-table-ticks-class">
+                                            @foreach($classes as $class)
+                                                <option value="{{$class->id}}">{{$class->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+
+                                        <select name="exam_type_id" class="form-control" id="listen-table-ticks-examtype">
+                                            @foreach($exam_types as $types)
+                                                <option value="{{$types->id}}"
+                                                        code="{{$types->code}}">{{$types->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" id="wrap_bookmap_form">
+
+                                    <select name="book_map_id" class="form-control" id="listen-table-ticks-bookmap">
+                                        @foreach($book_maps as $book)
+                                            <option value="{{$book->id}}">{{$book->title}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            @endif
+
+                            <input type="hidden" value="{{$code_user}}" name="code_user">
+                            <input type="hidden" value="{{$class_code}}" name="class_code">
+                            <input type="hidden" value="{{$author_id}}" name="authorspost">
+                        </div>
+
+                        @foreach($records as $key => $record)
+                            <?php $key_idx = $key + 1; ?>
+                            <input type="hidden" value="{{$record->id}}" name="listen_ticks[{{$key_idx}}][id_record]">
+                            @include('backend.author.show-post.show-listen-ticks')
+                        @endforeach
+
+                        <?php break;
 
                     case "listen_table_ticks": ?>
                     {{ Form::open(['route' => 'backend.manager.author.listen.listen_table_ticks.update',
@@ -301,13 +564,6 @@
 
                     <?php break;
 
-                    case "tick_crosses":
-                        echo "classify_words!";
-                        break;
-
-                    case "fill_numbers":
-                        echo "classify_words!";
-                        break;
                     default:
                         echo "Your favorite color is neither red, blue, nor green!";
                     }

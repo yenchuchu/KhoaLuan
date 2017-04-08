@@ -204,14 +204,28 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/post-detail', 'backend\AuthorController@post_detail')->name('backend.manager.author.post.detail');
 
 
+//        update Listen
         Route::post('/update-listen-table-ticks', 'backend\author\ListenTableTicksController@update')
             ->name('backend.manager.author.listen.listen_table_ticks.update');
 
+        Route::post('/update-listen-complete-sentences', 'backend\author\ListenCompleteSentencesController@update')
+            ->name('backend.manager.author.listen.listen_complete_sentences.update');
+
+        Route::post('/update-listen-ticks', 'backend\author\ListenTicksController@update')
+            ->name('backend.manager.author.listen.listen_ticks.update');
+
+//        Update Read
         Route::post('/update/answer-questions', 'backend\author\AnswerQuestionsController@update')
-            ->name('backend.manager.author.listen.answer_questions.update');
+            ->name('backend.manager.author.read.answer_questions.update');
 
         Route::post('/update/find-errors', 'backend\author\FindErrorController@update')
-            ->name('backend.manager.author.listen.find_errors.update');
+            ->name('backend.manager.author.read.find_errors.update');
+
+        Route::post('/update/multiple-choices', 'backend\author\MultipleChoiceController@update')
+            ->name('backend.manager.author.read.multiple_choices.update');
+
+        Route::post('/update/tick-true-false', 'backend\author\TickCircleTrueFalseController@update')
+            ->name('backend.manager.author.read.tick_circle_true_falses.update');
 
 
     });

@@ -50,21 +50,12 @@ class ListenCompleteSentencesController extends Controller
 
         $array_id_intypecode = [];
         foreach ($type_codes as $code=> $item) {
-            $array_id_intypecode[$code]['id'] = $item->pluck('id')->toArray();
+            $array_id_intypecode[$code]['id'] = json_encode($item->pluck('id')->toArray());
             $array_id_intypecode[$code]['class_id'] = array_unique($item->pluck('class_id')->toArray());
             $array_id_intypecode[$code]['level_id'] = array_unique($item->pluck('level_id')->toArray());
             $array_id_intypecode[$code]['status'] = array_unique($item->pluck('status')->toArray());
             $array_id_intypecode[$code]['created_at'] = array_unique($item->pluck('created_at')->toArray());
         }
-
-        //        $ans_for_students = [];
-//        foreach ($for_students as $ans) {
-//            $ans->content_json = json_decode($ans->content_json);
-//            $ans->skills = $ans->skills->first();
-//            $ans->levels = $ans->levels->first();
-//
-//            $ans_for_students[] = $ans;
-//        }
 
         $class_code = $this->url_parameters['class_code'];
         if ($class_code == 1) {

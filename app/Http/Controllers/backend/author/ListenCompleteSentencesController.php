@@ -16,6 +16,10 @@ use Config;
 use DB;
 use Auth;
 use Illuminate\Support\Facades\Input;
+use Session;
+use Carbon\Carbon;
+use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Redirect;
 
 class ListenCompleteSentencesController extends Controller
 {
@@ -124,9 +128,16 @@ class ListenCompleteSentencesController extends Controller
         $exam_type_id = $all_data['exam_type_id'];
 
         $class_id = $all_data['class_id'];
-        $classes = Classes::whereId($class_id)->first();
+        $classes = Classes::getClassById($class_id);
 
-        $type_code_next = $this->get_typecode_next('listen_complete_sentences');
+        $type_code_next = User::get_typecode_next('listen_complete_sentences');
+
+        $user =  Auth::user();
+        $user_auth_id = $user->id;
+
+        $data_new = [];
+        $new_id = [];
+        $data_new['user_id'] = $user_auth_id;
 
         foreach ($all_data['listen_complete_sentences'] as $key => $data) {
 
@@ -152,25 +163,161 @@ class ListenCompleteSentencesController extends Controller
                     $audio = $audio_files['listen_complete_sentences'][$key];
 
                     $filename = $audio['audio']->getClientOriginalName();
-                    $location = public_path('backend/audio-listening/');
+                    $location = public_path('backend/audio-listening/listen-complete-sentences/');
                     $audio['audio']->move($location, $filename);
-                    $listen->url = 'backend/audio-listening/'.$filename;
+                    $listen->url = 'backend/audio-listening/listen-complete-sentences/'.$filename;
                 }
             }
 
             $listen->save();
+
+            $new_id[] = $listen->id;
+            $data_new['created_at'] = $listen->created_at;
+            $data_new['url_avatar_user'] = $user->avatar;
         }
+
+        $title_class = $classes->title;
+
+        $level = Level::getLevelbyId($level_id);
+        $level_title = $level->title;
+
+        $data_new['user_id_receive'] = User::find_all_userId_by_code('AD');
+        $data_new['url'] = route('backend.manager.author.get.detail', ['listen_complete_sentences', $user_auth_id ,json_encode($new_id)]);
+        $data_new['content'] = $user->user_name.' đã tạo câu hỏi cho phần Listen Complete Sentences mức '.$level_title. ' cho ' . $title_class;
+
+        Session::flash('message', 'Tạo thành công!');
+        Session::flash('notification_new', $data_new);
 
         return Redirect()->route('backend.manager.author.listen.listen_complete_sentences', $classes->code);
     }
 
-    // mỗi lần add -> tạo 1 code.
-    public function get_typecode_next($name_table) {
-        $type_code = DB::table($name_table)->max('type_code');
-        $type_next = $type_code + 1;
+    public function update(Request $request) {
+        $all_data = $request->all();
 
-        return $type_next;
+        if (!isset($all_data['level_id'])) {
+            $all_data['level_id'] = null;
+        }
+
+        if (!isset($all_data['book_map_id'])) {
+            $all_data['book_map_id'] = null;
+        }
+
+        if (!isset($all_data['exam_type_id'])) {
+            $all_data['exam_type_id'] = null;
+        }
+
+        $skill = Skill::where('code', $this->skill)->first();
+        $level_id = $all_data['level_id'];
+        $code_user = $all_data['code_user'];
+        $book_map_id = $all_data['book_map_id'];
+        $exam_type_id = $all_data['exam_type_id'];
+
+        $class_id = $all_data['class_id'];
+        $classes = Classes::getClassById($class_id);
+
+        $user =  Auth::user();
+
+        $data_new = [];
+        $new_id = [];
+
+        foreach ($all_data['listen_complete_sentences'] as $key => $data) {
+            $id_record = $data['id_record'];
+            $listen = ListenCompleteSentences::where(['id' => $id_record])->first();
+
+            $listen_content_question = $data['content-choose-ans-question'];
+
+            $listen->title = $data['title-listen-complete-sentences'];
+            $listen->type_user = $code_user;
+            $listen->content_json = json_encode($listen_content_question);
+            $listen->skill_id = $skill->id;
+            $listen->exam_type_id = $exam_type_id;
+            $listen->level_id = $level_id;
+            $listen->class_id = $class_id;
+            $listen->bookmap_id = $book_map_id;
+            if (Auth::user()->hasRole('AD')) {
+                $listen->status = 1;
+            } else {
+                $listen->status = 0;
+            }
+
+            if (isset($data['audio'])) {
+                $audio_files = Input::file();
+
+                if (isset($audio_files['listen_complete_sentences'][$key])) {
+                    $audio = $audio_files['listen_complete_sentences'][$key];
+
+                    $filename = $audio['audio']->getClientOriginalName();
+                    $location = public_path('backend/audio-listening/listen-complete-sentences/');
+                    $audio['audio']->move($location, $filename);
+                    $listen->url = 'backend/audio-listening/listen-complete-sentences/'.$filename;
+                }
+            }
+
+            $listen->save();
+
+            if (Auth::user()->hasRole('AD')) {
+                $new_id[] = $listen->id;
+                $data_new['created_at'] = $listen->created_at;
+                $data_new['url_avatar_user'] = $user->avatar;
+            }
+        }
+
+        Session::flash('message', 'Cập nhật thành công!');
+
+        if (Auth::user()->hasRole('AD')) {
+            $title_class = $classes->title;
+
+            $level = Level::getLevelbyId($level_id);
+            $level_title = $level->title;
+            $json_encode_id = json_encode($new_id);
+
+            $data_new['user_id_receive'] = ['0' => $all_data['authorspost']];
+            $data_new['url'] = route('backend.manager.author.get.detail', ['listen_complete_sentences' , $all_data['authorspost'], $json_encode_id]);
+            $data_new['content'] = 'Bài viết về Listen Complete Sentences mức '. $level_title.  ' cho '. $title_class .' của bạn đã được chấp nhận ';
+
+            Session::flash('notification_new', $data_new);
+
+            $user = User::type_user();
+            $user_author = $user['user_author'];
+            $user_student = $user['user_student'];
+            $user_admin = $user['user_admin'];
+
+            $route = route('backend.manager.author.get.detail', ['listen_complete_sentences' , $all_data['authorspost'], $json_encode_id]);
+            return Redirect::to($route)
+                ->with(['user_author' => $user_author,
+                    'user_student' => $user_student,
+                    'user_admin' => $user_admin]);
+
+        } else {
+            $ans_questions_all = ListenCompleteSentences::where(['type_user' => 'ST'])->with('skills', 'levels')
+                ->orderBy('type_code', 'desc')
+                ->get();
+
+            $type_codes = $ans_questions_all->groupBy('type_code');
+
+            $array_id_intypecode = [];
+            foreach ($type_codes as $code=> $item) {
+                $array_id_intypecode[$code]['id'] = json_encode($item->pluck('id')->toArray());
+                $array_id_intypecode[$code]['class_id'] = array_unique($item->pluck('class_id')->toArray());
+                $array_id_intypecode[$code]['level_id'] = array_unique($item->pluck('level_id')->toArray());
+                $array_id_intypecode[$code]['status'] = array_unique($item->pluck('status')->toArray());
+                $array_id_intypecode[$code]['created_at'] = array_unique($item->pluck('created_at')->toArray());
+            }
+
+            $class_code = $classes->code;
+            if ($class_code == 1) {
+                $name_code = 'Elementary';
+            } elseif ($class_code == 2) {
+                $name_code = 'Secondary';
+            } elseif ($class_code == 3) {
+                $name_code = 'High School ';
+            }
+
+            return Redirect::to('backend/manager-author/listening/listen_complete_sentences/'.$class_code)
+                ->with(['class_code' => $class_code,
+                    'name_code' => $name_code,
+                    'array_id_intypecode' => $array_id_intypecode]);
+        }
     }
-
 
 }

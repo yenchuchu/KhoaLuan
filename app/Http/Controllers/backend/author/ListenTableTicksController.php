@@ -130,7 +130,8 @@ class ListenTableTicksController extends Controller
         $class_id = $all_data['class_id'];
         $classes = Classes::getClassById($class_id);
 
-        $type_code_next = $this->get_typecode_next('listen_table_ticks');
+        $type_code_next = User::get_typecode_next('listen_table_ticks');
+
         $user =  Auth::user();
         $user_auth_id = $user->id;
 
@@ -206,14 +207,6 @@ class ListenTableTicksController extends Controller
         $class_title = $class->title;
 
         return $class_title;
-    }
-
-    // mỗi lần add -> tạo 1 code.
-    public function get_typecode_next($name_table) {
-        $type_code = DB::table($name_table)->max('type_code');
-        $type_next = $type_code + 1;
-
-        return $type_next;
     }
 
     public function update(Request $request) {
@@ -344,8 +337,7 @@ class ListenTableTicksController extends Controller
                 $array_id_intypecode[$code]['created_at'] = array_unique($item->pluck('created_at')->toArray());
             }
 
-            $class_find = Classes::getClassById($class_id);
-            $class_code = $class_find->code;
+            $class_code = $classes->code;
             if ($class_code == 1) {
                 $name_code = 'Elementary';
             } elseif ($class_code == 2) {

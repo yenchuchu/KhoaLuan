@@ -10,10 +10,10 @@
                     <div class="col-lg-12" style="padding-left: 0;">
                         <div class="form-group">
                             <input type="text" name="listen_ticks[{{$key_idx}}][title-listen-ticks]"
-                                   class="form-control" placeholder="Cập nhật đề bài" required>
+                                   class="form-control" placeholder="Cập nhật đề bài" required value="{{$record->title}}">
                         </div>
                     </div>
-                    {{dd($record)}}
+
                     <div class="form-group" style="width:100%; float:left;">
                         <?php
                         $content_json = json_decode($record->content_json);
@@ -29,48 +29,34 @@
                             <div class="audio_listen form-group" style="margin-top: 10px; margin-bottom: 15px;">
                                 <label class="admin-lable-audio">Audio: </label>
                                 <audio controls>
-                                    <source src="{{URL::asset($record->url)}}" type="audio/mpeg">
+                                    <source src="{{URL::asset($sug->url_audio)}}" type="audio/mpeg">
                                 </audio>
                             </div>
                             <div class="form-group">
                                 <label>Change Audio: </label>
-                                {{ Form::file('listen_ticks['.$key_idx.'][content-choose-ans-question][{{$item_this}}
-                                ][url_audio]', array()) }}
+                                {{ Form::file('listen_ticks['.$key_idx.'][content-choose-ans-question]['.$item_this.'][url_audio]', array()) }}
                             </div>
 
                             <div class="span-choose-listen-tick">
-                                <span class="img-listen-tick">
-                                    <input type="radio" id="check-answer_{{$key_idx}}_{{$item_this}}_A" required
+                                @foreach($sug->content as $key_cont => $cont)
+                                    <span class="img-listen-tick">
+                                    <input type="radio" id="check-answer_{{$key_idx}}_{{$item_this}}_{{$key_cont}}" required
                                            name="listen_ticks[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][answer]"
-                                           value="A"
-                                           class="ans-true">
-                                    <label for="check-answer_{{$key_idx}}_{{$item_this}}_A" style="cursor: pointer">
-                                        <img src="{{URL::asset('imgs-dashboard/avatar.png')}}" style="height: 180px;"
-                                             id="change_uploadListenImgOne_{{$key_idx}}_{{$item_this}}_A"
+                                           value="{{$key_cont}}"
+                                           class="ans-true" <?php if($sug->answer == $key_cont) { echo ' checked '; } ?> >
+                                    <label for="check-answer_{{$key_idx}}_{{$item_this}}_{{$key_cont}}" style="cursor: pointer">
+                                        <img src="{{URL::asset($cont)}}" style="height: 180px;"
+                                             id="change_uploadListenImgOne_{{$key_idx}}_{{$item_this}}_{{$key_cont}}"
                                              alt="image suggest">
                                     </label>
 
-                                    <input type="file" id="uploadListenImgOne_{{$key_idx}}_{{$item_this}}_A"
+                                    <input type="file" id="uploadListenImgOne_{{$key_idx}}_{{$item_this}}_{{$key_cont}}"
                                            onclick="choose_img_upload(this.id)"
-                                           name="listen_ticks[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][content][A]"
-                                           required style="margin-left: 17px; margin-top: 10px;">
+                                           name="listen_ticks[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][content][{{$key_cont}}]"
+                                            style="margin-left: 17px; margin-top: 10px;">
                                 </span>
-                                <span class="img-listen-tick">
-                                     <input type="radio" id="check-answer_{{$key_idx}}_{{$item_this}}_B" required
-                                            name="listen_ticks[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][answer]"
-                                            value="B"
-                                            class="ans-false">
-                                    <label for="check-answer_{{$key_idx}}_{{$item_this}}_B" style="cursor: pointer">
-                                         <img src="{{URL::asset('imgs-dashboard/avatar.png')}}" style="height: 180px;"
-                                              id="change_uploadListenImgOther_{{$key_idx}}_{{$item_this}}_B"
-                                              alt="image suggest">
-                                    </label>
+                                @endforeach
 
-                                    <input type="file" id="uploadListenImgOther_{{$key_idx}}_{{$item_this}}_B"
-                                           onclick="choose_img_upload(this.id)"
-                                           name="listen_ticks[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][content][B]"
-                                           required style="margin-left: 17px; margin-top: 10px;">
-                                </span>
                             </div>
                         @endforeach
 

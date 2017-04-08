@@ -234,6 +234,14 @@ class FindErrorController extends Controller
             $read = FindError::where(['id' => $id_record])->first();
 
             $read_content_question = $data['content-choose-ans-question'];
+//            $array_suggest_ans ;
+            foreach ($read_content_question as $key => $value) {
+
+                $content_qts = $value['content'];
+
+                preg_match_all("~<u\>(.*?)\<\/u\>~", $content_qts, $array_suggest_ans);
+                $read_content_question[$key]['suggest_choose'] = $array_suggest_ans[1];
+            }
 
             $read->title = $data['title-find-errors'];
             $read->type_user = $code_user;

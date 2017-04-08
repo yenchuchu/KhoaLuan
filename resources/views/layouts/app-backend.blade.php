@@ -115,7 +115,7 @@
             position: relative;
             background-color: #f9f9f9;
             min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 100;
         }
 
@@ -126,7 +126,9 @@
             display: block;
         }
 
-        .dropdown-content a:hover {background-color: #f1f1f1}
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
 
         #dropdown-menu-top:hover .dropdown-content {
             display: block;
@@ -257,41 +259,33 @@
     var database = firebase.database();
 
     var user_auth_id = '{{Auth::user()->id}}';
-//    console.log(user_auth_id);
+    //    console.log(user_auth_id);
     // Find all dinosaurs whose height is exactly 25 meters.
     var ref = database.ref("notification/" + user_auth_id);
 
     ref.on("value", function (snap) {
         $('#alert_notifications').text('');
         var count_noti = [];
+        var sort = [];
 
         var all_data = snap.val();
-//        all_data.sort(function (x, y) {
-//            var xDate = new Date(x.created_at);
-//            var yDate = new Date(y.created_at);
-//
-//            return yDate - xDate;
-//        });
-//
-//        console.log(all_data);
+
         var count = 0;
         for (var prop in all_data) {
             if (!all_data.hasOwnProperty(prop)) continue;
 
             var end_obj = all_data[prop];
-            var path_ava = document.location.origin + '/allProjects/KhoaLuan/KLTN-EnglishTest/public/' + end_obj['url_avatar_user'];
-            $('#alert_notifications').append('<li>' +
-                    '<a href="' + end_obj['url'] + '" target="_blank">' +
-                    '<div>' +
-                    '<img src="'+ path_ava +'" style="height: 34px; margin-right: 10px">' +
-                    ' <span>' + end_obj['content'] + '</span>' +
-                    '<span class="pull-right text-muted small"> at ' + end_obj['created_at'] + '</span>' +
-                    '</div>' +
-                    '</a>' +
-                    '</li>' +
-                    '<li class="divider"></li>');
+            sort.push(end_obj);
+
             count++;
         }
+
+        sort.sort(function (x, y) {
+            var xDate = new Date(x.created_at);
+            var yDate = new Date(y.created_at);
+
+            return yDate - xDate;
+        });
 //        console.log("document.URL : "+document.URL);
 //        console.log("document.location.href : "+document.location.href);
 //        console.log("document.location.origin : "+document.location.origin);
@@ -299,15 +293,47 @@
 //        console.log("document.location.host : "+document.location.host);
 //        console.log("document.location.pathname : "+document.location.pathname);
         if (count >= 5) {
+
+            for (var sort_noti = 0; sort_noti < 5; sort_noti++) {
+                var noti_obj = sort[sort_noti];
+                var path_ava = document.location.origin + '/allProjects/KhoaLuan/KLTN-EnglishTest/public/' + noti_obj['url_avatar_user'];
+
+                $('#alert_notifications').append('<li>' +
+                        '<a href="' + noti_obj['url'] + '" target="_blank">' +
+                        '<div>' +
+                        '<img src="' + path_ava + '" style="height: 34px; margin-right: 10px">' +
+                        ' <span>' + noti_obj['content'] + '</span>' +
+                        '<span class="pull-right text-muted small"> at ' + noti_obj['created_at'] + '</span>' +
+                        '</div>' +
+                        '</a>' +
+                        '</li>' +
+                        '<li class="divider"></li>');
+            }
+
             $('#alert_notifications').append('<li id="see-all">' +
                     '<a class="text-center" href="#">' +
                     '<strong>See All Alerts</strong>' +
                     '<i class="fa fa-angle-right"></i>' +
                     '</a>' +
                     '</li>');
-        }
+        } else if (count < 5 && count > 0) {
+            for (var sort_noti in sort) {
+                if (!sort.hasOwnProperty(sort_noti)) continue;
+                var noti_obj = sort[sort_noti];
+                var path_ava = document.location.origin + '/allProjects/KhoaLuan/KLTN-EnglishTest/public/' + noti_obj['url_avatar_user'];
 
-        if (count == 0) {
+                $('#alert_notifications').append('<li>' +
+                        '<a href="' + noti_obj['url'] + '" target="_blank">' +
+                        '<div>' +
+                        '<img src="' + path_ava + '" style="height: 34px; margin-right: 10px">' +
+                        ' <span>' + noti_obj['content'] + '</span>' +
+                        '<span class="pull-right text-muted small"> at ' + noti_obj['created_at'] + '</span>' +
+                        '</div>' +
+                        '</a>' +
+                        '</li>' +
+                        '<li class="divider"></li>');
+            }
+        } else {
             $('#alert_notifications').append('<li>' +
                     '<p style="text-align: center; margin-top: 10px;"> No notification </p>' +
                     '</li>');
@@ -319,7 +345,6 @@
             $('#read-noti').click(function () {
                 firebase.database().ref("notification/" + user_auth_id + "/" + snapshot.key + "/status").set('1');
             });
-
         });
 
         var noti_length = count_noti.length;

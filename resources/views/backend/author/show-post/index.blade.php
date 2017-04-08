@@ -485,7 +485,8 @@
                         @foreach($records as $key => $record)
                             <?php $key_idx = $key + 1; ?>
                             <input type="hidden" value="{{$record->id}}" name="listen_ticks[{{$key_idx}}][id_record]">
-                            @include('backend.author.show-post.show-listen-ticks')
+
+                                @include('backend.author.show-post.show-listen-ticks')
                         @endforeach
 
                         <?php break;

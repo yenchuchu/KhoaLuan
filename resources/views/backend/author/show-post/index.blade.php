@@ -565,6 +565,80 @@
 
                     <?php break;
 
+                    case "speakings": ?>
+                    {{ Form::open(['route' => 'backend.manager.author.speakings.update',
+                        'method' => 'post', 'files'=>true,
+                        'enctype' => 'multipart/form-data']) }}
+
+                    <div class="row">
+                        @if($code_user == 'ST')
+                            <div class="col-lg-3">
+                                <div class="form-group">
+
+                                    <select name="level_id" class="form-control" id="admin-levels">
+                                        @foreach($levels as $level)
+                                            <option value="{{$level->id}}">{{$level->title}}
+                                                - {{$level->point}}  </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+
+                                    <select name="class_id" class="form-control" id="admin-classes">
+                                        @foreach($classes as $class)
+                                            <option value="{{$class->id}}">{{$class->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @elseif($code_user == 'TC')
+                            <div class="col-lg-3">
+                                <div class="form-group">
+
+                                    <select name="class_id" class="form-control" id="listen-table-ticks-class">
+                                        @foreach($classes as $class)
+                                            <option value="{{$class->id}}">{{$class->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+
+                                    <select name="exam_type_id" class="form-control" id="listen-table-ticks-examtype">
+                                        @foreach($exam_types as $types)
+                                            <option value="{{$types->id}}"
+                                                    code="{{$types->code}}">{{$types->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3" id="wrap_bookmap_form">
+
+                                <select name="book_map_id" class="form-control" id="listen-table-ticks-bookmap">
+                                    @foreach($book_maps as $book)
+                                        <option value="{{$book->id}}">{{$book->title}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                        @endif
+
+                        <input type="hidden" value="{{$code_user}}" name="code_user">
+                        <input type="hidden" value="{{$class_code}}" name="class_code">
+                        <input type="hidden" value="{{$author_id}}" name="authorspost">
+                    </div>
+
+                    @foreach($records as $key => $record)
+                        <?php $key_idx = $key + 1;?>
+                        <input type="hidden" value="{{$record->id}}" name="speaking[{{$key_idx}}][id_record]">
+                        @include('backend.author.show-post.show-speaking')
+                    @endforeach
+
+                    <?php break;
+
                     default:
                         echo "Your favorite color is neither red, blue, nor green!";
                     }

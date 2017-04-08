@@ -227,6 +227,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/update/tick-true-false', 'backend\author\TickCircleTrueFalseController@update')
             ->name('backend.manager.author.read.tick_circle_true_falses.update');
 
+        // SPEAKING
+        Route::post('/update/speaking', 'backend\author\SpeakingController@update')
+            ->name('backend.manager.author.speakings.update');
+
 
     });
 

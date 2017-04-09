@@ -310,8 +310,9 @@
                         '<li class="divider"></li>');
             }
 
+            var path_to_all_noti = '{{route("backend.manager.backend.all.noti")}}';
             $('#alert_notifications').append('<li id="see-all">' +
-                    '<a class="text-center" href="#">' +
+                    '<a class="text-center" href="'+path_to_all_noti+'">' +
                     '<strong>See All Alerts</strong>' +
                     '<i class="fa fa-angle-right"></i>' +
                     '</a>' +

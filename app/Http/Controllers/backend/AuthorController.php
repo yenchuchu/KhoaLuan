@@ -212,42 +212,9 @@ class AuthorController extends Controller
         return view('frontend.highschool.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request)
-    {
-        $user_id = $request->all();
-        $user = User::whereId($user_id)->with('roles')->first();
-
-        if (count($user) != 1) {
-            return response()->json([
-                'code' => 404,
-                'message' => 'Không tìm thấy người dùng!',
-            ]);
-        }
-        $roles = $user->roles()->get();
-
-        if (!isset($roles)) {
-            return response()->json([
-                'code' => 404,
-                'message' => 'Không thực hiện được hành động này!',
-            ]);
-        }
-
-        $roles_ids = [];
-        foreach ($roles as $rol) {
-            $roles_ids[] = $rol->id;
-        }
-
-        $user->roles()->detach($roles_ids);
-        $user->delete();
-
-        $users = User::with('roles', 'classes')->get();
-        return view('backend.users.table-index', compact('users'));
+    public function show_all_noti() {
 
     }
+
+
 }

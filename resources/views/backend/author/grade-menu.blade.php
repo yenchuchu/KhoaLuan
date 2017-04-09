@@ -21,7 +21,7 @@
             margin: 30px 15px 10px;
             overflow: hidden;
             padding: 10px 10px;
-            margin-bottom: 90px;
+            margin-bottom: 20px;
         }
 
         .type-exam {
@@ -43,7 +43,11 @@
 
         .type-exam > a {
             color: white;
-            padding: 11% 17%;
+            /*padding: 11% 17%;*/
+        }
+
+        .type-exam i {
+            margin-right: 6px;
         }
 
     </style>
@@ -51,7 +55,7 @@
 
 @section('content')
     <section id="grade-menu-wrap">
-        <div class="container">
+        <div class="">
             <div class="row">
                 <div class="col-lg-6">
                     <h1>Reading</h1>
@@ -97,21 +101,19 @@
                 </div>
 
                 <div class="col-lg-6">
+                    <h1>Listening</h1>
                     <div class="main-body">
-                        <h1>Listening</h1>
-                        <div class="main-body">
-                            <div class="col-lg-5 type-exam">
-                                <a href="{{route('backend.manager.author.listen.listen_table_ticks', $class_code)}}">
-                                    <i class="fa fa-dashboard fa-fw"></i>listen_table_ticks</a>
-                            </div>
-                            <div class="col-lg-5 type-exam">
-                                <a href="{{route('backend.manager.author.listen.listen_complete_sentences', $class_code)}}">
-                                    <i class="fa fa-dashboard fa-fw"></i>listen_complete_sentences</a>
-                            </div>
-                            <div class="col-lg-5 type-exam">
-                                <a href="{{route('backend.manager.author.listen.listen_ticks', $class_code)}}">
-                                    <i class="fa fa-dashboard fa-fw"></i>listen_ticks</a>
-                            </div>
+                        <div class="col-lg-5 type-exam">
+                            <a href="{{route('backend.manager.author.listen.listen_table_ticks', $class_code)}}">
+                                <i class="fa fa-dashboard fa-fw"></i>Listen table ticks</a>
+                        </div>
+                        <div class="col-lg-5 type-exam">
+                            <a href="{{route('backend.manager.author.listen.listen_complete_sentences', $class_code)}}">
+                                <i class="fa fa-dashboard fa-fw"></i>Listen Complete Sentences</a>
+                        </div>
+                        <div class="col-lg-5 type-exam">
+                            <a href="{{route('backend.manager.author.listen.listen_ticks', $class_code)}}">
+                                <i class="fa fa-dashboard fa-fw"></i>Listen ticks</a>
                         </div>
                     </div>
                 </div>

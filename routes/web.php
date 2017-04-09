@@ -231,6 +231,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/update/speaking', 'backend\author\SpeakingController@update')
             ->name('backend.manager.author.speakings.update');
 
+        // SHOW ALL NOTIFICATIONS
+        Route::post('/all-noti', 'backend\AuthorController@show_all_noti')
+            ->name('backend.manager.backend.all.noti');
+
 
     });
 

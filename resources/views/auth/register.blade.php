@@ -8,7 +8,9 @@
             /*padding: 10px 23px;*/
         /*}*/
 
-        .block-12 a:active {
+        .block-12 a>label:active,
+        .block-12 a>label:focus {
+            background-color: #68b52a;
             color: white !important;
         }
 
@@ -44,6 +46,10 @@
             color: #fff;
         }
 
+        .block-12 .option .radio:checked ~ label>a {
+            color: white !important;
+        }
+
         .block-12 .option .item:first-child label {
             border-radius: 3px 0 0 3px;
         }
@@ -70,7 +76,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-2" style="margin-top: 30px">
                 <div class="panel panel-default">
                     <div class="panel-heading">Register</div>
                     <div class="panel-body">
@@ -145,18 +151,6 @@
                                 </div>
                             </div>
 
-                            {{--<div class="form-group">--}}
-                            {{--<label for="office_type" class="col-md-4 control-label">Type</label>--}}
-
-                            {{--<div class="col-md-6">--}}
-                            {{--<select name="office_type" id="office_type">--}}
-                            {{--@foreach($roles as $role)--}}
-                            {{--<option value="{{$role->id}}">{{$role->name}}</option>--}}
-                            {{--@endforeach--}}
-                            {{--</select>--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-
                             <div class="form-group ">
                                 <label for="choose-object" class="col-md-4 control-label">Chọn đối tượng</label>
                                 <div class="col-md-6 block-12">
@@ -166,12 +160,14 @@
                                                 <input type="radio" id="student" name="office_type" value="ST"
                                                        class="radio"
                                                        checked="">
-                                                <label for="student"><a data-toggle="tab" href="#student-tabs">STUDENT</a></label>
+                                                <a data-toggle="tab" href="#student-tabs">
+                                                    <label id="label-stdent-id" for="student">STUDENT</label></a>
                                             </div>
                                             <div class="item objt">
-                                                <input type="radio" id="teacher" name="office_type" value="TC"
+                                                <input type="radio" id="teacher" name="office_type" value="AT"
                                                        class="radio">
-                                                <label for="teacher"><a data-toggle="tab" href="#teacher-tabs">TEACHER</a></label>
+                                                    <a data-toggle="tab" href="#teacher-tabs">
+                                                        <label id="label-author-id" for="teacher">AUTHOR</label></a>
                                             </div>
                                         </div>
                                     </div>
@@ -209,4 +205,30 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+
+<script>
+    $('#label-stdent-id').css('background-color', '#68b52a');
+    $('#label-stdent-id').css('color', 'white');
+
+    $('#label-author-id').click(function () {
+        $(this).css('background-color', '#68b52a');
+        $(this).css('color', 'white');
+
+        $('#label-stdent-id').css('background-color', '#eeeeee');
+        $('#label-stdent-id').css('color', '#68b52a');
+    });
+
+    $('#label-stdent-id').click(function () {
+        $(this).css('background-color', '#68b52a');
+        $(this).css('color', 'white');
+
+        $('#label-author-id').css('background-color', '#eeeeee');
+        $('#label-author-id').css('color', '#68b52a');
+    });
+
+
+</script>
 @endsection

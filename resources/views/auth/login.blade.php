@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-2" style="margin-top: 30px">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
@@ -58,7 +58,7 @@
                                     Forgot Your Password?
                                 </a>
                                 <a class="btn btn-link" href="{{ url('login/facebook') }}">
-                                    Login Fb
+                                    <i class="fa fa-facebook-square" style="font-size: 20px;" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>

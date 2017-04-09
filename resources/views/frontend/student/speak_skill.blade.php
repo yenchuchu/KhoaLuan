@@ -82,7 +82,7 @@
                 <p id="text_demo">{{$item->content}}</p>
                 @if($item->url_mp3 != null)
                     <audio controls>
-                        <source src="{{$item->url_mp3}}" type="audio/mpeg">
+                        <source src="{{URL::asset($item->url_mp3)}}" type="audio/mpeg">
                     </audio>
                 @else
                     <audio controls>

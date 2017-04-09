@@ -1112,10 +1112,14 @@ class StudentController extends Controller
         $classes = Classes::all();
 
         $data = $request->all();
+        if(!isset($data['change_class'])) {
+            $data['change_class'] = null;
+        }
 
         if($user->user_name == $data['change_user_name'] && $user->full_name == $data['change_full_name'] && $user->email == $data['change_email'] && $user->class_id ==  $data['change_class']) {
             Session::flash('message', 'No change!');
         } else {
+
             $change_data = [
                 'user_name' => $data['change_user_name'],
                 'full_name' => $data['change_full_name'],

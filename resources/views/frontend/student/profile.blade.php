@@ -1,9 +1,24 @@
-@if (Auth::user()->hasRole('ST'))
-    @extends('layouts.app')
+@extends(Auth::user()->hasRole('ST') ? 'layouts.app' : 'layouts.app-backend')
 
-    @section('menu-main')
-         @include('frontend.student.partials.menu-main')
-    @stop
+@if (Auth::user()->hasRole('ST'))
+
+@section('menu-main')
+    @include('frontend.student.partials.menu-main')
+@stop
+
+@section('style-menu-main')
+    <style>
+        #edit_avatar_img {
+            width: 100%;
+        }
+
+        #editInputFileAvatar {
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+    </style>
+@stop
 
 <style>
     #home-id .col-lg-6 {
@@ -20,10 +35,8 @@
 </style>
 
 @else
-    @extends('layouts.app-backend')
-@endif
 
-@section('style-menu-main')
+@section('style')
     <style>
         #edit_avatar_img {
             width: 100%;
@@ -37,10 +50,16 @@
     </style>
 @stop
 
+@endif
+
 
 @section('content')
 
+    @if(Auth::user()->hasRole('ST'))
     <div class="container">
+    @else
+    <div class="">
+    @endif
         <div><h3>Profile</h3></div>
         <div class="row">
             <div class="col-lg-3">
@@ -84,23 +103,20 @@
                                value="{{$user->email}}" placeholder="Enter email" required>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="sel1">Class:</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" id="change-class" name="change_class" required>
-                            @foreach($classes as $class)
-                                <option value="{{$class->id}}">{{$class->title}}</option>
-                            @endforeach
-                        </select>
+
+                @if(Auth::user()->hasRole('ST'))
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="sel1">Class:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="change-class" name="change_class" required>
+                                @foreach($classes as $class)
+                                    <option value="{{$class->id}}">{{$class->title}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </div>
-                {{--<div class="form-group">--}}
-                {{--<label class="control-label col-sm-2" for="pwd">Password:</label>--}}
-                {{--<div class="col-sm-10">--}}
-                {{--<input type="password" class="form-control" id="pwd"--}}
-                {{--value="{{$user->password}}" placeholder="Enter password">--}}
-                {{--</div>--}}
-                {{--</div>--}}
+                @endif
+
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-success">Save</button>
@@ -109,7 +125,10 @@
                 {!! Form::close() !!}
             </div>
         </div>
-        <div class="row" style="margin-bottom: 40px"></div>
+
+        @if(Auth::user()->hasRole('ST'))
+            <div class="row" style="margin-bottom: 40px"></div>
+        @endif
 
     </div>
 

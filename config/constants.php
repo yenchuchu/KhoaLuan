@@ -26,7 +26,7 @@ return [
     ],
     // point = 20 tương ứng với mỗi bài. chia đều 20 điểm cho tất cả số câu trong bài.
 //    'point' => 25,
-    'sum_point' => 100,
+    'sum_point' => 30,
     'max_exam' => 3, // số bài trong 1 đề, các kỹ năng nghe -đọc có số bài giống nhau.
     'time_start' => 3600, // 60 phuts cho 1 bai thi
     'lama' => [

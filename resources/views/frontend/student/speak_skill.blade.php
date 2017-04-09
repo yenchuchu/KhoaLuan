@@ -119,7 +119,7 @@
                 <ul class="list-unstyled" id='ul'></ul>
             </div>
 
-        <div class="row" style="margin-bottom: 30px;">
+        <div class="row" style="margin-bottom: 30px;margin-left: 0px;">
             <button id="check_diff" class="btn btn-success" disabled>Check</button>
             <a class="btn btn-success" href="{{route('frontend.dashboard.student.learn.speak', [])}}">Next</a>
         </div>

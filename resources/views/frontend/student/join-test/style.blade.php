@@ -90,4 +90,8 @@
         margin-bottom: 5px;
     }
 
+    .img-question>img {
+        height: 192px;
+    }
+
 </style>

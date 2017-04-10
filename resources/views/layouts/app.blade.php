@@ -15,21 +15,21 @@
     <link href="/backend/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet"/>
 
     <!-- My CSS -->
-    <link href="{{URL::asset('frontend/mystyle.css')}}" rel="stylesheet">
+    <link href="/frontend/mystyle.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="{{URL::asset('frontend/theme_css/css/freelancer.min.css')}}" rel="stylesheet">
+    <link href="/frontend/theme_css/css/freelancer.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="{{URL::asset('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet"/>
+    <link href="/backend/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
           type="text/css">
 
     <!-- sweet alert -->
-    {{--<link rel="stylesheet" href="{{URL::asset('css/sweet-alert/loader.css')}}"/>--}}
-    {{--<link rel="stylesheet" href="{{URL::asset('css/sweet-alert/page_loaders.css')}}"/>--}}
-    <link rel="stylesheet" href="{{URL::asset('sweetalert/dist/sweetalert.css')}}"/>
+    {{--<link rel="stylesheet" href="/css/sweet-alert/loader.css"/>--}}
+    {{--<link rel="stylesheet" href="/css/sweet-alert/page_loaders.css"/>--}}
+    <link rel="stylesheet" href="/sweetalert/dist/sweetalert.css"/>
 
 <!-- Scripts -->
     <script>
@@ -208,19 +208,19 @@
 </div>
 
 <!-- Core Scripts - Include with every page -->
-<script src="{{URL::asset('backend/assets/plugins/jquery-1.10.2.js')}}"></script>
+<script src="/backend/assets/plugins/jquery-1.10.2.js"></script>
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="{{URL::asset('backend/assets/plugins/bootstrap/bootstrap.min.js')}}"></script>
-<script src="{{URL::asset('backend/assets/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
-<script src="{{URL::asset('backend/assets/plugins/pace/pace.js')}}"></script>
+<script src="/backend/assets/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="/backend/assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/backend/assets/plugins/pace/pace.js"></script>
 <!-- Page-Level Plugin Scripts-->
-<script src="{{URL::asset('backend/assets/plugins/morris/raphael-2.1.0.min.js')}}"></script>
+<script src="/backend/assets/plugins/morris/raphael-2.1.0.min.js"></script>
 
 {{-- set dataTable--}}
-<script src="{{URL::asset('table/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{URL::asset('table/datatables/media/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="/table/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="/table/datatables/media/js/dataTables.bootstrap.min.js"></script>
 
-<script src="{{URL::asset('sweetalert/dist/sweetalert.min.js')}}"></script>
+<script src="/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
     $.ajaxSetup({
@@ -233,7 +233,7 @@
 </script>
 
 <!-- Scripts -->
-{{--<script src="{{URL::asset('js/app.js')}}"></script>--}}
+{{--<script src="/js/app.js"></script>--}}
 
 <script>
 

@@ -10,18 +10,18 @@
     <link href="/backend/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet"/>
     <!--remove asset-->
     <link href="/backend/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
-    <link href="{{URL::asset('backend/assets/plugins/pace/pace-theme-big-counter.css')}}" rel="stylesheet"/>
-    <link href="{{URL::asset('backend/assets/css/style.css')}}" rel="stylesheet"/>
-    <link href="{{URL::asset('backend/assets/css/main-style.css')}}" rel="stylesheet"/>
+    <link href="/backend/assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet"/>
+    <link href="/backend/assets/css/style.css" rel="stylesheet"/>
+    <link href="/backend/assets/css/main-style.css" rel="stylesheet"/>
 
     <!-- sweet alert -->
-    <link rel="stylesheet" href="{{URL::asset('sweetalert/dist/sweetalert.css')}}"/>
-{{--    <link rel="stylesheet" href="{{URL::asset('css/sweet-alert/loader.css')}}"/>--}}
-{{--    <link rel="stylesheet" href="{{URL::asset('css/sweet-alert/page_loaders.css')}}"/>--}}
-{{--    <link rel="stylesheet" href="{{URL::asset('css/sweet-alert/sweetalert2.min.css')}}"/>--}}
+    <link rel="stylesheet" href="/sweetalert/dist/sweetalert.css"/>
+{{--    <link rel="stylesheet" href="/css/sweet-alert/loader.css"/>--}}
+{{--    <link rel="stylesheet" href="/css/sweet-alert/page_loaders.css"/>--}}
+{{--    <link rel="stylesheet" href="/css/sweet-alert/sweetalert2.min.css"/>--}}
 
 <!-- Page-Level CSS -->
-    <link href="{{URL::asset('backend/assets/plugins/morris/morris-0.4.3.min.css')}}" rel="stylesheet"/>
+    <link href="/backend/assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet"/>
 
     @yield('style')
 
@@ -253,19 +253,19 @@
 <!-- end wrapper -->
 
 <!-- Core Scripts - Include with every page -->
-<script src="{{URL::asset('backend/assets/plugins/jquery-1.10.2.js')}}"></script>
+<script src="/backend/assets/plugins/jquery-1.10.2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="{{URL::asset('backend/assets/plugins/bootstrap/bootstrap.min.js')}}"></script>
-<script src="{{URL::asset('backend/assets/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
-<script src="{{URL::asset('backend/assets/plugins/pace/pace.js')}}"></script>
+<script src="/backend/assets/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="/backend/assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/backend/assets/plugins/pace/pace.js"></script>
 <!-- Page-Level Plugin Scripts-->
-<script src="{{URL::asset('backend/assets/plugins/morris/raphael-2.1.0.min.js')}}"></script>
+<script src="/backend/assets/plugins/morris/raphael-2.1.0.min.js"></script>
 
 {{-- set dataTable--}}
-<script src="{{URL::asset('table/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{URL::asset('table/datatables/media/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="/table/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="/table/datatables/media/js/dataTables.bootstrap.min.js"></script>
 
-<script src="{{URL::asset('sweetalert/dist/sweetalert.min.js')}}"></script>
+<script src="/sweetalert/dist/sweetalert.min.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-auth.js"></script>

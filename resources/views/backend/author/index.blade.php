@@ -1,16 +1,12 @@
 @extends('layouts.app-backend')
 
 @section('header')
-    <h1 class="page-header">Dashboard</h1>
+    <h1 class="page-header">{{ trans('label.backend.dashboard')  }}</h1>
 @stop
 @section('style')
     <style>
         .navbar-custom {
             padding: 10px 0;
-        }
-
-        #dashboard-index-wrap {
-            padding: 100px 0 80px;
         }
 
         a > img {
@@ -28,7 +24,16 @@
 @stop
 
 @section('content')
-    <section id="dashboard-index-wrap">
+    @if(!empty( Auth::user()))
+
+        @if (Auth::user()->hasRole('AT') || Auth::user()->hasRole('AD'))
+            <section id="dashboard-index-wrap" style="padding: 0px 0 80px;">
+                @else
+                    <section id="dashboard-index-wrap" style="padding: 100px 0 80px;">
+                        @endif
+                        @else
+                            <section id="dashboard-index-wrap" style="padding: 100px 0 80px;">
+                                @endif
         <div class="">
             <div class="row">
 

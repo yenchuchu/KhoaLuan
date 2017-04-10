@@ -30,10 +30,10 @@
                                 class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                 </li>
 
-                <li class="selected">
-                    <a href="{{route('backend.manager.author.show.post')}}"><i
-                                class="fa fa-dashboard fa-fw"></i>Posts</a>
-                </li>
+                {{--<li class="selected">--}}
+                    {{--<a href="{{route('backend.manager.author.show.post')}}"><i--}}
+                                {{--class="fa fa-dashboard fa-fw"></i>Posts</a>--}}
+                {{--</li>--}}
 
             @endif
 

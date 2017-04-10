@@ -30,11 +30,14 @@
         }
 
         #navbar {
-            background-color: #27C0D8;
+            background-color: #4d545d;
+            /*background-color: #007ee5;*/
+            /*background-color: #27C0D8;*/
         }
 
         .navbar-default {
-            border-color: #27C0D8;
+            border-color: #4d545d;
+            /*border-color: #007ee5;*/
         }
 
         .menu-top-right {
@@ -141,9 +144,39 @@
         #avatar_img {
             width: 40px;
             height: 40px;
-            border-radius: 5%;
             position: relative;
-            top: -5px;
+            top: -2px;
+            margin-right: 6px;
+            border-radius: 14%;
+        }
+
+        .name_app_brand {
+            color: white !important;
+            font-weight: 700;
+            font-size: 17px !important;;
+        }
+
+        .guest-app {
+            background: #00b1b3;
+            padding: 20px 31px;
+            font-size: 16px;
+        }
+
+        .breadcrumb {
+            background-color: transparent;
+            border-bottom: 1px solid #eeeeee;
+            margin-top: 30px;
+        }
+
+        .bread-active {
+            font-size: 27px;
+            color: black;
+        }
+
+        .bread-active:hover {
+            text-decoration: none;
+            color: black;
+            cursor: text;
         }
 
     </style>
@@ -154,18 +187,24 @@
 <div id="wrapper">
     <!-- navbar top -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
-        <!-- navbar-header -->
+
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                <span class="sr-only">Toggle navigation</span>
+
+            <!-- Collapsed Hamburger -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#app-navbar-collapse">
+                <span class="sr-only">Toggle Navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">
-                <img src="{{URL::asset('backend/assets/img/logo.png')}}" alt=""/>
+
+            <!-- Branding Image -->
+            <a class="navbar-brand name_app_brand" href="{{route('backend.manager.author.index')}}">
+                {{ config('app.name', 'Laravel') }}
             </a>
         </div>
+
         <!-- end navbar-header -->
         <!-- navbar-top-links -->
     @include('partials.menu-top-right')
@@ -175,11 +214,11 @@
     <!-- end navbar top -->
 
     <!-- navbar side -->
-@include('partials.menu-left-backend')
+{{--@include('partials.menu-left-backend')--}}
 <!-- end navbar side -->
 
     <!--  page-wrapper -->
-    <div id="page-wrapper">
+    <div id="page-wrapper" class="container">
 
         <div class="loader class-loader-css1" id="id-loader-css1"
              style="display: none;margin: 4% auto 0px 38%;z-index: 1;float: left;position: fixed;animation: spin 1s linear infinite;">

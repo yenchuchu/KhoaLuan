@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-    <h1 class="page-header">Dashboard</h1>
+    <h1 class="page-header">{{ trans('label.backend.dashboard')  }}</h1>
 @stop
 
 @section('style-menu-main')

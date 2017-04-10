@@ -5,10 +5,6 @@
             padding: 10px 0;
         }
 
-        #dashboard-index-wrap {
-            padding: 100px 0 80px;
-        }
-
         a > img {
             width: 100%;
         }
@@ -24,7 +20,17 @@
 @stop
 
 @section('content')
-    <section id="dashboard-index-wrap">
+
+    @if(!empty( Auth::user()))
+
+         @if (Auth::user()->hasRole('AT') || Auth::user()->hasRole('AD'))
+             <section id="dashboard-index-wrap" style="padding: 0px 0 80px;">
+         @else
+              <section id="dashboard-index-wrap" style="padding: 100px 0 80px;">
+         @endif
+    @else
+       <section id="dashboard-index-wrap" style="padding: 100px 0 80px;">
+    @endif
         <div class="container">
             <div class="row">
 

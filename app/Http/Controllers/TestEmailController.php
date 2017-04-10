@@ -15,12 +15,12 @@ class TestEmailController extends Controller
 
         // Ship order...
 
-        Mail::send('emails.reminder', function($message) use ($user) {
-            $message->from('phamha.uet@gmail.com', 'Document Mamagement');
-            $message->to($user->email)->subject(' This is your account\'s Document Mamagement !');
-        });
-
-        Mail::to('chuhue29@gmail.com')->send('balablabal');
+//        Mail::send('emails.reminder', function($message) use ($user) {
+//            $message->from('phamha.uet@gmail.com', 'Document Mamagement');
+//            $message->to($user->email)->subject(' This is your account\'s Document Mamagement !');
+//        });
+//
+//        Mail::to('chuhue29@gmail.com')->send('balablabal');
 //        Mail::to($request->user())->send(new OrderShipped($order));
     }
 }

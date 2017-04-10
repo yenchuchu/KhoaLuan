@@ -89,7 +89,7 @@
 
         #ul-menu-main li a {
             color: #7d8793;
-            padding: 15px 45px;
+            padding: 15px 42px;
             font-size: 16px;
             height: 54px;
         }
@@ -158,6 +158,16 @@
             border-radius: 5%;
             position: relative;
             top: -5px;
+        }
+
+        .guest-app>a {
+            padding: 20px 31px !important;
+            font-size: 16px;
+        }
+        .guest-app>a:hover {
+            background: #00b1b3 !important;
+            padding: 20px 31px;
+            font-size: 16px;
         }
 
     </style>

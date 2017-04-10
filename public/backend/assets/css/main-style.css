@@ -51,7 +51,7 @@ margin-bottom: 0px
     background-color:rgba(74, 72, 126, 0);
 }
 .navbar-top-links  .open > a, .nav .open > a:hover, .nav .open > a:focus {
-    background-color: #75C5B8;
+    background-color: transparent;
 }
 .navbar-top-links > li > a {
 color: #FFFFFF;
@@ -60,7 +60,7 @@ color: #FFFFFF;
 padding: 20px 15px;
 }
 #side-menu {
-    background-color:#04B173;
+    /*background-color:#04B173;*/
 }
 
  #side-menu a {
@@ -130,13 +130,17 @@ border-color: #27A6BE;
 {
     #page-wrapper {
         position: inherit;
-        margin: 0 0 0 250px;
+        /*margin: 0 0 0 250px;*/
         padding: 0 30px;
         min-height: 1000px;
        
        
     }
 
+}
+
+#page-wrapper {
+    /*margin: 0 0 0 0px;*/
 }
 
 @media(max-width:768px) {

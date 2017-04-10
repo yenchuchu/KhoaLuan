@@ -10,7 +10,7 @@
 
         .block-12 a>label:active,
         .block-12 a>label:focus {
-            background-color: #68b52a;
+            background-color: #00b1b3;
             color: white !important;
         }
 
@@ -42,7 +42,7 @@
         }
 
         .block-12 .option .radio:checked ~ label {
-            background: #68b52a;
+            background: #00b1b3;
             color: #fff;
         }
 
@@ -210,23 +210,23 @@
 @section('script')
 
 <script>
-    $('#label-stdent-id').css('background-color', '#68b52a');
+    $('#label-stdent-id').css('background-color', '#00b1b3');
     $('#label-stdent-id').css('color', 'white');
 
     $('#label-author-id').click(function () {
-        $(this).css('background-color', '#68b52a');
+        $(this).css('background-color', '#00b1b3');
         $(this).css('color', 'white');
 
         $('#label-stdent-id').css('background-color', '#eeeeee');
-        $('#label-stdent-id').css('color', '#68b52a');
+        $('#label-stdent-id').css('color', '#00b1b3');
     });
 
     $('#label-stdent-id').click(function () {
-        $(this).css('background-color', '#68b52a');
+        $(this).css('background-color', '#00b1b3');
         $(this).css('color', 'white');
 
         $('#label-author-id').css('background-color', '#eeeeee');
-        $('#label-author-id').css('color', '#68b52a');
+        $('#label-author-id').css('color', '#00b1b3');
     });
 
 

@@ -1,16 +1,9 @@
 @extends('layouts.app-backend')
 
-@section('header')
-    <h1 class="page-header">Create Exam For {{$name_code}}</h1>
-@stop
 @section('style')
     <style>
         .navbar-custom {
             padding: 10px 0;
-        }
-
-        #dashboard-index-wrap {
-            padding: 100px 0 80px;
         }
 
         a > img {
@@ -18,7 +11,7 @@
         }
 
         .main-body {
-            margin: 30px 15px 10px;
+            margin: 10px 15px 10px;
             overflow: hidden;
             padding: 10px 10px;
             margin-bottom: 20px;
@@ -50,84 +43,135 @@
             margin-right: 6px;
         }
 
+        #grade-menu-wrap .title-skills {
+            border-bottom: 1px solid #eeeeee;
+            padding-bottom: 10px;
+            color: black;
+        }
+
+        #grade-menu-wrap ul li a {
+            border: none;
+            padding: 14px 20px;
+        }
+
+        #grade-menu-wrap ul li {
+            padding: 0px;
+        }
+
+        #grade-menu-wrap .title-span-skill {
+            background-color: #eee;
+            font-weight: 700;
+            font-size: 16px;
+            border-radius: 0px;
+            border: none;
+        }
+
     </style>
+@stop
+
+@section('header')
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{route('backend.manager.author.index')}}">{{ trans('label.backend.dashboard')  }}</a></li>
+        <li class="breadcrumb-item ">
+            <span class="bread-active">
+                    {{ trans('label.backend.author.dashboard')  }}
+                @if($name_code == 'Elementary')
+                  học sinh cấp 1
+                @elseif($name_code == 'Secondary')
+                   học sinh cấp 2
+                @else
+                    học sinh cấp 3
+                @endif
+            </span>
+        </li>
+    </ol>
+
 @stop
 
 @section('content')
     <section id="grade-menu-wrap">
         <div class="">
             <div class="row">
-                <div class="col-lg-6">
-                    <h1>Reading</h1>
+                <div class="col-lg-4">
 
                     <div class="main-body">
 
-                        <div class="col-lg-5 type-exam">
-                            <a href="{{route('backend.manager.author.answer-question', $class_code)}}">
-                                <i class="fa fa-dashboard fa-fw"></i>Answer Questions</a>
-                        </div>
-                        {{--<div class="col-lg-5 type-exam">--}}
-                            {{--<a href="{{route('backend.manager.author.complete-word', $class_code)}}">--}}
-                                {{--<i class="fa fa-dashboard fa-fw"></i>Complete Words</a>--}}
-                        {{--</div>--}}
-                        <div class="col-lg-5 type-exam">
-                            <a href="{{route('backend.manager.author.find-errors', $class_code)}}">
-                                <i class="fa fa-dashboard fa-fw"></i>Find Errors</a>
-                        </div>
-                        <div class="col-lg-5 type-exam">
-                            <a href="{{route('backend.manager.author.multiple-choice', $class_code)}}">
-                                <i class="fa fa-dashboard fa-fw"></i>Multiple Choices</a>
-                        </div>
-                        <div class="col-lg-5 type-exam">
-                            <a href="{{route('backend.manager.author.tick-circle-true-false', $class_code)}}">
-                                <i class="fa fa-dashboard fa-fw"></i>Tick Cricle True Flase</a>
-                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span class="title-span-skill list-group-item"> {{ trans('label.skills.reading') }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{route('backend.manager.author.answer-question', $class_code)}}"
+                                   class="list-group-item">
+                                    {{trans('label.backend.author.reading.grade_menu.answer_question')}}
+                                    <span class="badge">12</span></a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{route('backend.manager.author.find-errors', $class_code)}}"
+                                   class="list-group-item">
+                                    {{trans('label.backend.author.reading.grade_menu.find_error')}}
+                                    <span class="badge">5</span></a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{route('backend.manager.author.multiple-choice', $class_code)}}"
+                                   class="list-group-item">
+                                    {{trans('label.backend.author.reading.grade_menu.multiple_choice')}}
+                                    <span class="badge">3</span></a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{route('backend.manager.author.tick-circle-true-false', $class_code)}}"
+                                   class="list-group-item">
+                                    {{trans('label.backend.author.reading.grade_menu.tick_true_false')}}
+                                    <span class="badge">3</span></a>
+                            </li>
+                        </ul>
 
-                        {{--<div class="col-lg-5 type-exam">--}}
-                            {{-------------------------------------------}}
-                        {{--</div>--}}
-
-                        {{--<div class="col-lg-5 type-exam">--}}
-
-                            {{--<a href="{{route('backend.manager.author.classify-word', $class_code)}}">--}}
-                                {{--<i class="fa fa-dashboard fa-fw"></i>Classify Words</a>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="col-lg-5 type-exam">--}}
-                            {{--<a href="{{route('backend.manager.author.underlines', $class_code)}}">--}}
-                                {{--<i class="fa fa-dashboard fa-fw"></i>Underlines</a>--}}
-                        {{--</div>--}}
                     </div>
                 </div>
 
-                <div class="col-lg-6">
-                    <h1>Listening</h1>
+                <div class="col-lg-4">
                     <div class="main-body">
-                        <div class="col-lg-5 type-exam">
-                            <a href="{{route('backend.manager.author.listen.listen_table_ticks', $class_code)}}">
-                                <i class="fa fa-dashboard fa-fw"></i>Listen table ticks</a>
-                        </div>
-                        <div class="col-lg-5 type-exam">
-                            <a href="{{route('backend.manager.author.listen.listen_complete_sentences', $class_code)}}">
-                                <i class="fa fa-dashboard fa-fw"></i>Listen Complete Sentences</a>
-                        </div>
-                        <div class="col-lg-5 type-exam">
-                            <a href="{{route('backend.manager.author.listen.listen_ticks', $class_code)}}">
-                                <i class="fa fa-dashboard fa-fw"></i>Listen ticks</a>
-                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span class="title-span-skill list-group-item"> {{ trans('label.skills.listening') }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{route('backend.manager.author.listen.listen_complete_sentences', $class_code)}}"
+                                   class="list-group-item">
+                                    {{trans('label.backend.author.listening.grade_menu.listen_complete_sentences')}}
+                                    <span class="badge">5</span></a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{route('backend.manager.author.listen.listen_ticks', $class_code)}}"
+                                   class="list-group-item">
+                                    {{trans('label.backend.author.listening.grade_menu.listen_ticks')}}
+                                    <span class="badge">3</span></a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{route('backend.manager.author.listen.listen_table_ticks', $class_code)}}"
+                                   class="list-group-item">
+                                    {{trans('label.backend.author.listening.grade_menu.listen_table_ticks')}}
+                                    <span class="badge">12</span></a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="col-lg-6">
-                    <h1>Speaking</h1>
+                <div class="col-lg-4">
                     <div class="main-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span class="title-span-skill list-group-item"> {{ trans('label.skills.speaking') }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{route('backend.manager.author.speaking', $class_code)}}"
+                                   class="list-group-item">
+                                    {{trans('label.backend.author.speaking.grade_menu.content')}}
+                                    <span class="badge">12</span></a>
+                            </li>
+                        </ul>
 
-                        <div class="col-lg-5 type-exam">
-                            <a href="{{route('backend.manager.author.speaking', $class_code)}}">
-                                <i class="fa fa-dashboard fa-fw"></i>
-                                {{trans('label.backend.author.speaking.grade_menu.content')}}
-                            </a>
-                        </div>
                     </div>
                 </div>
 

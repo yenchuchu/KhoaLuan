@@ -7,7 +7,7 @@
 
     <title>{{ config('app.name', 'English App - Free') }}</title>
     <!-- Core CSS - Include with every page -->
-    <link href="{{URL::asset('backend/assets/plugins/bootstrap/bootstrap.css')}}" rel="stylesheet"/>
+    <link href="/backend/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet"/>
     <link href="{{URL::asset('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet"/>
     <link href="{{URL::asset('backend/assets/plugins/pace/pace-theme-big-counter.css')}}" rel="stylesheet"/>
     <link href="{{URL::asset('backend/assets/css/style.css')}}" rel="stylesheet"/>

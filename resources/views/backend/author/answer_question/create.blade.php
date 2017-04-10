@@ -74,7 +74,7 @@
         @endif
 
         <input type="hidden" value="{{$code_user}}" name="code_user">
-        <input type="hidden" value="{{$class_code}}" name="class_code">
+        {{--<input type="hidden" value="{{$class_code}}" name="class_code">--}}
     </div>
     <div class="row" id="wrap_add_answer_question">
         <div class="col-lg-12 col_add_answer_question">

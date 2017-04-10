@@ -58,14 +58,14 @@ class AnswerQuestionsController extends Controller
             $array_id_intypecode[$code]['created_at'] = $item->pluck('created_at')->toArray();
         }
 
-        $class_code = $this->url_parameters['class_code'];
-        if ($class_code == 1) {
-            $name_code = 'Elementary';
-        } elseif ($class_code == 2) {
-            $name_code = 'Secondary';
-        } elseif ($class_code == 3) {
-            $name_code = 'High School ';
-        }
+//        $class_code = $this->url_parameters['class_code'];
+//        if ($class_code == 1) {
+//            $name_code = 'Elementary';
+//        } elseif ($class_code == 2) {
+//            $name_code = 'Secondary';
+//        } elseif ($class_code == 3) {
+//            $name_code = 'High School ';
+//        }
 
         return view('backend.author.answer_question.index',
             compact('ans_for_students', 'ans_for_teachers', 'class_code', 'name_code', 'array_id_intypecode'));
@@ -74,25 +74,27 @@ class AnswerQuestionsController extends Controller
     public function create()
     {
         $levels = $this->levels;
-        $all_classes = $this->classes;
+        $classes = $this->classes;
 
 
-        $class_code = $this->url_parameters['class_code'];
+//        $class_code = $this->url_parameters['class_code'];
         $code_user = $this->url_parameters['code_user'];
 
-        $classes = $all_classes->filter(function ($class) use ($class_code) {
-            return ($class->code == $class_code);
-        });
+//        $classes = $all_classes->filter(function ($class) use ($class_code) {
+//            return ($class->code == $class_code);
+//        });
+
+//        $classes = Classes::all();
 
         if ($code_user == 'TC') {
             $exam_types = ExamType::all();
             $book_maps = BookMap::all();
 
             return view('backend.author.answer_question.create',
-                compact('levels', 'class_code', 'code_user', 'classes', 'exam_types', 'book_maps'));
+                compact('levels', 'code_user', 'classes', 'exam_types', 'book_maps'));
         }
 
-        return view('backend.author.answer_question.create', compact('levels', 'class_code', 'code_user', 'classes'));
+        return view('backend.author.answer_question.create', compact('levels', 'code_user', 'classes'));
     }
 
     /**

@@ -33,7 +33,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        return view('backend.author.index');
+        return view('backend.author.grade-menu');
+//        return view('backend.author.index');
     }
 
     public function show_post()
@@ -129,8 +130,6 @@ class AuthorController extends Controller
 
         return view('backend.author.post-detail', compact('record', 'levels', 'classes'));
     }
-
-
 
     public function answer_question()
     {

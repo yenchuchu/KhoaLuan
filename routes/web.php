@@ -57,17 +57,25 @@ Route::group(['middleware' => 'auth'], function () {
 
                 // go to elementary
                 Route::group(array('prefix' => 'grade'), function () {
-                    Route::get('/{class_code}', 'backend\AuthorController@grade')->name('backend.author.grade');
+                    //odl
+//                    Route::get('/{class_code}', 'backend\AuthorController@grade')->name('backend.author.grade');
+                    Route::get('/', 'backend\AuthorController@grade_new')->name('backend.author.grade.new');
                 });
 
                 Route::get('/underlines',
                     'backend\AuthorController@underlines')->name('backend.manager.author.underlines');
 
                 Route::group(array('prefix' => 'answer-question'), function () {
-                    Route::get('/{class_code}', 'backend\author\AnswerQuestionsController@index')
+//                    Route::get('/{class_code}', 'backend\author\AnswerQuestionsController@index')
+//                        ->name('backend.manager.author.answer-question');
+//
+//                    Route::get('/create/{code_user}/{class_code}', 'backend\author\AnswerQuestionsController@create')
+//                        ->name('backend.manager.author.answer-question.create');
+
+                    Route::get('/', 'backend\author\AnswerQuestionsController@index')
                         ->name('backend.manager.author.answer-question');
 
-                    Route::get('/create/{code_user}/{class_code}', 'backend\author\AnswerQuestionsController@create')
+                    Route::get('/create/{code_user}', 'backend\author\AnswerQuestionsController@create')
                         ->name('backend.manager.author.answer-question.create');
 //                    Route::get('/create-teacher/{class_code}', 'backend\author\AnswerQuestionsController@create_teacher')
 //                        ->name('backend.manager.author.answer-question.create-teacher');
@@ -79,10 +87,17 @@ Route::group(['middleware' => 'auth'], function () {
                 });
 
                 Route::group(array('prefix' => 'tick-circle-true-false'), function () {
-                    Route::get('/{class_code}', 'backend\author\TickCircleTrueFalseController@index')
+//                    Route::get('/{class_code}', 'backend\author\TickCircleTrueFalseController@index')
+//                        ->name('backend.manager.author.tick-circle-true-false');
+//
+//                    Route::get('/create/{code_user}/{class_code}',
+//                        'backend\author\TickCircleTrueFalseController@create')
+//                        ->name('backend.manager.author.tick-circle-true-false.create');
+
+                    Route::get('/', 'backend\author\TickCircleTrueFalseController@index')
                         ->name('backend.manager.author.tick-circle-true-false');
 
-                    Route::get('/create/{code_user}/{class_code}',
+                    Route::get('/create/{code_user}',
                         'backend\author\TickCircleTrueFalseController@create')
                         ->name('backend.manager.author.tick-circle-true-false.create');
 
@@ -91,10 +106,16 @@ Route::group(['middleware' => 'auth'], function () {
                 });
 
                 Route::group(array('prefix' => 'multiple-choice'), function () {
-                    Route::get('/{class_code}', 'backend\author\MultipleChoiceController@index')
+//                    Route::get('/{class_code}', 'backend\author\MultipleChoiceController@index')
+//                        ->name('backend.manager.author.multiple-choice');
+//
+//                    Route::get('/create/{code_user}/{class_code}', 'backend\author\MultipleChoiceController@create')
+//                        ->name('backend.manager.author.multiple-choice.create');
+
+                    Route::get('/', 'backend\author\MultipleChoiceController@index')
                         ->name('backend.manager.author.multiple-choice');
 
-                    Route::get('/create/{code_user}/{class_code}', 'backend\author\MultipleChoiceController@create')
+                    Route::get('/create/{code_user}', 'backend\author\MultipleChoiceController@create')
                         ->name('backend.manager.author.multiple-choice.create');
 
                     Route::post('/store', 'backend\author\MultipleChoiceController@store')
@@ -102,10 +123,16 @@ Route::group(['middleware' => 'auth'], function () {
                 });
 
                 Route::group(array('prefix' => 'classify-word'), function () {
-                    Route::get('/{class_code}', 'backend\author\ClassifyWordController@index')
+//                    Route::get('/{class_code}', 'backend\author\ClassifyWordController@index')
+//                        ->name('backend.manager.author.classify-word');
+//
+//                    Route::get('/create/{code_user}/{class_code}', 'backend\author\ClassifyWordController@create')
+//                        ->name('backend.manager.author.classify-word.create');
+
+                   Route::get('/', 'backend\author\ClassifyWordController@index')
                         ->name('backend.manager.author.classify-word');
 
-                    Route::get('/create/{code_user}/{class_code}', 'backend\author\ClassifyWordController@create')
+                    Route::get('/create/{code_user}', 'backend\author\ClassifyWordController@create')
                         ->name('backend.manager.author.classify-word.create');
 
                     Route::post('/store', 'backend\author\ClassifyWordController@store')
@@ -113,10 +140,16 @@ Route::group(['middleware' => 'auth'], function () {
                 });
 
                 Route::group(array('prefix' => 'complete-word'), function () {
-                    Route::get('/{class_code}', 'backend\author\CompleteWordController@index')
+//                    Route::get('/{class_code}', 'backend\author\CompleteWordController@index')
+//                        ->name('backend.manager.author.complete-word');
+//
+//                    Route::get('/create/{code_user}/{class_code}', 'backend\author\CompleteWordController@create')
+//                        ->name('backend.manager.author.complete-word.create');
+
+                    Route::get('/', 'backend\author\CompleteWordController@index')
                         ->name('backend.manager.author.complete-word');
 
-                    Route::get('/create/{code_user}/{class_code}', 'backend\author\CompleteWordController@create')
+                    Route::get('/create/{code_user}', 'backend\author\CompleteWordController@create')
                         ->name('backend.manager.author.complete-word.create');
 
                     Route::post('/store', 'backend\author\CompleteWordController@store')
@@ -124,10 +157,18 @@ Route::group(['middleware' => 'auth'], function () {
                 });
 
                 Route::group(array('prefix' => 'complete-paragraph'), function () {
-                    Route::get('/{class_code}', 'backend\author\CompleteParagraphController@index')
+//                    Route::get('/{class_code}', 'backend\author\CompleteParagraphController@index')
+//                        ->name('backend.manager.author.complete-paragraph');
+//
+//                    Route::get('/create/{code_user}/{class_code}', 'backend\author\CompleteParagraphController@create')
+//                        ->name('backend.manager.author.complete-paragraph.create');
+//
+//                    Route::post('/store', 'backend\author\CompleteParagraphController@store')
+
+                    Route::get('/', 'backend\author\CompleteParagraphController@index')
                         ->name('backend.manager.author.complete-paragraph');
 
-                    Route::get('/create/{code_user}/{class_code}', 'backend\author\CompleteParagraphController@create')
+                    Route::get('/create/{code_user}', 'backend\author\CompleteParagraphController@create')
                         ->name('backend.manager.author.complete-paragraph.create');
 
                     Route::post('/store', 'backend\author\CompleteParagraphController@store')
@@ -135,10 +176,16 @@ Route::group(['middleware' => 'auth'], function () {
                 });
 
                 Route::group(array('prefix' => 'find-errors'), function () {
-                    Route::get('/{class_code}', 'backend\author\FindErrorController@index')
+//                    Route::get('/{class_code}', 'backend\author\FindErrorController@index')
+//                        ->name('backend.manager.author.find-errors');
+//
+//                    Route::get('/create/{code_user}/{class_code}', 'backend\author\FindErrorController@create')
+//                        ->name('backend.manager.author.find-errors.create');
+
+                    Route::get('/', 'backend\author\FindErrorController@index')
                         ->name('backend.manager.author.find-errors');
 
-                    Route::get('/create/{code_user}/{class_code}', 'backend\author\FindErrorController@create')
+                    Route::get('/create/{code_user}/', 'backend\author\FindErrorController@create')
                         ->name('backend.manager.author.find-errors.create');
 
                     Route::post('/store', 'backend\author\FindErrorController@store')
@@ -150,10 +197,16 @@ Route::group(['middleware' => 'auth'], function () {
                  */
                 Route::group(array('prefix' => 'listening'), function () {
                     Route::group(array('prefix' => 'listen_complete_sentences'), function () {
-                        Route::get('/{class_code}', 'backend\author\ListenCompleteSentencesController@index')
+//                        Route::get('/{class_code}', 'backend\author\ListenCompleteSentencesController@index')
+//                            ->name('backend.manager.author.listen.listen_complete_sentences');
+//
+//                        Route::get('/create/{code_user}/{class_code}', 'backend\author\ListenCompleteSentencesController@create')
+//                            ->name('backend.manager.author.listen.listen_complete_sentences.create');
+
+                        Route::get('/', 'backend\author\ListenCompleteSentencesController@index')
                             ->name('backend.manager.author.listen.listen_complete_sentences');
 
-                        Route::get('/create/{code_user}/{class_code}', 'backend\author\ListenCompleteSentencesController@create')
+                        Route::get('/create/{code_user}', 'backend\author\ListenCompleteSentencesController@create')
                             ->name('backend.manager.author.listen.listen_complete_sentences.create');
 
                         Route::post('/store', 'backend\author\ListenCompleteSentencesController@store')
@@ -161,10 +214,16 @@ Route::group(['middleware' => 'auth'], function () {
                     });
 
                     Route::group(array('prefix' => 'listen_table_ticks'), function () {
-                        Route::get('/{class_code}', 'backend\author\ListenTableTicksController@index')
+//                        Route::get('/{class_code}', 'backend\author\ListenTableTicksController@index')
+//                            ->name('backend.manager.author.listen.listen_table_ticks');
+//
+//                        Route::get('/create/{code_user}/{class_code}', 'backend\author\ListenTableTicksController@create')
+//                            ->name('backend.manager.author.listen.listen_table_ticks.create');
+
+                        Route::get('/', 'backend\author\ListenTableTicksController@index')
                             ->name('backend.manager.author.listen.listen_table_ticks');
 
-                        Route::get('/create/{code_user}/{class_code}', 'backend\author\ListenTableTicksController@create')
+                        Route::get('/create/{code_user}', 'backend\author\ListenTableTicksController@create')
                             ->name('backend.manager.author.listen.listen_table_ticks.create');
 
                         Route::post('/store', 'backend\author\ListenTableTicksController@store')
@@ -172,10 +231,16 @@ Route::group(['middleware' => 'auth'], function () {
                     });
 
                     Route::group(array('prefix' => 'listen_ticks'), function () {
-                        Route::get('/{class_code}', 'backend\author\ListenTicksController@index')
+//                        Route::get('/{class_code}', 'backend\author\ListenTicksController@index')
+//                            ->name('backend.manager.author.listen.listen_ticks');
+//
+//                        Route::get('/create/{code_user}/{class_code}', 'backend\author\ListenTicksController@create')
+//                            ->name('backend.manager.author.listen.listen_ticks.create');
+
+                        Route::get('/', 'backend\author\ListenTicksController@index')
                             ->name('backend.manager.author.listen.listen_ticks');
 
-                        Route::get('/create/{code_user}/{class_code}', 'backend\author\ListenTicksController@create')
+                        Route::get('/create/{code_user}', 'backend\author\ListenTicksController@create')
                             ->name('backend.manager.author.listen.listen_ticks.create');
 
                         Route::post('/store', 'backend\author\ListenTicksController@store')
@@ -187,10 +252,16 @@ Route::group(['middleware' => 'auth'], function () {
                  * Route: SPEAKING
                  */
                 Route::group(array('prefix' => 'speaking'), function () {
-                    Route::get('/{class_code}', 'backend\author\SpeakingController@index')
+//                    Route::get('/{class_code}', 'backend\author\SpeakingController@index')
+//                        ->name('backend.manager.author.speaking');
+//
+//                    Route::get('/create/{code_user}/{class_code}', 'backend\author\SpeakingController@create')
+//                        ->name('backend.manager.author.speaking.create');
+
+                     Route::get('/', 'backend\author\SpeakingController@index')
                         ->name('backend.manager.author.speaking');
 
-                    Route::get('/create/{code_user}/{class_code}', 'backend\author\SpeakingController@create')
+                    Route::get('/create/{code_user}/', 'backend\author\SpeakingController@create')
                         ->name('backend.manager.author.speaking.create');
 
                     Route::post('/store', 'backend\author\SpeakingController@store')

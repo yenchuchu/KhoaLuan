@@ -70,22 +70,22 @@
 @stop
 
 @section('header')
-
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('backend.manager.author.index')}}">{{ trans('label.backend.dashboard')  }}</a></li>
-        <li class="breadcrumb-item ">
-            <span class="bread-active">
-                    {{ trans('label.backend.author.dashboard')  }}
-                @if($name_code == 'Elementary')
-                  học sinh cấp 1
-                @elseif($name_code == 'Secondary')
-                   học sinh cấp 2
-                @else
-                    học sinh cấp 3
-                @endif
-            </span>
-        </li>
-    </ol>
+    <h1 class="page-header">{{ trans('label.backend.dashboard')  }}</h1>
+    {{--<ol class="breadcrumb">--}}
+        {{--<li class="breadcrumb-item"><a href="{{route('backend.manager.author.index')}}">{{ trans('label.backend.dashboard')  }}</a></li>--}}
+        {{--<li class="breadcrumb-item ">--}}
+            {{--<span class="bread-active">--}}
+                    {{--{{ trans('label.backend.author.dashboard')  }}--}}
+                {{--@if($name_code == 'Elementary')--}}
+                  {{--học sinh cấp 1--}}
+                {{--@elseif($name_code == 'Secondary')--}}
+                   {{--học sinh cấp 2--}}
+                {{--@else--}}
+                    {{--học sinh cấp 3--}}
+                {{--@endif--}}
+            {{--</span>--}}
+        {{--</li>--}}
+    {{--</ol>--}}
 
 @stop
 
@@ -102,25 +102,25 @@
                                 <span class="title-span-skill list-group-item"> {{ trans('label.skills.reading') }}</span>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{route('backend.manager.author.answer-question', $class_code)}}"
+                                <a href="{{route('backend.manager.author.answer-question')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.reading.grade_menu.answer_question')}}
                                     <span class="badge">12</span></a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{route('backend.manager.author.find-errors', $class_code)}}"
+                                <a href="{{route('backend.manager.author.find-errors')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.reading.grade_menu.find_error')}}
                                     <span class="badge">5</span></a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{route('backend.manager.author.multiple-choice', $class_code)}}"
+                                <a href="{{route('backend.manager.author.multiple-choice')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.reading.grade_menu.multiple_choice')}}
                                     <span class="badge">3</span></a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{route('backend.manager.author.tick-circle-true-false', $class_code)}}"
+                                <a href="{{route('backend.manager.author.tick-circle-true-false')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.reading.grade_menu.tick_true_false')}}
                                     <span class="badge">3</span></a>
@@ -137,19 +137,19 @@
                                 <span class="title-span-skill list-group-item"> {{ trans('label.skills.listening') }}</span>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{route('backend.manager.author.listen.listen_complete_sentences', $class_code)}}"
+                                <a href="{{route('backend.manager.author.listen.listen_complete_sentences')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.listening.grade_menu.listen_complete_sentences')}}
                                     <span class="badge">5</span></a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{route('backend.manager.author.listen.listen_ticks', $class_code)}}"
+                                <a href="{{route('backend.manager.author.listen.listen_ticks')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.listening.grade_menu.listen_ticks')}}
                                     <span class="badge">3</span></a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{route('backend.manager.author.listen.listen_table_ticks', $class_code)}}"
+                                <a href="{{route('backend.manager.author.listen.listen_table_ticks')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.listening.grade_menu.listen_table_ticks')}}
                                     <span class="badge">12</span></a>
@@ -165,7 +165,7 @@
                                 <span class="title-span-skill list-group-item"> {{ trans('label.skills.speaking') }}</span>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{route('backend.manager.author.speaking', $class_code)}}"
+                                <a href="{{route('backend.manager.author.speaking')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.speaking.grade_menu.content')}}
                                     <span class="badge">12</span></a>

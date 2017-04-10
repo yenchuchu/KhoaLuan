@@ -6,8 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
     <title>{{ config('app.name', 'English App - Free') }}</title>
-    <!-- Core CSS - Include with every page -->
-    <link href="/backend/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet"/>
+    <!-- Core CSS - Include with every page cmt-->
+    <link href="Ơ/backend/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet"/>
     <link href="{{URL::asset('backend/assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet"/>
     <link href="{{URL::asset('backend/assets/plugins/pace/pace-theme-big-counter.css')}}" rel="stylesheet"/>
     <link href="{{URL::asset('backend/assets/css/style.css')}}" rel="stylesheet"/>

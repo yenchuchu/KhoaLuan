@@ -11,8 +11,8 @@
 
 {{--<title>English App - Free</title>--}}
 
-<!-- Bootstrap Core CSS -->
-    <link href="{{URL::asset('backend/assets/plugins/bootstrap/bootstrap.css')}}" rel="stylesheet"/>
+<!-- Bootstrap Core CSS change -->
+    <link href="/backend/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet"/>
 
     <!-- My CSS -->
     <link href="{{URL::asset('frontend/mystyle.css')}}" rel="stylesheet">

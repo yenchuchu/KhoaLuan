@@ -72,7 +72,13 @@
     <div class="container">
         {{--<div><h3>Listen and repeat</h3></div>--}}
         @if(count($item) == 0)
-            <p>Chưa cập nhật đề bài.</p>
+            {{--<div class="container">--}}
+                <div><h3>Testing Speaking</h3></div>
+                <div id="refresh-page-testing">
+                    <p>Chưa cập nhật dữ liệu</p>
+                </div>
+            {{--</div>--}}
+
         @else
             <div>
                 <h3>Listen and repeat</h3>

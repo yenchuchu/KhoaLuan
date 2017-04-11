@@ -26,6 +26,16 @@
 
 @section('content')
     <a style="display: none;" href="{{route('frontend.dashboard.student.index')}}" id="href_goto_index"></a>
+    @if(empty($items))
+        <div class="container">
+            <div><h3>Testing {{$skill_code}}</h3></div>
+            <div id="refresh-page-testing">
+                <p>Chưa cập nhật dữ liệu</p>
+            </div>
+        </div>
+
+    @else
+
     <div class="wrap-clock">
         <div id='demnguoc' time_remaining="{{$time_remaining}}"><i class="fa fa-clock-o" aria-hidden="true"></i><span
                     id='dem'></span> <span id='donvi'></span>
@@ -41,8 +51,15 @@
         @include('frontend.student.join-test.listening.index_start')
     </div>
     </div>
+
+    @endif
+
 @stop
 
+
+@if(!empty($items))
 @section('script')
     @include('frontend.student.join-test.listening.script')
 @stop
+@endif
+

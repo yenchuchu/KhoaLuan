@@ -1,6 +1,5 @@
 <script>
     var j = 2;
-    var placeholder = '{{trans('label.backend.author.speaking.create.placeholder')}}';
     var add_radio = '{{trans('label.backend.author.speaking.create.button.add-radio')}}';
     $('.add-item').click(function () {
 
@@ -18,9 +17,10 @@
 
                 '<div class="form-group">' +
                 '<textarea type="text" class="form-control" name="speaking[' + j + '][content-speaking]"' +
-                'placeholder="'+placeholder +'" required></textarea>' +
+                'placeholder="{{trans('label.backend.author.speaking.create.placeholder')}}" required></textarea>' +
                 '</div>' +
                 '<div class="form-group">' +
+                ' <label>{{trans('label.backend.create.upload_audio')}}</label>' +
                 '<input name="speaking['+j+'][audio]" type="file">' +
                 '</div>' +
 

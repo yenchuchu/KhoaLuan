@@ -29,11 +29,11 @@
                             <div class="audio_listen form-group" style="margin-top: 10px; margin-bottom: 15px;">
                                 <label class="admin-lable-audio">Audio: </label>
                                 <audio controls>
-                                    <source src="{{URL::asset($sug->url_audio)}}" type="audio/mpeg">
+                                    <source src="/{{$sug->url_audio}}" type="audio/mpeg">
                                 </audio>
                             </div>
                             <div class="form-group">
-                                <label>Change Audio: </label>
+                                <label>{{trans('label.backend.post_details.change-audio')}}: </label>
                                 {{ Form::file('listen_ticks['.$key_idx.'][content-choose-ans-question]['.$item_this.'][url_audio]', array()) }}
                             </div>
 
@@ -45,7 +45,7 @@
                                            value="{{$key_cont}}"
                                            class="ans-true" <?php if($sug->answer == $key_cont) { echo ' checked '; } ?> >
                                     <label for="check-answer_{{$key_idx}}_{{$item_this}}_{{$key_cont}}" style="cursor: pointer">
-                                        <img src="{{URL::asset($cont)}}" style="height: 180px;"
+                                        <img src="/{{$cont}}" style="height: 180px;"
                                              id="change_uploadListenImgOne_{{$key_idx}}_{{$item_this}}_{{$key_cont}}"
                                              alt="image suggest">
                                     </label>

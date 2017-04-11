@@ -16,7 +16,7 @@
         var row = table.insertRow(0);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
-        cell1.innerHTML = '<input type="text"' +
+        cell1.innerHTML = '<input type="text" placeholder="{{trans('label.backend.create.suggest_answer')}}" ' +
                 'name="listen_table_ticks[' + item + '][content-choose-ans-question][' + item_this + '][suggest]">';
         cell2.innerHTML = '<input type="checkbox"' +
                 'name="listen_table_ticks[' + item + '][content-choose-ans-question][' + item_this + '][answer]">';
@@ -34,7 +34,7 @@
         $("#wrap-content-exam-" + item ).append('<div class="form-group" style="width:100%; float:left;">' +
                 '<div class="span-numb-question" id="id-numb-question-'+ item_this +'">' +
                 item_this +
-                '<input type="hidden" value="'+ item_this +'"' +
+                '<input type="hidden" value="'+ item_this +'" ' +
                 'name="answer_question['+ item +'][content-choose-ans-question]['+ item_this +'][id]">' +
                 '</div>' +
 
@@ -42,13 +42,13 @@
                 '<div class="span-text-question">' +
                 '<textarea type="text" class="form-control" ' +
                 'name="answer_question['+ item +'][content-choose-ans-question]['+ item_this +'][content]"' +
-                'placeholder="enter content" ></textarea>' +
+                ' placeholder="{{trans('label.backend.create.item-content-question')}}" ></textarea>' +
                 '</div>' +
                 '</div>' +
 
                 '<div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">' +
                 '<div class="form-group">' +
-                '<input type="text" class="form-control" placeholder="enter answer" ' +
+                '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" ' +
                 'name="answer_question['+ item +'][content-choose-ans-question]['+ item_this +'][answer]">' +
                 '</div>' +
                 '</div>' +
@@ -76,7 +76,7 @@
                 '<div class="span-text-question">' +
                 '<textarea type="text" class="form-control" ' +
                 'name="find_errors[' + item + '][content-choose-ans-question][' + item_this + '][content]"' +
-                'placeholder="enter content" ></textarea>' +
+                'placeholder="This <u>is</u> a <u>example</u> for <u>this</u> question format" ></textarea>' +
                 '</div>' +
                 '</div>' +
 
@@ -85,7 +85,7 @@
                 '<div class="col-lg-8 option-as-details">' +
                 '<label class="col-lg-2" style="padding-right: 0px;" for="find_errors_' + item + '_answer_' + item_this + '">Answer: </label>' +
                 '<div class="form-group col-lg-10" style="width: 43%;padding-left: 0; margin-left: 0">' +
-                '<input type="text" class="form-control" placeholder="enter answer" index="1"' +
+                '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="1"' +
                 'name="find_errors[' + item + '][content-choose-ans-question][' + item_this + '][answer]"' +
                 'id="find_errors_' + item + '_answer_' + item_this + '">' +
                 ' </div>' +
@@ -116,7 +116,7 @@
                 '<div class="span-text-question">' +
                 '<textarea type="text" class="form-control" ' +
                 'name="multiple_choice[' + item + '][content-choose-ans-question][' + item_this + '][content]"' +
-                'placeholder="enter content" ></textarea>' +
+                'placeholder="This is ... demo" ></textarea>' +
                 '</div>' +
                 '</div>' +
 
@@ -126,7 +126,7 @@
                 '<input type="radio" value="A"' +
                 'name="multiple_choice[' + item + '][content-choose-ans-question][' + item_this + '][answer]">' +
                 '<div class="form-group">' +
-                '<input type="text" class="form-control" placeholder="enter answer" index="A"' +
+                '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="A"' +
                 'name="multiple_choice[' + item + '][content-choose-ans-question][' + item_this + '][suggest_choose][A]">' +
                 ' </div>' +
                 ' </div>' +
@@ -135,7 +135,7 @@
                 '<input type="radio" value="B"' +
                 'name="multiple_choice[' + item + '][content-choose-ans-question][' + item_this + '][answer]">' +
                 '<div class="form-group">' +
-                ' <input type="text" class="form-control" placeholder="enter answer" index="B"' +
+                ' <input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="B"' +
                 ' name="multiple_choice[' + item + '][content-choose-ans-question][' + item_this + '][suggest_choose][B]">' +
                 '</div>' +
                 '</div>' +
@@ -144,11 +144,50 @@
                 '<input type="radio" value="C"' +
                 'name="multiple_choice[' + item + '][content-choose-ans-question][' + item_this + '][answer]">' +
                 '<div class="form-group">' +
-                '<input type="text" class="form-control" placeholder="enter answer" index="C"' +
+                '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="C"' +
                 'name="multiple_choice[' + item + '][content-choose-ans-question][' + item_this + '][suggest_choose][C]">' +
                 '</div>' +
                 '</div>' +
 
+                '</div>' +
+
+                '</div>');
+
+        $('#add_item_question_' + item).attr('item_this', item_this);
+    }
+
+    function add_item_question_TF(id) {
+
+        item = $('#' + id).attr('item');
+        item_this = $('#' + id).attr('item_this');
+
+        item_this++;
+
+        $("#wrap-content-exam-" + item).append('<div class="form-group" style="width:100%; float:left;">' +
+                '<div class="span-numb-question" id="id-numb-question-' + item_this + '">' +
+                item_this +
+                '<input type="hidden" value="' + item_this + '"' +
+                'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][id]">' +
+                '</div>' +
+                '<div class="span-text-question">' +
+                '<textarea type="text" class="form-control" ' +
+                'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][content]"' +
+                ' placeholder="{{trans('label.backend.create.item-content-question')}}" ></textarea>' +
+                '</div>' +
+
+                '<div class="span-choose-tick-true-false">' +
+                '<span>' +
+                '<input type="radio" id="check-answer_' + item + '_' + item_this + '_T"' +
+                'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][answer]" value="T"' +
+                'class="ans-true">' +
+                '<label for="check-answer_' + item + '_' + item_this + '_T" style="cursor: pointer">T</label>' +
+                ' </span>' +
+                '<span>' +
+                '<input type="radio" id="check-answer_' + item + '_' + item_this + '_F"' +
+                'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][answer]" value="F"' +
+                'class="ans-false"> ' +
+                '<label for="check-answer_' + item + '_' + item_this + '_F" style="cursor: pointer">F</label>' +
+                '</span>' +
                 '</div>' +
 
                 '</div>');
@@ -180,7 +219,7 @@
 
                 '<div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">' +
                 '<div class="form-group">' +
-                '<input type="text" class="form-control" placeholder="enter answer" ' +
+                '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" ' +
                 'name="listen_complete_sentences['+ item +'][content-choose-ans-question]['+ item_this +'][answer]">' +
                 '</div>' +
                 '</div>' +
@@ -205,7 +244,7 @@
                 '</div>' +
 
                 '<div class="form-group">' +
-                '<label>Upload Audio</label>' +
+                '<label>{{trans('label.backend.create.upload_audio')}}</label>' +
                 '<input name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][url_audio]" ' +
                 ' required type="file">' +
                 '</div>' +
@@ -216,7 +255,7 @@
                 'name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][answer]" value="A"' +
                 'class="ans-true">' +
                 '<label for="check-answer_' + item + '_' + item_this + '_A" style="cursor: pointer">' +
-                '<img src="{{URL::asset('imgs-dashboard/avatar.png')}}" style="height: 180px;"' +
+                '<img src="/imgs-dashboard/avatar.png" style="height: 180px;"' +
                 'id="change_uploadListenImgOne_' + item + '_' + item_this + '_A" alt="image suggest">' +
                 '</label>' +
 
@@ -231,7 +270,7 @@
                 'name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][answer]" value="B"' +
                 'class="ans-false">' +
                 '<label for="check-answer_' + item + '_' + item_this + '_B" style="cursor: pointer">' +
-                '<img src="{{URL::asset('imgs-dashboard/avatar.png')}}" style="height: 180px;"' +
+                '<img src="/imgs-dashboard/avatar.png" style="height: 180px;"' +
                 'id="change_uploadListenImgOther_' + item + '_' + item_this + '_B" alt="image suggest">' +
                 '</label>' +
 

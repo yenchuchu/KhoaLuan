@@ -13,21 +13,16 @@
 
                 '<div class="table-responsive" id="wrap-content-exam-' + j + '">' +
 
-                '<div class="col-lg-10" style="padding-left: 0;">' +
+                '<div class="col-lg-12" style="padding-left: 0;">' +
                 '<div class="form-group">' +
-                '<input type="text" name="tick_true_false[' + j + '][title-tick-true-false] " class="form-control" required>' +
-                '</div>' +
-                '</div>' +
-                '<div class="col-lg-2" style=" padding-right: 0;">' +
-                '<div class="form-group">' +
-                '<label class="lable-point">Point: </label>' +
-                '<input type="number" name="tick_true_false[' + j + '][point]" class="form-control input-point" >' +
+                '<input type="text" name="tick_true_false[' + j + '][title-tick-true-false] " class="form-control" ' +
+                'required placeholder="{{trans('label.backend.create.title-question')}}">' +
                 '</div>' +
                 '</div>' +
 
                 '<div class="form-group">' +
-                '<textarea type="text" class="form-control" name="tick_true_false[' + j + '][content-tick-true-false]' +
-                'placeholder="enter content" required></textarea>' +
+                '<textarea type="text" class="form-control" name="tick_true_false[' + j + '][content-tick-true-false]"' +
+                ' placeholder="{{trans('label.backend.create.content-question')}}" required></textarea>' +
                 '</div>' +
                 '<div class="form-group" style="width:100%; float:left;" >' +
                 ' <div class="span-numb-question" id="id-numb-question-1" >' +
@@ -38,7 +33,7 @@
                 '<div class="span-text-question">' +
                 '<textarea type="text" class="form-control" ' +
                 'name="tick_true_false[' + j + '][content-choose-ans-question][1][content]"' +
-                'placeholder="enter content" required></textarea>' +
+                ' placeholder="{{trans('label.backend.create.item-content-question')}}" required></textarea>' +
                 '</div>' +
 
                 '<div class="span-choose-tick-true-false">' +
@@ -69,44 +64,6 @@
         j++;
     });
 
-    function add_item_question_TF(id) {
-
-        item = $('#' + id).attr('item');
-        item_this = $('#' + id).attr('item_this');
-
-        item_this++;
-
-        $("#wrap-content-exam-" + item).append('<div class="form-group" style="width:100%; float:left;">' +
-                '<div class="span-numb-question" id="id-numb-question-' + item_this + '">' +
-                item_this +
-                '<input type="hidden" value="' + item_this + '"' +
-                'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][id]">' +
-                '</div>' +
-                '<div class="span-text-question">' +
-                '<textarea type="text" class="form-control" ' +
-                'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][content]"' +
-                'placeholder="enter content" ></textarea>' +
-                '</div>' +
-
-                '<div class="span-choose-tick-true-false">' +
-                '<span>' +
-                '<input type="radio" id="check-answer_' + item + '_' + item_this + '_T"' +
-                'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][answer]" value="T"' +
-                'class="ans-true">' +
-                '<label for="check-answer_' + item + '_' + item_this + '_T" style="cursor: pointer">T</label>' +
-                ' </span>' +
-                '<span>' +
-                '<input type="radio" id="check-answer_' + item + '_' + item_this + '_F"' +
-                'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][answer]" value="F"' +
-                'class="ans-false"> ' +
-                '<label for="check-answer_' + item + '_' + item_this + '_F" style="cursor: pointer">F</label>' +
-                '</span>' +
-                '</div>' +
-
-                '</div>');
-
-        $('#add_item_question_' + item).attr('item_this', item_this);
-    }
 
     /**
      * hiển thị các unit khi chọn kiểm tra thường xuyên

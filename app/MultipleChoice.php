@@ -40,4 +40,12 @@ class MultipleChoice extends Model
     public function multiple_choice_detail() {
         return $this->hasMany(MultipleChoiceDetail::class, 'id', 'multiple_choice_id');
     }
+
+    public static function getRecordByUserId($user_id) {
+        $ans_questions_all = MultipleChoice::where(['type_user' => 'ST', 'user_id' => $user_id])->with('skills', 'levels')
+            ->orderBy('type_code', 'desc')
+            ->get();
+
+        return $ans_questions_all;
+    }
 }

@@ -16,7 +16,8 @@
 
                 '<div class="col-lg-12" style="padding-left: 0;">' +
                 '<div class="form-group">' +
-                '<input type="text" name="listen_ticks[' + j + '][title-listen-ticks] " class="form-control" required>' +
+                '<input type="text" name="listen_ticks[' + j + '][title-listen-ticks] "' +
+                ' placeholder="{{trans('label.backend.create.title-question')}}"  class="form-control" required>' +
                 '</div>' +
                 '</div>' +
 
@@ -27,7 +28,7 @@
                 '</div>' +
 
                 '<div class="form-group">' +
-                '<label>Upload Audio</label>' +
+                '<label>{{trans('label.backend.create.upload_audio')}}</label>' +
                 '<input name="listen_ticks[' + j + '][content-choose-ans-question][1][url_audio]" ' +
                 ' required type="file">' +
                 '</div>' +

@@ -6,13 +6,21 @@
 @stop
 
 @section('header')
-    <h1 class="page-header">
-        @if($code_user == 'ST')
-            Add exam 'Multiple choice' for Student test online
-        @elseif($code_user == 'TC')
-            Add exam 'Multiple choice' for Teacher
-        @endif
-    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a
+                    href="{{route('backend.manager.author.index')}}">{{ trans('label.backend.dashboard')  }}</a></li>
+        <li class="breadcrumb-item ">
+            <a href="{{route('backend.manager.author.multiple-choice')}}">
+                {{trans('label.backend.author.reading.grade_menu.multiple_choice')}}</a>
+        </li>
+        <li class="breadcrumb-item ">
+            <span class="bread-active">
+                  {{trans('label.backend.create.title')}}
+            </span>
+        </li>
+    </ol>
+
 @stop
 
 @section('content')
@@ -26,7 +34,7 @@
 
                     <select name="level_id" class="form-control" id="add-multiple-choice-level">
                         @foreach($levels as $level)
-                            <option value="{{$level->id}}">{{$level->title}} - {{$level->point}}  </option>
+                            <option value="{{$level->id}}">{{$level->title}}  </option>
                         @endforeach
                     </select>
                 </div>
@@ -74,7 +82,7 @@
         @endif
 
         <input type="hidden" value="{{$code_user}}" name="code_user">
-        <input type="hidden" value="{{$class_code}}" name="class_code">
+        {{--<input type="hidden" value="{{$class_code}}" name="class_code">--}}
     </div>
     <div class="row" id="wrap_add_multiple_choice">
         <div class="col-lg-12 col_add_multiple_choice">
@@ -88,22 +96,10 @@
                         <div class="col-lg-12" style="padding-left: 0;">
                             <div class="form-group">
                                 <input type="text" name="multiple_choice[1][title-multiple-choice]"
-                                       class="form-control" required>
+                                       class="form-control" required placeholder="{{trans('label.backend.create.title-question')}}">
                             </div>
                         </div>
-                        {{--<div class="col-lg-2" style=" padding-right: 0;">--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label class="lable-point">Point: </label>--}}
-                                {{--<input type="number" name="multiple_choice[1][point]"--}}
-                                       {{--class="form-control input-point" required>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
 
-                        {{--<div class="form-group">--}}
-                                {{--<textarea type="text" class="form-control"--}}
-                                          {{--name="multiple_choice[1][content-multiple-choice]"--}}
-                                          {{--placeholder="enter content" required></textarea>--}}
-                        {{--</div>--}}
                         <div class="form-group" style="width:100%; float:left;">
                             <div class="span-numb-question" id="id-numb-question-1">
                                 1
@@ -113,7 +109,7 @@
                                 <div class="span-text-question">
                                     <textarea type="text" class="form-control"
                                               name="multiple_choice[1][content-choose-ans-question][1][content]"
-                                              placeholder="enter content" required></textarea>
+                                              placeholder="This is ... demo" required></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-12 div-wrap-option-answers" >
@@ -121,7 +117,7 @@
                                     <input type="radio" value="A"
                                            name="multiple_choice[1][content-choose-ans-question][1][answer]">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="enter answer" index="1"
+                                        <input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="1"
                                                name="multiple_choice[1][content-choose-ans-question][1][suggest_choose][A]">
                                     </div>
                                 </div>
@@ -130,7 +126,7 @@
                                     <input type="radio" value="B"
                                            name="multiple_choice[1][content-choose-ans-question][1][answer]">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="enter answer" index="2"
+                                        <input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="2"
                                                name="multiple_choice[1][content-choose-ans-question][1][suggest_choose][B]">
                                     </div>
                                 </div>
@@ -139,7 +135,7 @@
                                     <input type="radio" value="C"
                                            name="multiple_choice[1][content-choose-ans-question][1][answer]">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="enter answer" index="3"
+                                        <input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="3"
                                                name="multiple_choice[1][content-choose-ans-question][1][suggest_choose][C]">
                                     </div>
                                 </div>

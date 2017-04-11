@@ -47,9 +47,7 @@ class ListenTableTicksController extends Controller
 
     public function index()
     {
-        $ans_questions_all = ListenTableTicks::where(['type_user' => 'ST'])->with('skills', 'levels')
-            ->orderBy('type_code', 'desc')
-            ->get();
+        $ans_questions_all = ListenTableTicks::getRecordByUserId(Auth::user()->id);
 
         $type_codes = $ans_questions_all->groupBy('type_code');
 
@@ -62,31 +60,31 @@ class ListenTableTicksController extends Controller
             $array_id_intypecode[$code]['created_at'] = array_unique($item->pluck('created_at')->toArray());
         }
 
-        $class_code = $this->url_parameters['class_code'];
-        if ($class_code == 1) {
-            $name_code = 'Elementary';
-        } elseif ($class_code == 2) {
-            $name_code = 'Secondary';
-        } elseif ($class_code == 3) {
-            $name_code = 'High School ';
-        }
+//        $class_code = $this->url_parameters['class_code'];
+//        if ($class_code == 1) {
+//            $name_code = 'Elementary';
+//        } elseif ($class_code == 2) {
+//            $name_code = 'Secondary';
+//        } elseif ($class_code == 3) {
+//            $name_code = 'High School ';
+//        }
 
         return view('backend.author.listen.table-tick.index',
-            compact('ans_for_students', 'ans_for_teachers', 'class_code', 'name_code', 'array_id_intypecode'));
+            compact('class_code', 'name_code', 'array_id_intypecode'));
     }
 
     public function create()
     {
         $levels = $this->levels;
-        $all_classes = $this->classes;
+        $classes = $this->classes;
 
 
-        $class_code = $this->url_parameters['class_code'];
+//        $class_code = $this->url_parameters['class_code'];
         $code_user = $this->url_parameters['code_user'];
 
-        $classes = $all_classes->filter(function ($class) use ($class_code) {
-            return ($class->code == $class_code);
-        });
+//        $classes = $all_classes->filter(function ($class) use ($class_code) {
+//            return ($class->code == $class_code);
+//        });
 
         if ($code_user == 'TC') {
             $exam_types = ExamType::all();

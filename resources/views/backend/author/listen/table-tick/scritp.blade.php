@@ -19,26 +19,23 @@
                 '<div class="col-lg-12" style="padding-left: 0;">' +
                 '<div class="form-group">' +
                 '<input type="text" name="listen_table_ticks[' + j + '][title-listen-table-ticks] " class="form-control"' +
-                ' placeholder="Cập nhật đề bài" required>' +
+                ' placeholder="{{trans('label.backend.create.title-question')}}" required>' +
                 '</div>' +
                 '</div>' +
 
                 '<div class="form-group">' +
-                '<label>Upload Audio</label>' +
+                ' <label>{{trans('label.backend.create.upload_audio')}}</label>' +
                 '<input name="listen_table_ticks[' + j + '][url_audio]" ' +
                 ' required type="file">' +
                 '</div>' +
 
                 '<div class="form-group" style="width:100%; float:left;" >' +
-                ' <div class="span-numb-question" id="id-numb-question-1" >' +
-                '1' +
-                '</div>' +
 
                 '<div class="span-choose-listen-table-tick">' +
                 '<table id="listen_table_ticks_' + j + '" class="table table-bordered">' +
                 '<tr>' +
                 '<td>' +
-                '<input type="text"' +
+                '<input type="text" placeholder="{{trans('label.backend.create.suggest_answer')}}" ' +
                 'name="listen_table_ticks[' + j + '][content-choose-ans-question][1][suggest]">' +
                 '</td>' +
                 '<td><input type="checkbox"' +

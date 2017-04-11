@@ -2,11 +2,11 @@
     <thead>
     <tr>
         <th>STT</th>
-        <th>Class</th>
-        <th>Level</th>
-        <th>Link</th>
-        <th>Date</th>
-        <th>Status</th>
+        <th>{{trans('label.backend.table.class')}}</th>
+        <th>{{trans('label.backend.table.level')}}</th>
+        <th>{{trans('label.backend.table.link')}}</th>
+        <th>{{trans('label.backend.table.date')}}</th>
+        <th>{{trans('label.backend.table.status')}}</th>
     </tr>
     </thead>
     <tbody>
@@ -34,15 +34,15 @@
             <td>
 
                 <a href="{{route('backend.manager.author.get.detail', ['listen_complete_sentences' , Auth::user()->id, $item['id']])}}">
-                    Go to link</a>
+                    {{trans('label.backend.table.go_to_link')}}</a>
 
             </td>
             <td>{{Carbon\Carbon::parse($item['created_at'][0])->format('d/m/Y - H:i')}}</td>
             <td><?php
                 if($item['status'][0] == 0) { ?>
-                <span class="huge-null">Wait</span>
+                <span class="huge-null">{{trans('label.backend.table.wait')}}</span>
                 <?php } else if($item['status'][0] == 1) { ?>
-                <span class="huge-done">Done</span>
+                <span class="huge-done">{{trans('label.backend.table.done')}}</span>
                 <?php } ?></td>
         </tr>
     @endforeach

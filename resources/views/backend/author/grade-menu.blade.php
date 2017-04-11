@@ -105,25 +105,25 @@
                                 <a href="{{route('backend.manager.author.answer-question')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.reading.grade_menu.answer_question')}}
-                                    <span class="badge">12</span></a>
+                                    <span class="badge">{{$tal_ans_question}}</span></a>
                             </li>
                             <li class="list-group-item">
                                 <a href="{{route('backend.manager.author.find-errors')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.reading.grade_menu.find_error')}}
-                                    <span class="badge">5</span></a>
+                                    <span class="badge">{{$tal_find_error}}</span></a>
                             </li>
                             <li class="list-group-item">
                                 <a href="{{route('backend.manager.author.multiple-choice')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.reading.grade_menu.multiple_choice')}}
-                                    <span class="badge">3</span></a>
+                                    <span class="badge">{{$tal_multiple}}</span></a>
                             </li>
                             <li class="list-group-item">
                                 <a href="{{route('backend.manager.author.tick-circle-true-false')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.reading.grade_menu.tick_true_false')}}
-                                    <span class="badge">3</span></a>
+                                    <span class="badge">{{$tal_tick_true_false}}</span></a>
                             </li>
                         </ul>
 
@@ -140,19 +140,19 @@
                                 <a href="{{route('backend.manager.author.listen.listen_complete_sentences')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.listening.grade_menu.listen_complete_sentences')}}
-                                    <span class="badge">5</span></a>
+                                    <span class="badge">{{$tal_listen_complete}}</span></a>
                             </li>
                             <li class="list-group-item">
                                 <a href="{{route('backend.manager.author.listen.listen_ticks')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.listening.grade_menu.listen_ticks')}}
-                                    <span class="badge">3</span></a>
+                                    <span class="badge">{{$tal_listen_ticks}}</span></a>
                             </li>
                             <li class="list-group-item">
                                 <a href="{{route('backend.manager.author.listen.listen_table_ticks')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.listening.grade_menu.listen_table_ticks')}}
-                                    <span class="badge">12</span></a>
+                                    <span class="badge">{{$tal_listen_table_ticks}}</span></a>
                             </li>
                         </ul>
                     </div>
@@ -168,7 +168,7 @@
                                 <a href="{{route('backend.manager.author.speaking')}}"
                                    class="list-group-item">
                                     {{trans('label.backend.author.speaking.grade_menu.content')}}
-                                    <span class="badge">12</span></a>
+                                    <span class="badge">{{$tal_speaks}}</span></a>
                             </li>
                         </ul>
 

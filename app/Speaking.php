@@ -30,4 +30,12 @@ class Speaking extends Model
     public function levels() {
         return $this->hasMany(Level::class, 'id', 'level_id');
     }
+
+    public static function getRecordByUserId($user_id) {
+        $ans_questions_all = Speaking::where(['type_user' => 'ST', 'user_id' => $user_id])->with('skills', 'levels')
+            ->orderBy('type_code', 'desc')
+            ->get();
+
+        return $ans_questions_all;
+    }
 }

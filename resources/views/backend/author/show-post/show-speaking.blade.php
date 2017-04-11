@@ -16,14 +16,15 @@
 
                     @if($record->url_mp3 != null)
                         <audio controls>
-                            <source src="{{URL::asset($record->url_mp3)}}" type="audio/mpeg">
+                            <source src="/{{$record->url_mp3}}" type="audio/mpeg">
                         </audio>
                     @else
-                        <p style="font-weight: 700;">Audio is created by GG API</p>
+                        <p style="font-weight: 700;">{{trans('label.backend.post_details.default-audio-gg')}}</p>
+                        {{--//Audio is created by GG API--}}
                     @endif
 
                     <div class="form-group">
-                        <label>Change Audio: </label>
+                        <label>{{trans('label.backend.post_details.change-audio')}}: </label>
                         {{ Form::file('speaking['.$key_idx.'][audio]', array()) }}
                     </div>
 

@@ -13,6 +13,14 @@ use DB;
 use Illuminate\Http\Request;
 use Route;
 
+use App\AnswerQuestion;
+use App\FindError;
+use App\ListenCompleteSentences;
+use App\ListenTicks;
+use App\ListenTableTicks;
+use App\TickCircleTrueFalse;
+use App\MultipleChoice;
+
 class AuthorController extends Controller
 {
 
@@ -33,7 +41,34 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        return view('backend.author.grade-menu');
+        $user_id_auth = Auth::user()->id;
+
+        $ans_question = AnswerQuestion::getRecordByUserId($user_id_auth);
+        $tal_ans_question = count($ans_question);
+
+        $find_error = FindError::getRecordByUserId($user_id_auth);
+        $tal_find_error = count($find_error);
+
+        $multiple = MultipleChoice::getRecordByUserId($user_id_auth);
+        $tal_multiple = count($multiple);
+
+        $tick_true_false = TickCircleTrueFalse::getRecordByUserId($user_id_auth);
+        $tal_tick_true_false = count($tick_true_false);
+
+        $listen_complete = ListenCompleteSentences::getRecordByUserId($user_id_auth);
+        $tal_listen_complete = count($listen_complete);
+
+        $listen_ticks = ListenTicks::getRecordByUserId($user_id_auth);
+        $tal_listen_ticks = count($listen_ticks);
+
+        $listen_table_ticks = ListenTableTicks::getRecordByUserId($user_id_auth);
+        $tal_listen_table_ticks  = count($listen_table_ticks );
+
+        $speaks = Speaking::getRecordByUserId($user_id_auth);
+        $tal_speaks = count($speaks);
+
+        return view('backend.author.grade-menu', compact('tal_ans_question', 'tal_find_error', 'tal_multiple', 'tal_tick_true_false',
+            'tal_listen_complete', 'tal_listen_ticks', 'tal_listen_table_ticks', 'tal_speaks'));
 //        return view('backend.author.index');
     }
 
@@ -188,7 +223,8 @@ class AuthorController extends Controller
             $name_code = 'High School ';
         }
 
-        return view('backend.author.grade-menu', compact('class_code', 'name_code'));
+        return view('backend.author.grade-menu',
+            compact('class_code', 'name_code'));
     }
 
 //    public function create() {

@@ -1,19 +1,7 @@
 @extends('layouts.app-backend')
 
-@section('header')
-    <h1 class="page-header">
-        Post Detail
-        @if($status == 1)
-            <span class="pull-right text-muted small" style="color: #3dd41a">Confirmed</span>
-        @endif
-    </h1>
-@stop
-
 @section('style')
     @include('backend.author.style-common')
-@stop
-
-@section('style')
     <style>
         .navbar-custom {
             padding: 10px 0;
@@ -30,7 +18,98 @@
             margin-bottom: 90px;
         }
 
+        .title-confirm {
+            float: right;
+            position: relative;
+            top: -8px;
+        }
+
     </style>
+@stop
+
+@section('header')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a
+                    href="{{route('backend.manager.author.index')}}">{{ trans('label.backend.dashboard')  }}</a></li>
+
+    <?php
+    switch ($name_table) {
+    case "answer_questions": ?>
+        <li class="breadcrumb-item ">
+            <a href="{{route('backend.manager.author.answer-question')}}">
+                {{trans('label.backend.author.reading.grade_menu.answer_question')}}</a>
+        </li>
+    <?php  break;
+
+    case "find_errors": ?>
+        <li class="breadcrumb-item ">
+            <a href="{{route('backend.manager.author.find-errors')}}">
+                {{trans('label.backend.author.reading.grade_menu.find_error')}}</a>
+        </li>
+    <?php  break;
+
+    case "multiple_choices": ?>
+        <li class="breadcrumb-item ">
+            <a href="{{route('backend.manager.author.multiple-choice')}}">
+                {{trans('label.backend.author.reading.grade_menu.multiple_choice')}}</a>
+        </li>
+    <?php break;
+
+    case "tick_circle_true_falses": ?>
+        <li class="breadcrumb-item ">
+            <a href="{{route('backend.manager.author.tick-circle-true-false')}}">
+                {{trans('label.backend.author.reading.grade_menu.tick_true_false')}}</a>
+        </li>
+
+    <?php  break;
+
+    case "listen_complete_sentences": ?>
+        <li class="breadcrumb-item ">
+            <a href="{{route('backend.manager.author.listen.listen_complete_sentences')}}">
+                {{trans('label.backend.author.listening.grade_menu.listen_complete_sentences')}}</a>
+        </li>
+    <?php break;
+
+    case "listen_ticks": ?>
+        <li class="breadcrumb-item ">
+            <a href="{{route('backend.manager.author.listen.listen_ticks')}}">
+                {{trans('label.backend.author.listening.grade_menu.listen_ticks')}}</a>
+        </li>
+    <?php break;
+
+    case "listen_table_ticks": ?>
+        <li class="breadcrumb-item ">
+            <a href="{{route('backend.manager.author.listen.listen_table_ticks')}}">
+                {{trans('label.backend.author.listening.grade_menu.listen_table_ticks')}}</a>
+        </li>
+    <?php break;
+
+    case "speakings": ?>
+        <li class="breadcrumb-item ">
+            <a href="{{route('backend.manager.author.speaking')}}">
+                {{trans('label.backend.author.speaking.grade_menu.content')}}</a>
+        </li>
+    <?php break;
+
+    default:
+        echo "Your favorite color is neither red, blue, nor green!";
+    }
+    ?>
+        <li class="breadcrumb-item ">
+            <span class="bread-active">
+                  {{trans('label.backend.post_details.title')}}
+            </span>
+        </li>
+        <h2 class="title-confirm" >
+            @if($status == 1)
+                <span class="pull-right text-muted small" style="color: #3dd41a">{{trans('label.backend.post_details.confirmed')}}</span>
+            @endif
+        </h2>
+    </ol>
+@stop
+
+@section('style')
+    @include('backend.author.style-common')
 @stop
 
 @section('content')
@@ -52,8 +131,7 @@
 
                                         <select name="level_id" class="form-control" id="admin-levels">
                                             @foreach($levels as $level)
-                                                <option value="{{$level->id}}">{{$level->title}}
-                                                    - {{$level->point}}  </option>
+                                                <option value="{{$level->id}}">{{$level->title}}  </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -102,7 +180,7 @@
                             @endif
 
                             <input type="hidden" value="{{$code_user}}" name="code_user">
-                            <input type="hidden" value="{{$class_code}}" name="class_code">
+{{--                            <input type="hidden" value="{{$class_code}}" name="class_code">--}}
                             <input type="hidden" value="{{$author_id}}" name="authorspost">
                         </div>
 
@@ -128,8 +206,7 @@
 
                                         <select name="level_id" class="form-control" id="admin-levels">
                                             @foreach($levels as $level)
-                                                <option value="{{$level->id}}">{{$level->title}}
-                                                    - {{$level->point}}  </option>
+                                                <option value="{{$level->id}}">{{$level->title}} </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -178,7 +255,7 @@
                             @endif
 
                             <input type="hidden" value="{{$code_user}}" name="code_user">
-                            <input type="hidden" value="{{$class_code}}" name="class_code">
+{{--                            <input type="hidden" value="{{$class_code}}" name="class_code">--}}
                             <input type="hidden" value="{{$author_id}}" name="authorspost">
                         </div>
 
@@ -204,8 +281,7 @@
 
                                         <select name="level_id" class="form-control" id="admin-levels">
                                             @foreach($levels as $level)
-                                                <option value="{{$level->id}}">{{$level->title}}
-                                                    - {{$level->point}}  </option>
+                                                <option value="{{$level->id}}">{{$level->title}} </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -254,7 +330,7 @@
                             @endif
 
                             <input type="hidden" value="{{$code_user}}" name="code_user">
-                            <input type="hidden" value="{{$class_code}}" name="class_code">
+{{--                            <input type="hidden" value="{{$class_code}}" name="class_code">--}}
                             <input type="hidden" value="{{$author_id}}" name="authorspost">
                         </div>
 
@@ -279,8 +355,7 @@
 
                                         <select name="level_id" class="form-control" id="admin-levels">
                                             @foreach($levels as $level)
-                                                <option value="{{$level->id}}">{{$level->title}}
-                                                    - {{$level->point}}  </option>
+                                                <option value="{{$level->id}}">{{$level->title}}  </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -329,7 +404,7 @@
                             @endif
 
                             <input type="hidden" value="{{$code_user}}" name="code_user">
-                            <input type="hidden" value="{{$class_code}}" name="class_code">
+{{--                            <input type="hidden" value="{{$class_code}}" name="class_code">--}}
                             <input type="hidden" value="{{$author_id}}" name="authorspost">
                         </div>
                         @foreach($records as $key => $record)
@@ -354,8 +429,7 @@
 
                                         <select name="level_id" class="form-control" id="admin-levels">
                                             @foreach($levels as $level)
-                                                <option value="{{$level->id}}">{{$level->title}}
-                                                    - {{$level->point}}  </option>
+                                                <option value="{{$level->id}}">{{$level->title}} </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -404,7 +478,7 @@
                             @endif
 
                             <input type="hidden" value="{{$code_user}}" name="code_user">
-                            <input type="hidden" value="{{$class_code}}" name="class_code">
+{{--                            <input type="hidden" value="{{$class_code}}" name="class_code">--}}
                             <input type="hidden" value="{{$author_id}}" name="authorspost">
                         </div>
 
@@ -428,8 +502,7 @@
 
                                         <select name="level_id" class="form-control" id="admin-levels">
                                             @foreach($levels as $level)
-                                                <option value="{{$level->id}}">{{$level->title}}
-                                                    - {{$level->point}}  </option>
+                                                <option value="{{$level->id}}">{{$level->title}}  </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -478,7 +551,7 @@
                             @endif
 
                             <input type="hidden" value="{{$code_user}}" name="code_user">
-                            <input type="hidden" value="{{$class_code}}" name="class_code">
+{{--                            <input type="hidden" value="{{$class_code}}" name="class_code">--}}
                             <input type="hidden" value="{{$author_id}}" name="authorspost">
                         </div>
 
@@ -503,8 +576,7 @@
 
                                     <select name="level_id" class="form-control" id="admin-levels">
                                         @foreach($levels as $level)
-                                            <option value="{{$level->id}}">{{$level->title}}
-                                                - {{$level->point}}  </option>
+                                            <option value="{{$level->id}}">{{$level->title}}  </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -553,7 +625,7 @@
                         @endif
 
                         <input type="hidden" value="{{$code_user}}" name="code_user">
-                        <input type="hidden" value="{{$class_code}}" name="class_code">
+{{--                        <input type="hidden" value="{{$class_code}}" name="class_code">--}}
                         <input type="hidden" value="{{$author_id}}" name="authorspost">
                     </div>
 
@@ -577,8 +649,7 @@
 
                                     <select name="level_id" class="form-control" id="admin-levels">
                                         @foreach($levels as $level)
-                                            <option value="{{$level->id}}">{{$level->title}}
-                                                - {{$level->point}}  </option>
+                                            <option value="{{$level->id}}">{{$level->title}}  </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -627,7 +698,7 @@
                         @endif
 
                         <input type="hidden" value="{{$code_user}}" name="code_user">
-                        <input type="hidden" value="{{$class_code}}" name="class_code">
+                        {{--<input type="hidden" value="{{$class_code}}" name="class_code">--}}
                         <input type="hidden" value="{{$author_id}}" name="authorspost">
                     </div>
 
@@ -655,7 +726,7 @@
                                 {{--</div>--}}
 
                                 <div class="col-lg-12 col-md-12">
-                                    <button class="btn btn-success admin-save-confirm">Save and Confirm</button>
+                                    <button class="btn btn-success admin-save-confirm">{{trans('label.backend.post_details.save-confirm')}}</button>
                                 </div>
 
                             @endif

@@ -6,14 +6,21 @@
 @stop
 
 @section('header')
-    <h1 class="page-header">
-        @if($code_user == 'ST')
-            {{trans('label.backend.author.speaking.index.title')}}
-            <i class="fa fa-exclamation-circle alert-note" aria-hidden="true" title="Hướng dẫn"></i>
-        @elseif($code_user == 'TC')
-            Add exam 'answer question' for Teacher
-        @endif
-    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a
+                    href="{{route('backend.manager.author.index')}}">{{ trans('label.backend.dashboard')  }}</a></li>
+        <li class="breadcrumb-item ">
+            <a href="{{route('backend.manager.author.speaking')}}">
+                {{trans('label.backend.author.speaking.grade_menu.content')}}</a>
+        </li>
+        <li class="breadcrumb-item ">
+            <span class="bread-active">
+                  {{trans('label.backend.create.title')}}
+            </span>
+        </li>
+    </ol>
+
 @stop
 
 @section('content')
@@ -31,7 +38,7 @@
 
                     <select name="level_id" class="form-control" id="add-speaking-level">
                         @foreach($levels as $level)
-                            <option value="{{$level->id}}">{{$level->title}} - {{$level->point}}  </option>
+                            <option value="{{$level->id}}">{{$level->title}}  </option>
                         @endforeach
                     </select>
                 </div>
@@ -79,7 +86,7 @@
         @endif
 
         <input type="hidden" value="{{$code_user}}" name="code_user">
-        <input type="hidden" value="{{$class_code}}" name="class_code">
+        {{--<input type="hidden" value="{{$class_code}}" name="class_code">--}}
     </div>
     <div class="row" id="wrap_add_speaking">
         <div class="col-lg-12 col_add_speaking">
@@ -96,6 +103,7 @@
                                           required></textarea>
                         </div>
                         <div class="form-group">
+                            <label>{{trans('label.backend.create.upload_audio')}}</label>
                             {{ Form::file('speaking[1][audio]', array()) }}
                         </div>
 

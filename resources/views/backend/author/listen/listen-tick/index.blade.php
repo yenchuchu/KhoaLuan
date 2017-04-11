@@ -1,23 +1,38 @@
 @extends('layouts.app-backend')
 
 @section('header')
-    <h1 class="page-header">
-        Listen Ticks for {{$name_code}}
-        <a href="{{route('backend.manager.author.listen.listen_ticks.create', ['ST' , $class_code])}}" target="_blank"
-           class="btn btn-success btn-create-new-test" style="float:right;">
-            {{trans('label.backend.author.speaking.index.add')}}
-        </a>
-    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a
+                    href="{{route('backend.manager.author.index')}}">{{ trans('label.backend.dashboard')  }}</a></li>
+        <li class="breadcrumb-item ">
+            <span class="bread-active">
+                  {{trans('label.backend.author.listening.grade_menu.listen_ticks')}}
+            </span>
+        </li>
+    </ol>
 @stop
 @section('content')
 
     <div class="row">
-        <div class="col-lg-12">
+        <section class="col-lg-12">
             <!-- Advanced Tables -->
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    Listen Ticks's Students Tables
-                </div>
+                {{--<section class="panel">--}}
+
+                <header class="panel-heading">
+                    {{trans('label.backend.author.speaking.index.manage-table')}}
+                    <span class="tools pull-right" style=" position: relative; top: -4px;">
+                        <div class="btn-group">
+                             <a href="{{route('backend.manager.author.listen.listen_ticks.create', 'ST')}}"
+                                target="_blank" class="btn btn-success btn-create-new-test"
+                                style="float:right;padding: 3px 10px;">
+                                 {{trans('label.backend.author.speaking.index.add')}}
+                             </a>
+                        </div>
+                    </span>
+                </header>
+
                 <div class="panel-body">
                     <div class="table-responsive" id="reload_table_ans_for_students">
                         @include('backend.author.listen.listen-tick.table-students-index')
@@ -26,7 +41,7 @@
                 </div>
             </div>
             <!--End Advanced Tables -->
-        </div>
+        </section>
     </div>
 
 @stop

@@ -31,6 +31,7 @@
         background: rgb(69, 224, 32);
         border-radius: 24px;
         color: white;
+        border: none;
         padding: 4px 12px;
         margin-top: 10px;
         float: right;

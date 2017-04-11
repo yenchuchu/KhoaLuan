@@ -42,7 +42,7 @@
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Reading / 100
+                        Reading / 30
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive" id="reload-table-results">
@@ -76,7 +76,7 @@
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Listening / 100
+                        Listening / 30
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive" id="reload-table-listening-results">

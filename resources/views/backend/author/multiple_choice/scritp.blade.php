@@ -15,7 +15,8 @@
 
                 '<div class="col-lg-12" style="padding-left: 0;">' +
                 '<div class="form-group">' +
-                '<input type="text" name="multiple_choice[' + j + '][title-multiple-choice] " class="form-control" required>' +
+                '<input type="text" name="multiple_choice[' + j + '][title-multiple-choice] " class="form-control" ' +
+                'required  placeholder="{{trans('label.backend.create.title-question')}}" >' +
                 '</div>' +
                 '</div>' +
 
@@ -33,7 +34,7 @@
                 '<div class="span-text-question">' +
                 '<textarea type="text" class="form-control" ' +
                 'name="multiple_choice[' + j + '][content-choose-ans-question][1][content]"' +
-                'placeholder="enter content" required></textarea>' +
+                'placeholder="This is ... demo" required></textarea>' +
                 '</div>' +
                 '</div>' +
 
@@ -44,7 +45,7 @@
                 '<input type="radio" value="A"' +
                 'name="multiple_choice[' + j + '][content-choose-ans-question][1][answer]">' +
                 '<div class="form-group">' +
-                '<input type="text" class="form-control" placeholder="enter answer" index="A"' +
+                '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="A"' +
                 'name="multiple_choice[' + j + '][content-choose-ans-question][1][suggest_choose][A]">' +
                 ' </div>' +
                 ' </div>' +
@@ -53,7 +54,7 @@
                 '<input type="radio" value="B"' +
                 'name="multiple_choice[' + j + '][content-choose-ans-question][1][answer]">' +
                 '<div class="form-group">' +
-                ' <input type="text" class="form-control" placeholder="enter answer" index="B"' +
+                ' <input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="B"' +
                 ' name="multiple_choice[' + j + '][content-choose-ans-question][1][suggest_choose][B]">' +
                 '</div>' +
                 '</div>' +
@@ -62,7 +63,7 @@
                 '<input type="radio" value="C"' +
                 'name="multiple_choice[' + j + '][content-choose-ans-question][1][answer]">' +
                 '<div class="form-group">' +
-                '<input type="text" class="form-control" placeholder="enter answer" index="C"' +
+                '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="C"' +
                 'name="multiple_choice[' + j + '][content-choose-ans-question][1][suggest_choose][C]">' +
                 '</div>' +
                 '</div>' +

@@ -6,13 +6,21 @@
 @stop
 
 @section('header')
-    <h1 class="page-header">
-        @if($code_user == 'ST')
-            Add exam 'Listen Complete Sentences' for Student test online
-        @elseif($code_user == 'TC')
-            Add exam 'Listen Complete Sentences' for Teacher
-        @endif
-    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a
+                    href="{{route('backend.manager.author.index')}}">{{ trans('label.backend.dashboard')  }}</a></li>
+        <li class="breadcrumb-item ">
+            <a href="{{route('backend.manager.author.listen.listen_complete_sentences')}}">
+                {{trans('label.backend.author.listening.grade_menu.listen_complete_sentences')}}</a>
+        </li>
+        <li class="breadcrumb-item ">
+            <span class="bread-active">
+                  {{trans('label.backend.create.title')}}
+            </span>
+        </li>
+    </ol>
+
 @stop
 
 @section('content')
@@ -28,7 +36,7 @@
 
                     <select name="level_id" class="form-control" id="add-listen-complete-sentences-level">
                         @foreach($levels as $level)
-                            <option value="{{$level->id}}">{{$level->title}} - {{$level->point}}  </option>
+                            <option value="{{$level->id}}">{{$level->title}} </option>
                         @endforeach
                     </select>
                 </div>
@@ -76,7 +84,7 @@
         @endif
 
         <input type="hidden" value="{{$code_user}}" name="code_user">
-        <input type="hidden" value="{{$class_code}}" name="class_code">
+{{--        <input type="hidden" value="{{$class_code}}" name="class_code">--}}
     </div>
     <div class="row" id="wrap_add_listen_complete_sentences">
         <div class="col-lg-12 col_add_listen_complete_sentences">
@@ -90,10 +98,11 @@
                         <div class="col-lg-12" style="padding-left: 0;">
                             <div class="form-group">
                                 <input type="text" name="listen_complete_sentences[1][title-listen-complete-sentences]"
-                                       class="form-control" required>
+                                       class="form-control" placeholder="{{trans('label.backend.create.title-question')}}" required>
                             </div>
                         </div>
                         <div class="form-group">
+                            <label>{{trans('label.backend.create.upload_audio')}}</label>
                             {{ Form::file('listen_complete_sentences[1][audio]', array()) }}
                         </div>
                         <div class="form-group" style="width:100%; float:left;">
@@ -111,7 +120,7 @@
 
                             <div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="enter answer"
+                                    <input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}"
                                     name="listen_complete_sentences[1][content-choose-ans-question][1][answer]">
                                 </div>
                             </div>

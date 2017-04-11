@@ -38,15 +38,15 @@
 
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <a href="{{ route('frontend.teacher.elementary') }}">
-                            <img src="{{asset('/imgs-dashboard/tieu-hoc.PNG')}}" alt="Tạo Đề Cấp Tiểu Học"></a>
+                            <img src="/imgs-dashboard/tieu-hoc.PNG" alt="Tạo Đề Cấp Tiểu Học"></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <a href="{{ route('frontend.teacher.secondary') }}">
-                            <img src="{{asset('/imgs-dashboard/THCS.PNG')}}" alt="Tạo Đề Cấp Trung Học Cơ Sở"></a>
+                            <img src="/imgs-dashboard/THCS.PNG" alt="Tạo Đề Cấp Trung Học Cơ Sở"></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <a href="{{ route('frontend.teacher.highschool') }}">
-                            <img src="{{asset('/imgs-dashboard/THPT.PNG')}}" alt="Tạo Đề Cấp Trung Học Phổ Thông"></a>
+                            <img src="/imgs-dashboard/THPT.PNG" alt="Tạo Đề Cấp Trung Học Phổ Thông"></a>
                     </div>
                 </div>
             </div>

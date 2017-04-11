@@ -57,25 +57,27 @@
 
     @if(Auth::user()->hasRole('ST'))
     <div class="container">
+        <div><h3>{{trans('label.user.profile')}}</h3></div>
     @else
     <div class="">
+        <div><h3 style="margin-top: 45px; font-weight: 700">{{trans('label.user.profile')}}</h3></div>
     @endif
-        <div><h3>Profile</h3></div>
+{{--        <div><h3>{{trans('label.user.profile')}}</h3></div>--}}
         <div class="row">
             <div class="col-lg-3">
                 {{ Form::open(['route' => ['frontend.student.change.profile.avatar', $user->id],
                      'class' => 'form-horizontal', 'method' => 'POST', 'id' => 'edit-avatar-auth',
                          'enctype' => 'multipart/form-data']) }}
                 @if($user->avatar != null)
-                    <img src="{{URL::asset($user->avatar)}}" id="edit_avatar_img" alt="Avatar">
+                    <img src="/{{$user->avatar}}" id="edit_avatar_img" alt="Avatar">
                 @else
-                    <img src="{{URL::asset('imgs-dashboard/avatar.png')}}" id="edit_avatar_img" alt="Avatar">
+                    <img src="/imgs-dashboard/avatar.png" id="edit_avatar_img" alt="Avatar">
                 @endif
 
                 @if(Auth::user())
                     <input type="file" id="editInputFileAvatar" name="change_avatar">
                 @endif
-                <button type="submit" class="btn btn-default">Upload</button>
+                <button type="submit" class="btn btn-default">{{trans('button.backend.author.upload')}}</button>
                 {!! Form::close() !!}
 
             </div>
@@ -83,21 +85,21 @@
                 {{ Form::open(['route' => ['frontend.student.change.profile.infomation', $user->id],
                      'class' => 'form-horizontal', 'method' => 'POST', 'id' => 'edit-infomation-auth']) }}
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="user_name">User Name:</label>
+                    <label class="control-label col-sm-2" for="user_name">{{trans('label.user.user_name')}}:</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="user_name" name="change_user_name"
                                value="{{$user->user_name}}" placeholder="Enter User Name" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="full_name">Full Name:</label>
+                    <label class="control-label col-sm-2" for="full_name">{{trans('label.user.full_name')}}:</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="full_name" name="change_full_name"
                                value="{{$user->full_name}}" placeholder="Enter Full Name">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="email">Email:</label>
+                    <label class="control-label col-sm-2" for="email">{{trans('label.user.email')}}:</label>
                     <div class="col-sm-10">
                         <input type="email" class="form-control" id="email" name="change_email"
                                value="{{$user->email}}" placeholder="Enter email" required>
@@ -106,7 +108,7 @@
 
                 @if(Auth::user()->hasRole('ST'))
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="sel1">Class:</label>
+                        <label class="control-label col-sm-2" for="sel1">{{trans('label.user.class')}}:</label>
                         <div class="col-sm-10">
                             <select class="form-control" id="change-class" name="change_class" required>
                                 @foreach($classes as $class)
@@ -119,7 +121,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="submit" class="btn btn-success">{{trans('button.backend.author.save')}}</button>
                     </div>
                 </div>
                 {!! Form::close() !!}

@@ -15,13 +15,14 @@
 
                 '<div class="col-lg-12" style="padding-left: 0;">' +
                 '<div class="form-group">' +
-                '<input type="text" name="answer_question['+ j +'][title-answer-question] " class="form-control" required>' +
+                '<input type="text" name="answer_question['+ j +'][title-answer-question] " class="form-control" ' +
+                '  placeholder="{{trans('label.backend.create.title-question')}}" required>' +
                 '</div>' +
                 '</div>' +
 
                 '<div class="form-group">' +
-                '<textarea type="text" class="form-control" name="answer_question['+ j +'][content-answer-question]' +
-                'placeholder="enter content" required></textarea>' +
+                '<textarea type="text" class="form-control" name="answer_question['+ j +'][content-answer-question]"' +
+                ' placeholder="{{trans('label.backend.create.content-question')}}" required></textarea>' +
                 '</div>' +
                 '<div class="form-group" style="width:100%; float:left;" >' +
                 ' <div class="span-numb-question" id="id-numb-question-1" >' +
@@ -33,13 +34,13 @@
                 '<div class="span-text-question">' +
                 '<textarea type="text" class="form-control" ' +
                 'name="answer_question['+ j +'][content-choose-ans-question][1][content]"' +
-                'placeholder="enter content" required></textarea>' +
+                'placeholder="{{trans('label.backend.create.item-content-question')}}" required></textarea>' +
                 '</div>' +
                 '</div>' +
 
                 '<div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">' +
                 '<div class="form-group">' +
-                '<input type="text" class="form-control" placeholder="enter answer" ' +
+                '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" ' +
                 'name="answer_question['+ j +'][content-choose-ans-question][1][answer]">' +
                 '</div>' +
                 '</div>' +

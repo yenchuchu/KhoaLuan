@@ -18,11 +18,11 @@
                     <div class="audio_listen form-group" style="margin-top: 10px; margin-bottom: 15px;">
                        <label class="admin-lable-audio">Audio: </label>
                         <audio controls>
-                            <source src="{{URL::asset($record->url)}}" type="audio/mpeg">
+                            <source src="/{{$record->url}}" type="audio/mpeg">
                         </audio>
                     </div>
                     <div class="form-group">
-                        <label>Change Audio</label>
+                        <label>{{trans('label.backend.post_details.change-audio')}}:</label>
                         {{ Form::file('listen_table_ticks['.$key_idx.'][url_audio]', array()) }}
                     </div>
 

@@ -25,9 +25,9 @@
                 {{--</a>--}}
                 <a href="#" class="dropbtn dropdown-toggle" id="username-auth" data-toggle="dropdown">
                     @if(Auth::user()->avatar != null)
-                        <img src="{{URL::asset(Auth::user()->avatar)}}" id="avatar_img" alt="Avatar">
+                        <img src="/{{Auth::user()->avatar}}" id="avatar_img" alt="Avatar">
                     @else
-                        <img src="{{URL::asset('imgs-dashboard/avatar.png')}}" id="avatar_img" alt="Avatar">
+                        <img src="/imgs-dashboard/avatar.png" id="avatar_img" alt="Avatar">
                     @endif
                     {{ Auth::user()->user_name }} <span class="caret"></span>
                 </a>
@@ -35,13 +35,13 @@
                 <ul class="dropdown-menu dropdown-user">
                     <li>
                         <a href="{{route('frontend.student.show.profile')}}"><i class="fa fa-user fa-fw"></i>
-                            User Profile</a>
+                            {{trans('button.redirect.profile_page')}}</a>
                     </li>
                     <li>
                         <a href="{{ url('/logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                            <i class="fa fa-sign-out fa-fw"></i>Logout
+                            <i class="fa fa-sign-out fa-fw"></i>{{trans('button.redirect.logout')}}
                         </a>
 
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
@@ -68,19 +68,19 @@
             <div class="dropdown" id="dropdown-menu-top">
                 <a href="#" class="dropbtn" id="username-auth">
                     @if(Auth::user()->avatar != null)
-                        <img src="{{URL::asset(Auth::user()->avatar)}}" id="avatar_img" alt="Avatar">
+                        <img src="/{{Auth::user()->avatar}}" id="avatar_img" alt="Avatar">
                     @else
-                        <img src="{{URL::asset('imgs-dashboard/avatar.png')}}" id="avatar_img" alt="Avatar">
+                        <img src="/imgs-dashboard/avatar.png" id="avatar_img" alt="Avatar">
                     @endif
                     {{ Auth::user()->user_name }} <span class="caret"></span>
                 </a>
                 <div class="dropdown-content">
                     <a href="{{route('frontend.student.show.profile')}}"><i class="fa fa-user fa-fw"></i>
-                        User Profile</a>
+                        {{trans('button.redirect.profile_page')}}</a>
                     <a href="{{ url('/logout') }}"
                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                        Logout
+                        {{trans('button.redirect.logout')}}
 
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}

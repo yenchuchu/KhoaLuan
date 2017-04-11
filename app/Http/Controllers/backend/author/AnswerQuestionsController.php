@@ -43,9 +43,7 @@ class AnswerQuestionsController extends Controller
 
     public function index()
     {
-        $ans_questions_all = AnswerQuestion::where(['type_user' => 'ST'])->with('skills', 'levels')
-            ->orderBy('type_code', 'desc')
-            ->get();
+        $ans_questions_all = AnswerQuestion::getRecordByUserId(Auth::user()->id);
 
         $type_codes = $ans_questions_all->groupBy('type_code');
 
@@ -68,7 +66,7 @@ class AnswerQuestionsController extends Controller
 //        }
 
         return view('backend.author.answer_question.index',
-            compact('ans_for_students', 'ans_for_teachers', 'class_code', 'name_code', 'array_id_intypecode'));
+            compact('name_code', 'array_id_intypecode'));
     }
 
     public function create()

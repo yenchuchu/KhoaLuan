@@ -11,7 +11,7 @@ return [
                     'title' => 'Tạo đề cho kỹ năng nói',
                     'table' => 'Quản lí đề đã tạo',
                     'add' => 'Tạo câu hỏi mới',
-                    'manage-table' => ' Quản lí câu hỏi đã tạo',
+                    'manage-table' => ' Quản lí câu hỏi đã tạo theo số lần tạo',
                 ],
                 'create' => [
                     'title' => 'Tạo đề theo độ khó và lớp',
@@ -39,10 +39,43 @@ return [
             'dashboard' => 'Tạo câu hỏi cho  ',
         ],
         'dashboard' => 'Trang chủ',
+        'table' => [
+            'class' => 'Lớp',
+            'level' => 'Mức khó',
+            'link' => 'liên kết',
+            'date' => 'Ngày đăng',
+            'status' => 'Trạng thái đăng bài',
+            'go_to_link' => 'Đi đến bài đăng',
+            'done' => 'Đã phê duyệt',
+            'wait' => 'Chờ phê duyệt'
+        ],
+        'create' => [
+            'title' => 'Tạo bài mới',
+            'title-question' => 'Nhập đề bài',
+            'content-question' => 'Nhập đoạn văn',
+            'item-content-question' => 'Nhập câu hỏi',
+            'answer-question' => 'Nhập đáp án',
+            'upload_audio' => 'Tải file nghe',
+            'suggest_answer' => 'Gợi ý đáp án'
+        ],
+        'post_details' => [
+            'title' => 'Chi tiết bài đăng',
+            'confirmed' => 'Đã phê duyệt',
+            'save-confirm' => 'Lưu và phê duyệt',
+            'change-audio' => 'Thay đổi file nghe',
+            'default-audio-gg' => 'File nghe được mặc định theo Google API',
+        ]
     ],
     'skills' => [
         'speaking' => 'Kỹ năng nói',
         'reading' => 'Kỹ năng đọc',
         'listening' => 'Kỹ năng nghe',
+    ],
+    'user' => [
+        'profile' => 'THÔNG TIN CÁ NHÂN',
+        'user_name' => 'Tên đại diện',
+        'full_name' => 'Họ và Tên',
+        'class' => 'Lớp',
+        'email' => 'Hộp Thư',
     ]
 ];

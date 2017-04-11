@@ -32,7 +32,7 @@
                     case "listen_table_ticks": ?>
                     <div class="audio_listen" style="margin-top: 10px; margin-bottom: 15px;">
                         <audio controls>
-                            <source src="{{URL::asset($detail->url)}}" type="audio/mpeg">
+                            <source src="/{{$detail->url}}" type="audio/mpeg">
                         </audio>
                     </div>
                     @include('frontend.student.join-test.listening.temp_table_tick',
@@ -47,7 +47,7 @@
                     case "listen_complete_sentences": ?>
                     <div class="audio_listen" style="margin-top: 10px; margin-bottom: 15px;">
                         <audio controls>
-                            <source src="{{URL::asset($detail->url)}}" type="audio/mpeg">
+                            <source src="/{{$detail->url}}" type="audio/mpeg">
                         </audio>
                     </div>
 
@@ -74,7 +74,7 @@
 
                         <div class="audio_listen" style="margin-top: 10px; margin-bottom: 15px;">
                             <audio controls>
-                                <source src="{{URL::asset($question->url_audio)}}" type="audio/mpeg">
+                                <source src="/{{$question->url_audio}}" type="audio/mpeg">
                             </audio>
                             <div id="show_result_{{$detail->table}}_{{$detail->id}}_{{$question->id}}" ></div>
                         </div>

@@ -9,7 +9,7 @@
             @foreach($question_content as $key => $qts)
                 <div class="col-lg-5">
                     <div class="img-question">
-                        <img src="{{URL::asset($qts)}}" alt="">
+                        <img src="/{{$qts}}" alt="">
                     </div>
                     <div>
                         <label class="checkbox-inline">
@@ -27,7 +27,7 @@
             @foreach($question_content as $key => $qts)
                 <div class="col-lg-5">
                     <div class="img-question">
-                        <img src="{{URL::asset($qts)}}" alt="">
+                        <img src="/{{$qts}}" alt="">
                     </div>
                     <div>
                         <label class="checkbox-inline">

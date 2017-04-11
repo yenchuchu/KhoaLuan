@@ -6,13 +6,19 @@
 @stop
 
 @section('header')
-    <h1 class="page-header">
-        @if($code_user == 'ST')
-            Add exam 'find errors' for Student test online
-        @elseif($code_user == 'TC')
-            Add exam 'find errors' for Teacher
-        @endif
-    </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a
+                    href="{{route('backend.manager.author.index')}}">{{ trans('label.backend.dashboard')  }}</a></li>
+        <li class="breadcrumb-item ">
+            <a href="{{route('backend.manager.author.find-errors')}}">
+                {{ trans('label.backend.author.reading.grade_menu.find_error')  }}</a>
+        </li>
+        <li class="breadcrumb-item ">
+            <span class="bread-active">
+                  {{trans('label.backend.create.title')}}
+            </span>
+        </li>
+    </ol>
 @stop
 
 @section('content')
@@ -26,7 +32,7 @@
 
                     <select name="level_id" class="form-control" id="add-find-errors-level">
                         @foreach($levels as $level)
-                            <option value="{{$level->id}}">{{$level->title}} - {{$level->point}}  </option>
+                            <option value="{{$level->id}}">{{$level->title}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -74,7 +80,7 @@
         @endif
 
         <input type="hidden" value="{{$code_user}}" name="code_user">
-        <input type="hidden" value="{{$class_code}}" name="class_code">
+        {{--<input type="hidden" value="{{$class_code}}" name="class_code">--}}
     </div>
     <div class="row" id="wrap_add_find_errors">
         <div class="col-lg-12 col_add_find_errors">
@@ -88,7 +94,7 @@
                         <div class="col-lg-12" style="padding-left: 0;">
                             <div class="form-group">
                                 <input type="text" name="find_errors[1][title-find-errors]"
-                                       class="form-control" placeholder="enter topic content" required>
+                                       class="form-control" placeholder="{{trans('label.backend.create.title-question')}}" required>
                             </div>
                         </div>
 
@@ -108,7 +114,7 @@
                                 <div class="col-lg-8 option-as-details">
                                     <label class="col-lg-2" style="padding-right: 0px;" for="find_errors_1_answer_1">Answer: </label>
                                     <div class="form-group col-lg-10" style="width: 43%;padding-left: 0; margin-left: 0">
-                                        <input type="text" class="form-control" placeholder="enter answer" index="1"
+                                        <input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="1"
                                                name="find_errors[1][content-choose-ans-question][1][answer]"
                                                id="find_errors_1_answer_1">
                                     </div>

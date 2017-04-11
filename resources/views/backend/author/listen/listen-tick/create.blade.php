@@ -6,13 +6,21 @@
 @stop
 
 @section('header')
-    <h1 class="page-header">
-        @if($code_user == 'ST')
-            Tạo bài dạng "Nghe và chọn ảnh" cho học sinh.
-        @elseif($code_user == 'TC')
-            Add exam 'Listen Ticks' for Teacher
-        @endif
-    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a
+                    href="{{route('backend.manager.author.index')}}">{{ trans('label.backend.dashboard')  }}</a></li>
+        <li class="breadcrumb-item ">
+            <a href="{{route('backend.manager.author.listen.listen_ticks')}}">
+                {{trans('label.backend.author.listening.grade_menu.listen_ticks')}}</a>
+        </li>
+        <li class="breadcrumb-item ">
+            <span class="bread-active">
+                  {{trans('label.backend.create.title')}}
+            </span>
+        </li>
+    </ol>
+
 @stop
 
 @section('content')
@@ -28,7 +36,7 @@
 
                     <select name="level_id" class="form-control" id="add-listen-ticks-level">
                         @foreach($levels as $level)
-                            <option value="{{$level->id}}">{{$level->title}} - {{$level->point}}  </option>
+                            <option value="{{$level->id}}">{{$level->title}}  </option>
                         @endforeach
                     </select>
                 </div>
@@ -76,7 +84,7 @@
         @endif
 
         <input type="hidden" value="{{$code_user}}" name="code_user">
-        <input type="hidden" value="{{$class_code}}" name="class_code">
+{{--        <input type="hidden" value="{{$class_code}}" name="class_code">--}}
     </div>
     <div class="row" id="wrap_add_listen_ticks">
         <div class="col-lg-12 col_add_listen_ticks">
@@ -90,7 +98,7 @@
                         <div class="col-lg-12" style="padding-left: 0;">
                             <div class="form-group">
                                 <input type="text" name="listen_ticks[1][title-listen-ticks]"
-                                       class="form-control" placeholder="Cập nhật đề bài" required>
+                                       class="form-control" placeholder="{{trans('label.backend.create.title-question')}}" required>
                             </div>
                         </div>
                         <div class="form-group" style="width:100%; float:left;">
@@ -100,7 +108,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Upload Audio</label>
+                                <label>{{trans('label.backend.create.upload_audio')}}</label>
                                 {{ Form::file('listen_ticks[1][content-choose-ans-question][1][url_audio]', array()) }}
                             </div>
 

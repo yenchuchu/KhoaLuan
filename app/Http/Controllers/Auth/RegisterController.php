@@ -29,6 +29,8 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/dashboard';
+    protected  $classes ;
+
 
     /**
      * Create a new controller instance.
@@ -38,6 +40,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->classes = Classes::all();
     }
 
     /**

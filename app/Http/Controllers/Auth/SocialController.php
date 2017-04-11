@@ -26,7 +26,7 @@ class SocialController extends Controller
     public function handleProviderCallback()
     {
         $user = Socialite::driver('facebook')->user();
-dd($user);
+//dd($user);
         // $user->token;
     }
 }

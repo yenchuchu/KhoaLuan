@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use App\Role;
 use App\Classes;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\Role;
+use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -30,7 +30,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/dashboard';
-    protected  $classes ;
+    protected $classes;
 
 
     /**
@@ -55,7 +55,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -72,26 +72,42 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
     {
-        if(!isset($data['class'])) {
+        if (!isset($data['class'])) {
             $data['class'] = null;
         }
 
         $roles = Role::where('code', $data['office_type'])->first();
 
-        return User::create([
-            'full_name' => $data['full_name'],
-            'type' => $roles->id,
-            'email' => $data['email'],
-            'class_id' => $data['class'],
-            'user_name' => $data['user_name'],
-            'password' => bcrypt($data['password']),
-            'avatar' => 'imgs-dashboard/avatar.png',
-        ]);
+        $user = new User();
+        $user->full_name = $data['full_name'];
+        $user->type = $roles->id;
+        $user->email = $data['email'];
+        $user->class_id = $data['class'];
+        $user->user_name = $data['user_name'];
+        $user->password = bcrypt($data['password']);
+        $user->avatar = 'imgs-dashboard/avatar.png';
+//dd($user);
+        $user->save();
+
+        $user->roles()->attach($roles->id);
+        return $user;
+//        $user->roles()->attach($roles->id);
+//
+//
+//        return User::create([
+//            'full_name' => $data['full_name'],
+//            'type' => $roles->id,
+//            'email' => $data['email'],
+//            'class_id' => $data['class'],
+//            'user_name' => $data['user_name'],
+//            'password' => bcrypt($data['password']),
+//            'avatar' => 'imgs-dashboard/avatar.png',
+//        ]);
 
 
     }

@@ -404,6 +404,7 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 //});
 
 Auth::routes();
+Route::get('register', 'Auth\RegisterController@showRegistrationFormReset')->name('register');
 
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider')->name('login.facebook');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');

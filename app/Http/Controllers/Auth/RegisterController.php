@@ -42,6 +42,14 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
         $this->classes = Classes::all();
+//        dd($this->classes);
+    }
+
+    public function showRegistrationFormReset()
+    {
+//        dd();
+        $classes = Classes::all();
+        return view('auth.register', compact('classes'));
     }
 
     /**

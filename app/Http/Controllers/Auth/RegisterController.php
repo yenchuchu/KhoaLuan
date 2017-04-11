@@ -77,7 +77,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if (!isset($data['class'])) {
+        if (!isset($data['class']) || $data['office_type'] == 'AT') {
             $data['class'] = null;
         }
 

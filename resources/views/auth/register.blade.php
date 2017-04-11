@@ -158,17 +158,19 @@
                                         <div class="group nav nav-tabs" >
                                             <div class="item objs">
                                                 <input type="radio" id="student" name="office_type" value="ST"
-                                                       class="radio"
-                                                       checked="">
-                                                <a data-toggle="tab" href="#student-tabs">
-                                                    <label id="label-stdent-id" for="student">STUDENT</label></a>
+                                                       class="radio" checked>
+                                                <label id="label-stdent-id" for="student">STUDENT</label>
+                                                {{--<a data-toggle="tab" href="#student-tabs">--}}
+                                                    {{--<label id="label-stdent-id" for="student">STUDENT</label></a>--}}
                                             </div>
-                                            <div class="item objt">
+                                            <div class="item objt" style="color: #00b1b3">
                                                 <input type="radio" id="teacher" name="office_type" value="AT"
                                                        class="radio">
-                                                    <a data-toggle="tab" href="#teacher-tabs">
-                                                        <label id="label-author-id" for="teacher">AUTHOR</label></a>
+                                                <label id="label-author-id" for="teacher">AUTHOR</label>
+                                                    {{--<a data-toggle="tab" href="#teacher-tabs">--}}
+                                                        {{--<label id="label-author-id" for="teacher">AUTHOR</label></a>--}}
                                             </div>
+                                            <input type="hidden" id="check_type_user">
                                         </div>
                                     </div>
                                 </div>
@@ -219,6 +221,8 @@
 
         $('#label-stdent-id').css('background-color', '#eeeeee');
         $('#label-stdent-id').css('color', '#00b1b3');
+
+        $('#student-tabs').hide();
     });
 
     $('#label-stdent-id').click(function () {
@@ -227,8 +231,13 @@
 
         $('#label-author-id').css('background-color', '#eeeeee');
         $('#label-author-id').css('color', '#00b1b3');
+
+        $('#student-tabs').show();
     });
 
+    $( 'input[type="radio"]' ).on( "click", function() {
+        $( "#check_type_user" ).html( $( "input:checked" ).val() + " is checked!" );
+    });
 
 </script>
 @endsection

@@ -28,6 +28,7 @@ class CreateListenCompleteTablesTable extends Migration
             $table->integer('skill_id')->nullable();
             $table->integer('level_id')->nullable();
             $table->integer('type_code');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

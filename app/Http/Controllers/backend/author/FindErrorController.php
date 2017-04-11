@@ -306,20 +306,18 @@ class FindErrorController extends Controller
                 $array_id_intypecode[$code]['created_at'] = array_unique($item->pluck('created_at')->toArray());
             }
 
-            $class_find = Classes::getClassById($class_id);
-            $class_code = $class_find->code;
-            if ($class_code == 1) {
-                $name_code = 'Elementary';
-            } elseif ($class_code == 2) {
-                $name_code = 'Secondary';
-            } elseif ($class_code == 3) {
-                $name_code = 'High School ';
-            }
+//            $class_find = Classes::getClassById($class_id);
+//            $class_code = $class_find->code;
+//            if ($class_code == 1) {
+//                $name_code = 'Elementary';
+//            } elseif ($class_code == 2) {
+//                $name_code = 'Secondary';
+//            } elseif ($class_code == 3) {
+//                $name_code = 'High School ';
+//            }
 
-            return Redirect::to('backend/manager-author/find-errors/'.$class_code)
-                ->with(['class_code' => $class_code,
-                    'name_code' => $name_code,
-                    'array_id_intypecode' => $array_id_intypecode]);
+            return Redirect::to('backend/manager-author/find-errors')
+                ->with(['array_id_intypecode' => $array_id_intypecode]);
         }
     }
 

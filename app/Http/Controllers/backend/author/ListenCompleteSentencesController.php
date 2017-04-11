@@ -301,20 +301,18 @@ class ListenCompleteSentencesController extends Controller
                 $array_id_intypecode[$code]['status'] = array_unique($item->pluck('status')->toArray());
                 $array_id_intypecode[$code]['created_at'] = array_unique($item->pluck('created_at')->toArray());
             }
+//
+//            $class_code = $classes->code;
+//            if ($class_code == 1) {
+//                $name_code = 'Elementary';
+//            } elseif ($class_code == 2) {
+//                $name_code = 'Secondary';
+//            } elseif ($class_code == 3) {
+//                $name_code = 'High School ';
+//            }
 
-            $class_code = $classes->code;
-            if ($class_code == 1) {
-                $name_code = 'Elementary';
-            } elseif ($class_code == 2) {
-                $name_code = 'Secondary';
-            } elseif ($class_code == 3) {
-                $name_code = 'High School ';
-            }
-
-            return Redirect::to('backend/manager-author/listening/listen_complete_sentences/'.$class_code)
-                ->with(['class_code' => $class_code,
-                    'name_code' => $name_code,
-                    'array_id_intypecode' => $array_id_intypecode]);
+            return Redirect::to('backend/manager-author/listening/listen_complete_sentences')
+                ->with(['array_id_intypecode' => $array_id_intypecode]);
         }
     }
 

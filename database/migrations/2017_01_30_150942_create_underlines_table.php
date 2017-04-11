@@ -28,6 +28,7 @@ class CreateUnderlinesTable extends Migration
             $table->integer('level_id')->nullable();
             $table->tinyInteger('status')->defaul(0)->comment('0-chua active, 1-active');
             $table->integer('type_code');
+            $table->integer('user_id');
 
             $table->timestamps();
         });

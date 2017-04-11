@@ -105,7 +105,7 @@ class SpeakingController extends Controller
     public function store(Request $request)
     {
         $all_data = $request->all();
-        $class_code = $all_data['class_code'];
+//        $class_code = $all_data['class_code'];
 
         if (!isset($all_data['level_id'])) {
             $all_data['level_id'] = null;
@@ -178,7 +178,7 @@ class SpeakingController extends Controller
         Session::flash('message', 'Tạo thành công!');
         Session::flash('notification_new', $data_new);
 
-        return Redirect()->route('backend.manager.author.speaking', $class_code);
+        return Redirect()->route('backend.manager.author.speaking');
     }
 
     function get_string_between($string, $start, $end)
@@ -308,19 +308,17 @@ class SpeakingController extends Controller
             }
 
             $class_find = Classes::getClassById($class_id);
-            $class_code = $class_find->code;
-            if ($class_code == 1) {
-                $name_code = 'Elementary';
-            } elseif ($class_code == 2) {
-                $name_code = 'Secondary';
-            } elseif ($class_code == 3) {
-                $name_code = 'High School ';
-            }
+//            $class_code = $class_find->code;
+//            if ($class_code == 1) {
+//                $name_code = 'Elementary';
+//            } elseif ($class_code == 2) {
+//                $name_code = 'Secondary';
+//            } elseif ($class_code == 3) {
+//                $name_code = 'High School ';
+//            }
 
-            return Redirect::to('backend/manager-author/speaking/'.$class_code)
-                ->with(['class_code' => $class_code,
-                    'name_code' => $name_code,
-                    'array_id_intypecode' => $array_id_intypecode]);
+            return Redirect::to('backend/manager-author/speaking')
+                ->with(['array_id_intypecode' => $array_id_intypecode]);
         }
     }
 

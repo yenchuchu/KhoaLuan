@@ -336,7 +336,8 @@
 
             for (var sort_noti = 0; sort_noti < 5; sort_noti++) {
                 var noti_obj = sort[sort_noti];
-                var path_ava = document.location.origin + '/allProjects/KhoaLuan/KLTN-EnglishTest/public/' + noti_obj['url_avatar_user'];
+                var path_ava = document.location.origin + noti_obj['url_avatar_user'];
+//                var path_ava = document.location.origin + '/allProjects/KhoaLuan/KLTN-EnglishTest/public/' + noti_obj['url_avatar_user'];
 
                 $('#alert_notifications').append('<li>' +
                         '<a href="' + noti_obj['url'] + '" target="_blank">' +

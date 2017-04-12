@@ -28,7 +28,9 @@
 @stop
 
 @section('header')
+
     <ol class="breadcrumb">
+        @if (Auth::user()->hasRole('AT'))
         <li class="breadcrumb-item"><a
                     href="{{route('backend.manager.author.index')}}">{{ trans('label.backend.dashboard')  }}</a></li>
 
@@ -95,6 +97,8 @@
         echo "Your favorite color is neither red, blue, nor green!";
     }
     ?>
+
+        @endif
         <li class="breadcrumb-item ">
             <span class="bread-active">
                   {{trans('label.backend.post_details.title')}}

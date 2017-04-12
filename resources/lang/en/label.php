@@ -64,6 +64,10 @@ return [
         'profile' => 'Profile',
         'user_name' => 'User name',
         'full_name' => 'Full name',
-        'email' => 'Email'
+        'email' => 'Email',
+        'change_ava' => 'To change your avatar successful!',
+        'no_change' => 'No change!',
+        'change_info' => 'To change your information successful!',
+
     ]
 ];

@@ -19,6 +19,7 @@ use Route;
 use Session;
 use Auth;
 use DB;
+use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Redirect;
 
 class SpeakingController extends Controller
@@ -151,9 +152,12 @@ class SpeakingController extends Controller
             if (!empty($audio_files)) {
 
                 if (isset($audio_files['speaking'][$key])) {
+                    $faker = Faker::create();
+                    $maxTime = $faker->unixTime($max = 'now');
+
                     $audio = $audio_files['speaking'][$key];
 
-                    $filename = $audio['audio']->getClientOriginalName();
+                    $filename = $maxTime.'-'.$audio['audio']->getClientOriginalName();
                     $location = public_path('backend/audio/');
                     $audio['audio']->move($location, $filename);
                     $speak_item->url_mp3 = 'backend/audio/'.$filename;
@@ -228,21 +232,24 @@ class SpeakingController extends Controller
 
             $speak_item->content = $data['content-speaking'];
 
-            $speak_item->type_user = $all_data['code_user'];
+            $speak_item->type_user = $code_user;
             $speak_item->skill_id = $skill->id;
-            $speak_item->exam_type_id = $all_data['exam_type_id'];
+            $speak_item->exam_type_id = $exam_type_id;
             $speak_item->level_id = $level_id;
             $speak_item->class_id = $class_id;
-            $speak_item->bookmap_id = $all_data['book_map_id'];
+            $speak_item->bookmap_id = $book_map_id;
 
             if(isset($data['audio'])) {
                 $audio_files = Input::file();
                 if (!empty($audio_files)) {
 
                     if (isset($audio_files['speaking'][$key])) {
+                        $faker = Faker::create();
+                        $maxTime = $faker->unixTime($max = 'now');
+
                         $audio = $audio_files['speaking'][$key];
 
-                        $filename = $audio['audio']->getClientOriginalName();
+                        $filename = $maxTime.'-'.$audio['audio']->getClientOriginalName();
                         $location = public_path('backend/audio/');
                         $audio['audio']->move($location, $filename);
                         $speak_item->url_mp3 = 'backend/audio/'.$filename;
@@ -307,7 +314,7 @@ class SpeakingController extends Controller
                 $array_id_intypecode[$code]['created_at'] = array_unique($item->pluck('created_at')->toArray());
             }
 
-            $class_find = Classes::getClassById($class_id);
+//            $class_find = Classes::getClassById($class_id);
 //            $class_code = $class_find->code;
 //            if ($class_code == 1) {
 //                $name_code = 'Elementary';

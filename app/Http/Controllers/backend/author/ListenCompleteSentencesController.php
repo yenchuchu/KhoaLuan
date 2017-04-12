@@ -156,11 +156,13 @@ class ListenCompleteSentencesController extends Controller
 
             $audio_files = Input::file();
             if (!empty($audio_files)) {
+                $faker = Faker::create();
+                $maxTime = $faker->unixTime($max = 'now');
 
                 if (isset($audio_files['listen_complete_sentences'][$key])) {
                     $audio = $audio_files['listen_complete_sentences'][$key];
 
-                    $filename = $audio['audio']->getClientOriginalName();
+                    $filename = $maxTime.'-'.$audio['audio']->getClientOriginalName();
                     $location = public_path('backend/audio-listening/listen-complete-sentences/');
                     $audio['audio']->move($location, $filename);
                     $listen->url = 'backend/audio-listening/listen-complete-sentences/'.$filename;
@@ -239,12 +241,15 @@ class ListenCompleteSentencesController extends Controller
             }
 
             if (isset($data['audio'])) {
+                $faker = Faker::create();
+                $maxTime = $faker->unixTime($max = 'now');
+
                 $audio_files = Input::file();
 
                 if (isset($audio_files['listen_complete_sentences'][$key])) {
                     $audio = $audio_files['listen_complete_sentences'][$key];
 
-                    $filename = $audio['audio']->getClientOriginalName();
+                    $filename = $maxTime.'-'.$audio['audio']->getClientOriginalName();
                     $location = public_path('backend/audio-listening/listen-complete-sentences/');
                     $audio['audio']->move($location, $filename);
                     $listen->url = 'backend/audio-listening/listen-complete-sentences/'.$filename;
@@ -301,15 +306,6 @@ class ListenCompleteSentencesController extends Controller
                 $array_id_intypecode[$code]['status'] = array_unique($item->pluck('status')->toArray());
                 $array_id_intypecode[$code]['created_at'] = array_unique($item->pluck('created_at')->toArray());
             }
-//
-//            $class_code = $classes->code;
-//            if ($class_code == 1) {
-//                $name_code = 'Elementary';
-//            } elseif ($class_code == 2) {
-//                $name_code = 'Secondary';
-//            } elseif ($class_code == 3) {
-//                $name_code = 'High School ';
-//            }
 
             return Redirect::to('backend/manager-author/listening/listen_complete_sentences')
                 ->with(['array_id_intypecode' => $array_id_intypecode]);

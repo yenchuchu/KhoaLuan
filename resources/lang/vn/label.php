@@ -89,5 +89,8 @@ return [
         'full_name' => 'Họ và Tên',
         'class' => 'Lớp',
         'email' => 'Hộp Thư',
+        'change_ava' => 'Thay đổi ảnh đại diện thành công!',
+        'no_change' => 'Không có gì thay đổi!',
+        'change_info' => 'Thay đổi thông tin thành công!',
     ]
 ];

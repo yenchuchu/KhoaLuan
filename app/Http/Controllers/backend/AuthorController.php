@@ -227,14 +227,6 @@ class AuthorController extends Controller
             compact('class_code', 'name_code'));
     }
 
-//    public function create() {
-//
-//        $header_examp_type = ExamType::select('Header')->where('ID', '=', 1)->first();
-//        $exam_format = ExamFormat::where('ID', '=', 2)->first();
-//
-//        return view('elementary.create', compact('header_examp_type', 'exam_format'));
-//    }
-
     public function secondary()
     {
 

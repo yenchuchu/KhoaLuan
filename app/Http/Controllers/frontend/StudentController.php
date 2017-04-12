@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Route;
 use Session;
-
+use Faker\Factory as Faker;
 
 class StudentController extends Controller
 {
@@ -1085,10 +1085,13 @@ class StudentController extends Controller
         $data = $request->all();
 
         if (isset($data['change_avatar'])) {
+            $faker = Faker::create();
+            $maxTime = $faker->unixTime($max = 'now');
+
             $file_cover = Input::file('change_avatar');
             $destinationPath_cover = public_path('img/img-avatar'); // upload path
             $extension_cover = $file_cover->getClientOriginalExtension(); // getting image extension
-            $filename_cover = $user->id . '-avatar' . '.' . $extension_cover;
+            $filename_cover = $maxTime. '-'.$user->id . '-avatar' . '.' . $extension_cover;
             $file_cover->move($destinationPath_cover, $filename_cover);
             $convert_save['avatar'] = "img/img-avatar/" . $filename_cover;
 
@@ -1096,9 +1099,9 @@ class StudentController extends Controller
                 ->where('id', $user_id)
                 ->update($convert_save);
 
-            Session::flash('message', 'To change your avatar successful!');
+            Session::flash('message', trans('label.user.change_ava'));
         } else {
-            Session::flash('message', 'No change!');
+            Session::flash('message', trans('label.user.no_change'));
         }
 
         return Redirect()->route('frontend.student.show.profile', ['user' => $user, 'classes' => $classes]);
@@ -1115,7 +1118,7 @@ class StudentController extends Controller
         }
 
         if ($user->user_name == $data['change_user_name'] && $user->full_name == $data['change_full_name'] && $user->email == $data['change_email'] && $user->class_id == $data['change_class']) {
-            Session::flash('message', 'No change!');
+            Session::flash('message', trans('label.user.no_change'));
         } else {
 
             $change_data = [
@@ -1129,7 +1132,7 @@ class StudentController extends Controller
                 ->where('id', $user_id)
                 ->update($change_data);
 
-            Session::flash('message', 'To change your information successful!');
+            Session::flash('message', trans('label.user.change_info'));
         }
 
         return Redirect()->route('frontend.student.show.profile', ['user' => $user, 'classes' => $classes]);

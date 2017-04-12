@@ -204,7 +204,7 @@
 
         swal({
                     title: "",
-                    text: "Bạn muốn tiếp tục hay làm lại bài thi?",
+                    text: " Do you want to continue?",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",

@@ -25,7 +25,7 @@ return [
                 'grade_menu' => [
                     'listen_ticks' => 'Nghe và chọn ảnh phù hợp',
                     'listen_complete_sentences' => 'Nghe và hoàn thành câu',
-                    'listen_table_ticks' => 'Nghe và chọn đáp án đúng dựa vào bảng',
+                    'listen_table_ticks' => 'Nghe và chọn đáp án dựa vào bảng',
                 ],
             ],
             'reading' => [

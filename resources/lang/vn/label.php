@@ -66,6 +66,18 @@ return [
             'default-audio-gg' => 'File nghe được mặc định theo Google API',
         ]
     ],
+    'frontend' => [
+        'introduce' => 'TRANG CHỦ',
+        'test_reading' => 'THI ĐỌC',
+        'test_listening' => 'THI NGHE',
+        'test_speaking' => 'THI NÓI',
+        'result' => 'KẾT QUẢ THI',
+        'continue' => 'Tiếp tục',
+        'restart' => 'Làm lại',
+        'submit' => 'Nộp bài',
+        'start' => 'Bắt đầu',
+        'stop' => 'Dừng'
+    ],
     'skills' => [
         'speaking' => 'Kỹ năng nói',
         'reading' => 'Kỹ năng đọc',

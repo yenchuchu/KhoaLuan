@@ -35,7 +35,7 @@
 @stop
 
 @section('content')
-    <div class="container">
+    <div class="container" style="padding-left: 0">
         <div><h3>Kết quả thi</h3></div>
         <div class="row">
             <div class="col-lg-4">

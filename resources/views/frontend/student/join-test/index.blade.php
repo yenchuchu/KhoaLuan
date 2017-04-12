@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container" style="padding-left: 0">
             <div><h3>Testing {{$skill_code}}</h3></div>
             <div id="refresh-page-testing">
                 @include('frontend.student.join-test.index_start')

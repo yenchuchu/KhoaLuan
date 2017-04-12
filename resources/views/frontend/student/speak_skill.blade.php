@@ -69,7 +69,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container" style="padding-left: 0">
         {{--<div><h3>Listen and repeat</h3></div>--}}
         @if(count($item) == 0)
             {{--<div class="container">--}}

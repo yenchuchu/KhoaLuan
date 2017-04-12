@@ -89,7 +89,7 @@
 
         #ul-menu-main li a {
             color: #7d8793;
-            padding: 15px 42px;
+            padding: 15px 57px;
             font-size: 16px;
             height: 54px;
         }
@@ -176,7 +176,7 @@
 <body>
 <div id="app">
     <nav class="navbar navbar-default navbar-static-top" id="menu-nav-top">
-        <div class="container">
+        <div class="container"  style="padding-left: 0">
             <div class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
@@ -189,7 +189,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{route('frontend.dashboard.student.index')}}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
             </div>
@@ -198,7 +198,7 @@
         </div>
     </nav>
     @yield('menu-main')
-    <div class="container">
+    <div class="container" style="padding-left: 0">
 
         @include('errors.errors')
     </div>

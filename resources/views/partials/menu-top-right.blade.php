@@ -19,7 +19,7 @@
                 <!-- end dropdown-alerts -->
             </li>
 
-            <li class="dropdown" style="float:left;">
+            <li class="dropdown" style="float:left;margin-right: 0px">
                 {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">--}}
                     {{--<i class="fa fa-user fa-2x"></i>--}}
                 {{--</a>--}}

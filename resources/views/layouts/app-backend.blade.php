@@ -180,6 +180,10 @@
             cursor: text;
         }
 
+        #page-wrapper {
+            padding: 15px !important;
+        }
+
     </style>
 
 </head>
@@ -188,27 +192,29 @@
 <div id="wrapper">
     <!-- navbar top -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
+<div class="container">
+    <div class="navbar-header">
 
-        <div class="navbar-header">
+        <!-- Collapsed Hamburger -->
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#app-navbar-collapse">
+            <span class="sr-only">Toggle Navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
 
-            <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#app-navbar-collapse">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+        <!-- Branding Image -->
+        <a class="navbar-brand name_app_brand" href="{{route('backend.manager.author.index')}}">
+            {{ config('app.name', 'Laravel') }}
+        </a>
+    </div>
 
-            <!-- Branding Image -->
-            <a class="navbar-brand name_app_brand" href="{{route('backend.manager.author.index')}}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
-        </div>
-
-        <!-- end navbar-header -->
-        <!-- navbar-top-links -->
+    <!-- end navbar-header -->
+    <!-- navbar-top-links -->
     @include('partials.menu-top-right')
+</div>
+
     <!-- end navbar-top-links -->
 
     </nav>

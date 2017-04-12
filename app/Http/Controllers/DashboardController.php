@@ -28,7 +28,7 @@ class DashboardController extends Controller
 
     public function redirectUrl() {
         $roles = Auth::user()->roles()->first();
-
+//dd(Auth::user()->hasRole('AD'));
         if (count($roles) === 1) {
             if ( Auth::user()->hasRole('TC')) {
                 return redirect()->route('frontend.teacher.index');

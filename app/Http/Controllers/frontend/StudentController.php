@@ -251,7 +251,7 @@ class StudentController extends Controller
 
         if (!empty($filter_skills)) {
             foreach ($filter_skills as $filter) {
-                $get_next_level = $this->checkLevel($filter['point'], $filter['level_id'], 50);
+                $get_next_level = $this->checkLevel($filter['point'], $filter['level_id'], 15);
             }
         } else {
             $code_level = 'L2';
@@ -610,7 +610,7 @@ class StudentController extends Controller
 
         if (!empty($filter_skills)) {
             foreach ($filter_skills as $filter) {
-                $get_next_level = $this->checkLevel($filter['point'], $filter['level_id'], 50);
+                $get_next_level = $this->checkLevel($filter['point'], $filter['level_id'], 15);
             }
         } else {
             $code_level = 'L2';

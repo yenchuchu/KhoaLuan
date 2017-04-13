@@ -17,7 +17,9 @@
         <li class="breadcrumb-item ">
             <span class="bread-active">
                   {{trans('label.backend.create.title')}}
+                <p class="alert-note">Hướng dẫn</p>
             </span>
+
         </li>
     </ol>
 
@@ -155,6 +157,21 @@
 @stop
 
 @section('script')
+    <script>
+        swal('Tạo bài luyện tập theo mức độ khó cho từng lớp. ' +
+                'Mỗi bài bao gồm đề bài, 1 đoạn văn, đặt các câu hỏi cho học sinh và kèm đáp án. ' +
+                'Nếu muốn thêm câu trong bài chọn nút cộng ngay dưới câu phía trước. ' +
+                'Kích vào nút cộng dưới cùng bên phải nếu muốn thêm bài mới. Kích vào nút lưu khi đã ra bài xong.' +
+                ' Bài của bạn sẽ dược quản trị kiểm duyệt và gửi thông báo khi đã được đăng.');
+        $('.alert-note').click(function () {
+            swal('Tạo bài luyện tập theo mức độ khó cho từng lớp. ' +
+                    'Mỗi bài bao gồm đề bài, 1 đoạn văn, đặt các câu hỏi cho học sinh và kèm đáp án. ' +
+                    'Nếu muốn thêm câu trong bài chọn nút cộng ngay dưới câu phía trước. ' +
+                    'Kích vào nút cộng dưới cùng bên phải nếu muốn thêm bài mới. Kích vào nút lưu khi đã ra bài xong.' +
+                    ' Bài của bạn sẽ dược quản trị kiểm duyệt và gửi thông báo khi đã được đăng.');
+        });
+    </script>
+
     @include('backend.author.answer_question.scritp')
     @include('backend.author.script-common')
 @stop

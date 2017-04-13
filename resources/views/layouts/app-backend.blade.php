@@ -184,6 +184,18 @@
             padding: 15px !important;
         }
 
+        .alert-note {
+            font-size: 15px;
+            float: right;
+            padding-top: 12px;
+            margin-left: 10px;
+            color: #f0ad4e;
+            cursor: pointer;
+        }
+
+        .sweet-alert h2 {
+            font-size: 19px;
+        }
     </style>
 
 </head>

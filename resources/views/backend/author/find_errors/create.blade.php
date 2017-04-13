@@ -16,6 +16,7 @@
         <li class="breadcrumb-item ">
             <span class="bread-active">
                   {{trans('label.backend.create.title')}}
+                <p class="alert-note">Hướng dẫn</p>
             </span>
         </li>
     </ol>
@@ -151,6 +152,24 @@
 @stop
 
 @section('script')
+    <script>
+        swal('Tạo bài luyện tập theo mức độ khó cho từng lớp. ' +
+                'Mỗi bài bao gồm đề bài, các câu chứa 3 đáp án được gợi ý và kèm đáp án bằng chữ. ' +
+                'Mỗi đáp án gợi ý được bọc bởi thẻ <u> </u>. ' +
+                'Ví dụ: trong câu có 3 gợi ý lỗi sai: <u>house</u>, <u>was</u>, <u>day</u>. ' +
+                'Nếu muốn thêm câu trong bài chọn nút cộng ngay dưới câu phía trước. ' +
+                'Kích vào nút cộng dưới cùng bên phải nếu muốn thêm bài mới. Kích vào nút lưu khi đã ra bài xong. ' +
+                ' Bài của bạn sẽ được quản trị kiểm duyệt và gửi thông báo khi đã được đăng.');
+        $('.alert-note').click(function () {
+            swal('Mỗi bài bao gồm đề bài, các câu chứa 3 đáp án được gợi ý và kèm đáp án bằng chữ. ' +
+                    'Mỗi đáp án gợi ý được bọc bởi thẻ <u> </u>. ' +
+                    'Ví dụ: trong câu có 3 gợi ý lỗi sai: <u>house</u>, <u>was</u>, <u>day</u>. ' +
+                    'Nếu muốn thêm câu trong bài chọn nút cộng ngay dưới câu phía trước. ' +
+                    'Kích vào nút cộng dưới cùng bên phải nếu muốn thêm bài mới. Kích vào nút lưu khi đã ra bài xong. ' +
+                    ' Bài của bạn sẽ được quản trị kiểm duyệt và gửi thông báo khi đã được đăng.');
+        });
+    </script>
+
     @include('backend.author.find_errors.scritp')
     @include('backend.author.script-common')
 @stop

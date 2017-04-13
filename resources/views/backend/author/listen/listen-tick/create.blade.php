@@ -17,6 +17,7 @@
         <li class="breadcrumb-item ">
             <span class="bread-active">
                   {{trans('label.backend.create.title')}}
+                <p class="alert-note">Hướng dẫn</p>
             </span>
         </li>
     </ol>
@@ -171,6 +172,23 @@
 @stop
 
 @section('script')
+    <script>
+        swal('Tạo bài luyện tập theo mức độ khó cho từng lớp. ' +
+                'Mỗi bài bao gồm đề bài, mỗi câu trong bài bao gồm một audio, hai ảnh cho học sinh chọn kèm đáp án.  ' +
+                ' Sau khi tác giả thêm audio và thêm ảnh, phải kích chọn vào ảnh đúng. ' +
+                'Nếu muốn thêm câu trong bài chọn nút cộng ngay dưới câu phía trước. ' +
+                'Kích vào nút cộng dưới cùng bên phải nếu muốn thêm bài mới. Kích vào nút lưu khi đã ra bài xong. ' +
+                ' Bài của bạn sẽ được quản trị kiểm duyệt và gửi thông báo khi đã được đăng.');
+        $('.alert-note').click(function () {
+            swal('Tạo bài luyện tập theo mức độ khó cho từng lớp. ' +
+                    'Mỗi bài bao gồm đề bài, mỗi câu trong bài bao gồm một audio, hai ảnh cho học sinh chọn kèm đáp án.  ' +
+                    ' Sau khi tác giả thêm audio và thêm ảnh, phải kích chọn vào ảnh đúng. ' +
+                    'Nếu muốn thêm câu trong bài chọn nút cộng ngay dưới câu phía trước. ' +
+                    'Kích vào nút cộng dưới cùng bên phải nếu muốn thêm bài mới. Kích vào nút lưu khi đã ra bài xong. ' +
+                    ' Bài của bạn sẽ được quản trị kiểm duyệt và gửi thông báo khi đã được đăng.');
+        });
+    </script>
+
     @include('backend.author.listen.listen-tick.scritp')
     @include('backend.author.script-common')
 @stop

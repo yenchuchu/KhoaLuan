@@ -109,13 +109,6 @@
         float: right;
     }
 
-    .alert-note {
-        font-size: 19px;
-        float: right;
-        padding-top: 15px;
-        color: #f0ad4e;
-        cursor: pointer;
-    }
 
     .admin-lable-audio {
         float: left;

@@ -17,6 +17,7 @@
         <li class="breadcrumb-item ">
             <span class="bread-active">
                   {{trans('label.backend.create.title')}}
+                <p class="alert-note">Hướng dẫn</p>
             </span>
         </li>
     </ol>
@@ -136,9 +137,13 @@
 
 @section('script')
     <script>
-        swal("Nhập câu hoặc đoạn văn. Thêm audio nếu có!");
+        swal("Nhập câu hoặc đoạn văn để học sinh đọc lại theo mức độ khó cho từng lớp. Thêm audio nếu có. " +
+                "Kích vào nút cộng nếu muốn thêm bài mới. Kích vào nút lưu khi đã ra bài xong." +
+                " Bài của bạn sẽ dược quản trị kiểm duyệt và gửi thông báo khi đã được đăng.");
         $('.alert-note').click(function () {
-            swal("Nhập câu hoặc đoạn văn. Thêm audio nếu có!");
+            swal("Nhập câu hoặc đoạn văn để học sinh đọc lại theo mức độ khó cho từng lớp. Thêm audio nếu có. " +
+                    "Kích vào nút cộng nếu muốn thêm bài mới. Kích vào nút lưu khi đã ra bài xong." +
+                    " Bài của bạn sẽ dược quản trị kiểm duyệt và gửi thông báo khi đã được đăng.");
         });
     </script>
 

@@ -19,6 +19,7 @@
         color: white;
         cursor: pointer;
         padding: 5px 16px;
+        margin-top: 10px;
         float: right;
         font-weight: 700;
         font-size: 26px;
@@ -30,6 +31,7 @@
     .style-save {
         background: rgb(69, 224, 32);
         border-radius: 24px;
+        margin-right: 14px;
         color: white;
         border: none;
         padding: 4px 12px;

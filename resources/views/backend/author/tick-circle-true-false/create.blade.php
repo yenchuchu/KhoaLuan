@@ -147,12 +147,12 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-12 col-md-12">
-            <spam class="add-item">+</spam>
-        </div>
-        <div class="col-lg-12 col-md-12">
+        <div  style="float: right">
             <button class="save-tick-true-false btn style-save" title="Save" type="submit">
                 <i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+        </div>
+        <div style="float:right; margin-right: 17px;margin-left: 18px;">
+            <spam class="add-item">+</spam>
         </div>
     </div>
 

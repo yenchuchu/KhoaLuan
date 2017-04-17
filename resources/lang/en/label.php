@@ -11,7 +11,7 @@ return [
                     'title' => 'Create test',
                     'table' => 'Manager tests',
                     'add' => 'Create new questions',
-                    'manage-table' => ' Manager own questions by created order',
+                    'manage-table' => ' Manager own questions',
                 ],
                 'create' => [
                     'title' => 'Create test by levels and classes',
@@ -41,7 +41,7 @@ return [
             'link' => 'link',
             'date' => 'date',
             'status' => 'status',
-            'go_to_link' => 'Go to link',
+            'go_to_link' => 'Link',
             'done' => 'Done',
             'wait' => 'Wait'
         ],

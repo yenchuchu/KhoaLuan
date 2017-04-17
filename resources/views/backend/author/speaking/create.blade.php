@@ -117,17 +117,13 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-12 col-md-12">
-            <span class="add-item">+</span>
-        </div>
-        <div class="col-lg-12 col-md-12">
-{{--            {{ Form::submit('', array(--}}
-            {{--'class' => 'save-speaking btn',--}}
-            {{--'title' => 'Save')) }}--}}
+        <div style="float: right">
             <button class="save-speaking btn style-save" title="Save" type="submit">
-            <i class="fa fa-floppy-o" aria-hidden="true"></i>
-{{--                            {{trans('label.backend.author.speaking.create.button.add-radio')}}--}}
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
             </button>
+        </div>
+        <div style="float:right; margin-right: 17px;margin-left: 18px;">
+            <span class="add-item">+</span>
         </div>
     </div>
 

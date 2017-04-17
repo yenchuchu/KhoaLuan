@@ -450,10 +450,10 @@
                 "sLengthMenu": "Xem _MENU_ bản ghi",
                 "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
                 "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ bản ghi",
-                "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 bản ghi",
+                "sInfoEmpty": "",
                 "sInfoFiltered": "(được lọc từ _MAX_ bản ghi)",
                 "sInfoPostFix": "",
-                "sSearch": "Tìm kiếm:",
+                "sSearch": "Tìm kiếm: ",
                 "sUrl": "",
                 "oPaginate": {
                     "sFirst": "Đầu",

@@ -38,7 +38,7 @@ return [
     'facebook' => [
         'client_id' => '234077720399350',
         'client_secret' => 'd88037b8246f2b55641beef180f10e3e',
-        'redirect' => 'http://localhost/allProjects/KhoaLuan/KLTN-EnglishTest/public/login/facebook/callback',
+        'redirect' => 'http://localhost/login/facebook/callback',
     ],
 
 ];

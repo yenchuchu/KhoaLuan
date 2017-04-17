@@ -10,8 +10,8 @@ return [
                 'index' => [
                     'title' => 'Tạo đề cho kỹ năng nói',
                     'table' => 'Quản lí đề đã tạo',
-                    'add' => 'Tạo câu hỏi mới',
-                    'manage-table' => ' Quản lí câu hỏi đã tạo theo số lần tạo',
+                    'add' => 'Thêm',
+                    'manage-table' => ' Quản lí câu hỏi',
                 ],
                 'create' => [
                     'title' => 'Tạo đề theo độ khó và lớp',
@@ -45,12 +45,12 @@ return [
             'link' => 'liên kết',
             'date' => 'Ngày đăng',
             'status' => 'Trạng thái đăng bài',
-            'go_to_link' => 'Đi đến bài đăng',
+            'go_to_link' => 'Liên kết',
             'done' => 'Đã phê duyệt',
             'wait' => 'Chờ phê duyệt'
         ],
         'create' => [
-            'title' => 'Tạo bài mới',
+            'title' => 'Thêm',
             'title-question' => 'Nhập đề bài',
             'content-question' => 'Nhập đoạn văn',
             'item-content-question' => 'Nhập câu hỏi',

@@ -360,7 +360,7 @@
                 $('#alert_notifications').append('<li>' +
                         '<a href="' + noti_obj['url'] + '" target="_blank">' +
                         '<div>' +
-                        '<img src="' + path_ava + '" style="height: 34px; margin-right: 10px">' +
+                        '<img src="/' + path_ava + '" style="height: 34px; margin-right: 10px">' +
                         ' <span>' + noti_obj['content'] + '</span>' +
                         '<span class="pull-right text-muted small"> at ' + noti_obj['created_at'] + '</span>' +
                         '</div>' +
@@ -369,10 +369,10 @@
                         '<li class="divider"></li>');
             }
 
-            var path_to_all_noti = '{{route("backend.manager.backend.all.noti")}}';
+{{--            var path_to_all_noti = '{{route("backend.manager.backend.all.noti")}}';--}}
             $('#alert_notifications').append('<li id="see-all">' +
-                    '<a class="text-center" href="'+path_to_all_noti+'">' +
-                    '<strong>See All Alerts</strong>' +
+                    '<a class="text-center" href="#">' +
+                    '<strong>See all notifications</strong>' +
                     '<i class="fa fa-angle-right"></i>' +
                     '</a>' +
                     '</li>');
@@ -385,7 +385,7 @@
                 $('#alert_notifications').append('<li>' +
                         '<a href="' + noti_obj['url'] + '" target="_blank">' +
                         '<div>' +
-                        '<img src="' + path_ava + '" style="height: 34px; margin-right: 10px">' +
+                        '<img src="/' + path_ava + '" style="height: 34px; margin-right: 10px">' +
                         ' <span>' + noti_obj['content'] + '</span>' +
                         '<span class="pull-right text-muted small"> at ' + noti_obj['created_at'] + '</span>' +
                         '</div>' +
@@ -398,6 +398,26 @@
                     '<p style="text-align: center; margin-top: 10px;"> No notification </p>' +
                     '</li>');
         }
+
+        $('#see-all').click(function () {
+            $('#alert_notifications').text('');
+            for (var sort_noti in sort) {
+                if (!sort.hasOwnProperty(sort_noti)) continue;
+                var noti_obj = sort[sort_noti];
+                var path_ava = document.location.origin + noti_obj['url_avatar_user'];
+
+                $('#alert_notifications').append('<li>' +
+                        '<a href="' + noti_obj['url'] + '" target="_blank">' +
+                        '<div>' +
+                        '<img src="/' + path_ava + '" style="height: 34px; margin-right: 10px">' +
+                        ' <span>' + noti_obj['content'] + '</span>' +
+                        '<span class="pull-right text-muted small"> at ' + noti_obj['created_at'] + '</span>' +
+                        '</div>' +
+                        '</a>' +
+                        '</li>' +
+                        '<li class="divider"></li>');
+            }
+        });
 
         ref.orderByChild("status").equalTo('0').on("child_added", function (snapshot) {
             count_noti.push(snapshot.val());

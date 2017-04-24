@@ -13,7 +13,7 @@
 
 
 //if (App::environment('remote')) {
-//   URL::forceSchema('https');
+   URL::forceSchema('https');
 //}
 
 Route::group(['middleware' => 'auth'], function () {

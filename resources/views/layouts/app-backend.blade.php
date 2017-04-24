@@ -354,13 +354,13 @@
 
             for (var sort_noti = 0; sort_noti < 5; sort_noti++) {
                 var noti_obj = sort[sort_noti];
-                var path_ava = document.location.origin + noti_obj['url_avatar_user'];
+                var path_ava = document.location.origin + '/' + noti_obj['url_avatar_user'];
 //                var path_ava = document.location.origin + '/allProjects/KhoaLuan/KLTN-EnglishTest/public/' + noti_obj['url_avatar_user'];
 
                 $('#alert_notifications').append('<li>' +
                         '<a href="' + noti_obj['url'] + '" target="_blank">' +
                         '<div>' +
-                        '<img src="/' + path_ava + '" style="height: 34px; margin-right: 10px">' +
+                        '<img src="' + path_ava + '" style="height: 34px; margin-right: 10px">' +
                         ' <span>' + noti_obj['content'] + '</span>' +
                         '<span class="pull-right text-muted small"> at ' + noti_obj['created_at'] + '</span>' +
                         '</div>' +
@@ -385,7 +385,7 @@
                 $('#alert_notifications').append('<li>' +
                         '<a href="' + noti_obj['url'] + '" target="_blank">' +
                         '<div>' +
-                        '<img src="/' + path_ava + '" style="height: 34px; margin-right: 10px">' +
+                        '<img src="' + path_ava + '" style="height: 34px; margin-right: 10px">' +
                         ' <span>' + noti_obj['content'] + '</span>' +
                         '<span class="pull-right text-muted small"> at ' + noti_obj['created_at'] + '</span>' +
                         '</div>' +
@@ -409,7 +409,7 @@
                 $('#alert_notifications').append('<li>' +
                         '<a href="' + noti_obj['url'] + '" target="_blank">' +
                         '<div>' +
-                        '<img src="/' + path_ava + '" style="height: 34px; margin-right: 10px">' +
+                        '<img src="' + path_ava + '" style="height: 34px; margin-right: 10px">' +
                         ' <span>' + noti_obj['content'] + '</span>' +
                         '<span class="pull-right text-muted small"> at ' + noti_obj['created_at'] + '</span>' +
                         '</div>' +

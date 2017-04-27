@@ -92,5 +92,26 @@ return [
         'change_ava' => 'Thay đổi ảnh đại diện thành công!',
         'no_change' => 'Không có gì thay đổi!',
         'change_info' => 'Thay đổi thông tin thành công!',
+    ],
+    'auth' => [
+        'login' => [
+            'title' => 'Đăng nhập',
+            'email' => 'Địa chỉ Email', //E-Mail Address
+            'password' => 'Mật khẩu',
+            'remember' => 'Nhớ tài khoản',
+            'forgot_password' => 'Quên mật khẩu?',
+        ],
+        'register' => [
+            'title' => 'Đăng ký',
+            'full_name' => 'Họ tên đầy đủ',
+            'user_name' => 'Tên đăng nhập',
+            'email' => 'Địa chỉ Email', //E-Mail Address
+            'password' => 'Mật khẩu',
+            'confirm_password' => 'Nhập lại mật khẩu',
+            'choose_type' => 'Chọn đối tượng',
+            'student_type' => 'HỌC SINH',
+            'author_type' => 'TÁC GIẢ',
+            'class' => 'Chọn lớp',
+        ]
     ]
 ];

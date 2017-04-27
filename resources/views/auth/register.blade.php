@@ -78,13 +78,15 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2" style="margin-top: 30px">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Register</div>
+                    <div class="panel-heading">{{trans('label.auth.register.title')}}</div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
-                                <label for="full_name" class="col-md-4 control-label">Full Name</label>
+                                <label for="full_name" class="col-md-4 control-label">
+                                    {{trans('label.auth.register.full_name')}}
+                                </label>
 
                                 <div class="col-md-6">
                                     <input id="full_name" type="text" class="form-control" name="full_name"
@@ -99,7 +101,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('user_name') ? ' has-error' : '' }}">
-                                <label for="user_name" class="col-md-4 control-label">User Name</label>
+                                <label for="user_name" class="col-md-4 control-label">{{trans('label.auth.register.user_name')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="user_name" type="text" class="form-control" name="user_name"
@@ -114,7 +116,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                                <label for="email" class="col-md-4 control-label">{{trans('label.auth.register.email')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control" name="email"
@@ -129,7 +131,9 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
+                                <label for="password" class="col-md-4 control-label">
+                                    {{trans('label.auth.register.password')}}
+                                </label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" name="password" required>
@@ -143,7 +147,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                                <label for="password-confirm" class="col-md-4 control-label">
+                                    {{trans('label.auth.register.confirm_password')}}
+                                </label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
@@ -152,23 +158,19 @@
                             </div>
 
                             <div class="form-group ">
-                                <label for="choose-object" class="col-md-4 control-label">Chọn đối tượng</label>
+                                <label for="choose-object" class="col-md-4 control-label">{{trans('label.auth.register.choose_type')}}</label>
                                 <div class="col-md-6 block-12">
                                     <div class="option">
                                         <div class="group nav nav-tabs" >
                                             <div class="item objs">
                                                 <input type="radio" id="student" name="office_type" value="ST"
                                                        class="radio" checked>
-                                                <label id="label-stdent-id" for="student">STUDENT</label>
-                                                {{--<a data-toggle="tab" href="#student-tabs">--}}
-                                                    {{--<label id="label-stdent-id" for="student">STUDENT</label></a>--}}
+                                                <label id="label-stdent-id" for="student">{{trans('label.auth.register.student_type')}}</label>
                                             </div>
                                             <div class="item objt" style="color: #00b1b3">
                                                 <input type="radio" id="teacher" name="office_type" value="AT"
                                                        class="radio">
-                                                <label id="label-author-id" for="teacher">AUTHOR</label>
-                                                    {{--<a data-toggle="tab" href="#teacher-tabs">--}}
-                                                        {{--<label id="label-author-id" for="teacher">AUTHOR</label></a>--}}
+                                                <label id="label-author-id" for="teacher">{{trans('label.auth.register.author_type')}}</label>
                                             </div>
                                             <input type="hidden" id="check_type_user">
                                         </div>
@@ -181,10 +183,10 @@
                                 </div>
                                 <div id="student-tabs" class="tab-pane fade in active">
                                     <div class="form-group">
-                                        <label for="class" class="col-md-4 control-label">Class</label>
+                                        <label for="class" class="col-md-4 control-label">{{trans('label.auth.register.class')}}</label>
 
                                         <div class="col-md-6">
-                                            <select name="class" id="class">
+                                            <select name="class" id="class" class="form-control">
                                                 @foreach($classes as $class)
                                                     <option value="{{$class->id}}">{{$class->title}}</option>
                                                 @endforeach
@@ -197,7 +199,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Register
+                                        {{trans('label.auth.register.title')}}
                                     </button>
                                 </div>
                             </div>

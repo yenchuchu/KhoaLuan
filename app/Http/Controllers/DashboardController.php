@@ -9,21 +9,19 @@ use Auth;
 
 class DashboardController extends Controller
 {
-//    public function __construct()
-//    {
-//        $this->middleware(['except' => 'guest']);
-//    }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $classes = Classes::all();
 //        dd($classes);
         return view('dashboard.index');
+    }
+
+    public function dashboardDesign()
+    {
+        $classes = Classes::all();
+
+        return view('dashboard.test_design');
     }
 
     public function redirectUrl() {

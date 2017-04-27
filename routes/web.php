@@ -13,7 +13,7 @@
 
 
 //if (App::environment('remote')) {
-   URL::forceSchema('https');
+//   URL::forceSchema('https');
 //}
 
 Route::group(['middleware' => 'auth'], function () {
@@ -405,6 +405,7 @@ Route::group(['middleware' => 'auth'], function () {
 // dashboard
 //Route::group(array('middleware' => 'checkRole:TC|AU|guest'), function () {
 Route::get('/', 'DashboardController@index')->name('dashboard');
+Route::get('/test-design', 'DashboardController@dashboardDesign')->name('dashboard.design');
 //});
 
 Auth::routes();

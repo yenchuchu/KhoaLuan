@@ -191,6 +191,7 @@ class StudentController extends Controller
 
     }
 
+    // xác định mức độ khó cho lần thi tiếp theo.
     public function checkLevel($point, $level_now, $point_item)
     {
 
@@ -260,7 +261,9 @@ class StudentController extends Controller
         }
 
         // kiểm tra lượt thi đã tồn tại hay chưa ( được lưu ở bảng Items).
-        $check_exist_item = Item::where(['user_id' => $user_id, 'skill_id' => $skill_id])->get();
+        $check_exist_item = Item::where(['user_id' => $user_id,
+            'skill_id' => $skill_id])->get();
+
         if (count($check_exist_item) == 0) {
             $type_exam_read = Config::get('constants.skill.' . $skill_code);
             $random_type_read = array_rand($type_exam_read, 3);
@@ -321,12 +324,14 @@ class StudentController extends Controller
             $time_remaining = Config::get('constants.time_start');
         } elseif (count($check_exist_item) == 1) { // đã tồn tại
 
+
             $noti_not_complete = 1;
-            $items_old = Item::where([
-                'user_id' => $user_id,
-                'skill_id' => $skill_id,
-                'level_id' => $get_next_level
-            ])->get();
+//            $items_old = Item::where([
+//                'user_id' => $user_id,
+//                'skill_id' => $skill_id
+//            ])->get();
+//            $items_old = $check_exist_item->first();
+            $items_old = $check_exist_item;
 
             $items = [];
             foreach ($items_old as $item) {
@@ -358,7 +363,6 @@ class StudentController extends Controller
                     $items[$skill][$tb[0]->order] = $find;
                 }
             }
-
         }
 
         $lamas = $this->lama;
@@ -619,13 +623,14 @@ class StudentController extends Controller
         }
 
         // kiểm tra lượt thi đã tồn tại hay chưa ( được lưu ở bảng Items).
-        $check_exist_item = Item::where(['user_id' => $user_id, 'skill_id' => $skill_id])->get();
+        $check_exist_item = Item::where([
+            'user_id' => $user_id,
+            'skill_id' => $skill_id])->get();
+
         if (count($check_exist_item) == 0) {
 
             $type_exam_read = Config::get('constants.skill.' . $skill_code);
             $random_type_read = array_rand($type_exam_read, 3); // 3
-//            $random_type_read = ['listen_ticks'];
-//            dd($random_type_read);
 
             $items = [];
 
@@ -684,12 +689,7 @@ class StudentController extends Controller
         } elseif (count($check_exist_item) == 1) { // đã tồn tại
 
             $noti_not_complete = 1;
-//            dd($check_exist_item);
-            $items_old = Item::where([
-                'user_id' => $user_id,
-                'skill_id' => $skill_id,
-                'level_id' => $get_next_level
-            ])->get();
+            $items_old = $check_exist_item;
 
             $items = [];
             foreach ($items_old as $item) {
@@ -698,9 +698,7 @@ class StudentController extends Controller
             }
 
             foreach ($json_decode_answer as $skill => $ans) {
-//dd($ans);
                 foreach ($ans as $table => $tb) {
-//                    dd($tb);
                     $find = DB::table($table)->where([
                         'id' => $tb[0]->id_record
                     ])->first();

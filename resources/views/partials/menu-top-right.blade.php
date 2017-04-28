@@ -1,7 +1,7 @@
 @if (Auth::guest())
     <ul class="nav navbar-nav navbar-right">
-        <li class="guest-app"><a href="{{ url('/login') }}">Login</a></li>
-        <li class="guest-app"><a href="{{ url('/register') }}">Register</a></li>
+        <li class="guest-app"><a href="{{ url('/login') }}">{{trans('label.auth.login.title')}}</a></li>
+        <li class="guest-app"><a href="{{ url('/register') }}">{{trans('label.auth.register.title')}}</a></li>
     </ul>
 @else
 
@@ -61,8 +61,8 @@
         <!-- Authentication Links -->
         @if (Auth::guest())
             <ul class="nav navbar-nav navbar-right">
-                <li class="guest-app"><a href="{{ url('/login') }}">Login</a></li>
-                <li class="guest-app"><a href="{{ url('/register') }}">Register</a></li>
+                <li class="guest-app"><a href="{{ url('/login') }}">{{trans('label.auth.login.title')}}</a></li>
+                <li class="guest-app"><a href="{{ url('/register') }}">{{trans('label.auth.register.title')}}</a></li>
             </ul>
         @else
             <div class="dropdown" id="dropdown-menu-top">

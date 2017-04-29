@@ -58,15 +58,6 @@ class MultipleChoiceController extends Controller
             $array_id_intypecode[$code]['created_at'] = $item->pluck('created_at')->toArray();
         }
 
-//        $class_code = $this->url_parameters['class_code'];
-//        if ($class_code == 1) {
-//            $name_code = 'Elementary';
-//        } elseif ($class_code == 2) {
-//            $name_code = 'Secondary';
-//        } elseif ($class_code == 3) {
-//            $name_code = 'High School ';
-//        }
-
         return view('backend.author.multiple_choice.index',
             compact( 'class_code', 'name_code', 'array_id_intypecode'));
     }
@@ -76,13 +67,7 @@ class MultipleChoiceController extends Controller
         $levels = $this->levels;
         $classes = $this->classes;
 
-
-//        $class_code = $this->url_parameters['class_code'];
         $code_user = $this->url_parameters['code_user'];
-
-//        $classes = $all_classes->filter(function ($class) use ($class_code) {
-//            return ($class->code == $class_code);
-//        });
 
         if ($code_user == 'TC') {
             $exam_types = ExamType::all();
@@ -142,11 +127,15 @@ class MultipleChoiceController extends Controller
                 $ans = $mul['answer'];
                 $multiple_choice_content_question[$key_m]['answer'] = $mul['suggest_choose'][$ans];
             }
+
+            if (!isset($data['content-multiple-choice'])) {
+                $data['content-multiple-choice'] = null;
+            }
 //            dd($multiple_choice_content_question);
             $multiple_choice = new MultipleChoice();
 
             $multiple_choice->title = $data['title-multiple-choice'];
-//            $multiple_choice->content = $data['content-multiple-choice'];
+            $multiple_choice->content = $data['content-multiple-choice'];
 //            $multiple_choice->point = $data['point'];
             $multiple_choice->user_id = Auth::user()->id;
             $multiple_choice->type_user = $code_user;
@@ -213,6 +202,11 @@ class MultipleChoiceController extends Controller
 
         foreach ($all_data['multiple_choice'] as $key => $data) {
             $multiple_choice_content_question = $data['content-choose-ans-question'];
+
+            if (!isset($data['content-multiple-choice'])) {
+                $data['content-multiple-choice'] = null;
+            }
+
             foreach ($multiple_choice_content_question as $key_m => $mul) {
                 $ans = $mul['answer'];
                 $multiple_choice_content_question[$key_m]['answer'] = $mul['suggest_choose'][$ans];
@@ -226,6 +220,7 @@ class MultipleChoiceController extends Controller
             $read->title = $data['title-multiple-choice'];
             $read->type_user = $code_user;
             $read->content_json = json_encode($multiple_choice_content_question);
+            $read->content = $data['content-multiple-choice'];
             $read->skill_id = $skill->id;
             $read->exam_type_id = $exam_type_id;
             $read->level_id = $level_id;

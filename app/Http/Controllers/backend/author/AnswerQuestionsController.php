@@ -138,6 +138,10 @@ class AnswerQuestionsController extends Controller
         foreach ($all_data['answer_question'] as $data) {
 
             $answer_question_content_question = $data['content-choose-ans-question'];
+            if (!isset($data['content-answer-question'])) {
+                $data['content-answer-question'] = null;
+            }
+
             $answer_question = new AnswerQuestion();
 
             $answer_question->title = $data['title-answer-question'];
@@ -208,10 +212,14 @@ class AnswerQuestionsController extends Controller
             $read = AnswerQuestion::where(['id' => $id_record])->first();
 
             $read_content_question = $data['content-choose-ans-question'];
+            if (!isset($data['content-answer-question'])) {
+                $data['content-answer-question'] = null;
+            }
 
             $read->title = $data['title-answer-question'];
             $read->type_user = $code_user;
             $read->content_json = json_encode($read_content_question);
+            $read->content = $data['content-answer-question'];
             $read->skill_id = $skill->id;
             $read->exam_type_id = $exam_type_id;
             $read->level_id = $level_id;
@@ -273,16 +281,6 @@ class AnswerQuestionsController extends Controller
                 $array_id_intypecode[$code]['status'] = array_unique($item->pluck('status')->toArray());
                 $array_id_intypecode[$code]['created_at'] = array_unique($item->pluck('created_at')->toArray());
             }
-
-//            $class_find = Classes::getClassById($class_id);
-//            $class_code = $class_find->code;
-//            if ($class_code == 1) {
-//                $name_code = 'Elementary';
-//            } elseif ($class_code == 2) {
-//                $name_code = 'Secondary';
-//            } elseif ($class_code == 3) {
-//                $name_code = 'High School ';
-//            }
 
             return Redirect::to('backend/manager-author/answer-question')
                 ->with(['array_id_intypecode' => $array_id_intypecode]);

@@ -100,7 +100,11 @@
                                        class="form-control" required placeholder="{{trans('label.backend.create.title-question')}}">
                             </div>
                         </div>
-
+                        <div class="form-group">
+                                <textarea type="text" class="form-control"
+                                          name="multiple_choice[1][content-multiple-choice]"
+                                          placeholder="{{trans('label.backend.create.content-question')}}"></textarea>
+                        </div>
                         <div class="form-group" style="width:100%; float:left;">
                             <div class="span-numb-question" id="id-numb-question-1">
                                 1

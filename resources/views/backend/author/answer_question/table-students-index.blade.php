@@ -24,7 +24,7 @@
              </td>
              <td>
                  <?php
-                     dd($item['level_id']);
+
                  if(!empty($item['level_id'])) {
                      $level = \App\Level::where(['id' => $item['level_id'][0]])->first();
                      echo $level->title;

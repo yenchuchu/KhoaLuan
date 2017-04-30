@@ -302,7 +302,12 @@
             'Pragma': 'no-cache'
         }
     });
-
+    console.log("document.URL : "+document.URL);
+            console.log("document.location.href : "+document.location.href);
+    console.log("document.location.origin : "+document.location.origin);
+            console.log("document.location.hostname : "+document.location.hostname);
+            console.log("document.location.host : "+document.location.host);
+            console.log("document.location.pathname : "+document.location.pathname);
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyDGy7M0b1gqm7bo9ly7XmZcI2PqBH6h9BE",
@@ -344,12 +349,7 @@
 
             return yDate - xDate;
         });
-//        console.log("document.URL : "+document.URL);
-//        console.log("document.location.href : "+document.location.href);
-//        console.log("document.location.origin : "+document.location.origin);
-//        console.log("document.location.hostname : "+document.location.hostname);
-//        console.log("document.location.host : "+document.location.host);
-//        console.log("document.location.pathname : "+document.location.pathname);
+//
         if (count >= 5) {
 
             for (var sort_noti = 0; sort_noti < 5; sort_noti++) {

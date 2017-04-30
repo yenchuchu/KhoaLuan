@@ -19,10 +19,7 @@
                 'class="form-control" required placeholder="{{trans('label.backend.create.title-question')}}">' +
                 '</div>' +
                 '</div>' +
-                '<div class="form-group">' +
-                '<label>{{trans('label.backend.create.upload_audio')}}</label>' +
-                '<input name="listen_complete_sentences['+j+'][audio]" type="file">' +
-                '</div>' +
+
                 '<div class="form-group" style="width:100%; float:left;" >' +
                 ' <div class="span-numb-question" id="id-numb-question-1" >' +
                 '1' +

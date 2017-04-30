@@ -59,15 +59,6 @@ class ListenTicksController extends Controller
             $array_id_intypecode[$code]['created_at'] = array_unique($item->pluck('created_at')->toArray());
         }
 
-//        $class_code = $this->url_parameters['class_code'];
-//        if ($class_code == 1) {
-//            $name_code = 'Elementary';
-//        } elseif ($class_code == 2) {
-//            $name_code = 'Secondary';
-//        } elseif ($class_code == 3) {
-//            $name_code = 'High School ';
-//        }
-
         return view('backend.author.listen.listen-tick.index',
             compact( 'class_code', 'name_code', 'array_id_intypecode'));
     }
@@ -77,13 +68,7 @@ class ListenTicksController extends Controller
         $levels = $this->levels;
         $classes = $this->classes;
 
-
-//        $class_code = $this->url_parameters['class_code'];
         $code_user = $this->url_parameters['code_user'];
-
-//        $classes = $all_classes->filter(function ($class) use ($class_code) {
-//            return ($class->code == $class_code);
-//        });
 
         if ($code_user == 'TC') {
             $exam_types = ExamType::all();
@@ -140,12 +125,12 @@ class ListenTicksController extends Controller
             $listen = new ListenTicks();
 
             $listen_content_question = $data['content-choose-ans-question'];
+            $file = Input::file();
 
             foreach ($listen_content_question as $idx => $item) {
                 $faker = Faker::create();
                 $maxTime = $faker->unixTime($max = 'now');
 
-                $file = Input::file();
                 if (isset($file['listen_ticks'][$key]['content-choose-ans-question'][$idx]['content']['A'])) {
                     $file_a = $file['listen_ticks'][$key]['content-choose-ans-question'][$idx]['content']['A'];
                     $destinationPath_a = public_path('backend/img-listen'); // upload path
@@ -165,15 +150,17 @@ class ListenTicksController extends Controller
                     $listen_content_question[$idx]['content']['B'] = 'backend/img-listen/'.$filename_img_b;
                     $file_b->move($destinationPath_b, $filename_img_b);
                 }
+            }
 
-                if (isset($file['listen_ticks'][$key]['content-choose-ans-question'][$idx]['url_audio'])) {
-                    $audio = $file['listen_ticks'][$key]['content-choose-ans-question'][$idx]['url_audio'];
+            if (isset($file['listen_ticks'][$key]['url_audio'])) {
+                $audio = $file['listen_ticks'][$key]['url_audio'];
 
-                    $filename_audio = $maxTime. '-'. $key. '-'. $idx. '-'. $audio->getClientOriginalName();
-                    $location_audio = public_path('backend/audio-listening/listen-ticks/');
-                    $listen_content_question[$idx]['url_audio'] = 'backend/audio-listening/listen-ticks/'.$filename_audio;
-                    $audio->move($location_audio, $filename_audio);
-                }
+                $filename_audio = $maxTime. '-'. $key. '-'. $idx. '-'. $audio->getClientOriginalName();
+                $location_audio = public_path('backend/audio-listening/listen-ticks/');
+                $audio->move($location_audio, $filename_audio);
+
+                $path_url = 'backend/audio-listening/listen-ticks/'.$filename_audio;
+                $listen->url = $path_url;
             }
 
             $listen->title = $data['title-listen-ticks'];

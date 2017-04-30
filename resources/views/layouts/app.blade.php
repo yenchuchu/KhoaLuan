@@ -269,7 +269,7 @@
             language: {
                 "sProcessing": "Đang xử lý...",
                 "sLengthMenu": "Xem _MENU_ bản ghi",
-                "sZeroRecords": "Chuwa ",
+                "sZeroRecords": "Không có kết quả ",
                 "sInfo": "",
                 "sInfoEmpty": "",
                 "sInfoFiltered": "(được lọc từ _MAX_ bản ghi)",

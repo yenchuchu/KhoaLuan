@@ -338,14 +338,16 @@ class StudentController extends Controller
                 $json_decode_answer = json_decode($item->update_json_answer);
                 $time_remaining = $item->time_remaining;
             }
-
+//dd($items_old);
             foreach ($json_decode_answer as $skill => $ans) {
 
                 foreach ($ans as $table => $tb) {
+//                    dd($tb);
                     $find = DB::table($table)->where([
                         'id' => $tb[0]->id_record
                     ])->first();
 
+//                    dd($find);
                     if ($find == null) {
                         Session::flash('message', 'Không thực hiện được hành động này!');
 

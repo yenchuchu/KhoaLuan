@@ -243,12 +243,6 @@
                 'name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][id]">' +
                 '</div>' +
 
-                '<div class="form-group">' +
-                '<label>{{trans('label.backend.create.upload_audio')}}</label>' +
-                '<input name="listen_ticks[' + item + '][content-choose-ans-question][' + item_this + '][url_audio]" ' +
-                ' required type="file">' +
-                '</div>' +
-
                 '<div class="span-choose-listen-tick">' +
                 '<span class="img-listen-tick">' +
                 '<input type="radio" id="check-answer_' + item + '_' + item_this + '_A" required ' +

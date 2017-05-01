@@ -81,36 +81,39 @@
 
         @else
             <div>
-                <h3>Listen and repeat</h3>
+                <h3>Read the sentences and listen the sample audio below. Then to repeat.</h3>
                 <input type="hidden" id="level-tesing-hidden" value="{{$get_next_level}}">
                 <input type="hidden" id="skill-code-tesing-hidden" value="Speak">
 
                 <p id="text_demo">{{$item->content}}</p>
-                @if($item->url_mp3 != null)
-                    <audio controls>
-                        <source src="/{{$item->url_mp3}}" type="audio/mpeg">
-                    </audio>
-                @else
-                    <audio controls>
-                        <source src="{{$item->url_mp3_create}}" type="audio/mpeg">
-                    </audio>
-                @endif
-
+                <div>
+                    <label style="font-size:16px;margin-right: 6px;">The sample audio </label>
+                    @if($item->url_mp3 != null)
+                        <audio controls>
+                            <source src="/{{$item->url_mp3}}" type="audio/mpeg">
+                        </audio>
+                    @else
+                        <audio controls>
+                            <source src="{{$item->url_mp3_create}}" type="audio/mpeg">
+                        </audio>
+                    @endif
+                </div>
             </div>
-
+        <hr>
             <div style="float:left; width: 100%">
                 {{--<a href="#" id="start_button" onclick="startDictation(event)"><i class="fa fa-microphone" aria-hidden="true"></i></a>--}}
 
                 <div id="results">
-                    <a href="#" id="start_button" style="margin-right: 10px;"><i class="fa fa-microphone"
-                                                                                 aria-hidden="true"></i></a>
+                    <a href="#" id="start_button" style="margin-bottom: 10px;margin-right: 10px;">
+                        <i class="fa fa-microphone" aria-hidden="true" style="margin-right: 5px;"></i>Your result: </a>
                     <span id="final_span" class="final"></span>
                     <span id="interim_span" class="interim"></span>
                 </div>
                 <div id="messages_result"></div>
+                <div id="result_similarity"></div>
             </div>
 
-            <p> For now it is supported only in Firefox(v25+) and Chrome(v47+)</p>
+            {{--<p> For now it is supported only in Firefox(v25+) and Chrome(v47+)</p>--}}
             <div id='gUMArea'>
                 <div>
                     Record:
@@ -156,8 +159,8 @@
         let mv = {
             audio: {
                 tag: 'audio',
-                type: 'audio/ogg',
-                ext: '.ogg',
+                type: 'audio/mp3',
+                ext: '.mp3',
                 gUM: {audio: true}
             }
         };
@@ -229,8 +232,8 @@
             mt.controls = true;
             mt.src = url;
             hf.href = url;
-            hf.download = '${counter++}${media.ext}';
-            hf.innerHTML = '<i class="fa fa-download" aria-hidden="true"></i> ${hf.download}';
+            hf.download = '${counter++}${media.ext}.mp3';
+//            hf.innerHTML = '<i class="fa fa-download" aria-hidden="true"></i> ${hf.download}';
             li.appendChild(mt);
             li.appendChild(hf);
             ul.appendChild(li);
@@ -289,8 +292,9 @@
                         if (data.result == null) {
                             $('#messages_result').text(data.message);
                         } else {
-                            $('#final_span').remove();
-                            $('#results').prepend(data.result);
+                            $('#final_span').text('');
+                            $('#final_span').prepend(data.result);
+                            $('#result_similarity').prepend(data.result_similarity);
                             $('#messages_result').text(data.message);
                         }
                     }

@@ -1,14 +1,14 @@
 <nav class="navbar navbar-default navbar-static-top" id="nav-bottom-tab">
     <div class="container" style="padding: 0">
         <ul class="nav navbar-nav" id="ul-menu-main">
-            <li class="active" style="border-left: 1px solid #d7d7d7;">
+            <li id="page-home-active"  style="border-left: 1px solid #d7d7d7;">
                 <a href="{{route('frontend.dashboard.student.index')}}">
                     <div class="img-icon">
                         <i class="fa fa-home" aria-hidden="true"></i>
                     </div>
                     {{trans('label.frontend.introduce')}}</a>
             </li>
-            <li>
+            <li id="page-read-active">
 
                 <a href="{{route('frontend.dashboard.student.redirect', 'Read')}}" id="href_Read">
                     <div class="img-icon">
@@ -17,7 +17,7 @@
                     {{trans('label.frontend.test_reading')}}
                 </a>
             </li>
-            <li>
+            <li id="page-listen-active">
                 <a href="{{route('frontend.dashboard.student.redirect.listen', 'Listen')}}" id="href_Listen">
                     <div class="img-icon">
                         <i class="fa fa-headphones" aria-hidden="true"></i>
@@ -25,14 +25,14 @@
                     {{trans('label.frontend.test_listening')}}
                 </a>
             </li>
-            <li>
+            <li id="page-speak-active">
                 <a href="{{route('frontend.dashboard.student.learn.speak', [])}}">
                     <div class="img-icon">
                         <i class="fa fa-smile-o" aria-hidden="true"></i>
                     </div>
                     {{trans('label.frontend.test_speaking')}}</a>
             </li>
-            <li style="border-right: 1px solid #d7d7d7;">
+            <li style="border-right: 1px solid #d7d7d7;" id="page-result-active">
                 <a href="{{route('frontend.student.show.results')}}">
                     <div class="img-icon">
                         {{--<i class="fa fa-th-list" aria-hidden="true"></i>--}}

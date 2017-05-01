@@ -42,13 +42,13 @@ class StudentController extends Controller
     {
         $class_id = Auth::user()->class_id;
         $levels = $this->levels;
+        $set_menu = 'Home';
 
-        return view('frontend.student.index', compact('class_id', 'levels'));
+        return view('frontend.student.index', compact('class_id', 'levels', 'set_menu'));
     }
 
     public function learn_speak()
     {
-
         $skill_id = $this->getSkillIdByCode('Speak');
 
         $user = Auth::user();
@@ -108,7 +108,9 @@ class StudentController extends Controller
             $item = null;
         }
 
-        return view('frontend.student.speak_skill', compact('class_id', 'levels', 'get_next_level', 'item'));
+        $set_menu = 'Speak';
+
+        return view('frontend.student.speak_skill', compact('class_id', 'levels', 'get_next_level', 'item', 'set_menu'));
     }
 
     public function check_text_speech(Request $request)
@@ -122,8 +124,9 @@ class StudentController extends Controller
             $point = 10;
             $result_diff = null;
         } else {
-            $diff = $this->get_decorated_diff($text_demo, $text_speak);
+            $diff = $this->get_decorated_diff_v2($text_demo, $text_speak);
             $result_diff = $diff['new'];
+            $result_similarity = $diff['similarity'];
             $point = $diff['point'];
         }
 
@@ -152,14 +155,12 @@ class StudentController extends Controller
         return response()->json([
             'code' => 200,
             'result' => $result_diff,
+            'result_similarity' => $result_similarity,
             'message' => 'Score: ' . $point
         ]);
     }
 
-    function get_decorated_diff($old, $new)
-    {
-        $count_word_old = str_word_count($old);
-//
+    function get_decorated_diff_v2($old, $new, $get_similarity=false){
         $from_start = strspn($old ^ $new, "\0");
         $from_end = strspn(strrev($old) ^ strrev($new), "\0");
 
@@ -169,11 +170,42 @@ class StudentController extends Controller
         $start = substr($new, 0, $from_start);
         $end = substr($new, $new_end);
         $new_diff = substr($new, $from_start, $new_end - $from_start);
-//        $old_diff = substr($old, $from_start, $old_end - $from_start);
-//dd($new_diff);
+        $old_diff = substr($old, $from_start, $old_end - $from_start);
+
+        $new = "$start<del style='background-color:#ffcccc'>$new_diff</del>$end";
+        $old = "$start<ins style='background-color:#ccffcc'>$old_diff</ins>$end";
+        if($get_similarity)
+            $get_similarity = "<ins style='background-color:#ccffcc'>$start $end</ins>";
+
+        $count_words_similar = str_word_count($start) + str_word_count($end);
+        $count_words_diff = str_word_count($new_diff);
+
+        if ($count_words_diff < $count_words_similar) {
+            $point = 10 - ($count_words_diff * 10) / $count_words_similar;
+        } else {
+            $point = 0;
+        }
+
+        return array("old"=>$old, "new"=>$new, "similarity"=>$get_similarity, 'point' => $point);
+    }
+
+    function get_decorated_diff($old, $new)
+    {
+        $count_word_old = str_word_count($old);
+
+        $from_start = strspn($old ^ $new, "\0");
+        $from_end = strspn(strrev($old) ^ strrev($new), "\0");
+
+        $old_end = strlen($old) - $from_end;
+        $new_end = strlen($new) - $from_end;
+
+        $start = substr($new, 0, $from_start);
+        $end = substr($new, $new_end);
+        $new_diff = substr($new, $from_start, $new_end - $from_start);
+        $old_diff = substr($old, $from_start, $old_end - $from_start);
+
         $count_word_correct = str_word_count($start) + str_word_count($end); // nên check cả số từ sai nữa để trừ điểm.
-//        dd($count_word_correct);
-//        var_dump($count_word_correct);
+
         if ($count_word_correct == 0) {
             $point = 0;
         } else {
@@ -184,7 +216,7 @@ class StudentController extends Controller
 
 //        dd($new_diff);
 //        $new = $start . " - " . $new_diff . " - " . $end;
-//        $old = "$start<del style='background-color:#ffcccc'>$old_diff</del>$end";
+        $old = "$start<del style='background-color:#ffcccc'>$old_diff</del>$end";
         return array("old" => $old, "new" => $new, "point" => round($point, 2), "new_diff" => $new_diff);
 //
 //        return array('1','2');
@@ -368,10 +400,10 @@ class StudentController extends Controller
         }
 
         $lamas = $this->lama;
-
+        $set_menu = 'Read';
         return view('frontend.student.join-test.index',
             compact('class_id', 'items', 'random_type_listen', 'random_type_read', 'skill_code', 'get_next_level',
-                'noti_not_complete', 'time_remaining', 'lamas'));
+                'noti_not_complete', 'time_remaining', 'lamas', 'set_menu'));
     }
 
     // xử lí lưu liên tục kết quả làm bài 15s/lần của học sinh - KY NANG READING
@@ -731,10 +763,11 @@ class StudentController extends Controller
         }
 //        dd($items);
         $lamas = $this->lama;
+        $set_menu = 'Listen';
 
         return view('frontend.student.join-test.listening.index',
             compact('class_id', 'items', 'random_type_listen', 'random_type_read', 'skill_code', 'get_next_level',
-                'noti_not_complete', 'time_remaining', 'lamas'));
+                'noti_not_complete', 'time_remaining', 'lamas', 'set_menu'));
     }
 
     // xử lí lưu liên tục kết quả làm bài 15s/lần của học sinh.- KỸ NĂNG NGHE
@@ -1058,8 +1091,8 @@ class StudentController extends Controller
         $all_results['Speak'] = $results->filter(function ($result) {
             return $result->skill_id == $this->getSkillIdByCode('Speak');
         });
-
-        return view('frontend.student.test_results', compact('all_results'));
+        $set_menu = 'Result';
+        return view('frontend.student.test_results', compact('all_results', 'set_menu'));
     }
 
     public function getSkillIdByCode($code_skill)

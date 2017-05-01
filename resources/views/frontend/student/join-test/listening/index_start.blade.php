@@ -66,21 +66,17 @@
                             <?php break;
 
                             case "listen_ticks": ?>
-
+                            <div class="audio_listen" style="margin-top: 10px; margin-bottom: 15px;">
+                                <audio controls>
+                                    <source src="/{{$detail->url_audio}}" type="audio/mpeg">
+                                </audio>
+                            </div>
                             @foreach($list_question as $question)
-
 
                                 @include('frontend.student.join-test.listening.temp_listen_tick',
                                 ['key' => $key, 'table' => $detail->table, 'number_title' =>$j_title,
                                 'k_question' => $k_question, 'id_question' => $question->id,
                                 'question_content' =>$question->content, 'id_record'=> $detail->id])
-
-                                <div class="audio_listen" style="margin-top: 10px; margin-bottom: 15px;">
-                                    <audio controls>
-                                        <source src="/{{$question->url_audio}}" type="audio/mpeg">
-                                    </audio>
-                                    <div id="show_result_{{$detail->table}}_{{$detail->id}}_{{$question->id}}" ></div>
-                                </div>
 
                                 <?php $k_question++; ?>
 
@@ -88,9 +84,24 @@
 
                             <?php break;
 
-                            case "tick_crosses":
-                                echo "classify_words!";
-                                break;
+                            case "listen_table_matchs": ?>
+                            <div class="audio_listen" style="margin-top: 10px; margin-bottom: 15px;">
+                                <audio controls>
+                                    <source src="/{{$detail->url}}" type="audio/mpeg">
+                                </audio>
+                            </div>
+                            @foreach($list_question as $question)
+
+                                @include('frontend.student.join-test.listening.temp_table_match',
+                                ['key' => $key, 'table' => $detail->table, 'number_title' =>$j_title,
+                                'k_question' => $k_question, 'id_question' => $question->id,
+                                'question_content' =>$question->content, 'id_record'=> $detail->id])
+
+                                <?php $k_question++; ?>
+
+                            @endforeach
+
+                            <?php break;
 
                             case "fill_numbers":
                                 echo "classify_words!";

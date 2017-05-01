@@ -93,9 +93,21 @@
                                             '<label class="checkbox-inline" style="color: red;"><strong>Answer:</strong>'+ end_obj[end]['answer'] +'</label>');
 //                                    console.log(name_id);
 //                                    console.log(end_obj[end]);
+                                } else if(key == 'listen_table_matchs') {
+                                    var answer_correct_match = end_obj['answer'];
                                 }
                             }
                         }
+                        if(key == 'listen_table_matchs') {
+                            var answer_correct_match = end_obj['answer'];
+                            $('#title-show-result-table-match').text('Answer: ');
+
+                            for(var i = 0; i<= answer_correct_match.length -1; i++) {
+                                $('#show-result-table-match').append(' <div class="col-md-2" style="padding-left: 29px;">' +
+                                        '<label> '+ answer_correct_match[i] +' </label>');
+                            }
+                        }
+
                     }
 
                     clearInterval(timer); // stop the interval
@@ -159,12 +171,12 @@
         skill_name = $('#skill-code-tesing-hidden').val();
         time_remaning = $('#demnguoc').attr('time_remaining');
 
+        answer_question_table_match = [];
         $("[id^='your_answer_']").each(function () {
             name_table = $(this).attr('name_table');
 //            console.log(name_table);
             id_record = $(this).attr('id_record');
             number_title = $(this).attr('number_title');
-
 
             var answer_student = [];
             if (name_table == 'listen_table_ticks') {
@@ -180,6 +192,12 @@
 //                $("input[name='your_answer_[" + name_table + "][" + id_record + "]["+ id_question +"][]']:checked").each(function () {
 //                    answer_student.push($(this).val());
 //                });
+            } else if(name_table == 'listen_table_matchs') {
+                id_question = $(this).attr('id_question');
+                left = $(this).attr('left');
+                answer_student = left + '-' + $(this).val();
+//                answer_question_table_match.push({'left': left, 'right': $(this).val()});
+
             } else {
                 id_question = $(this).attr('id_question');
                 answer_student = $(this).val();
@@ -193,9 +211,12 @@
                 'number_title': number_title,
                 'skill_name': skill_name
             });
+//            console.log(list_answer);
             unique_list_answer = dedupe(list_answer);
         });
 
+//        console.log(unique_list_answer);
+//        return false;
         auto_sent_answer(unique_list_answer, level_id, time_remaning, submit);
     }
 

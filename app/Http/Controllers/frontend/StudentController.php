@@ -156,7 +156,7 @@ class StudentController extends Controller
             'code' => 200,
             'result' => $result_diff,
             'result_similarity' => $result_similarity,
-            'message' => 'Score: ' . $point
+            'message' => 'Score: ' . round($point, 2)
         ]);
     }
 
@@ -661,6 +661,7 @@ class StudentController extends Controller
             'user_id' => $user_id,
             'skill_id' => $skill_id])->get();
 
+
         if (count($check_exist_item) == 0) {
 
             $type_exam_read = Config::get('constants.skill.' . $skill_code);
@@ -717,6 +718,7 @@ class StudentController extends Controller
 
                 }
             }
+//            dd($items);
 
             $noti_not_complete = 0;
             $time_remaining = Config::get('constants.time_start');
@@ -730,12 +732,14 @@ class StudentController extends Controller
                 $json_decode_answer = json_decode($item->update_json_answer);
                 $time_remaining = $item->time_remaining;
             }
-
+//dd($json_decode_answer);
             foreach ($json_decode_answer as $skill => $ans) {
                 foreach ($ans as $table => $tb) {
                     $find = DB::table($table)->where([
                         'id' => $tb[0]->id_record
                     ])->first();
+
+//                    dd($find);
 
                     if ($find == null) {
                         Session::flash('message', 'Không thực hiện được hành động này!');
@@ -744,15 +748,31 @@ class StudentController extends Controller
                     }
 
                     $find->table = $table;
+//                    dd($tb);
                     foreach ($tb as $t) {
 
-                        if (!isset($t->id_question)) {
-                            $find->old_answer = $t->answer_student;
+                        if($table == 'listen_table_matchs') {
+                            $answer_detail = explode('-', $t->answer_student);
+                            $id_left_ans = $answer_detail[0];
+                            $id_right_ans = $answer_detail[1];
+
+                            if (!isset($t->id_question)) {
+                                $find->old_answer = $t->answer_student;
+                            } else {
+                                $find->old_answer[$id_left_ans] = [
+                                    'id_question' => $t->id_question,
+                                    'answer_student' => $id_right_ans
+                                ];
+                            }
                         } else {
-                            $find->old_answer[$t->id_question] = [
-                                'id_question' => $t->id_question,
-                                'answer_student' => $t->answer_student
-                            ];
+                            if (!isset($t->id_question)) {
+                                $find->old_answer = $t->answer_student;
+                            } else {
+                                $find->old_answer[$t->id_question] = [
+                                    'id_question' => $t->id_question,
+                                    'answer_student' => $t->answer_student
+                                ];
+                            }
                         }
                     }
 
@@ -774,6 +794,8 @@ class StudentController extends Controller
     public function hanglingResultListen(Request $request)
     {
         $requets_all = $request->all();
+
+//        dd($requets_all);
 
         $array_tables = collect($requets_all['list_answer'])->pluck('name_table');
         $table_all = array_unique($array_tables->toArray());
@@ -809,7 +831,9 @@ class StudentController extends Controller
 
         }
 
+
         $json_answer_encode = json_encode($json_answer);
+//        dd($json_answer_encode);
         $user_id = Auth::user()->id;
         $level_id = $requets_all['level_id'];
         $time_remaining = $requets_all['time_remaning']; // thời gian còn lại của học sinh để làm bài
@@ -829,6 +853,8 @@ class StudentController extends Controller
         $skill_id_item = $this->getSkillIdByCode($ans['skill_name']);
 
         $check_item_exist = Item::where(['user_id' => $user_id, 'skill_id' => $skill_id_item])->get();
+//        dd(count($check_item_exist));
+
         if ($done == 0) {
             if (count($check_item_exist) == 0) {
                 $items = new Item();
@@ -858,9 +884,11 @@ class StudentController extends Controller
             $sum_point = Config::get('constants.sum_point'); // điểm của mỗi bài trong mỗi kỹ năng
             $add_user_skill = new UserSkill();
 
+//            dd($json_answer);
+
             // gọi hàm đối chiếu đáp án & tính điểm
             $result_answer = $this->checkAnswerListen($json_answer);
-
+//dd($result_answer);
             $point_skills = $result_answer['point'];
             $point_total = $result_answer['point_total'];
 
@@ -905,35 +933,65 @@ class StudentController extends Controller
 
         $point_sum = Config::get('constants.sum_point'); // Tổng điểm của cả bài thi.
         $max_exam = count($json_answer['Listen']); // số bài có trong 1 kỹ năng
+//        dd($max_exam);
 
         foreach ($json_answer as $skill => $items) {
             $point[$skill] = 0;
             foreach ($items as $table => $qts_asn) {
+
                 $count_correct = 0;
                 $count_incorrect = 0;
 
+
+                if($table == 'listen_table_matchs') {
+                    $qts_asn_array = [];
+                    foreach ($qts_asn as $qt_details) {
+                        $qts_asn_array[0]['order'] = $qt_details['order'];
+                        $qts_asn_array[0]['id_question'] = $qt_details['id_question'];
+                        $qts_asn_array[0]['id_record'] = $qt_details['id_record'];
+                        $qts_asn_array[0]['answer_student'][] = $qt_details['answer_student'];
+                    }
+
+                    $qts_asn = $qts_asn_array;
+                }
                 $id_record = $qts_asn[0]['id_record'];
+
                 $found_record = DB::table($table)->where(['id' => $id_record])->get()->toArray();
 
                 $json_decode_answer = json_decode($found_record[0]->content_json); // conten_json từ trong db
-
-                if (isset($json_decode_answer->answer)) { // Dạng bài: Listen Table Tick
-                    $answer_correct = $json_decode_answer->answer;
+//dd($json_decode_answer);
+                if (isset($json_decode_answer->answer)) { // Dạng bài: Listen Table Tick và Table Match
+                    $answer_correct = $json_decode_answer->answer; // đáp án đúng của đề.
+//                    dd(count($answer_correct));
 //                    echo 'isset';
                 } else {
-//                    echo 'konh ton tai';
-                    $answer_correct = $json_decode_answer;
+                    if($table == 'listen_table_matchs') {
+                        $array_ans_correct = [];
+                        foreach ($json_decode_answer as $key => $json) {
+                            foreach ($json->answer as $key_left => $val_right) {
+                                $array_ans_correct[$key_left] = $val_right;
+                            }
+                        }
+                        $answer_correct = $array_ans_correct;
+                    } else {
+                        $answer_correct = $json_decode_answer;
+                    }
                 }
 
                 if (isset($json_decode_answer->suggest_choose)) { // Dạng bài: Listen Table Tick
                     $total_qts = count($json_decode_answer->suggest_choose); // tổng số câu trong 1 bài ( 1 bài trong 1 kĩ năng)
                 } else {
-                    $total_qts = count($qts_asn); // tổng số câu trong 1 bài ( 1 bài trong 1 kĩ năng)
+                    if($table == 'listen_table_matchs') {
+                        $total_qts = count($array_ans_correct);
+                    } else {
+                        $total_qts = count($qts_asn); // tổng số câu trong 1 bài ( 1 bài trong 1 kĩ năng)
+                    }
                 }
+
 
                 $point_each_qts = ($point_sum / $max_exam) / $total_qts;  // điểm trung bình của từng question trong bài đấy.
 
-                $answer_correct_array = [];
+                $answer_correct_array = []; // đáp án đúng của đề đã cho.
                 foreach ($answer_correct as $key => $check) {
                     if (!isset($check->id)) {
                         $answer_correct_array[$key] = preg_replace('/\s+/', ' ', trim($check));
@@ -941,13 +999,26 @@ class StudentController extends Controller
                         $answer_correct_array[$check->id] = preg_replace('/\s+/', ' ', trim($check->answer));
                     }
                 }
+//                dd($answer_correct_array);
 
                 foreach ($qts_asn as $item) {
+//                    dd($item);
                     if ($item['id_question'] == 0) {
                         $text_answer_correct = $answer_correct_array;
                     } else {
-                        $id_question = $item['id_question'];
-                        $text_answer_correct = $answer_correct_array[$id_question];
+                        if($table == 'listen_table_matchs') {
+                            $text_answer_correct = [];
+                            $id_question = $item['id_question'];
+
+                            foreach ($answer_correct_array as  $key_left => $value_right_1) {
+                                $text_answer_correct[] = $key_left.'-'.$value_right_1;
+                            }
+
+                        } else {
+                            $id_question = $item['id_question'];
+                            $text_answer_correct = $answer_correct_array[$id_question];
+                        }
+
                     }
 
                     if (is_array($item['answer_student']) == true) {
@@ -955,26 +1026,43 @@ class StudentController extends Controller
                     } else {
                         $answer_student = preg_replace('/\s+/', ' ', trim($item['answer_student']));
                     }
-
+//dd($answer_student);
                     $result_check = [];
-                    if (is_array($text_answer_correct) == true) { // Dạng bài: Listen Table Tick
-
+                    if (is_array($text_answer_correct) == true) { // Dạng bài: Listen Table Tick, Table match
+//dd($text_answer_correct);
                         if (!empty($answer_student)) {
-                            $result_check['answer_student_incorrect'] = array_diff($answer_student,
-                                $text_answer_correct);
-                            $result_check['answer_correct_miss'] = array_diff($text_answer_correct, $answer_student);
+//                            if($table == 'listen_table_matchs') {
+//                                $answer_student_convert_array[] = $answer_student;
+////                                dd($answer_student_convert_array);
+//                                $result_check['answer_student_incorrect'] = array_diff($answer_student_convert_array,
+//                                    $text_answer_correct);
+//                                $result_check['answer_correct_miss'] = array_diff($text_answer_correct, $answer_student_convert_array);
+//                            } else {
+                                $result_check['answer_student_incorrect'] = array_diff($answer_student,
+                                    $text_answer_correct);
+                                $result_check['answer_correct_miss'] = array_diff($text_answer_correct, $answer_student);
+//                            }
+
                         } else {
                             $result_check['answer_student_incorrect'] = '';
                             $result_check['answer_correct_miss'] = $text_answer_correct;
                         }
-
+//dd($result_check);
                         $check_correct[$table][$id_record]['answer'] = $text_answer_correct;
                         $check_correct[$table][$id_record]['error'] = $result_check['answer_student_incorrect'];
 
                         $count_incorrect_table_tick = count($result_check['answer_student_incorrect']);
                         $count_correct_table_tick = count($answer_student) - count($result_check['answer_student_incorrect']);
-                        $point[$skill] += $point_each_qts * $count_correct_table_tick - $point_each_qts * $count_incorrect_table_tick;
 
+//                        dd($count_correct_table_tick);
+//                        dd($point_each_qts);
+                       $point_item = $point_each_qts * $count_correct_table_tick - $point_each_qts * $count_incorrect_table_tick;
+                        if($point_item < 0) {
+                            $point_item = 0;
+                        }
+
+                        $point[$skill] += $point_item;
+//dd($point);
                     } else { // Dạng các dạng bài còn lại
                         if (strcmp($text_answer_correct, $answer_student) == 0) {
 //                       $check_correct[$table][$id_record][$id_question] = 1; // đúng kết quả

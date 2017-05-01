@@ -314,16 +314,14 @@
     });
 
     $('#page-home-active').addClass('active');
+    <?php
+            if(!isset($set_menu)) {
+                $set_menu = '';
+            }
+            ?>
     set_menu_active = '{{$set_menu}}';
-    console.log(set_menu_active);
-    if(set_menu_active == 'Home') {
-        $('#page-home-active').addClass('active');
 
-        $('#page-speak-active').removeClass('active');
-        $('#page-listen-active').removeClass('active');
-        $('#page-read-active').removeClass('active');
-        $('#page-result-ative').removeClass('active');
-    } else if(set_menu_active == 'Read') {
+    if(set_menu_active == 'Read') {
         $('#page-read-active').addClass('active');
 
         $('#page-speak-active').removeClass('active');
@@ -344,13 +342,20 @@
         $('#page-listen-active').removeClass('active');
         $('#page-read-active').removeClass('active');
         $('#page-home-active').removeClass('active');
-    } else {
+    } else  if(set_menu_active == 'Speak') {
         $('#page-speak-active').addClass('active');
 
         $('#page-result-active').removeClass('active');
         $('#page-listen-active').removeClass('active');
         $('#page-read-active').removeClass('active');
         $('#page-home-active').removeClass('active');
+    } else {
+        $('#page-home-active').addClass('active');
+
+        $('#page-speak-active').removeClass('active');
+        $('#page-listen-active').removeClass('active');
+        $('#page-read-active').removeClass('active');
+        $('#page-result-ative').removeClass('active');
     }
 
 </script>

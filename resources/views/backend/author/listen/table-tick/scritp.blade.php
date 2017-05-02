@@ -36,10 +36,10 @@
                 '<tr>' +
                 '<td>' +
                 '<input type="text" placeholder="{{trans('label.backend.create.suggest_answer')}}" ' +
-                'name="listen_table_ticks[' + j + '][content-choose-ans-question][1][suggest]">' +
+                'name="listen_table_ticks[' + j + '][content-choose-ans-question][1][suggest]" required>' +
                 '</td>' +
                 '<td><input type="checkbox"' +
-                'name="listen_table_ticks[' + j + '][content-choose-ans-question][1][answer]">' +
+                'name="listen_table_ticks[' + j + '][content-choose-ans-question][1][answer]" required>' +
                 '</td>' +
                 '</tr>' +
                 '</table>' +

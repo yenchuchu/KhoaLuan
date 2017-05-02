@@ -17,9 +17,9 @@
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         cell1.innerHTML = '<input type="text" placeholder="{{trans('label.backend.create.suggest_answer')}}" ' +
-                'name="listen_table_ticks[' + item + '][content-choose-ans-question][' + item_this + '][suggest]">';
+                'name="listen_table_ticks[' + item + '][content-choose-ans-question][' + item_this + '][suggest]" required>';
         cell2.innerHTML = '<input type="checkbox"' +
-                'name="listen_table_ticks[' + item + '][content-choose-ans-question][' + item_this + '][answer]">';
+                'name="listen_table_ticks[' + item + '][content-choose-ans-question][' + item_this + '][answer]" required>';
 
         $('#add_item_question_' + item).attr('item_this', item_this);
     }

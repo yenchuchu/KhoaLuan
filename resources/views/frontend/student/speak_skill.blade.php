@@ -274,6 +274,7 @@
 
             $('#start').attr('disabled', 'disabled');
             $('#stop').attr('disabled', 'disabled');
+            $('#check_diff').attr('disabled', 'disabled');
             text_demo = $('#text_demo').text();
             text_speak = $('#final_span').text();
             level_now = '{{$get_next_level}}';

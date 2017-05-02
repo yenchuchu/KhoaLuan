@@ -153,6 +153,7 @@ class StudentController extends Controller
         $add_user_skill->save();
 
         $point_around = round($point, 2);
+        dd($point_around);
 
         return response()->json([
             'code' => 200,

@@ -274,11 +274,11 @@ class ListenTableMatchController extends Controller
             if(isset($data['url_audio'])) {
                 $file = Input::file();
 
-                if (isset($file['listen_table_ticks'][$key]['url_audio'])) {
+                if (isset($file['listen_table_matchs'][$key]['url_audio'])) {
                     $faker = Faker::create();
                     $maxTime = $faker->unixTime($max = 'now');
 
-                    $audio = $file['listen_table_ticks'][$key]['url_audio'];
+                    $audio = $file['listen_table_matchs'][$key]['url_audio'];
 
                     $filename_audio = $maxTime. '-'. $key. '-'. '-'. $audio->getClientOriginalName();
                     $location_audio = public_path('backend/audio-listening/listen-table-match/');

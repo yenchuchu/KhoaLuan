@@ -31,5 +31,8 @@
         width:50%;
     }
 
+    .table-match td {
+        width: 50%;
+    }
 
 </style>

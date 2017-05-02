@@ -5,6 +5,7 @@
         $('#'+id).parent().remove();
     }
 
+    // Listen Table Tick
     function add_item_question_LTT(id, table_id) {
 
         item = $('#' + id).attr('item');
@@ -24,6 +25,40 @@
         $('#add_item_question_' + item).attr('item_this', item_this);
     }
 
+    // Listen Table Match
+    function add_item_question_LTM(id, table_id) {
+        alpha_order = [];
+        <?php
+                foreach ($alphab_order as $key_al => $val_al) { ?>
+                    alpha_order['{{$key_al}}'] = '{{$val_al}}';
+         <?php } ?>
+//        console.log(alpha_order);
+        item = $('#' + id).attr('item');
+        item_this = $('#' + id).attr('item_this');
+
+        item_this++;
+
+        var table = document.getElementById(table_id);
+        var row = table.insertRow(0);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = '<label> ' + item_this + ' </label>' +
+        ' <input type="text" placeholder="{{trans('label.backend.create.suggest_answer')}}"' +
+                'name="listen_table_matchs[' + item + '][content-choose-ans-question][left][' + item_this + ']" required>' +
+                '<div class="col-sm-3" style="padding-left: 0px; float:right;">' +
+                '<label> Đáp án </label>' +
+        ' <input type="text" maxlength="1" style="text-transform:uppercase" ' +
+                'name="listen_table_matchs[' + item + '][answer][' + item_this + ']" required>' +
+                '</div>';
+
+        cell2.innerHTML = '<label> '+ alpha_order[item_this] +' </label>' +
+                ' <input type="text"' +
+        'name="listen_table_matchs[' + item + '][content-choose-ans-question][right][' + alpha_order[item_this] + ']" required>';
+
+        $('#add_item_question_' + item).attr('item_this', item_this);
+    }
+
+    // Read: Answer Question
     function add_item_question_AQ(id) {
 
         item = $('#' + id).attr('item');
@@ -58,6 +93,7 @@
         $('#add_item_question_'+ item).attr('item_this', item_this);
     }
 
+    // Read: Find Error
     function add_item_question_find_error(id) {
 
         item = $('#' + id).attr('item');
@@ -98,6 +134,7 @@
         $('#add_item_question_' + item).attr('item_this', item_this);
     }
 
+    // Read: Multiple Choice
     function add_item_question_MT(id) {
 
         item = $('#' + id).attr('item');
@@ -156,6 +193,7 @@
         $('#add_item_question_' + item).attr('item_this', item_this);
     }
 
+    // Read: Tick True False
     function add_item_question_TF(id) {
 
         item = $('#' + id).attr('item');
@@ -195,6 +233,7 @@
         $('#add_item_question_' + item).attr('item_this', item_this);
     }
 
+    // Listen: Listen Complete Sentences
     function add_item_question_LCS(id) {
 
         item = $('#' + id).attr('item');
@@ -229,6 +268,7 @@
         $('#add_item_question_'+ item).attr('item_this', item_this);
     }
 
+    // Listen: Tick
     function add_item_question_LT(id) {
 
         item = $('#' + id).attr('item');

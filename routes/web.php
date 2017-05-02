@@ -13,7 +13,7 @@
 
 
 //if (App::environment('remote')) {
-//   URL::forceSchema('https');
+   URL::forceSchema('https');
 //}
 
 Route::group(['middleware' => 'auth'], function () {
@@ -235,11 +235,6 @@ Route::group(['middleware' => 'auth'], function () {
                     });
 
                     Route::group(array('prefix' => 'listen_ticks'), function () {
-//                        Route::get('/{class_code}', 'backend\author\ListenTicksController@index')
-//                            ->name('backend.manager.author.listen.listen_ticks');
-//
-//                        Route::get('/create/{code_user}/{class_code}', 'backend\author\ListenTicksController@create')
-//                            ->name('backend.manager.author.listen.listen_ticks.create');
 
                         Route::get('/', 'backend\author\ListenTicksController@index')
                             ->name('backend.manager.author.listen.listen_ticks');
@@ -249,6 +244,18 @@ Route::group(['middleware' => 'auth'], function () {
 
                         Route::post('/store', 'backend\author\ListenTicksController@store')
                             ->name('backend.manager.author.listen.listen_ticks.store');
+                    });
+
+                    Route::group(array('prefix' => 'listen_table_match'), function () {
+
+                        Route::get('/', 'backend\author\ListenTableMatchController@index')
+                            ->name('backend.manager.author.listen.listen_table_match');
+
+                        Route::get('/create/{code_user}', 'backend\author\ListenTableMatchController@create')
+                            ->name('backend.manager.author.listen.listen_table_match.create');
+
+                        Route::post('/store', 'backend\author\ListenTableMatchController@store')
+                            ->name('backend.manager.author.listen.listen_table_match.store');
                     });
                 });
 
@@ -288,6 +295,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('/update-listen-ticks', 'backend\author\ListenTicksController@update')
             ->name('backend.manager.author.listen.listen_ticks.update');
+
+        Route::post('/update-listen-ticks', 'backend\author\ListenTableMatchController@update')
+            ->name('backend.manager.author.listen.listen_table_match.update');
 
 //        Update Read
         Route::post('/update/answer-questions', 'backend\author\AnswerQuestionsController@update')

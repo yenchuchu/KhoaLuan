@@ -26,6 +26,7 @@ return [
                     'listen_ticks' => 'Nghe và chọn ảnh phù hợp',
                     'listen_complete_sentences' => 'Nghe và hoàn thành câu',
                     'listen_table_ticks' => 'Nghe và chọn đáp án dựa vào bảng',
+                    'listen_table_match' => 'Nghe và nối 2 cột trong bảng',
                 ],
             ],
             'reading' => [

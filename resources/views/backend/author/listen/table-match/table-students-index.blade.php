@@ -1,4 +1,4 @@
-<table class="table table-hover" id="manager_listen_ticks_students">
+<table class="table table-hover" id="manager_listen_table_match_students">
     <thead>
     <tr>
         <th>STT</th>
@@ -33,7 +33,7 @@
             </td>
             <td>
 
-                <a href="{{route('backend.manager.author.get.detail', ['listen_ticks' , Auth::user()->id, $item['id']])}}">
+                <a href="{{route('backend.manager.author.get.detail', ['listen_table_matchs' , Auth::user()->id, $item['id']])}}">
                     {{trans('label.backend.table.go_to_link')}}</a>
 
             </td>

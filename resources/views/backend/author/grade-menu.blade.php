@@ -71,21 +71,6 @@
 
 @section('header')
     <h1 class="page-header">{{ trans('label.backend.dashboard')  }}</h1>
-    {{--<ol class="breadcrumb">--}}
-        {{--<li class="breadcrumb-item"><a href="{{route('backend.manager.author.index')}}">{{ trans('label.backend.dashboard')  }}</a></li>--}}
-        {{--<li class="breadcrumb-item ">--}}
-            {{--<span class="bread-active">--}}
-                    {{--{{ trans('label.backend.author.dashboard')  }}--}}
-                {{--@if($name_code == 'Elementary')--}}
-                  {{--học sinh cấp 1--}}
-                {{--@elseif($name_code == 'Secondary')--}}
-                   {{--học sinh cấp 2--}}
-                {{--@else--}}
-                    {{--học sinh cấp 3--}}
-                {{--@endif--}}
-            {{--</span>--}}
-        {{--</li>--}}
-    {{--</ol>--}}
 
 @stop
 
@@ -153,6 +138,12 @@
                                    class="list-group-item">
                                     {{trans('label.backend.author.listening.grade_menu.listen_table_ticks')}}
                                     <span class="badge">{{$tal_listen_table_ticks}}</span></a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{route('backend.manager.author.listen.listen_table_match')}}"
+                                   class="list-group-item">
+                                    {{trans('label.backend.author.listening.grade_menu.listen_table_match')}}
+                                    <span class="badge">{{$tal_listen_table_match}}</span></a>
                             </li>
                         </ul>
                     </div>

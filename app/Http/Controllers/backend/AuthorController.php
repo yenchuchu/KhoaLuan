@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Classes;
 use App\Http\Controllers\Controller;
 use App\Level;
+use App\ListenTableMatchs;
 use App\Speaking;
 use App\User;
 use Auth;
@@ -64,11 +65,14 @@ class AuthorController extends Controller
         $listen_table_ticks = ListenTableTicks::getRecordByUserId($user_id_auth);
         $tal_listen_table_ticks  = count($listen_table_ticks );
 
+        $listen_table_match = ListenTableMatchs::getRecordByUserId($user_id_auth);
+        $tal_listen_table_match  = count($listen_table_match );
+
         $speaks = Speaking::getRecordByUserId($user_id_auth);
         $tal_speaks = count($speaks);
 
         return view('backend.author.grade-menu', compact('tal_ans_question', 'tal_find_error', 'tal_multiple', 'tal_tick_true_false',
-            'tal_listen_complete', 'tal_listen_ticks', 'tal_listen_table_ticks', 'tal_speaks'));
+            'tal_listen_complete', 'tal_listen_ticks', 'tal_listen_table_ticks', 'tal_listen_table_match', 'tal_speaks'));
 //        return view('backend.author.index');
     }
 

@@ -28,7 +28,7 @@
         <div class="">
             <div class="row">
                 <div class="main-body">
-{{dd($record)}}
+
                     <?php
                     switch ($record->table) {
                     case "answer_questions": ?>

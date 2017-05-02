@@ -18,7 +18,7 @@
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/dashboard', 'DashboardController@redirectUrl')->name('dashboard.redirect.login');
+    Route::get('/', 'DashboardController@redirectUrl')->name('dashboard.redirect.login');
 
     Route::group(array('prefix' => 'backend'), function () {
 
@@ -414,7 +414,7 @@ Route::group(['middleware' => 'auth'], function () {
 //Route::group(array('middleware' => 'guest'), function () {
 // dashboard
 //Route::group(array('middleware' => 'checkRole:TC|AU|guest'), function () {
-Route::get('/', 'DashboardController@index')->name('dashboard');
+//Route::get('/', 'DashboardController@redirectUrl')->name('dashboard');
 Route::get('/test-design', 'DashboardController@dashboardDesign')->name('dashboard.design');
 //});
 

@@ -668,7 +668,7 @@ class StudentController extends Controller
 
             $type_exam_read = Config::get('constants.skill.' . $skill_code);
             $random_type_read = array_rand($type_exam_read, 3); // 3
-
+//dd($random_type_read);
             $items = [];
 
             if (!isset($check_read)) {
@@ -682,6 +682,7 @@ class StudentController extends Controller
                             'status' => 1
                         ])
                         ->get()->toArray();
+//                    dd($read_table);
 
                     if (count($read_table) != 0) {
                         $max = count($read_table) - 1;

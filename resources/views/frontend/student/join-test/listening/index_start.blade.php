@@ -5,7 +5,6 @@
 </div>
 
 <div class="row wrap-test-class" id="testing-id">
-
     <?php $i_skill = 1;
     $j_title = 1;
     ?>
@@ -34,9 +33,10 @@
 
                             case "listen_table_ticks": ?>
                             <div class="audio_listen" style="margin-top: 10px; margin-bottom: 15px;">
-                                <audio controls>
-                                    <source src="/{{$detail->url}}" type="audio/mpeg">
+                                <audio controls name="media" style="height: 34px;width: 31%;">
+                                    <source src="{{$detail->url}}" type="audio/mp3">
                                 </audio>
+
                             </div>
                             @include('frontend.student.join-test.listening.temp_table_tick',
                             ['key' => $key, 'table' => $detail->table, 'number_title' =>$j_title,
@@ -50,7 +50,7 @@
                             case "listen_complete_sentences": ?>
                             <div class="audio_listen" style="margin-top: 10px; margin-bottom: 15px;">
                                 <audio controls>
-                                    <source src="/{{$detail->url}}" type="audio/mpeg">
+                                    <source src="{{$detail->url}}" type="audio/mp3">
                                 </audio>
                             </div>
 
@@ -68,7 +68,7 @@
                             case "listen_ticks": ?>
                             <div class="audio_listen" style="margin-top: 10px; margin-bottom: 15px;">
                                 <audio controls>
-                                    <source src="/{{$detail->url_audio}}" type="audio/mpeg">
+                                    <source src="{{$detail->url_audio}}" type="audio/mp3">
                                 </audio>
                             </div>
                             @foreach($list_question as $question)
@@ -87,7 +87,7 @@
                             case "listen_table_matchs": ?>
                             <div class="audio_listen" style="margin-top: 10px; margin-bottom: 15px;">
                                 <audio controls>
-                                    <source src="/{{$detail->url}}" type="audio/mpeg">
+                                    <source src="{{$detail->url}}" type="audio/mp3">
                                 </audio>
                             </div>
                             @foreach($list_question as $question)

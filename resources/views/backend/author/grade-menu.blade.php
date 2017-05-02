@@ -127,12 +127,12 @@
                                     {{trans('label.backend.author.listening.grade_menu.listen_complete_sentences')}}
                                     <span class="badge">{{$tal_listen_complete}}</span></a>
                             </li>
-                            <li class="list-group-item">
-                                <a href="{{route('backend.manager.author.listen.listen_ticks')}}"
-                                   class="list-group-item">
-                                    {{trans('label.backend.author.listening.grade_menu.listen_ticks')}}
-                                    <span class="badge">{{$tal_listen_ticks}}</span></a>
-                            </li>
+                            {{--<li class="list-group-item">--}}
+                                {{--<a href="{{route('backend.manager.author.listen.listen_ticks')}}"--}}
+                                   {{--class="list-group-item">--}}
+                                    {{--{{trans('label.backend.author.listening.grade_menu.listen_ticks')}}--}}
+                                    {{--<span class="badge">{{$tal_listen_ticks}}</span></a>--}}
+                            {{--</li>--}}
                             <li class="list-group-item">
                                 <a href="{{route('backend.manager.author.listen.listen_table_ticks')}}"
                                    class="list-group-item">

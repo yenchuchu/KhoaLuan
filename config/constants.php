@@ -16,7 +16,7 @@ return [
             'listen_table_ticks' => 'Table Tick',
             'listen_table_matchs' => 'Table Matchs',
             'listen_complete_sentences' => 'Complete Sentences',
-            'listen_ticks' => 'Listen and Tick',
+//            'listen_ticks' => 'Listen and Tick',
 //            'listen_tick_crosses' => 'Tick Cross',
 //            'listen_fill_numbers' => 'Listen And Fill In One Number',
         ],

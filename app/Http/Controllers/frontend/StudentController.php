@@ -151,7 +151,7 @@ class StudentController extends Controller
         $add_user_skill->skill_id = $skill_id;
 
         $add_user_skill->save();
-//        dd(round($point, 2));
+        dd(round($point, 2));
 
         return response()->json([
             'code' => 200,

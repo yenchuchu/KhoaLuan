@@ -272,8 +272,8 @@
 
         $('#check_diff').click(function () {
 
-            $('#start').attr('disabled');
-            $('#stop').attr('disabled');
+            $('#start').attr('disabled', 'disabled');
+            $('#stop').attr('disabled', 'disabled');
             text_demo = $('#text_demo').text();
             text_speak = $('#final_span').text();
             level_now = '{{$get_next_level}}';

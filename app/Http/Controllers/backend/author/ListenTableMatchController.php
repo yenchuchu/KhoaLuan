@@ -206,7 +206,7 @@ class ListenTableMatchController extends Controller
 
     public function update(Request $request) {
         $all_data = $request->all();
-//dd($all_data);
+
         if (!isset($all_data['level_id'])) {
             $all_data['level_id'] = null;
         }
@@ -233,22 +233,30 @@ class ListenTableMatchController extends Controller
         $data_new = [];
         $new_id = [];
 
-        foreach ($all_data['listen_table_ticks'] as $key => $data) {
+        foreach ($all_data['listen_table_matchs'] as $key => $data) {
             $id_record = $data['id_record'];
-            $listen = ListenTableTicks::where(['id' => $id_record])->first();
-
-            $listen_content_question = $data['content-choose-ans-question'];
+            $listen = ListenTableMatchs::where(['id' => $id_record])->first();
 
             $array_json = [];
-            foreach ($listen_content_question as $idx => $item) {
-                $array_json['suggest_choose'][] = $item['suggest'];
+            $array_json[1]['id'] = 1;
 
-                if(isset($item['answer'])) {
-                    $array_json['answer'][] = $item['suggest'];
-                }
+            ksort($data['content-choose-ans-question']['right']);
+            ksort($data['content-choose-ans-question']['left']);
+            ksort($data['answer']);
+
+            foreach ($data['content-choose-ans-question']['left'] as $key_l => $val_l) {
+                $array_json[1]['content']['left'][$key_l] = $val_l;
             }
 
-            $listen->title = $data['title-listen-table-ticks'];
+            foreach ($data['content-choose-ans-question']['right'] as $key_r => $val_r) {
+                $array_json[1]['content']['right'][$key_r] = $val_r;
+            }
+
+            foreach ($data['answer'] as $key_ans => $val_ans) {
+                $array_json[1]['answer'][$key_ans] = strtoupper($val_ans);
+            }
+
+            $listen->title = $data['title-listen-table-match'];
 //            $listen->user_id_edit = $user_auth_id;
             $listen->type_user = $code_user;
             $listen->content_json = json_encode($array_json);
@@ -273,10 +281,10 @@ class ListenTableMatchController extends Controller
                     $audio = $file['listen_table_ticks'][$key]['url_audio'];
 
                     $filename_audio = $maxTime. '-'. $key. '-'. '-'. $audio->getClientOriginalName();
-                    $location_audio = public_path('backend/audio-listening/listen-table-ticks/');
+                    $location_audio = public_path('backend/audio-listening/listen-table-match/');
                     $audio->move($location_audio, $filename_audio);
 
-                    $path_url = 'backend/audio-listening/listen-table-ticks/'.$filename_audio;
+                    $path_url = 'backend/audio-listening/listen-table-match/'.$filename_audio;
                     $listen->url = $path_url;
                 }
             }
@@ -300,8 +308,8 @@ class ListenTableMatchController extends Controller
             $json_encode_id = json_encode($new_id);
 
             $data_new['user_id_receive'] = ['0' => $all_data['authorspost']];
-            $data_new['url'] = route('backend.manager.author.get.detail', ['listen_table_ticks' , $all_data['authorspost'], $json_encode_id]);
-            $data_new['content'] = 'Bài viết về Listen Table Ticks mức '. $level_title.  ' cho '. $title_class .' của bạn đã được chấp nhận ';
+            $data_new['url'] = route('backend.manager.author.get.detail', ['listen_table_matchs' , $all_data['authorspost'], $json_encode_id]);
+            $data_new['content'] = 'Bài viết về Listen Table Match mức '. $level_title.  ' cho '. $title_class .' của bạn đã được chấp nhận ';
 
             Session::flash('notification_new', $data_new);
 
@@ -317,7 +325,7 @@ class ListenTableMatchController extends Controller
                     'user_admin' => $user_admin]);
 
         } else {
-            $ans_questions_all = ListenTableTicks::where(['type_user' => 'ST'])->with('skills', 'levels')
+            $ans_questions_all = ListenTableMatchs::where(['type_user' => 'ST'])->with('skills', 'levels')
                 ->orderBy('type_code', 'desc')
                 ->get();
 
@@ -332,7 +340,7 @@ class ListenTableMatchController extends Controller
                 $array_id_intypecode[$code]['created_at'] = array_unique($item->pluck('created_at')->toArray());
             }
 
-            return Redirect::to('backend/manager-author/listening/listen_table_ticks')
+            return Redirect::to('backend/manager-author/listening/listen_table_match')
                 ->with(['array_id_intypecode' => $array_id_intypecode]);
         }
     }

@@ -69,19 +69,19 @@
                                                 <td width="50%">
                                                     <label>{{$i}} </label>
                                                     <input type="text" placeholder="{{trans('label.backend.create.suggest_answer')}}"
-                                                           name="listen_table_matchs[1][content-choose-ans-question][left][1]"
+                                                           name="listen_table_matchs[{{$key_idx}}][content-choose-ans-question][left][{{$i}}]"
                                                            value="{{$array_left[$i]}}" required>
 
                                                     <div class="col-sm-3" style="padding-left: 0px; float:right;">
                                                         <label>Đáp án </label>
                                                         <input type="text" maxlength="1" style="text-transform:uppercase" value="{{$array_answer[$i]}}"
-                                                               name="listen_table_matchs[1][answer][1]">
+                                                               name="listen_table_matchs[{{$key_idx}}][answer][{{$i}}]">
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <label>{{$array_key_right[$i]}} </label>
                                                     <input type="text" value="{{$array_right[$array_key_right[$i]]}}"
-                                                           name="listen_table_matchs[1][content-choose-ans-question][right][{{$alphab_order[1]}}]" required>
+                                                           name="listen_table_matchs[{{$key_idx}}][content-choose-ans-question][right][{{$alphab_order[$i]}}]" required>
                                                 </td>
                                             </tr>
                                         @endfor

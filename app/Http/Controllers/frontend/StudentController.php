@@ -123,6 +123,7 @@ class StudentController extends Controller
         if (strcmp($text_demo, $text_speak) == 0) {
             $point = 10;
             $result_diff = null;
+            $result_similarity = '';
         } else {
             $diff = $this->get_decorated_diff_v2($text_demo, $text_speak);
             $result_diff = $diff['new'];

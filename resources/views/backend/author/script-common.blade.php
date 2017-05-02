@@ -29,6 +29,7 @@
     function add_item_question_LTM(id, table_id) {
         alpha_order = [];
         <?php
+                $alphab_order = config('constants.alphab');
                 foreach ($alphab_order as $key_al => $val_al) { ?>
                     alpha_order['{{$key_al}}'] = '{{$val_al}}';
          <?php } ?>

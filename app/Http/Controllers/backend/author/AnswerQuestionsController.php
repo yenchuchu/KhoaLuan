@@ -56,14 +56,7 @@ class AnswerQuestionsController extends Controller
             $array_id_intypecode[$code]['created_at'] = $item->pluck('created_at')->toArray();
         }
 
-//        $class_code = $this->url_parameters['class_code'];
-//        if ($class_code == 1) {
-//            $name_code = 'Elementary';
-//        } elseif ($class_code == 2) {
-//            $name_code = 'Secondary';
-//        } elseif ($class_code == 3) {
-//            $name_code = 'High School ';
-//        }
+        dd($array_id_intypecode);
 
         return view('backend.author.answer_question.index',
             compact('name_code', 'array_id_intypecode'));

@@ -19,7 +19,7 @@
                 '<div class="col-lg-12" style="padding-left: 0;">' +
                 '<div class="form-group">' +
                 '<input type="text" name="listen_table_ticks[' + j + '][title-listen-table-ticks] " class="form-control"' +
-                ' placeholder="{{trans('label.backend.create.title-question')}}" required>' +
+                ' placeholder="{{trans('label.backend.create.title-question')}}" required >' +
                 '</div>' +
                 '</div>' +
 
@@ -39,7 +39,7 @@
                 'name="listen_table_ticks[' + j + '][content-choose-ans-question][1][suggest]" required>' +
                 '</td>' +
                 '<td><input type="checkbox"' +
-                'name="listen_table_ticks[' + j + '][content-choose-ans-question][1][answer]" required>' +
+                'name="listen_table_ticks[' + j + '][content-choose-ans-question][1][answer]">' +
                 '</td>' +
                 '</tr>' +
                 '</table>' +

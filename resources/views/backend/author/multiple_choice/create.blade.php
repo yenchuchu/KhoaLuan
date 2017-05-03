@@ -96,7 +96,7 @@
 
                         <div class="col-lg-12" style="padding-left: 0;">
                             <div class="form-group">
-                                <input type="text" name="multiple_choice[1][title-multiple-choice]"
+                                <input type="text" name="multiple_choice[1][title-multiple-choice]" required
                                        class="form-control" required placeholder="{{trans('label.backend.create.title-question')}}">
                             </div>
                         </div>
@@ -112,7 +112,7 @@
                             </div>
                             <div class="form-group" style="width:98%; float:left;">
                                 <div class="span-text-question">
-                                    <textarea type="text" class="form-control"
+                                    <textarea type="text" class="form-control count-question-multiple"
                                               name="multiple_choice[1][content-choose-ans-question][1][content]"
                                               placeholder="This is ... demo" required></textarea>
                                 </div>
@@ -162,6 +162,7 @@
 
     </div>
 
+    <input type="hidden" id="total-question">
     <div class="row">
         <div style="float: right">
             <button class="save-multiple-choice btn style-save" title="Save" type="submit">
@@ -178,6 +179,39 @@
 
 @section('script')
     <script>
+
+        $('.save-multiple-choice').click(function () {
+            var numItems = $('.count-question-multiple').length;
+            var total_question = [];
+            var i = 0;
+            $('[id^="add_item_question_"]').each(function () {
+                item = $('#' + this.id).attr('item');
+                item_this = $('#' + this.id).attr('item_this');
+
+                total_question[i] = [item, item_this];
+                i++;
+            });
+
+            var count_question = total_question.length;
+            var order_q = 0;
+            var item_order = 0;
+            var order_item_this_next = 0;
+            var order_item_this = 0;
+            var atLeastOneIsChecked = 0;
+
+            for(order_q = 0; order_q< count_question; order_q++) {
+                item_order = order_q + 1;
+                for (order_item_this = 0; order_item_this < total_question[order_q][1]; order_item_this++) {
+                    order_item_this_next = order_item_this + 1;
+                    atLeastOneIsChecked+= $('input[name="multiple_choice['+item_order+'][content-choose-ans-question]['+order_item_this_next+'][answer]"]:checked').length;
+                }
+            }
+
+            if(atLeastOneIsChecked < numItems) {
+                swal('', 'Bạn phải điền hết đáp án!', 'info');
+            }
+        });
+
         swal('Tạo bài luyện tập theo mức độ khó cho từng lớp. ' +
                 'Mỗi bài bao gồm đề bài, các câu chứa 3 dấu chấm (.) liền nhau là vị trí cần chọn đáp án đúng dể điền vào.' +
                 'Mỗi câu gồm 3 đáp án gợi ý, sau khi nhập 3 đáp án gợi ý, tác giả kích chọn đáp án đúng. ' +

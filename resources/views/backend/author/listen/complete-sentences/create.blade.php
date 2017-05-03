@@ -104,7 +104,7 @@
                         </div>
                         <div class="form-group">
                             <label>{{trans('label.backend.create.upload_audio')}}</label>
-                            {{ Form::file('listen_complete_sentences[1][audio]', array()) }}
+                            {{ Form::file('listen_complete_sentences[1][audio]', array('required')) }}
                         </div>
                         <div class="form-group" style="width:100%; float:left;">
                             <div class="span-numb-question" id="id-numb-question-1">
@@ -122,7 +122,7 @@
                             <div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}"
-                                    name="listen_complete_sentences[1][content-choose-ans-question][1][answer]">
+                                    name="listen_complete_sentences[1][content-choose-ans-question][1][answer]" required>
                                 </div>
                             </div>
                         </div>

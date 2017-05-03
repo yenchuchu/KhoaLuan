@@ -319,6 +319,8 @@ Route::group(['middleware' => 'auth'], function () {
         // SHOW ALL NOTIFICATIONS
         Route::post('/all-noti', 'backend\AuthorController@show_all_noti')
             ->name('backend.manager.backend.all.noti');
+        Route::get('/all-noti-get', 'backend\AuthorController@show_all_noti')
+            ->name('backend.manager.backend.all.noti.get');
 
 
     });

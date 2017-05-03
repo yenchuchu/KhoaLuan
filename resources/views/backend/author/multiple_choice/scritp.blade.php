@@ -32,7 +32,7 @@
 
                 '<div class="form-group" style="width:98%; float:left;">' +
                 '<div class="span-text-question">' +
-                '<textarea type="text" class="form-control" ' +
+                '<textarea type="text" class="form-control count-question-multiple" ' +
                 'name="multiple_choice[' + j + '][content-choose-ans-question][1][content]"' +
                 'placeholder="This is ... demo" required></textarea>' +
                 '</div>' +

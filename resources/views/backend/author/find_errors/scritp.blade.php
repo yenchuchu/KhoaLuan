@@ -16,7 +16,7 @@
                 '<div class="col-lg-12" style="padding-left: 0;">' +
                 '<div class="form-group">' +
                 '<input type="text" name="find_errors[' + j + '][title-find-errors] " class="form-control" required' +
-                ' placeholder="{{trans('label.backend.create.title-question')}}">' +
+                ' placeholder="{{trans('label.backend.create.title-question')}}" >' +
                 '</div>' +
                 '</div>' +
 
@@ -30,7 +30,7 @@
                 '<div class="span-text-question">' +
                 '<textarea type="text" class="form-control" ' +
                 'name="find_errors[' + j + '][content-choose-ans-question][1][content]"' +
-                'placeholder="This <u>is</u> a <u>example</u> for <u>this</u> question format" required></textarea>' +
+                'placeholder="This <u>is</u> a <u>example</u> for <u>this</u> question format" required ></textarea>' +
                 '</div>' +
                 '</div>' +
 
@@ -42,7 +42,7 @@
                 '<div class="form-group col-lg-10" style="width: 43%;padding-left: 0; margin-left: 0">' +
                 '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="1"' +
                 'name="find_errors[' + j + '][content-choose-ans-question][1][answer]"' +
-                'id="find_errors_' + j + '_answer_1">' +
+                'id="find_errors_' + j + '_answer_1" required>' +
                 ' </div>' +
                 ' </div>' +
 

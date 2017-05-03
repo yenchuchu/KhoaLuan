@@ -243,7 +243,30 @@ class AuthorController extends Controller
         return view('frontend.highschool.index');
     }
 
-    public function show_all_noti() {
+    public function show_all_noti(Request $request) {
+
+        $all_request = $request->all();
+
+        if(isset($all_request['sort_noti'])) {
+            $notis = $all_request['sort_noti'];
+
+//        0 => array:5 [
+//            "content" => "Bài viết về Multiple Choices mức Dễ cho Lớp 8 của bạn đã được chấp nhận "
+//      "created_at" => "2017-04-30 08:24:26"
+//      "status" => "1"
+//      "url" => "https://englishonline.herokuapp.com/backend/get-detail/multiple_choices/3/%5B45%5D"
+//      "url_avatar_user" => "imgs-dashboard/avatar.png"
+//    ]
+//
+//        dd($all_request);
+//            return redirect()->route('backend.manager.backend.all.noti.get')->with('notis', $notis);
+            return response()->json([
+                'code' => 200,
+                'data' => $notis
+            ]);
+        }
+
+        // hiển thị notifications: gửi ajax post lên. trả về dữ liệu ở 1 link khác
 
     }
 

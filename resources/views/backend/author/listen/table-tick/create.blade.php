@@ -105,7 +105,7 @@
 
                         <div class="form-group">
                             <label>{{trans('label.backend.create.upload_audio')}}</label>
-                            {{ Form::file('listen_table_ticks[1][url_audio]', array()) }}
+                            {{ Form::file('listen_table_ticks[1][url_audio]', array('required')) }}
                         </div>
 
                         <div class="form-group" style="width:100%; float:left;">
@@ -119,7 +119,7 @@
                                                    name="listen_table_ticks[1][content-choose-ans-question][1][suggest]" required>
                                         </td>
                                         <td><input type="checkbox"
-                                                   name="listen_table_ticks[1][content-choose-ans-question][1][answer]" required>
+                                                   name="listen_table_ticks[1][content-choose-ans-question][1][answer]">
                                         </td>
                                     </tr>
                                 </table>
@@ -157,6 +157,37 @@
 
 @section('script')
     <script>
+        $('.save-listen-table-ticks').click(function () {
+            var total_question = [];
+            var i = 0;
+            $('[id^="add_item_question_"]').each(function () {
+                item = $('#' + this.id).attr('item');
+                item_this = $('#' + this.id).attr('item_this');
+
+                total_question[i] = [item, item_this];
+                i++;
+            });
+
+            var count_question = total_question.length;
+            var order_q = 0;
+            var item_order = 0;
+            var order_item_this_next = 0;
+            var order_item_this = 0;
+            var atLeastOneIsChecked = 0;
+
+            for(order_q = 0; order_q< count_question; order_q++) {
+                item_order = order_q + 1;
+                for (order_item_this = 0; order_item_this < total_question[order_q][1]; order_item_this++) {
+                    order_item_this_next = order_item_this + 1;
+                    atLeastOneIsChecked+= $('input[name="listen_table_ticks['+item_order+'][content-choose-ans-question]['+order_item_this_next+'][answer]"]:checked').length;
+                }
+            }
+
+            if(atLeastOneIsChecked < count_question ) {
+                swal('', 'Bạn phải chọn đáp án!', 'info');
+            }
+        });
+
         swal('Tạo bài luyện tập theo mức độ khó cho từng lớp. ' +
                 'Mỗi bài bao gồm đề bài, một đoạn audio chứa toàn bộ thông tin của các câu trong bài,' +
                 ' Một bảng gồm các gợi ý đáp án có trong đoạn audio đấy. ' +

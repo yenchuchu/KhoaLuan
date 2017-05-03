@@ -112,7 +112,7 @@
                                 <input type="hidden" name="tick_true_false[1][content-choose-ans-question][1][id]" value="1">
                             </div>
                             <div class="span-text-question">
-                                    <textarea type="text" class="form-control"
+                                    <textarea type="text" class="form-control count-question-true-false"
                                               name="tick_true_false[1][content-choose-ans-question][1][content]"
                                               placeholder="{{trans('label.backend.create.item-content-question')}}" required></textarea>
                             </div>
@@ -162,6 +162,39 @@
 
 @section('script')
     <script>
+        $('.save-tick-true-false').click(function () {
+            var numItems = $('.count-question-true-false').length;
+            var total_question = [];
+            var i = 0;
+            $('[id^="add_item_question_"]').each(function () {
+                item = $('#' + this.id).attr('item');
+                item_this = $('#' + this.id).attr('item_this');
+
+                total_question[i] = [item, item_this];
+                i++;
+            });
+
+            var count_question = total_question.length;
+            var order_q = 0;
+            var item_order = 0;
+            var order_item_this_next = 0;
+            var order_item_this = 0;
+            var atLeastOneIsChecked = 0;
+
+            for(order_q = 0; order_q< count_question; order_q++) {
+                item_order = order_q + 1;
+                for (order_item_this = 0; order_item_this < total_question[order_q][1]; order_item_this++) {
+                    order_item_this_next = order_item_this + 1;
+                    atLeastOneIsChecked+= $('input[name="tick_true_false['+item_order+'][content-choose-ans-question]['+order_item_this_next+'][answer]"]:checked').length;
+                }
+            }
+
+            if(atLeastOneIsChecked < numItems) {
+                swal('', 'Bạn phải điền hết đáp án!', 'info');
+            }
+
+        });
+
         swal('Tạo bài luyện tập theo mức độ khó cho từng lớp. ' +
                 'Mỗi bài bao gồm đề bài, đoạn văn và các câu cho học sinh chọn đúng sai.' +
                 ' Tác giả phải chọn đáp án đúng hoặc sai cho các câu của mình. ' +

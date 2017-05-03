@@ -16,7 +16,7 @@
                 '<div class="col-lg-12" style="padding-left: 0;">' +
                 '<div class="form-group">' +
                 '<input type="text" name="tick_true_false[' + j + '][title-tick-true-false] " class="form-control" ' +
-                'required placeholder="{{trans('label.backend.create.title-question')}}">' +
+                ' required placeholder="{{trans('label.backend.create.title-question')}}">' +
                 '</div>' +
                 '</div>' +
 
@@ -31,7 +31,7 @@
                 '</div>' +
 
                 '<div class="span-text-question">' +
-                '<textarea type="text" class="form-control" ' +
+                '<textarea type="text" class="form-control count-question-true-false" ' +
                 'name="tick_true_false[' + j + '][content-choose-ans-question][1][content]"' +
                 ' placeholder="{{trans('label.backend.create.item-content-question')}}" required></textarea>' +
                 '</div>' +

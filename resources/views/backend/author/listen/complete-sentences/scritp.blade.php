@@ -16,8 +16,14 @@
                 '<div class="col-lg-12" style="padding-left: 0;">' +
                 '<div class="form-group">' +
                 '<input type="text" name="listen_complete_sentences['+ j +'][title-listen-complete-sentences] " ' +
-                'class="form-control" required placeholder="{{trans('label.backend.create.title-question')}}">' +
+                'class="form-control" required placeholder="{{trans('label.backend.create.title-question')}}" required>' +
                 '</div>' +
+                '</div>' +
+
+                '<div class="form-group">' +
+                '<label>{{trans('label.backend.create.upload_audio')}}</label>' +
+                '<input name="listen_complete_sentences[' + j + '][audio]" ' +
+                ' required type="file">' +
                 '</div>' +
 
                 '<div class="form-group" style="width:100%; float:left;" >' +
@@ -37,7 +43,7 @@
                 '<div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">' +
                 '<div class="form-group">' +
                 '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" ' +
-                'name="listen_complete_sentences['+ j +'][content-choose-ans-question][1][answer]">' +
+                'name="listen_complete_sentences['+ j +'][content-choose-ans-question][1][answer]" required>' +
                 '</div>' +
                 '</div>' +
                 '</div>' +

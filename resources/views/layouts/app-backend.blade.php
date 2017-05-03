@@ -196,6 +196,11 @@
         .sweet-alert h2 {
             font-size: 19px;
         }
+
+        div.scroll {
+            height: 500px;
+            overflow-y: scroll;
+        }
     </style>
 
 </head>
@@ -264,6 +269,32 @@
         @include('errors.errors')
         @yield('content')
 
+    <!-- Trigger the modal with a button -->
+        {{--<button type="button" id="auto-click-noti" data-toggle="modal" data-target="#show-noti-all">Open Modal</button>--}}
+
+        <!-- Modal -->
+        <div class="modal fade" id="show-noti-all" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body scroll">
+                        <ul class="list-group" id="modal-show-all-noti">
+
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
     <!-- end page-wrapper -->
 
@@ -308,7 +339,9 @@
             console.log("document.location.hostname : "+document.location.hostname);
             console.log("document.location.host : "+document.location.host);
             console.log("document.location.pathname : "+document.location.pathname);
+
     // Initialize Firebase
+    CSRF_TOKEN_1 = $('meta[name="csrf-token"]').attr('content');
     var config = {
         apiKey: "AIzaSyDGy7M0b1gqm7bo9ly7XmZcI2PqBH6h9BE",
         authDomain: "englishtest-9ce81.firebaseapp.com",
@@ -349,10 +382,10 @@
 
             return yDate - xDate;
         });
-//
-        if (count >= 5) {
 
-            for (var sort_noti = 0; sort_noti < 5; sort_noti++) {
+        if (count >= 4) {
+
+            for (var sort_noti = 0; sort_noti < 4; sort_noti++) {
                 var noti_obj = sort[sort_noti];
                 var path_ava = document.location.origin + '/' + noti_obj['url_avatar_user'];
 
@@ -371,13 +404,13 @@
             }
 
 {{--            var path_to_all_noti = '{{route("backend.manager.backend.all.noti")}}';--}}
-            $('#alert_notifications').append('<li id="see-all">' +
-                    '<a class="text-center" href="#">' +
+            $('#alert_notifications').append('<li id="see-all" data-toggle="modal" data-target="#show-noti-all" >' +
+                    '<a class="text-center" href="#" >' +
                     '<strong>See all notifications</strong>' +
                     '<i class="fa fa-angle-right"></i>' +
                     '</a>' +
                     '</li>');
-        } else if (count < 5 && count > 0) {
+        } else if (count < 4 && count > 0) {
             for (var sort_noti in sort) {
                 if (!sort.hasOwnProperty(sort_noti)) continue;
                 var noti_obj = sort[sort_noti];
@@ -401,13 +434,13 @@
         }
 
         $('#see-all').click(function () {
-            $('#alert_notifications').text('');
-            for (var sort_noti in sort) {
-                if (!sort.hasOwnProperty(sort_noti)) continue;
+            for (var sort_noti = 0; sort_noti < count; sort_noti++) {
                 var noti_obj = sort[sort_noti];
                 var path_ava = document.location.origin + '/' + noti_obj['url_avatar_user'];
 
-                $('#alert_notifications').append('<li>' +
+//                var path_ava = document.location.origin + '/allProjects/KhoaLuan/KLTN-EnglishTest/public/' + noti_obj['url_avatar_user'];
+
+                $('#modal-show-all-noti').append('<li class="list-group-item">' +
                         '<a href="' + noti_obj['url'] + '" target="_blank">' +
                         '<div>' +
                         '<img src="' + path_ava + '" style="height: 34px; margin-right: 10px">' +

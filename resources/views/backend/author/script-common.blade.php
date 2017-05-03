@@ -18,9 +18,9 @@
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         cell1.innerHTML = '<input type="text" placeholder="{{trans('label.backend.create.suggest_answer')}}" ' +
-                'name="listen_table_ticks[' + item + '][content-choose-ans-question][' + item_this + '][suggest]" required>';
+                ' name="listen_table_ticks[' + item + '][content-choose-ans-question][' + item_this + '][suggest]" required>';
         cell2.innerHTML = '<input type="checkbox"' +
-                'name="listen_table_ticks[' + item + '][content-choose-ans-question][' + item_this + '][answer]" required>';
+                ' name="listen_table_ticks[' + item + '][content-choose-ans-question][' + item_this + '][answer]">';
 
         $('#add_item_question_' + item).attr('item_this', item_this);
     }
@@ -71,21 +71,21 @@
                 '<div class="span-numb-question" id="id-numb-question-'+ item_this +'">' +
                 item_this +
                 '<input type="hidden" value="'+ item_this +'" ' +
-                'name="answer_question['+ item +'][content-choose-ans-question]['+ item_this +'][id]">' +
+                'name="answer_question['+ item +'][content-choose-ans-question]['+ item_this +'][id]" >' +
                 '</div>' +
 
                 '<div class="form-group" style="width:98%; float:left;">'+
                 '<div class="span-text-question">' +
                 '<textarea type="text" class="form-control" ' +
                 'name="answer_question['+ item +'][content-choose-ans-question]['+ item_this +'][content]"' +
-                ' placeholder="{{trans('label.backend.create.item-content-question')}}" ></textarea>' +
+                ' placeholder="{{trans('label.backend.create.item-content-question')}}" required></textarea>' +
                 '</div>' +
                 '</div>' +
 
                 '<div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">' +
                 '<div class="form-group">' +
                 '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" ' +
-                'name="answer_question['+ item +'][content-choose-ans-question]['+ item_this +'][answer]">' +
+                'name="answer_question['+ item +'][content-choose-ans-question]['+ item_this +'][answer]" required>' +
                 '</div>' +
                 '</div>' +
 
@@ -113,7 +113,7 @@
                 '<div class="span-text-question">' +
                 '<textarea type="text" class="form-control" ' +
                 'name="find_errors[' + item + '][content-choose-ans-question][' + item_this + '][content]"' +
-                'placeholder="This <u>is</u> a <u>example</u> for <u>this</u> question format" ></textarea>' +
+                'placeholder="This <u>is</u> a <u>example</u> for <u>this</u> question format" required></textarea>' +
                 '</div>' +
                 '</div>' +
 
@@ -124,7 +124,7 @@
                 '<div class="form-group col-lg-10" style="width: 43%;padding-left: 0; margin-left: 0">' +
                 '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="1"' +
                 'name="find_errors[' + item + '][content-choose-ans-question][' + item_this + '][answer]"' +
-                'id="find_errors_' + item + '_answer_' + item_this + '">' +
+                'id="find_errors_' + item + '_answer_' + item_this + '" required>' +
                 ' </div>' +
                 ' </div>' +
 
@@ -152,7 +152,7 @@
 
                 '<div class="form-group" style="width:98%; float:left;">' +
                 '<div class="span-text-question">' +
-                '<textarea type="text" class="form-control" ' +
+                '<textarea type="text" class="form-control count-question-multiple" ' +
                 'name="multiple_choice[' + item + '][content-choose-ans-question][' + item_this + '][content]"' +
                 'placeholder="This is ... demo" ></textarea>' +
                 '</div>' +
@@ -192,6 +192,8 @@
                 '</div>');
 
         $('#add_item_question_' + item).attr('item_this', item_this);
+
+
     }
 
     // Read: Tick True False
@@ -209,9 +211,9 @@
                 'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][id]">' +
                 '</div>' +
                 '<div class="span-text-question">' +
-                '<textarea type="text" class="form-control" ' +
+                '<textarea type="text" class="form-control count-question-true-false" ' +
                 'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][content]"' +
-                ' placeholder="{{trans('label.backend.create.item-content-question')}}" ></textarea>' +
+                ' placeholder="{{trans('label.backend.create.item-content-question')}}" required ></textarea>' +
                 '</div>' +
 
                 '<div class="span-choose-tick-true-false">' +
@@ -253,14 +255,14 @@
                 '<div class="span-text-question">' +
                 '<textarea type="text" class="form-control" ' +
                 'name="listen_complete_sentences['+ item +'][content-choose-ans-question]['+ item_this +'][content]"' +
-                'placeholder="this is ___ a kind. there are three character _" ></textarea>' +
+                'placeholder="this is ___ a kind. there are three character _" required ></textarea>' +
                 '</div>' +
                 '</div>' +
 
                 '<div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">' +
                 '<div class="form-group">' +
                 '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" ' +
-                'name="listen_complete_sentences['+ item +'][content-choose-ans-question]['+ item_this +'][answer]">' +
+                'name="listen_complete_sentences['+ item +'][content-choose-ans-question]['+ item_this +'][answer]" required>' +
                 '</div>' +
                 '</div>' +
 

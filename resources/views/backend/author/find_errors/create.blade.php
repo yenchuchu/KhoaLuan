@@ -117,7 +117,7 @@
                                     <div class="form-group col-lg-10" style="width: 43%;padding-left: 0; margin-left: 0">
                                         <input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="1"
                                                name="find_errors[1][content-choose-ans-question][1][answer]"
-                                               id="find_errors_1_answer_1">
+                                               id="find_errors_1_answer_1" required>
                                     </div>
                                 </div>
                             </div>

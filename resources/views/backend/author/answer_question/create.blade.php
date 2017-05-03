@@ -123,7 +123,7 @@
                             <div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}"
-                                    name="answer_question[1][content-choose-ans-question][1][answer]">
+                                    name="answer_question[1][content-choose-ans-question][1][answer]" required>
                                 </div>
                             </div>
                         </div>

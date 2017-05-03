@@ -56,7 +56,7 @@ class AnswerQuestionsController extends Controller
             $array_id_intypecode[$code]['created_at'] = $item->pluck('created_at')->toArray();
         }
 
-        dd($array_id_intypecode);
+//        dd($array_id_intypecode);
 
         return view('backend.author.answer_question.index',
             compact('name_code', 'array_id_intypecode'));

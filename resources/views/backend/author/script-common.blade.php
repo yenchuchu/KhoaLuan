@@ -83,7 +83,8 @@
                 '</div>' +
 
                 '<div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">' +
-                '<div class="form-group">' +
+                ' <label class="col-lg-1" style="padding-right: 0px;">Đáp án: </label>' +
+                '<div class="form-group col-lg-11" style="padding-left: 0; padding-right: 0px; margin-left: 0">' +
                 '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" ' +
                 'name="answer_question['+ item +'][content-choose-ans-question]['+ item_this +'][answer]" required>' +
                 '</div>' +

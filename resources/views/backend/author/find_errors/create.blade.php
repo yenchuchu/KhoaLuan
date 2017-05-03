@@ -113,7 +113,7 @@
                             </div>
                             <div class="col-lg-12 div-wrap-option-answers" >
                                 <div class="col-lg-8 option-as-details">
-                                    <label class="col-lg-2" style="padding-right: 0px;" for="find_errors_1_answer_1">Answer: </label>
+                                    <label class="col-lg-2" style="padding-right: 0px;" for="find_errors_1_answer_1">Đáp án: </label>
                                     <div class="form-group col-lg-10" style="width: 43%;padding-left: 0; margin-left: 0">
                                         <input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" index="1"
                                                name="find_errors[1][content-choose-ans-question][1][answer]"

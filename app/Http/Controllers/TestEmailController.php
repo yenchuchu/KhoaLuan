@@ -19,8 +19,7 @@ class TestEmailController extends Controller
 //            $message->from('phamha.uet@gmail.com', 'Document Mamagement');
 //            $message->to($user->email)->subject(' This is your account\'s Document Mamagement !');
 //        });
-//
-//        Mail::to('chuhue29@gmail.com')->send('balablabal');
-//        Mail::to($request->user())->send(new OrderShipped($order));
+
+        Mail::to('chuhue29@gmail.com')->send('balablabal');
     }
 }

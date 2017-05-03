@@ -198,9 +198,20 @@
         }
 
         div.scroll {
-            height: 500px;
+            height: 450px;
             overflow-y: scroll;
         }
+
+        #modal-show-all-noti li {
+            list-style: none;
+        }
+
+        #modal-show-all-noti .divider {
+            margin-bottom: 0px;
+            margin-top: 0px;
+            border-bottom: 1px solid #ddd;
+        }
+
     </style>
 
 </head>
@@ -280,15 +291,15 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
+                        <h4 class="modal-title">Thông báo của bạn</h4>
                     </div>
-                    <div class="modal-body scroll">
-                        <ul class="list-group" id="modal-show-all-noti">
+                    <div class="modal-body scroll" style="padding-bottom: 0px">
+                        <ul class="list-group" id="modal-show-all-noti" style="margin-bottom: 0px;">
 
                         </ul>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="modal-footer" style="border-top: none; margin-top: 0px">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                     </div>
                 </div>
 
@@ -371,8 +382,8 @@
             if (!all_data.hasOwnProperty(prop)) continue;
 
             var end_obj = all_data[prop];
+            end_obj.key = prop;
             sort.push(end_obj);
-
             count++;
         }
 
@@ -391,12 +402,20 @@
 
 //                var path_ava = document.location.origin + '/allProjects/KhoaLuan/KLTN-EnglishTest/public/' + noti_obj['url_avatar_user'];
 
+                var background_color;
+                if(noti_obj['read'] == 0) {
+                    background_color = 'background-color: #f5f5f5';
+                } else {
+                    background_color = ' background: transparent';
+                }
+
                 $('#alert_notifications').append('<li>' +
-                        '<a href="' + noti_obj['url'] + '" target="_blank">' +
+                        '<a href="' + noti_obj['url'] + '" target="_blank" class="check-read" ' +
+                        ' key_firebase = "'+noti_obj['key']+'" style="'+background_color+'">' +
                         '<div>' +
                         '<img src="' + path_ava + '" style="height: 34px; margin-right: 10px">' +
                         ' <span>' + noti_obj['content'] + '</span>' +
-                        '<span class="pull-right text-muted small"> at ' + noti_obj['created_at'] + '</span>' +
+                        '<span class="pull-right text-muted small"> Lúc ' + noti_obj['created_at'] + '</span>' +
                         '</div>' +
                         '</a>' +
                         '</li>' +
@@ -406,7 +425,7 @@
 {{--            var path_to_all_noti = '{{route("backend.manager.backend.all.noti")}}';--}}
             $('#alert_notifications').append('<li id="see-all" data-toggle="modal" data-target="#show-noti-all" >' +
                     '<a class="text-center" href="#" >' +
-                    '<strong>See all notifications</strong>' +
+                    '<strong>Xem tất cả</strong>' +
                     '<i class="fa fa-angle-right"></i>' +
                     '</a>' +
                     '</li>');
@@ -416,12 +435,20 @@
                 var noti_obj = sort[sort_noti];
                 var path_ava = document.location.origin + '/' + noti_obj['url_avatar_user'];
 
+                var background_color;
+                if(noti_obj['read'] == 0) {
+                    background_color = 'background-color: #f5f5f5';
+                } else {
+                    background_color = ' background: transparent';
+                }
+
                 $('#alert_notifications').append('<li>' +
-                        '<a href="' + noti_obj['url'] + '" target="_blank">' +
+                        '<a href="' + noti_obj['url'] + '" target="_blank" class="check-read" ' +
+                        ' key_firebase = "'+noti_obj['key']+'" style="'+background_color+'">' +
                         '<div>' +
                         '<img src="' + path_ava + '" style="height: 34px; margin-right: 10px">' +
                         ' <span>' + noti_obj['content'] + '</span>' +
-                        '<span class="pull-right text-muted small"> at ' + noti_obj['created_at'] + '</span>' +
+                        '<span class="pull-right text-muted small"> Lúc ' + noti_obj['created_at'] + '</span>' +
                         '</div>' +
                         '</a>' +
                         '</li>' +
@@ -429,7 +456,7 @@
             }
         } else {
             $('#alert_notifications').append('<li>' +
-                    '<p style="text-align: center; margin-top: 10px;"> No notification </p>' +
+                    '<p style="text-align: center; margin-top: 10px;"> Không có thông báo </p>' +
                     '</li>');
         }
 
@@ -438,14 +465,22 @@
                 var noti_obj = sort[sort_noti];
                 var path_ava = document.location.origin + '/' + noti_obj['url_avatar_user'];
 
+                var background_color;
+                if(noti_obj['read'] == 0) {
+                    background_color = 'background-color: #f5f5f5';
+                } else {
+                    background_color = ' background: transparent';
+                }
+
 //                var path_ava = document.location.origin + '/allProjects/KhoaLuan/KLTN-EnglishTest/public/' + noti_obj['url_avatar_user'];
 
-                $('#modal-show-all-noti').append('<li class="list-group-item">' +
-                        '<a href="' + noti_obj['url'] + '" target="_blank">' +
+                $('#modal-show-all-noti').append('<li style="height: 60px; padding-top: 10px;padding-left: 5px;'+background_color+'">' +
+                        '<a href="' + noti_obj['url'] + '" target="_blank" class="check-read" ' +
+                        ' key_firebase = "'+noti_obj['key']+'">' +
                         '<div>' +
-                        '<img src="' + path_ava + '" style="height: 34px; margin-right: 10px">' +
+                        '<img src="' + path_ava + '" style="height: 34px; margin-right: 10px;float: left;">' +
                         ' <span>' + noti_obj['content'] + '</span>' +
-                        '<span class="pull-right text-muted small"> at ' + noti_obj['created_at'] + '</span>' +
+                        '<span class="pull-left text-muted small" style="margin-top: 3px;"> Lúc ' + noti_obj['created_at'] + '</span>' +
                         '</div>' +
                         '</a>' +
                         '</li>' +
@@ -459,6 +494,12 @@
             $('#read-noti').click(function () {
                 firebase.database().ref("notification/" + user_auth_id + "/" + snapshot.key + "/status").set('1');
             });
+
+        });
+
+        $('.check-read').click(function () {
+            var key_firebase = $(this).attr('key_firebase');
+            firebase.database().ref("notification/" + user_auth_id + "/" + key_firebase + "/read").set('1');
         });
 
         var noti_length = count_noti.length;
@@ -480,6 +521,7 @@
         //       A post entry.var
         postData = {
             status: '0',
+            read: '0',
             created_at: '{{$post_data["created_at"]}}',
             url_avatar_user: '{{$post_data["url_avatar_user"]}}',
             url: '{{$post_data["url"]}}',

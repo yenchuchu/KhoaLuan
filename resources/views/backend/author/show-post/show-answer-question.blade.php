@@ -11,14 +11,14 @@
                     <div class="col-lg-12" style="padding-left: 0; padding: 0px">
                         <div class="form-group">
                             <input type="text" name="answer_question[{{$key_idx}}][title-answer-question]"
-                                   class="form-control" required value="{{$record->title}}">
+                                   class="form-control" required value="{{$record->title}}" placeholder="Nhập đề bài">
                         </div>
                     </div>
 
                     <div class="form-group">
                                 <textarea type="text" class="form-control"
                                           name="answer_question[{{$key_idx}}][content-answer-question]"
-                                          placeholder="enter content" required>{{$record->content}}</textarea>
+                                          placeholder="Nhập đoạn văn" required>{{$record->content}}</textarea>
                     </div>
                     <div class="form-group" style="width:100%; float:left;">
 
@@ -36,12 +36,13 @@
                                     <div class="span-text-question">
                                     <textarea type="text" class="form-control"
                                               name="answer_question[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][content]"
-                                              placeholder="enter content" required>{{$sug->content}}</textarea>
+                                              placeholder="Nhập đáp án" required>{{$sug->content}}</textarea>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">
-                                    <div class="form-group">
+                                    <label class="col-lg-1" style="padding-right: 0px;">Đáp án: </label>
+                                    <div class="form-group col-lg-11" style="padding-left: 0; padding-right: 0px; margin-left: 0">
                                         <input type="text" class="form-control" placeholder="enter answer" value="{{$sug->answer}}"
                                                name="answer_question[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][answer]">
                                     </div>

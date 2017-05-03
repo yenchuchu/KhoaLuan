@@ -268,18 +268,18 @@
             responsive: true,
             language: {
                 "sProcessing": "Đang xử lý...",
-                "sLengthMenu": "Xem _MENU_ bản ghi",
+                "sLengthMenu": "Xem _MENU_ kết quả",
                 "sZeroRecords": "Không có kết quả ",
                 "sInfo": "",
                 "sInfoEmpty": "",
-                "sInfoFiltered": "(được lọc từ _MAX_ bản ghi)",
+                "sInfoFiltered": "(được lọc từ _MAX_ kết quả)",
                 "sInfoPostFix": "",
-                "sSearch": "Tìm kiếm:",
+                "sSearch": "Tìm kiếm ",
                 "sUrl": "",
                 "oPaginate": {
                     "sFirst": "Đầu",
-                    "sPrevious": "Trước",
-                    "sNext": "Tiếp",
+                    "sPrevious": "<<",
+                    "sNext": ">>",
                     "sLast": "Cuối"
                 }
             },

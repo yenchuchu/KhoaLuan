@@ -13,7 +13,7 @@
                             <input type="radio" name="your_answer_[{{$table}}][{{$id_record}}][{{$id_question}}][]"
                                    id="your_answer_{{$table}}_{{$id_record}}_{{$id_question}}" number_title="{{$j_title}}"
                                    skill_name="{{$key}}" id_record="{{$id_record}}" id_question="{{$id_question}}"
-                                   name_table="{{$table}}" value="{{$suggest}}" style="margin-right: 5px"
+                                   name_table="{{$table}}" value="{{$suggest}}" style="margin-right: 10px; position: relative; top: 2px;"
                                    answer_suggest="{{$suggest}}"
                             <?php if(strcmp($detail->old_answer[$id_question]['answer_student'], $suggest) == 0) echo "checked" ?> >{{$suggest}}
                         </label>
@@ -23,7 +23,7 @@
                                    id="your_answer_{{$table}}_{{$id_record}}_{{$id_question}}" number_title="{{$j_title}}"
                                    skill_name="{{$key}}" id_record="{{$id_record}}" id_question="{{$id_question}}"
                                    answer_suggest="{{$suggest}}"
-                                   name_table="{{$table}}" value="{{$suggest}}" style="margin-right: 5px">{{$suggest}}
+                                   name_table="{{$table}}" value="{{$suggest}}" style="margin-right: 10px; position: relative; top: 2px;">{{$suggest}}
                         </label>
                     @endif
                 </div>

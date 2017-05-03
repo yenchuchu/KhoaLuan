@@ -94,4 +94,10 @@
         height: 192px;
     }
 
+    .suggest_find_error input {
+        margin-right: 10px;
+        position: relative;
+        top: 2px;
+    }
+
 </style>

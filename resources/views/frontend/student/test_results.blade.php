@@ -22,9 +22,17 @@
             width: 100%;
         }
 
-        div#manager_results_users_filter input {
-            margin-left: 10px;
-            width: 65%;
+        /*div#manager_results_users_filter input {*/
+            /*margin-left: 10px;*/
+            /*width: 65%;*/
+        /*}*/
+
+        .dataTables_filter input {
+            width: 59% !important;
+        }
+
+        .table {
+            margin-top: 10px;
         }
 
     </style>
@@ -42,7 +50,7 @@
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Reading / 30
+                        Reading / Thang điểm 30
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive" id="reload-table-results">
@@ -76,7 +84,7 @@
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Listening / 30
+                        Listening / Thang điểm 30
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive" id="reload-table-listening-results">
@@ -110,7 +118,7 @@
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Speaking / 10
+                        Speaking / Thang điểm 10
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive" id="reload-table-speaking-results">

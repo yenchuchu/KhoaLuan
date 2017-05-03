@@ -4,10 +4,10 @@
     </div>
 
     <div class="col-lg-12 suggest_asnwer_questions">
-        <div class="form-group">
+        <div class="form-group test1">
             <input type="text" class="form-control" placeholder="enter answer" id="your_answer_{{$table}}_{{$id_record}}_{{$id_question}}"
                    id_record="{{$id_record}}" id_question="{{$id_question}}" name_table="{{$table}}"
-                   number_title="{{$j_title}}" skill_name="{{$key}}"
+                   number_title="{{$j_title}}" skill_name="{{$key}}" style="margin-top: 10px;"
                    value="<?php if(isset($detail->old_answer) && $detail->old_answer[$id_question]['id_question'] == $id_question) echo $detail->old_answer[$id_question]['answer_student']; ?>"
                    name="your_answer_[{{$table}}][{{$id_record}}][{{$id_question}}]">
         </div>

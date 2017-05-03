@@ -53,12 +53,12 @@
                 </div>
 
             </div>
-
+        @if($status == 0)
             <div class="form-group">
                     <span id="add_item_question_{{$key_idx}}" item_this="{{count((array)$content_json)}}" item="{{$key_idx}}"
                           class="add-question" onclick="add_item_question_AQ(this.id)" title="Add">+</span>
             </div>
-
+        @endif
         </div>
     </div>
     <!--End Advanced Tables -->

@@ -96,11 +96,13 @@
 
             </div>
 
+        @if($status == 0)
             <div class="form-group">
                     <span id="add_item_question_{{$key_idx}}" item_this="{{$total_row}}" item="{{$key_idx}}"
                           class="add-question" onclick="add_item_question_LTM(this.id, 'listen_table_matchs_{{$key_idx}}')"
                           title="Add">+</span>
             </div>
+        @endif
 
         </div>
     </div>

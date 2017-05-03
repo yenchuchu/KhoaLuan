@@ -94,7 +94,7 @@
                 <div class="panel-body">
                     <div class="table-responsive" id="wrap-content-exam-1">
 
-                        <div class="col-lg-12" style="padding-left: 0;">
+                        <div class="col-lg-12" style="padding-left: 0; padding-right: 0px">
                             <div class="form-group">
                                 <input type="text" name="multiple_choice[1][title-multiple-choice]" required
                                        class="form-control" required placeholder="{{trans('label.backend.create.title-question')}}">
@@ -208,12 +208,12 @@
             }
 
             if(atLeastOneIsChecked < numItems) {
-                swal('', 'Bạn phải điền hết đáp án!', 'info');
+                swal('', 'Bạn phải chọn hết đáp án đúng!', 'info');
             }
         });
 
         swal('Tạo bài luyện tập theo mức độ khó cho từng lớp. ' +
-                'Mỗi bài bao gồm đề bài, các câu chứa 3 dấu chấm (.) liền nhau là vị trí cần chọn đáp án đúng dể điền vào.' +
+                'Mỗi bài bao gồm đề bài (có thể có hoặc không), mỗi câu hỏi chứa 3 dấu chấm (.) liền nhau là vị trí cần chọn đáp án đúng dể điền vào.' +
                 'Mỗi câu gồm 3 đáp án gợi ý, sau khi nhập 3 đáp án gợi ý, tác giả kích chọn đáp án đúng. ' +
                 'Nếu muốn thêm câu trong bài chọn nút cộng ngay dưới câu phía trước. ' +
                 'Kích vào nút cộng dưới cùng bên phải nếu muốn thêm bài mới. Kích vào nút lưu khi đã ra bài xong. ' +

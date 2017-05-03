@@ -7,10 +7,10 @@
             <div class="panel-body">
                 <div class="table-responsive" id="wrap-content-exam-{{$key_idx}}">
 
-                    <div class="col-lg-12" style="padding-left: 0;">
+                    <div class="col-lg-12" style="padding-left: 0; padding-right: 0px">
                         <div class="form-group">
                             <input type="text" name="listen_complete_sentences[{{$key_idx}}][title-listen-complete-sentences]"
-                                   class="form-control" required value="{{$record->title}}">
+                                   class="form-control" required value="{{$record->title}}" placeholder="Nhập đề bài">
                         </div>
                     </div>
 
@@ -31,7 +31,8 @@
                         ?>
 
                         @foreach($content_json as $item_this => $sug)
-                                <div class="span-numb-question" id="id-numb-question-{{$item_this}}">
+                            <div style="float:left; width: 100%;">
+                                <div class="span-numb-question" id="id-numb-question-{{$item_this}}" style="float:left; width: 2%;">
                                     {{$item_this}}
                                     <input type="hidden" value="{{$sug->id}}"
                                            name="listen_complete_sentences[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][id]" >
@@ -45,12 +46,13 @@
                                 </div>
 
                                 <div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">
-                                    <label>Answer: </label>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="enter answer" value="{{$sug->answer}}"
+                                    <label style="width: 6%; float:left;">Answer: </label>
+                                    <div class="form-group" style="width: 94%; float: left;">
+                                        <input type="text" class="form-control" placeholder="Nhập đáp án" value="{{$sug->answer}}"
                                                name="listen_complete_sentences[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][answer]">
                                     </div>
                                 </div>
+                            </div>
                         @endforeach
 
                     </div>

@@ -7,7 +7,7 @@
             <div class="panel-body">
                 <div class="table-responsive" id="wrap-content-exam-{{$key_idx}}">
 
-                    <div class="col-lg-10" style="padding-left: 0;">
+                    <div class="col-lg-12" style="padding-left: 0; padding-right: 0px">
                         <div class="form-group">
                             <input type="text" name="tick_true_false[{{$key_idx}}][title-tick-true-false]"
                                    class="form-control" required value="{{$record->title}}">
@@ -25,19 +25,22 @@
                         $content_json = json_decode($record->content_json);
                         ?>
                         @foreach($content_json as $item_this => $sug)
-                            <div class="span-numb-question" id="id-numb-question-{{$item_this}}">
+                            <div style="float:left; width: 100%;">
+
+                                <div class="span-numb-question" style="float:left; width: 2%;"
+                                 id="id-numb-question-{{$item_this}}">
                                 {{$item_this}}
                                 <input type="hidden"
                                        name="tick_true_false[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][id]"
                                        value="{{$sug->id}}">
                             </div>
-                            <div class="span-text-question">
+                            <div class="span-text-question" style="width: 68%; float: left; margin-bottom: 10px;">
                                     <textarea type="text" class="form-control"
                                               name="tick_true_false[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][content]"
                                               placeholder="enter content" required>{{$sug->content}}</textarea>
                             </div>
-                            <div class="span-choose-tick-true-false">
-                                <span>
+                            <div class="span-choose-tick-true-false" style="float:left; width: 30%; text-align: center">
+                                <span style="float: left; width: 50%;">
                                     <input type="radio" id="check-answer_{{$key_idx}}_{{$item_this}}_T"
                                            name="tick_true_false[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][answer]"
                                            value="T" <?php if($sug->answer == 'T') { echo ' checked ' ; } ?>
@@ -51,6 +54,7 @@
                                             class="ans-false">
                                     <label for="check-answer_{{$key_idx}}_{{$item_this}}_F" style="cursor: pointer">F</label>
                                 </span>
+                            </div>
                             </div>
                         @endforeach
 

@@ -96,7 +96,7 @@
                 <div class="panel-body">
                     <div class="table-responsive" id="wrap-content-exam-1">
 
-                        <div class="col-lg-12" style="padding-left: 0;">
+                        <div class="col-lg-12" style="padding-left: 0; padding-right: 0px;">
                             <div class="form-group">
                                 <input type="text" name="listen_complete_sentences[1][title-listen-complete-sentences]"
                                        class="form-control" placeholder="{{trans('label.backend.create.title-question')}}" required>
@@ -120,7 +120,8 @@
                             </div>
 
                             <div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">
-                                <div class="form-group">
+                                <label style="width: 6%; float:left;">Answer: </label>
+                                <div class="form-group" style="width: 94%; float: left;">
                                     <input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}"
                                     name="listen_complete_sentences[1][content-choose-ans-question][1][answer]" required>
                                 </div>

@@ -92,7 +92,7 @@
                 <div class="panel-body">
                     <div class="table-responsive" id="wrap-content-exam-1">
 
-                        <div class="col-lg-12" style="padding-left: 0;">
+                        <div class="col-lg-12" style="padding-left: 0;padding-right: 0px">
                             <div class="form-group">
                                 <input type="text" name="find_errors[1][title-find-errors]"
                                        class="form-control" placeholder="{{trans('label.backend.create.title-question')}}" required>

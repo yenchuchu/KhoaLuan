@@ -68,7 +68,7 @@
         item_this++;
 
         $("#wrap-content-exam-" + item ).append('<div class="form-group" style="width:100%; float:left;">' +
-                '<div class="span-numb-question" id="id-numb-question-'+ item_this +'">' +
+                '<div class="span-numb-question" id="id-numb-question-'+ item_this +'"  style="width: 2%; float:left;">' +
                 item_this +
                 '<input type="hidden" value="'+ item_this +'" ' +
                 'name="answer_question['+ item +'][content-choose-ans-question]['+ item_this +'][id]" >' +
@@ -103,7 +103,7 @@
         item_this++;
 
         $("#wrap-content-exam-" + item).append('<div class="form-group" style="width:100%; float:left;">' +
-                '<div class="span-numb-question" id="id-numb-question-' + item_this + '">' +
+                '<div class="span-numb-question" id="id-numb-question-' + item_this + '"  style="width: 2%; float:left;">' +
                 item_this +
                 '<input type="hidden"  value="' + item_this + '" ' +
                 'name="find_errors[' + item + '][content-choose-ans-question][' + item_this + '][id]">' +
@@ -144,7 +144,7 @@
         item_this++;
 
         $("#wrap-content-exam-" + item).append('<div class="form-group" style="width:100%; float:left;">' +
-                '<div class="span-numb-question" id="id-numb-question-' + item_this + '">' +
+                '<div class="span-numb-question" id="id-numb-question-' + item_this + '"  style="width: 2%; float:left;">' +
                 item_this +
                 '<input type="hidden" value="' + item_this + '" ' +
                 'name="multiple_choice[' + item + '][content-choose-ans-question][' + item_this + '][id]">' +
@@ -205,29 +205,29 @@
         item_this++;
 
         $("#wrap-content-exam-" + item).append('<div class="form-group" style="width:100%; float:left;">' +
-                '<div class="span-numb-question" id="id-numb-question-' + item_this + '">' +
+                '<div class="span-numb-question" id="id-numb-question-' + item_this + '" style="float:left; width: 2%;">' +
                 item_this +
                 '<input type="hidden" value="' + item_this + '"' +
                 'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][id]">' +
                 '</div>' +
-                '<div class="span-text-question">' +
+                '<div class="span-text-question" style="width: 75%; float: left; margin-bottom: 10px;">' +
                 '<textarea type="text" class="form-control count-question-true-false" ' +
                 'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][content]"' +
                 ' placeholder="{{trans('label.backend.create.item-content-question')}}" required ></textarea>' +
                 '</div>' +
 
-                '<div class="span-choose-tick-true-false">' +
-                '<span>' +
+                '<div class="span-choose-tick-true-false" style="float:left; width: 22%; text-align: center">' +
+                '<span style="float: left; width: 50%;">' +
                 '<input type="radio" id="check-answer_' + item + '_' + item_this + '_T"' +
                 'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][answer]" value="T"' +
-                'class="ans-true">' +
-                '<label for="check-answer_' + item + '_' + item_this + '_T" style="cursor: pointer">T</label>' +
+                'class="ans-true" style="margin-right: 3px">' +
+                '<label for="check-answer_' + item + '_' + item_this + '_T" style="cursor: pointer"> T</label>' +
                 ' </span>' +
                 '<span>' +
                 '<input type="radio" id="check-answer_' + item + '_' + item_this + '_F"' +
                 'name="tick_true_false[' + item + '][content-choose-ans-question][' + item_this + '][answer]" value="F"' +
                 'class="ans-false"> ' +
-                '<label for="check-answer_' + item + '_' + item_this + '_F" style="cursor: pointer">F</label>' +
+                '<label for="check-answer_' + item + '_' + item_this + '_F" style="cursor: pointer"> F</label>' +
                 '</span>' +
                 '</div>' +
 
@@ -245,7 +245,7 @@
         item_this++;
 
         $("#wrap-content-exam-" + item ).append('<div class="form-group" style="width:100%; float:left;">' +
-                '<div class="span-numb-question" id="id-numb-question-'+ item_this +'">' +
+                '<div class="span-numb-question" id="id-numb-question-'+ item_this +'"  style="width: 2%; float:left;">' +
                 item_this +
                 '<input type="hidden" value="'+ item_this +'"' +
                 'name="listen_complete_sentences['+ item +'][content-choose-ans-question]['+ item_this +'][id]">' +
@@ -260,7 +260,8 @@
                 '</div>' +
 
                 '<div class="col-lg-12" style="padding-left: 0;margin-left: 17px;width: 100%">' +
-                '<div class="form-group">' +
+                '<label style="width: 6%; float:left;">Answer: </label>' +
+                '<div class="form-group" style="width: 94%; float: left;">' +
                 '<input type="text" class="form-control" placeholder="{{trans('label.backend.create.answer-question')}}" ' +
                 'name="listen_complete_sentences['+ item +'][content-choose-ans-question]['+ item_this +'][answer]" required>' +
                 '</div>' +

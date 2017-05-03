@@ -95,7 +95,7 @@
                 <div class="panel-body">
                     <div class="table-responsive" id="wrap-content-exam-1">
 
-                        <div class="col-lg-12" style="padding-left: 0;">
+                        <div class="col-lg-12" style="padding-left: 0; padding-right: 0px">
                             <div class="form-group">
                                 <input type="text" name="answer_question[1][title-answer-question]" required
                                        class="form-control" placeholder="{{trans('label.backend.create.title-question')}}">
@@ -104,7 +104,7 @@
 
                         <div class="form-group">
                                 <textarea type="text" class="form-control"
-                                          name="answer_question[1][content-answer-question]"
+                                          name="answer_question[1][content-answer-question]" required
                                           placeholder="{{trans('label.backend.create.content-question')}}"></textarea>
                         </div>
                         <div class="form-group" style="width:100%; float:left;">

@@ -7,7 +7,7 @@
             <div class="panel-body">
                 <div class="table-responsive" id="wrap-content-exam-{{$key_idx}}">
 
-                    <div class="col-lg-12" style="padding-left: 0;">
+                    <div class="col-lg-12" style="padding-left: 0; padding-right: 0px">
                         <div class="form-group">
                             <input type="text" name="listen_table_ticks[{{$key_idx}}][title-listen-table-ticks]"
                                    class="form-control" placeholder="Cập nhật đề bài" required

@@ -96,7 +96,7 @@
                 <div class="panel-body">
                     <div class="table-responsive" id="wrap-content-exam-1">
 
-                        <div class="col-lg-12" style="padding-left: 0;">
+                        <div class="col-lg-12" style="padding-left: 0; padding-right: 0px">
                             <div class="form-group">
                                 <input type="text" name="listen_table_ticks[1][title-listen-table-ticks]"
                                        class="form-control" placeholder="{{trans('label.backend.create.title-question')}}" required>
@@ -184,7 +184,7 @@
             }
 
             if(atLeastOneIsChecked < count_question ) {
-                swal('', 'Bạn phải chọn đáp án!', 'info');
+                swal('', 'Bạn phải chọn hết đáp án đúng!', 'info');
             }
         });
 

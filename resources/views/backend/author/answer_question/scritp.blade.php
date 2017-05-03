@@ -13,7 +13,7 @@
 
                 '<div class="table-responsive" id="wrap-content-exam-' + j + '">' +
 
-                '<div class="col-lg-12" style="padding-left: 0;">' +
+                '<div class="col-lg-12" style="padding-left: 0; padding-right: 0px">' +
                 '<div class="form-group">' +
                 '<input type="text" name="answer_question['+ j +'][title-answer-question] " class="form-control" ' +
                 '  placeholder="{{trans('label.backend.create.title-question')}}" required>' +
@@ -22,7 +22,7 @@
 
                 '<div class="form-group">' +
                 '<textarea type="text" class="form-control" name="answer_question['+ j +'][content-answer-question]"' +
-                ' placeholder="{{trans('label.backend.create.content-question')}}"></textarea>' +
+                ' placeholder="{{trans('label.backend.create.content-question')}}" required></textarea>' +
                 '</div>' +
                 '<div class="form-group" style="width:100%; float:left;" >' +
                 ' <div class="span-numb-question" id="id-numb-question-1" >' +

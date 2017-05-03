@@ -190,7 +190,7 @@
             }
 
             if(atLeastOneIsChecked < numItems) {
-                swal('', 'Bạn phải điền hết đáp án!', 'info');
+                swal('', 'Bạn phải chọn hết đáp án đúng!', 'info');
             }
 
         });

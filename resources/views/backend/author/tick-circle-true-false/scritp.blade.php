@@ -40,12 +40,12 @@
                 '<span>' +
                 '<input type="radio" id="check-answer_' + j + '_1_T"' +
                 'name="tick_true_false[' + j + '][content-choose-ans-question][1][answer]" value="T"' +
-                'class="ans-true"> <label for="check-answer_' + j + '_1_T" style="cursor: pointer">T</label>' +
+                'class="ans-true"> <label for="check-answer_' + j + '_1_T" style="cursor: pointer"> T</label>' +
                 ' </span>' +
                 '<span>' +
                 '<input type="radio" id="check-answer_' + j + '_1_F"' +
                 'name="tick_true_false[' + j + '][content-choose-ans-question][1][answer]" value="F"' +
-                'class="ans-false"> <label for="check-answer_' + j + '_1_F" style="cursor: pointer">F</label>' +
+                'class="ans-false"> <label for="check-answer_' + j + '_1_F" style="cursor: pointer"> F</label>' +
                 '</span>' +
                 '</div>' +
 

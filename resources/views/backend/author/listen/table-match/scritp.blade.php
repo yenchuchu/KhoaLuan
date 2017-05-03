@@ -17,7 +17,7 @@ $('.add-item').click(function () {
 
                 '<div class="table-responsive" id="wrap-content-exam-' + j + '">' +
 
-                '<div class="col-lg-12" style="padding-left: 0;">' +
+                '<div class="col-lg-12" style="padding-left: 0; padding-right: 0px">' +
                 '<div class="form-group">' +
                 '<input type="text" name="listen_table_matchs[' + j + '][title-listen-table-match] " class="form-control"' +
                 ' placeholder="{{trans('label.backend.create.title-question')}}" required>' +

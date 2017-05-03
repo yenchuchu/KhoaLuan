@@ -7,7 +7,7 @@
             <div class="panel-body">
                 <div class="table-responsive" id="wrap-content-exam-{{$key_idx}}">
 
-                    <div class="col-lg-12" style="padding-left: 0;">
+                    <div class="col-lg-12" style="padding-left: 0; padding-right: 0px">
                         <div class="form-group">
                             <input type="text" name="find_errors[{{$key_idx}}][title-find-errors]"
                                    class="form-control" placeholder="enter topic content" required  value="{{$record->title}}">
@@ -21,7 +21,7 @@
                         ?>
 
                         @foreach($content_json as $item_this => $sug)
-                            <div class="span-numb-question" id="id-numb-question-1">
+                            <div class="span-numb-question" id="id-numb-question-1" style="width: 2%; float:left;">
                                 {{$item_this}}
                                 <input type="hidden"
                                        name="find_errors[{{$key_idx}}][content-choose-ans-question][{{$item_this}}][id]"

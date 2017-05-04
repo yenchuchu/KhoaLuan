@@ -80,6 +80,12 @@
             float: left;
             position: relative;
         }
+
+        #class {
+            width: 42%;
+            box-shadow: none;
+        }
+
     </style>
 @stop
 
@@ -92,19 +98,19 @@
                 <div class="main-body">
 
                     <div class="form-group ">
-                        <label for="choose-object" class="col-md-4 control-label">Chọn đối tượng</label>
+                        <label for="choose-object" class="col-sm-offset-3 col-md-2 control-label">Chọn đối tượng</label>
                         <div class="col-md-6 block-12">
                             <div class="option">
-                                <div class="group nav nav-tabs" >
+                                <div class="group nav nav-tabs" style="border-bottom: none">
                                     <div class="item objs">
                                         <input type="radio" id="student" name="office_type" value="ST"
                                                class="radio" checked>
-                                        <label id="label-stdent-id" for="student">STUDENT</label>
+                                        <label id="label-stdent-id" for="student">HỌC SINH</label>
                                     </div>
                                     <div class="item objt" style="color: #00b1b3">
                                         <input type="radio" id="author" name="office_type" value="AT"
                                                class="radio">
-                                        <label id="label-author-id" for="author">AUTHOR</label>
+                                        <label id="label-author-id" for="author">TÁC GIẢ</label>
                                     </div>
                                     <input type="hidden" id="check_type_user">
                                 </div>
@@ -116,11 +122,11 @@
                         <div id="teacher-tabs" class="tab-pane fade ">
                         </div>
                         <div id="student-tabs" class="tab-pane fade in active">
-                            <div class="form-group">
-                                <label for="class" class="col-md-4 control-label">Class</label>
+                            <div class="form-group" style="padding-top: 30px;">
+                                <label for="class" class="col-sm-offset-3 col-md-2 control-label">Chọn lớp</label>
 
                                 <div class="col-md-6">
-                                    <select name="class" id="class">
+                                    <select name="class" id="class" class="form-control">
                                         @foreach($classes as $class)
                                             <option value="{{$class->id}}">{{$class->title}}</option>
                                         @endforeach
@@ -133,7 +139,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" id="btn-done-loginfb" class="btn btn-default" data-dismiss="modal">Done</button>
+                    <button type="submit" id="btn-done-loginfb" class="btn btn-default" data-dismiss="modal">Xong</button>
                 </div>
 
                 {{ Form::close() }}

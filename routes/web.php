@@ -432,4 +432,5 @@ Route::get('/403', function () {
     return view('errors.403');
 });
 
-Route::get('test/send-email', 'TestEmailController@ship');
+//Route::get('test/send-email', 'TestEmailController@ship');
+//Route::get('/setup/roles', 'SetupRoleController@setupRole')->name('get.setup.roles');

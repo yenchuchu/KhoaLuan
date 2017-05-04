@@ -78,7 +78,7 @@
                                                     sẽ tự rèn luyện kỹ năng tiếng Anh của mình với những kiến thức
                                                     đó. </p>
                                                 <a href="{{ url('/register') }}"
-                                                   class="page-scroll btn btn-default btn-xl sr-button">Đăng ký!</a>
+                                                   class="page-scroll btn btn-default btn-xl sr-button">Đăng ký</a>
                                             </div>
                                         </div>
                                     </div>
@@ -245,7 +245,7 @@
                                         <div class="call-to-action">
                                             <h2>Sử dụng miễn phí</h2>
                                             <a href="{{ url('/login') }}"
-                                               class="btn btn-default btn-xl sr-button">Đăng nhập!</a>
+                                               class="btn btn-default btn-xl sr-button">Đăng nhập</a>
                                         </div>
                                     </div>
                                 </aside>

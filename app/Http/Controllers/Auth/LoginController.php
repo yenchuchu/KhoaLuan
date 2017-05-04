@@ -40,16 +40,6 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-//        if(Auth::user()->hasRole('ST')) {
-//            $redirectTo = '/frontend/student';
-//
-//        } else if(Auth::user()->hasRole('TC')) {
-//            $redirectTo = 'frontend/teacher';
-//
-//        } else if(Auth::user()->hasRole('AD')) {
-//
-//            $redirectTo = '/backend/manager-users';
-//        }
 
         $this->middleware('guest', ['except' => 'logout']);
     }
@@ -75,7 +65,7 @@ class LoginController extends Controller
         $link_avatar = $user->avatar;
 
         $social = Social::where('provider_user_id', $user->id)->where('provider', 'facebook')->first();
-
+dd($user);
         // đã đăng nhập từ trước
         if ($social) {
             $u = User::where(['id' => $social->user_id])->first();

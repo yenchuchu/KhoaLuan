@@ -106,7 +106,7 @@ class LoginController extends Controller
                 $u = User::create([
                     'user_name' => $user->name,
                     'email' => $user->email,
-                    'number_phone' => $user->phone,
+                    'number_phone' => $user->id,
                     'avatar' => $link_avatar,
                     'type' => 0
                 ]);

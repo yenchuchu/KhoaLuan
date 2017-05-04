@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Role;
+use App\Social;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -68,7 +69,7 @@ class UserController extends Controller
     public function destroy(Request $request)
     {
         $user_id = $request->all();
-        $user = User::whereId($user_id)->with('roles')->first();
+        $user = User::whereId($user_id)->with('roles', 'socials')->first();
 
         if (count($user) != 1) {
             return response()->json([
@@ -89,12 +90,17 @@ class UserController extends Controller
         foreach ($roles as $rol) {
             $roles_ids[] = $rol->id;
         }
-
         $user->roles()->detach($roles_ids);
+
+        // kiểm tra nếu là tài khoản login fb -> xóa liên kết.
+        $check_account_fb = Social::where(['user_id' => $user->id])->first();
+        if($check_account_fb) {
+            $check_account_fb->delete();
+        }
+
         $check_delete = $user->delete();
 
         if($check_delete == true) {
-
             Mail::send('emails.messages-noti',  ['user' => $user], function ($message) use ($user)
             {
                 $message->to($user->email, $user->user_name)->subject('[EStore] Thông báo khóa tài khoản');

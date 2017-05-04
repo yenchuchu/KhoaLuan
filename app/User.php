@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_name', 'type', 'email', 'number_phone'
+        'user_name', 'type', 'email', 'number_phone', 'avatar'
     ];
 
     /**
@@ -37,6 +37,12 @@ class User extends Authenticatable
     {
 //        return $this->belongsToMany('App\Role');
         return $this->belongsToMany('App\Role', 'user_roles', 'user_id', 'role_id');
+    }
+
+    public function socials()
+    {
+//        return $this->belongsToMany('App\Role');
+        return $this->hasOne('App\Social', 'user_id', 'id');
     }
 
 

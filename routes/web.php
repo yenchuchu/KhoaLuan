@@ -18,7 +18,7 @@
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/', 'DashboardController@redirectUrl')->name('dashboard.redirect.login');
+    Route::get('/redirect_login', 'DashboardController@redirectUrl')->name('dashboard.redirect.login');
 
     Route::group(array('prefix' => 'backend'), function () {
 
@@ -419,7 +419,7 @@ Route::group(['middleware' => 'auth'], function () {
 //Route::get('/', 'DashboardController@redirectUrl')->name('dashboard');
 //Route::get('/test-design', 'DashboardController@dashboardDesign')->name('dashboard.design');
 Route::group(['middleware' => 'guest'], function () {
-Route::get('/main', 'DashboardController@index')->name('dashboard.design');
+Route::get('/', 'DashboardController@index')->name('dashboard.design');
 });
 
 Auth::routes();

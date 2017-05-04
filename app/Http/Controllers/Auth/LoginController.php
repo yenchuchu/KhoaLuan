@@ -81,7 +81,25 @@ class LoginController extends Controller
             $u = User::where(['id' => $social->user_id])->first();
 
             Auth::login($u);
-            $this->getRedirectTo($u);
+            if ($u->type == 0) {
+                return redirect()->route('get.setup.roles');
+            } else {
+                if ( Auth::user()->hasRole('ST')) {
+//                    dd('student');
+                    return redirect()->route('frontend.dashboard.student.index');
+                }
+
+                if ( Auth::user()->hasRole('AD')) {
+//                    dd('admin');
+                    return redirect()->route('backend.manager.users.index');
+                }
+
+                if ( Auth::user()->hasRole('AT')) {
+//                    dd('author');
+                    return redirect()->route('backend.manager.author.index');
+                }
+            }
+//            $this->getRedirectTo($u);
         } else {
             // đăng nhập lần đầu.
             $temp = new Social();

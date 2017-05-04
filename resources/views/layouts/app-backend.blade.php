@@ -16,9 +16,8 @@
 
     <!-- sweet alert -->
     <link rel="stylesheet" href="/sweetalert/dist/sweetalert.css"/>
-{{--    <link rel="stylesheet" href="/css/sweet-alert/loader.css"/>--}}
-{{--    <link rel="stylesheet" href="/css/sweet-alert/page_loaders.css"/>--}}
-{{--    <link rel="stylesheet" href="/css/sweet-alert/sweetalert2.min.css"/>--}}
+    <link rel="stylesheet" href="/css/loader.css"/>
+    <link rel="stylesheet" href="/css/page_loaders.css"/>
 
 <!-- Page-Level CSS -->
     <link href="/backend/assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet"/>

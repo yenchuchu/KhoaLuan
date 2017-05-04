@@ -271,6 +271,7 @@
         }
 
         $('#check_diff').click(function () {
+            $('.class-loader-css1').css("display", "block");
 
             $('#start').attr('disabled', 'disabled');
             $('#stop').attr('disabled', 'disabled');
@@ -290,6 +291,7 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
+                    $('.class-loader-css1').css("display", "none");
 
                     if (data.code == 200) {
                         if (data.result == null) {
@@ -309,7 +311,7 @@
                     }
                 },
                 error: function () {
-                    alert('error');
+                    $('.class-loader-css1').css("display", "none");
                     swal('', 'Không thực hiện được hành động này!', 'error');
                 }
             });

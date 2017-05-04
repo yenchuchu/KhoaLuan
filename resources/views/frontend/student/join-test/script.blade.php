@@ -35,6 +35,7 @@
                 _token: CSRF_TOKEN
             },
             success: function (data) {
+                $('.class-loader-css1').css("display", "none");
 
                 // hay trả về data mảng dạng {code, message, data};
                 if (data.code == 200) {  // mặc định 200 là thành công
@@ -88,8 +89,10 @@
 
                     return false;
                 }
+
             },
             error: function () {
+                $('.class-loader-css1').css("display", "none");
                 swal('', 'Không thực hiện được hành động này!', 'error');
             }
         });
@@ -297,6 +300,8 @@
 <script>
 
     $('#btn-submit-test').click(function () {
+        $('.class-loader-css1').css("display", "block");
+
         submit = 1; // khi nút submit đc click hoặc tự động hết giờ. = 0 khi chưa hết giờ mà ngưng làm bài.
 
         clearInterval(timer); // stop the interval

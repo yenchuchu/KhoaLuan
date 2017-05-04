@@ -7,7 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'English App - Free') }}</title>
+    <title>{{ config('app.name', 'EStore') }}</title>
 
 {{--<title>English App - Free</title>--}}
 
@@ -30,6 +30,8 @@
     {{--<link rel="stylesheet" href="/css/sweet-alert/loader.css"/>--}}
     {{--<link rel="stylesheet" href="/css/sweet-alert/page_loaders.css"/>--}}
     <link rel="stylesheet" href="/sweetalert/dist/sweetalert.css"/>
+    <link rel="stylesheet" href="/css/loader.css"/>
+    <link rel="stylesheet" href="/css/page_loaders.css"/>
 
 <!-- Scripts -->
     <script>
@@ -42,6 +44,7 @@
     @yield('style-menu-main')
 
     <style>
+
         #menu-nav-top {
             background-color: #4d545d;
             margin-bottom: -1px;
@@ -175,30 +178,71 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-default navbar-static-top" id="menu-nav-top">
-        <div class="container"  style="padding-left: 0">
-            <div class="navbar-header">
+    @if(Auth::guest())
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                    </button>
+                    @if (Auth::guest())
+                    <a class="navbar-brand page-scroll" href="{{route('dashboard.design')}}">{{ config('app.name', 'Laravel') }}</a>
+                    @else
+                        <a class="navbar-brand page-scroll" href="{{route('frontend.dashboard.student.index')}}">{{ config('app.name', 'Laravel') }}</a>
+                    @endif
+                </div>
 
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{route('frontend.dashboard.student.index')}}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    @include('partials.menu-top-right')
+                </div>
+                <!-- /.navbar-collapse -->
             </div>
+            <!-- /.container-fluid -->
+        </nav>
+    @else
+        <nav class="navbar navbar-default navbar-static-top" id="menu-nav-top">
+            <div class="container"  style="padding-left: 0">
+                <div class="navbar-header">
 
-            @include('partials.menu-top-right')
-        </div>
-    </nav>
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#app-navbar-collapse">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="{{route('frontend.dashboard.student.index')}}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                </div>
+
+                @include('partials.menu-top-right')
+            </div>
+        </nav>
+    @endif
+
     @yield('menu-main')
     <div class="container" style="padding-left: 0">
+
+        <div class="loader class-loader-css1" id="id-loader-css1"
+             style="display: none;margin: 4% auto 0px 38%;z-index: 1;float: left;position: fixed;animation: spin 1s linear infinite;">
+            <div class="loader-inner ball-spin-fade-loader">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
 
         @include('errors.errors')
     </div>

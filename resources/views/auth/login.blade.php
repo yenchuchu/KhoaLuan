@@ -1,8 +1,32 @@
 @extends('layouts.app')
 
+@section('style')
+
+    <link rel="stylesheet" href="{{URL::asset('test_theme_dashboard/creative.min.css')}}"/>
+    <link rel="stylesheet" href="{{URL::asset('test_theme_dashboard/magnific-popup.css')}}"/>
+
+    <style>
+        .navbar-custom {
+            padding: 10px 0;
+        }
+
+        a > img {
+            width: 100%;
+        }
+
+        .main-body {
+            margin: 30px 15px 10px;
+            overflow: hidden;
+            padding: 10px 10px;
+            margin-bottom: 90px;
+        }
+
+    </style>
+@stop
+
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="row" style="margin-top: 80px;">
         <div class="col-md-8 col-md-offset-2" style="margin-top: 30px">
             <div class="panel panel-default">
                 <div class="panel-heading">{{trans('label.auth.login.title')}}</div>

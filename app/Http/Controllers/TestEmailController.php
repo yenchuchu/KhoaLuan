@@ -11,15 +11,13 @@ class TestEmailController extends Controller
 {
     public function ship()
     {
-//        $order = Order::findOrFail($orderId);
 
-        // Ship order...
-
-//        Mail::send('emails.reminder', function($message) use ($user) {
-//            $message->from('phamha.uet@gmail.com', 'Document Mamagement');
-//            $message->to($user->email)->subject(' This is your account\'s Document Mamagement !');
+        return view('emails.messages-noti');
+//        $data = []; // Empty array
+//        Mail::send('emails.welcome', $data, function($message)
+//        {
+//            $message->to('chuhonghue@gmail.com', 'Jon Doe')->subject('Welcome!');
 //        });
 
-        Mail::to('chuhue29@gmail.com')->send('balablabal');
     }
 }

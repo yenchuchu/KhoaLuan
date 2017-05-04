@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -90,7 +91,15 @@ class UserController extends Controller
         }
 
         $user->roles()->detach($roles_ids);
-        $user->delete();
+        $check_delete = $user->delete();
+
+        if($check_delete == true) {
+
+            Mail::send('emails.messages-noti',  ['user' => $user], function ($message) use ($user)
+            {
+                $message->to($user->email, $user->user_name)->subject('[EStore] Thông báo khóa tài khoản');
+            });
+        }
 
         $user = $this->type_user();
         $user_author = $user['user_author'];

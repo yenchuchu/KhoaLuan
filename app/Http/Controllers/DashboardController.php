@@ -14,7 +14,7 @@ class DashboardController extends Controller
     {
         $classes = Classes::all();
 //        dd($classes);
-        return view('dashboard.index');
+        return view('dashboard.test_design');
     }
 
     public function dashboardDesign()

@@ -417,8 +417,10 @@ Route::group(['middleware' => 'auth'], function () {
 // dashboard
 //Route::group(array('middleware' => 'checkRole:TC|AU|guest'), function () {
 //Route::get('/', 'DashboardController@redirectUrl')->name('dashboard');
-Route::get('/test-design', 'DashboardController@dashboardDesign')->name('dashboard.design');
-//});
+//Route::get('/test-design', 'DashboardController@dashboardDesign')->name('dashboard.design');
+Route::group(['middleware' => 'guest'], function () {
+Route::get('/start-page', 'DashboardController@index')->name('dashboard.design');
+});
 
 Auth::routes();
 Route::get('register', 'Auth\RegisterController@showRegistrationFormReset')->name('register');

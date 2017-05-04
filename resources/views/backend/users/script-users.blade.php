@@ -14,7 +14,7 @@
             confirmButtonText: 'Yes, delete it!'
         }, function (isConfirm) {
             if (isConfirm == true) {
-                document.getElementById('id-loader-css1').style.display = "block";
+                $('.class-loader-css1').css("display", "block");
                 $(".row button").prop('disabled', true);
 
                 url = 'manager-users/delete';
@@ -27,15 +27,15 @@
                     },
                     success: function (data) {
                         if (data.code == 404) {
-                            document.getElementById('id-loader-css1').style.display = "none";
+                            $('.class-loader-css1').css("display", "none");
                             $(".row button").prop('disabled', false);
 
                             swal('', data.message, 'error');
                         } else {
-                            document.getElementById('id-loader-css1').style.display = "none";
+                            $('.class-loader-css1').css("display", "none");
                             $(".row button").prop('disabled', false);
 
-                            $('#reload-table-manager-users').html(data);
+                            $('#wrap-user-table').html(data);
                             setTableInit('manager_users_student');
 
                             // Alert message success
@@ -44,7 +44,7 @@
 
                     },
                     error: function () {
-                        document.getElementById('id-loader-css1').style.display = "none";
+                        $('.class-loader-css1').css("display", "none");
                         $(".row button").prop('disabled', false);
 
                         swal('', 'Không thực hiện được hành động này!', 'error');

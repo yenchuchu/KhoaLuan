@@ -419,7 +419,7 @@ Route::group(['middleware' => 'auth'], function () {
 //Route::get('/', 'DashboardController@redirectUrl')->name('dashboard');
 //Route::get('/test-design', 'DashboardController@dashboardDesign')->name('dashboard.design');
 Route::group(['middleware' => 'guest'], function () {
-Route::get('/start-page', 'DashboardController@index')->name('dashboard.design');
+Route::get('/main', 'DashboardController@index')->name('dashboard.design');
 });
 
 Auth::routes();

@@ -11,6 +11,13 @@
 
         a > img {
             width: 100%;
+            visibility: visible;
+            -webkit-transform: translateY(0) scale(1);
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            -webkit-transition: all 0.35s ease 0s, -webkit-transform 1s cubic-bezier(0.6, 0.2, 0.1, 1) 0.2s, opacity 1s cubic-bezier(0.6, 0.2, 0.1, 1) 0.2s;
+            transition: all 0.35s ease 0s, transform 1s cubic-bezier(0.6, 0.2, 0.1, 1) 0.2s, opacity 1s cubic-bezier(0.6, 0.2, 0.1, 1) 0.2s;
         }
 
         .main-body {
@@ -18,6 +25,47 @@
             overflow: hidden;
             padding: 10px 10px;
             margin-bottom: 90px;
+        }
+
+        .main-body img {
+            margin-top: 25px;
+            font-size: 21px;
+            text-align: center;
+
+            -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+            -moz-animation: fadein 2s; /* Firefox < 16 */
+            -ms-animation: fadein 2s; /* Internet Explorer */
+            -o-animation: fadein 2s; /* Opera < 12.1 */
+            animation: fadein 2s;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Firefox < 16 */
+        @-moz-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Safari, Chrome and Opera > 12.1 */
+        @-webkit-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Internet Explorer */
+        @-ms-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Opera < 12.1 */
+        @-o-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
         }
 
     </style>
@@ -44,17 +92,17 @@
 
                                                 <div class="main-body" style="margin: 10px 15px 10px;">
 
-                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 col-lg-offset-1 col-md-offset-1" style="margin-top: 40px;">
                                                         <a href="#">
                                                             <img src="/imgs-dashboard/tieu-hoc.PNG"
                                                                  alt="Tạo Đề Cấp Tiểu Học"></a>
                                                     </div>
-                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                                         <a href="#">
                                                             <img src="/imgs-dashboard/THCS.PNG"
                                                                  alt="Tạo Đề Cấp Trung Học Cơ Sở"></a>
                                                     </div>
-                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-top: 40px;">
                                                         <a href="#">
                                                             <img src="/imgs-dashboard/THPT.PNG"
                                                                  alt="Tạo Đề Cấp Trung Học Phổ Thông"></a>
@@ -279,14 +327,15 @@
                     </section>
                 @stop
 
-            @section('script')
+@section('script')
 
-                <!-- Plugin JavaScript -->
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-                    <script src="{{URL::asset('test_theme_dashboard/scrollreveal.min.js')}}"></script>
-                    <script src="{{URL::asset('test_theme_dashboard/jquery.magnific-popup.min.js')}}"></script>
+    <!-- Plugin JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+        <script src="{{URL::asset('test_theme_dashboard/scrollreveal.min.js')}}"></script>
+        <script src="{{URL::asset('test_theme_dashboard/jquery.magnific-popup.min.js')}}"></script>
 
-                    <!-- Theme JavaScript -->
-                    <script src="{{URL::asset('test_theme_dashboard/creative.min.js')}}"></script>
+        <!-- Theme JavaScript -->
+        <script src="{{URL::asset('test_theme_dashboard/creative.min.js')}}"></script>
+
 
 @stop

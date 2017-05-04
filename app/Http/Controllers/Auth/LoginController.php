@@ -65,7 +65,7 @@ class LoginController extends Controller
         $link_avatar = $user->avatar;
 
         $social = Social::where('provider_user_id', $user->id)->where('provider', 'facebook')->first();
-dd($user);
+//dd($user);
         // đã đăng nhập từ trước
         if ($social) {
             $u = User::where(['id' => $social->user_id])->first();
@@ -96,18 +96,10 @@ dd($user);
             $temp->provider_user_id = $user->id;
             $temp->provider = 'facebook';
 
-            if(isset($user->phone)) {
-                $u = User::where(['number_phone' => $user->phone])->first();
-            } else if (isset($user->email)) {
+            if ($user->email != null) {
                 $u = User::where(['email' => $user->email])->first();
-            }
-
-            if(!isset($user->phone)) {
-                $user->phone = null;
-            }
-
-            if(!isset($user->email)) {
-                $user->email = null;
+            } else {
+                $u = User::where(['number_phone' => $user->id])->first();
             }
 
             if (!$u) {

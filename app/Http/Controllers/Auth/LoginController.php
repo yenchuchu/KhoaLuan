@@ -72,8 +72,8 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $user = Socialite::driver('facebook')->user();
+        $link_avatar = $user->avatar;
 
-dd($user->avatar);
         $social = Social::where('provider_user_id', $user->id)->where('provider', 'facebook')->first();
 //dd($social);
         // đã đăng nhập từ trước
@@ -107,7 +107,7 @@ dd($user->avatar);
                     'user_name' => $user->name,
                     'email' => $user->email,
                     'number_phone' => $user->phone,
-                    'avatar' => $user->avatar,
+                    'avatar' => $link_avatar,
                     'type' => 0
                 ]);
             } else {

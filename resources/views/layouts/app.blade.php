@@ -92,7 +92,7 @@
 
         #ul-menu-main li a {
             color: #7d8793;
-            padding: 15px 57px;
+            padding: 15px 52px;
             font-size: 16px;
             height: 54px;
         }

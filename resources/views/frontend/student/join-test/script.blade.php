@@ -207,12 +207,12 @@
 
         swal({
                     title: "",
-                    text: " Do you want to continue?",
+                    text: "Bạn có muốn tiếp tục không?",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Restart",
-                    cancelButtonText: "Continue",
+                    confirmButtonText: "Làm lại",
+                    cancelButtonText: "Tiếp tục",
                     closeOnConfirm: true,
                     closeOnCancel: true
                 },

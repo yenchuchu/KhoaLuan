@@ -44,13 +44,13 @@
 
 @section('content')
     <div class="container" style="padding-left: 0">
-        <div><h3>Kết quả thi</h3></div>
+        <div><h3>Kết quả</h3></div>
         <div class="row">
             <div class="col-lg-4">
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Reading / Thang điểm 30
+                        Đọc / Thang điểm 30
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive" id="reload-table-results">
@@ -84,7 +84,7 @@
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Listening / Thang điểm 30
+                        Nghe / Thang điểm 30
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive" id="reload-table-listening-results">
@@ -118,7 +118,7 @@
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Speaking / Thang điểm 10
+                        Nói / Thang điểm 10
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive" id="reload-table-speaking-results">

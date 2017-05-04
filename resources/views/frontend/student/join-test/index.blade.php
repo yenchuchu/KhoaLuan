@@ -13,7 +13,7 @@
 
     @if(empty($items))
         <div class="container">
-            <div><h3>Testing {{$skill_code}}</h3></div>
+            <div><h3>Luyện kỹ năng đọc</h3></div>
             <div id="refresh-page-testing">
                 <p>Chưa cập nhật dữ liệu</p>
             </div>
@@ -26,12 +26,12 @@
                         id='dem'></span> <span id='donvi'></span>
             </div>
             <div class="reload-exam-btn">
-                <button class="btn btn-default" style="width: 132%;" onclick="restart_test('{{$get_next_level}}', '{{$skill_code}}')">Restart</button>
+                <button class="btn btn-default" style="width: 132%;" onclick="restart_test('{{$get_next_level}}', '{{$skill_code}}')">Làm lại</button>
             </div>
         </div>
 
         <div class="container" style="padding-left: 0">
-            <div><h3>Testing {{$skill_code}}</h3></div>
+            <div><h3>Luyện kỹ năng đọc</h3></div>
             <div id="refresh-page-testing">
                 @include('frontend.student.join-test.index_start')
             </div>

@@ -128,7 +128,7 @@
             @endforeach
 
             <div class="col-lg-offset-10 col-lg-2">
-                <button type="submit" title="Submit" id="btn-submit-test" class="btn btn-success btn-submit-test">Submit
+                <button type="submit" title="Submit" id="btn-submit-test" class="btn btn-success btn-submit-test">Send
                 </button>
             </div>
 

@@ -6,12 +6,11 @@
 
 @section('style-menu-main')
    <style>
-       #home-id .col-lg-6 {
+       #home-id .col-lg-12 {
            margin-right: 20px;
        }
 
-       #home-id .col-lg-6,
-       #home-id .col-lg-5 {
+       #home-id .col-lg-12 {
            background: #fafaf3;
            padding-top: 16px;
            padding-bottom: 16px;

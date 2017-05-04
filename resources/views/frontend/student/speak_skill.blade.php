@@ -73,15 +73,16 @@
         {{--<div><h3>Listen and repeat</h3></div>--}}
         @if(count($item) == 0)
             {{--<div class="container">--}}
-                <div><h3>Testing Speaking</h3></div>
+            <div><h3>Luyện kỹ năng nói</h3></div>
                 <div id="refresh-page-testing">
                     <p>Chưa cập nhật dữ liệu</p>
                 </div>
             {{--</div>--}}
 
         @else
+            <div style="margin-bottom: 20px;"><h3>Luyện kỹ năng nói</h3></div>
             <div>
-                <h3>Read the sentences and listen the sample audio below. Then to repeat.</h3>
+                <h4>Read the sentences and listen the sample audio below. Then to repeat.</h4>
                 <input type="hidden" id="level-tesing-hidden" value="{{$get_next_level}}">
                 <input type="hidden" id="skill-code-tesing-hidden" value="Speak">
 

@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/redirect_login';
     protected $classes;
 
 
@@ -87,27 +87,16 @@ class RegisterController extends Controller
         $user->full_name = $data['full_name'];
         $user->type = $roles->id;
         $user->email = $data['email'];
+        $user->number_phone = null;
         $user->class_id = $data['class'];
         $user->user_name = $data['user_name'];
         $user->password = bcrypt($data['password']);
         $user->avatar = 'imgs-dashboard/avatar.png';
-//dd($user);
+
         $user->save();
 
         $user->roles()->attach($roles->id);
         return $user;
-//        $user->roles()->attach($roles->id);
-//
-//
-//        return User::create([
-//            'full_name' => $data['full_name'],
-//            'type' => $roles->id,
-//            'email' => $data['email'],
-//            'class_id' => $data['class'],
-//            'user_name' => $data['user_name'],
-//            'password' => bcrypt($data['password']),
-//            'avatar' => 'imgs-dashboard/avatar.png',
-//        ]);
 
 
     }

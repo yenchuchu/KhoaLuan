@@ -73,47 +73,71 @@ class LoginController extends Controller
     {
         $user = Socialite::driver('facebook')->user();
 
+dd($user);
         $social = Social::where('provider_user_id', $user->id)->where('provider', 'facebook')->first();
 //dd($social);
+        // đã đăng nhập từ trước
         if ($social) {
-            $u = User::where(['email' => $user->email])->first();
+            $u = User::where(['id' => $social->user_id])->first();
+
             Auth::login($u);
-            if ($u->type == 0) {
-                return redirect()->route('get.setup.roles');
-            } else {
-                dd(Auth::user());
-                if ( Auth::user()->hasRole('ST')) {
-                    return redirect()->route('frontend.dashboard.student.index');
-                }
-
-                if ( Auth::user()->hasRole('AD')) {
-                    return redirect()->route('backend.manager.users.index');
-                }
-
-                if ( Auth::user()->hasRole('AT')) {
-                    return redirect()->route('backend.manager.author.index');
-                }
-            }
+            $this->getRedirectTo($u);
         } else {
+            // đăng nhập lần đầu.
             $temp = new Social();
             $temp->provider_user_id = $user->id;
             $temp->provider = 'facebook';
 
-            $u = User::where(['email' => $user->email])->first();
+            if($user->phone != null) {
+                $u = User::where(['number_phone' => $user->phone])->first();
+            } else if ($user->email != null) {
+                $u = User::where(['email' => $user->email])->first();
+            } else {
+                Session::flash('message', 'Email đã tồn tại');
+                return redirect()->route('login');
+            }
+
             if (!$u) {
                 $u = User::create([
                     'user_name' => $user->name,
                     'email' => $user->email,
+                    'number_phone' => $user->phone,
                     'avatar' => $user->avatar,
                     'type' => 0
                 ]);
+            } else {
+                $this->getRedirectTo($u);
             }
+
             $temp->user_id = $u->id;
 
             $temp->save();
 
             Auth::login($u);
             return redirect()->route('get.setup.roles');
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getRedirectTo($u)
+    {
+        if ($u->type == 0) {
+            return redirect()->route('get.setup.roles');
+        } else {
+//                dd(Auth::user());
+            if ( Auth::user()->hasRole('ST')) {
+                return redirect()->route('frontend.dashboard.student.index');
+            }
+
+            if ( Auth::user()->hasRole('AD')) {
+                return redirect()->route('backend.manager.users.index');
+            }
+
+            if ( Auth::user()->hasRole('AT')) {
+                return redirect()->route('backend.manager.author.index');
+            }
         }
     }
 

@@ -8,14 +8,14 @@
                                number_title="'.$j_title.'"
                                skill_name="'.$key.'" id_record="'.$id_record.'" id_question="'.$id_question.'"
                                name_table="'.$table.'" value="'.$detail->old_answer[$id_question]['answer_student'].'"
-                               style="width: 7%; border: none; border-bottom: 1px solid gray; margin-left: 7px; color: gray;">';
+                               style="width: 8%;background: transparent; border: none; border-bottom: 1px solid gray; margin-left: 7px; color: gray;">';
         } else {
             $input_replace = '<input type="text" name="your_answer_['.$table.']['.$id_record.']['.$id_question.'][]"
                                id="your_answer_'.$table.'_'.$id_record.'_'.$id_question.'"
                                number_title="'.$j_title.'"
                                skill_name="'.$key.'" id_record="'.$id_record.'" id_question="'.$id_question.'"
                                name_table="'.$table.'"
-                               style="width: 7%; border: none; border-bottom: 1px solid gray; margin-left: 7px; color: gray;">';
+                               style="width: 8%;background: transparent; border: none; border-bottom: 1px solid gray; margin-left: 7px; color: gray;">';
         }
         ?>
         <span class="content_question">

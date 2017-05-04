@@ -81,7 +81,7 @@ class LoginController extends Controller
             if ($u->type == 0) {
                 return redirect()->route('get.setup.roles');
             } else {
-                dd(Auth::user()->hasRole('ST'));
+                dd(Auth::user());
                 if ( Auth::user()->hasRole('ST')) {
                     return redirect()->route('frontend.dashboard.student.index');
                 }

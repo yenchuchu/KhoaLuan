@@ -75,7 +75,7 @@ class LoginController extends Controller
         $link_avatar = $user->avatar;
 
         $social = Social::where('provider_user_id', $user->id)->where('provider', 'facebook')->first();
-//dd($social);
+
         // đã đăng nhập từ trước
         if ($social) {
             $u = User::where(['id' => $social->user_id])->first();
@@ -111,7 +111,7 @@ class LoginController extends Controller
                     'type' => 0
                 ]);
             } else {
-                Session::flash('message', 'Đã có tài khoản sử dụng Email của bạn');
+                Session::flash('message', 'Email của bạn đã được sử dựng ở một tài khoản khác!');
                 return redirect()->route('login');
             }
 
@@ -132,7 +132,6 @@ class LoginController extends Controller
         if ($u->type == 0) {
             return redirect()->route('get.setup.roles');
         } else {
-//                dd(Auth::user());
             if ( Auth::user()->hasRole('ST')) {
                 return redirect()->route('frontend.dashboard.student.index');
             }

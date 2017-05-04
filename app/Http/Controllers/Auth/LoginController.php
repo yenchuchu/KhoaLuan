@@ -74,13 +74,14 @@ class LoginController extends Controller
         $user = Socialite::driver('facebook')->user();
 
         $social = Social::where('provider_user_id', $user->id)->where('provider', 'facebook')->first();
-dd($social);
+//dd($social);
         if ($social) {
             $u = User::where(['email' => $user->email])->first();
             Auth::login($u);
             if ($u->type == 0) {
                 return redirect()->route('get.setup.roles');
             } else {
+                dd(Auth::user()->hasRole('ST'));
                 if ( Auth::user()->hasRole('ST')) {
                     return redirect()->route('frontend.dashboard.student.index');
                 }

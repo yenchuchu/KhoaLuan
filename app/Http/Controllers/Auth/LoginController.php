@@ -73,7 +73,7 @@ class LoginController extends Controller
     {
         $user = Socialite::driver('facebook')->user();
 
-dd($user);
+dd($user->avatar);
         $social = Social::where('provider_user_id', $user->id)->where('provider', 'facebook')->first();
 //dd($social);
         // đã đăng nhập từ trước
@@ -88,13 +88,18 @@ dd($user);
             $temp->provider_user_id = $user->id;
             $temp->provider = 'facebook';
 
-            if($user->phone != null) {
+            if(isset($user->phone)) {
                 $u = User::where(['number_phone' => $user->phone])->first();
-            } else if ($user->email != null) {
+            } else if (isset($user->email)) {
                 $u = User::where(['email' => $user->email])->first();
-            } else {
-                Session::flash('message', 'Email đã tồn tại');
-                return redirect()->route('login');
+            }
+
+            if(!isset($user->phone)) {
+                $user->phone = null;
+            }
+
+            if(!isset($user->email)) {
+                $user->email = null;
             }
 
             if (!$u) {
@@ -106,7 +111,8 @@ dd($user);
                     'type' => 0
                 ]);
             } else {
-                $this->getRedirectTo($u);
+                Session::flash('message', 'Đã có tài khoản sử dụng Email của bạn');
+                return redirect()->route('login');
             }
 
             $temp->user_id = $u->id;

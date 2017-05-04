@@ -18,6 +18,8 @@
 
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::get('/', 'DashboardController@redirectUrl')->name('dashboard.redirect.login.not.url');
+    Route::get('/home', 'DashboardController@redirectUrl')->name('dashboard.redirect.login.not.url');
     Route::get('/redirect_login', 'DashboardController@redirectUrl')->name('dashboard.redirect.login');
 
     Route::group(array('prefix' => 'backend'), function () {

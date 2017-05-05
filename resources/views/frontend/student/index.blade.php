@@ -16,6 +16,18 @@
            padding-bottom: 16px;
        }
 
+       .p-result {
+           font-size: 15px;
+           color: #00b1b3;
+           margin-top: 9px;
+       }
+
+       .p-result span {
+           color: rgba(128, 128, 128, 0.7);
+           font-size: 13px;
+           margin-left: 2px;
+       }
+
 
    </style>
 @stop

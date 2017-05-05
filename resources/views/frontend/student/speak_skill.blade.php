@@ -81,58 +81,61 @@
 
         @else
             <div style="margin-bottom: 20px;"><h3>Luyện kỹ năng nói</h3></div>
-            <div>
-                <h4>Read the sentences and listen the sample audio below. Then to repeat.</h4>
-                <input type="hidden" id="level-tesing-hidden" value="{{$get_next_level}}">
-                <input type="hidden" id="skill-code-tesing-hidden" value="Speak">
-
-                <p id="text_demo">{{$item->content}}</p>
+            <div class="col-lg-12" style="background: #fafaf3; padding: 20px; padding-top: 13px;">
                 <div>
-                    <label style="font-size:16px;margin-right: 6px;">The sample audio </label>
-                    @if($item->url_mp3 != null)
-                        <audio controls>
-                            <source src="/{{$item->url_mp3}}" type="audio/mpeg">
-                        </audio>
-                    @else
-                        <audio controls>
-                            <source src="{{$item->url_mp3_create}}" type="audio/mpeg">
-                        </audio>
-                    @endif
-                </div>
-            </div>
-        <hr>
-            <div style="float:left; width: 100%">
-                {{--<a href="#" id="start_button" onclick="startDictation(event)"><i class="fa fa-microphone" aria-hidden="true"></i></a>--}}
+                    <span style="font-size: 17px;font-weight: 700;">Read the sentence and listen to the sample audio below. Then repeat.</span>
+                    <input type="hidden" id="level-tesing-hidden" value="{{$get_next_level}}">
+                    <input type="hidden" id="skill-code-tesing-hidden" value="Speak">
 
-                <div id="results">
-                    <a href="#" id="start_button" style="margin-bottom: 10px;margin-right: 10px;">
-                        <i class="fa fa-microphone" aria-hidden="true" style="margin-right: 5px;"></i>Your result: </a>
-                    <span id="final_span" class="final"></span>
-                    <span id="interim_span" class="interim"></span>
+                    <p style="font-size: 17px; margin-top: 5px;" id="text_demo">{{$item->content}}</p>
+                    <div>
+                        <label style="position: relative;top: -11px;font-size:15px;margin-right: 6px;">The sample audio </label>
+                        @if($item->url_mp3 != null)
+                            <audio controls>
+                                <source src="/{{$item->url_mp3}}" type="audio/mpeg">
+                            </audio>
+                        @else
+                            <audio controls>
+                                <source src="{{$item->url_mp3_create}}" type="audio/mpeg">
+                            </audio>
+                        @endif
+                    </div>
                 </div>
-                <div id="messages_result"></div>
-                <div id="result_similarity"></div>
-            </div>
+                <hr>
+                <div style="float:left; width: 100%">
+                    {{--<a href="#" id="start_button" onclick="startDictation(event)"><i class="fa fa-microphone" aria-hidden="true"></i></a>--}}
 
-            {{--<p> For now it is supported only in Firefox(v25+) and Chrome(v47+)</p>--}}
-            <div id='gUMArea'>
+                    <div id="results">
+                        <a href="#" id="start_button" style="margin-bottom: 10px;margin-right: 10px;">
+                            <i class="fa fa-microphone" aria-hidden="true" style="margin-right: 5px;"></i>Your result: </a>
+                        <span id="final_span" class="final"></span>
+                        <span id="interim_span" class="interim"></span>
+                    </div>
+                    <div id="messages_result"></div>
+                    <div id="result_similarity"></div>
+                </div>
+
+                {{--<p> For now it is supported only in Firefox(v25+) and Chrome(v47+)</p>--}}
+                <div id='gUMArea'>
+                    <div>
+                        Record:
+                        <input type="radio" name="media" value="audio">audio
+                    </div>
+                </div>
+                <div id='btns'>
+                    <button class="btn btn-default" id='start'>Start</button>
+                    <button class="btn btn-default" id='stop' disabled>Stop</button>
+                </div>
                 <div>
-                    Record:
-                    <input type="radio" name="media" value="audio">audio
+                    <ul class="list-unstyled" id='ul'></ul>
+                </div>
+
+                <div class="row" style="margin-bottom: 30px;margin-left: 0px;">
+                    <button id="check_diff" class="btn btn-success" disabled>Check</button>
+                    <a class="btn btn-success" href="{{route('frontend.dashboard.student.learn.speak', [])}}">Next</a>
                 </div>
             </div>
-            <div id='btns'>
-                <button class="btn btn-default" id='start'>Start</button>
-                <button class="btn btn-default" id='stop' disabled>Stop</button>
-            </div>
-            <div>
-                <ul class="list-unstyled" id='ul'></ul>
-            </div>
 
-        <div class="row" style="margin-bottom: 30px;margin-left: 0px;">
-            <button id="check_diff" class="btn btn-success" disabled>Check</button>
-            <a class="btn btn-success" href="{{route('frontend.dashboard.student.learn.speak', [])}}">Next</a>
-        </div>
 
         @endif
 

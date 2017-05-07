@@ -123,12 +123,16 @@ class StudentController extends Controller
         if (strcmp($text_demo, $text_speak) == 0) {
             $point = 10;
             $result_diff = null;
-            $result_similarity = '';
+//            $result_similarity = '';
         } else {
-            $diff = $this->get_decorated_diff_v2($text_demo, $text_speak);
-            $result_diff = $diff['new'];
-            $result_similarity = $diff['similarity'];
+            $diff = $this->htmlDiff($text_demo, $text_speak);
+            $result_diff = $diff['check_new'];
             $point = $diff['point'];
+
+//            $diff = $this->get_decorated_diff_v2($text_demo, $text_speak);
+//            $result_diff = $diff['new'];
+//            $result_similarity = $diff['similarity'];
+//            $point = $diff['point'];
         }
 
         $add_user_skill = new UserSkill();
@@ -157,12 +161,67 @@ class StudentController extends Controller
         return response()->json([
             'code' => 200,
             'result' => $result_diff,
-            'result_similarity' => $result_similarity,
+//            'result_similarity' => $result_similarity,
             'message' => 'Score: ' . $point_around
         ]);
     }
 
-    function get_decorated_diff_v2($old, $new, $get_similarity=false){
+    // So sánh 2 chuỗi - cách 3:
+    public function diff($old, $new){
+        $matrix = array();
+        $maxlen = 0;
+        foreach($old as $oindex => $ovalue){
+            $nkeys = array_keys($new, $ovalue);
+            foreach($nkeys as $nindex){
+                $matrix[$oindex][$nindex] = isset($matrix[$oindex - 1][$nindex - 1]) ?
+                    $matrix[$oindex - 1][$nindex - 1] + 1 : 1;
+                if($matrix[$oindex][$nindex] > $maxlen){
+                    $maxlen = $matrix[$oindex][$nindex];
+                    $omax = $oindex + 1 - $maxlen;
+                    $nmax = $nindex + 1 - $maxlen;
+                }
+            }
+        }
+        if($maxlen == 0) return array(array('d'=>$old, 'i'=>$new));
+        return array_merge(
+            $this->diff(array_slice($old, 0, $omax), array_slice($new, 0, $nmax)),
+            array_slice($new, $nmax, $maxlen),
+            $this->diff(array_slice($old, $omax + $maxlen), array_slice($new, $nmax + $maxlen)));
+    }
+
+    public function htmlDiff($old, $new){
+        $ret['check_new'] = '';
+        $count_words_similar = 0;
+        $diff = $this->diff(preg_split("/[\s]+/", $old), preg_split("/[\s]+/", $new));
+        foreach($diff as $k){
+            if(is_array($k)){
+                $ret['check_new'] .=(!empty($k['i'])?"<del style='background-color:#ffcccc'>".implode(' ',$k['i'])."</del> ":'');
+                $count_words_similar++;
+            } else {
+                $ret['check_new'] .= $k . ' ';
+            }
+        }
+
+        $count_words_old = str_word_count($old);
+        $count_words_diff = $count_words_old - $count_words_similar;
+
+        $ret['point'] = 0;
+        if ($count_words_diff < $count_words_similar) {
+            $ret['point'] = 10 - ($count_words_diff * 10) / $count_words_similar;
+        } else {
+            $ret['point'] = 0;
+        }
+
+//        if ($count_words_similar > 0) {
+//            $ret['point'] = ($count_words_similar * 10) / $count_words_old;
+//        } else {
+//            $ret['point'] = 0;
+//        }
+
+        return $ret;
+    }
+
+    public function get_decorated_diff_v2($old, $new, $get_similarity=false){
         $from_start = strspn($old ^ $new, "\0");
         $from_end = strspn(strrev($old) ^ strrev($new), "\0");
 
@@ -191,7 +250,7 @@ class StudentController extends Controller
         return array("old"=>$old, "new"=>$new, "similarity"=>$get_similarity, 'point' => $point);
     }
 
-    function get_decorated_diff($old, $new)
+    public function get_decorated_diff($old, $new)
     {
         $count_word_old = str_word_count($old);
 

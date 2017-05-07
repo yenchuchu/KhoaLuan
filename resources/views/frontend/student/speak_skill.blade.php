@@ -303,7 +303,7 @@
                         } else {
                             $('#final_span').text('');
                             $('#final_span').prepend(data.result);
-                            $('#result_similarity').prepend(data.result_similarity);
+//                            $('#result_similarity').prepend(data.result_similarity);
                             $('#messages_result').text(data.message);
                         }
                     }

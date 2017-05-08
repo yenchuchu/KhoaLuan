@@ -51,9 +51,10 @@
             color: rgb(27, 245, 27);
             float: left;
             width: 100%;
-            margin-left: 30px;
+            margin-left: 25px;
             font-size: 16px;
             font-weight: 500;
+            margin-bottom: 7px;
         }
 
         #btns {

@@ -191,32 +191,28 @@ class StudentController extends Controller
 
     public function htmlDiff($old, $new){
         $ret['check_new'] = '';
-        $count_words_similar = 0;
+        $count_words_diff = 0;
         $diff = $this->diff(preg_split("/[\s]+/", $old), preg_split("/[\s]+/", $new));
         foreach($diff as $k){
             if(is_array($k)){
                 $ret['check_new'] .=(!empty($k['i'])?"<del style='background-color:#ffcccc'>".implode(' ',$k['i'])."</del> ":'');
-                $count_words_similar++;
+                if(!empty($k['i'])) {
+                    $count_words_diff++;
+                }
+
             } else {
                 $ret['check_new'] .= $k . ' ';
             }
         }
 
         $count_words_old = str_word_count($old);
-        $count_words_diff = $count_words_old - $count_words_similar;
+        $count_words_similar = $count_words_old - $count_words_diff;
 
-        $ret['point'] = 0;
         if ($count_words_diff < $count_words_similar) {
             $ret['point'] = 10 - ($count_words_diff * 10) / $count_words_similar;
         } else {
             $ret['point'] = 0;
         }
-
-//        if ($count_words_similar > 0) {
-//            $ret['point'] = ($count_words_similar * 10) / $count_words_old;
-//        } else {
-//            $ret['point'] = 0;
-//        }
 
         return $ret;
     }

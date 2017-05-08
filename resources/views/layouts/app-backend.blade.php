@@ -84,7 +84,7 @@
 
         .huge-done {
             background: #04b173;
-            padding: 3px 7px;
+            padding: 3px 12px;
             border-radius: 6px;
             color: white;
             font-weight: 600;

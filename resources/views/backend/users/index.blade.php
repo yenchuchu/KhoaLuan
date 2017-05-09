@@ -1,7 +1,7 @@
 @extends('layouts.app-backend')
 
 @section('header')
-    <h1 class="page-header">Trang Chủ</h1>
+    <h1 class="page-header">{{ trans('label.backend.dashboard')  }}</h1>
 @stop
 @section('content')
     <div class="row" id="wrap-user-table">

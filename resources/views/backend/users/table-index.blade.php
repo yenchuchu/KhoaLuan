@@ -2,18 +2,18 @@
     <!-- Advanced Tables -->
     <div class="panel panel-default">
         <div class="panel-heading">
-            Manager Student
+            {{ trans('label.backend.admin.manager_student')  }}
         </div>
         <div class="panel-body">
             <div class="table-responsive" id="reload-table-manager-users">
                 <table class="table table-hover" id="manager_users_student">
                     <thead>
                     <tr>
-                        <th>STT</th>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Class</th>
-                        <th>Action</th>
+                        <th>{{ trans('label.backend.admin.table.order')  }}</th>
+                        <th>{{ trans('label.backend.admin.table.full_name')  }}</th>
+                        <th>{{ trans('label.backend.admin.table.email')  }}</th>
+                        <th>{{ trans('label.backend.admin.table.class')  }}</th>
+                        <th>{{ trans('label.backend.admin.table.action')  }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -28,7 +28,7 @@
                                 if($class != null) { ?>
                                 {{$class->title}}
                                 <?php } else { ?>
-                                <span class="huge-null">null</span>
+                                <span class="huge-null">Lớp 3</span>
                                 <?php } ?>
                             </td>
                             <td>
@@ -56,17 +56,17 @@
     <!-- Advanced Tables -->
     <div class="panel panel-default">
         <div class="panel-heading">
-            Manager Author
+            {{ trans('label.backend.admin.manager_author')  }}
         </div>
         <div class="panel-body">
             <div class="table-responsive" id="reload-table-manager-users">
                 <table class="table table-hover" id="manager_users_author">
                     <thead>
                     <tr>
-                        <th>STT</th>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
+                        <th>{{ trans('label.backend.admin.table.order')  }}</th>
+                        <th>{{ trans('label.backend.admin.table.full_name')  }}</th>
+                        <th>{{ trans('label.backend.admin.table.email')  }}</th>
+                        <th>{{ trans('label.backend.admin.table.action')  }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -101,17 +101,17 @@
     <!-- Advanced Tables -->
     <div class="panel panel-default">
         <div class="panel-heading">
-            Manager Admin
+            {{ trans('label.backend.admin.manager_admin')  }}
         </div>
         <div class="panel-body">
             <div class="table-responsive" id="reload-table-manager-users">
                 <table class="table table-hover" id="manager_users_admin">
                     <thead>
                     <tr>
-                        <th>STT</th>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
+                        <th>{{ trans('label.backend.admin.table.order')  }}</th>
+                        <th>{{ trans('label.backend.admin.table.full_name')  }}</th>
+                        <th>{{ trans('label.backend.admin.table.email')  }}</th>
+                        <th>{{ trans('label.backend.admin.table.action')  }}</th>
                     </tr>
                     </thead>
                     <tbody>

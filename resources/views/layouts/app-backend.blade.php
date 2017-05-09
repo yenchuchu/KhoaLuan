@@ -564,19 +564,19 @@
             responsive: true,
             language: {
                 "sProcessing": "Đang xử lý...",
-                "sLengthMenu": "Xem _MENU_ bản ghi",
-                "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
+                "sLengthMenu": "{{ trans('label.table.view')  }}  _MENU_  {{ trans('label.table.record')  }}",
+                "sZeroRecords": "{{ trans('label.table.no_record')  }} ",
                 "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ bản ghi",
                 "sInfoEmpty": "",
                 "sInfoFiltered": "(được lọc từ _MAX_ bản ghi)",
                 "sInfoPostFix": "",
-                "sSearch": "Tìm kiếm: ",
+                "sSearch": "{{ trans('label.table.search')  }}  ",
                 "sUrl": "",
                 "oPaginate": {
-                    "sFirst": "Đầu",
-                    "sPrevious": "Trước",
-                    "sNext": "Tiếp",
-                    "sLast": "Cuối"
+                    "sFirst": "{{ trans('label.table.first')  }} ",
+                    "sPrevious": "<<",
+                    "sNext": ">>",
+                    "sLast": "{{ trans('label.table.last')  }} "
                 }
             },
             aLengthMenu: [

@@ -65,6 +65,18 @@ return [
             'save-confirm' => 'Lưu và phê duyệt',
             'change-audio' => 'Thay đổi file nghe',
             'default-audio-gg' => 'File nghe được mặc định theo Google API',
+        ],
+        'admin' => [
+            'manager_student' => 'Quản lý học sinh',
+            'manager_author' => 'Quản lý tác giả',
+            'manager_admin' => 'Quản lý quản trị viên',
+            'table' => [
+                'order' => 'STT',
+                'full_name' => 'Họ và tên',
+                'email' => 'Hộp thư điện tử',
+                'class' => 'Lớp',
+                'action' => 'Xóa'
+            ]
         ]
     ],
     'frontend' => [

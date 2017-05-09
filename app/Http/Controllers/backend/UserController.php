@@ -70,16 +70,46 @@ class UserController extends Controller
     {
         $user_id = $request->all();
         $user = User::whereId($user_id)->with('roles', 'socials')->first();
+//        $user_email = $user->email;
+//        $user_name = $user->user_name;
+
+        if (count($user) != 1) {
+            return response()->json([
+                'code' => 404,
+                'message' => 'Không tìm thấy người dùng!',
+            ]);
+        }
+        $roles = $user->roles()->get();
+
+        if (!isset($roles)) {
+            return response()->json([
+                'code' => 404,
+                'message' => 'Không thực hiện được hành động này!',
+            ]);
+        }
+
+        $roles_ids = [];
+        foreach ($roles as $rol) {
+            $roles_ids[] = $rol->id;
+        }
+
+        $user->roles()->detach($roles_ids);
+
+        // kiểm tra nếu là tài khoản login fb -> xóa liên kết.
+        $check_account_fb = Social::where(['user_id' => $user_id])->first();
+        if($check_account_fb) {
+            $check_account_fb->delete();
+        }
 
         $check_delete = $user->delete();
 
-        $data = [];
-        if($check_delete == true) {
-            Mail::send('emails.messages-noti',  [$data], function ($message)
-            {
-                $message->to('xliucuxiux@gmail.com', 'Thuy Hien')->subject('[EStore] Thông báo khóa tài khoản');
-            });
-        }
+//        $data = [];
+//        if($check_delete == true) {
+//            Mail::send('emails.messages-noti',  [$data], function ($message) use ($user_email, $user_name)
+//            {
+//                $message->to($user_email, $user_name)->subject('[EStore] Thông báo khóa tài khoản');
+//            });
+//        }
 
         $user_all = $this->type_user();
         $user_author = $user_all['user_author'];
@@ -88,35 +118,6 @@ class UserController extends Controller
 
         return view('backend.users.table-index', compact('user_author', 'user_student', 'user_admin'));
     }
-
-
-//        if (count($user) != 1) {
-//            return response()->json([
-//                'code' => 404,
-//                'message' => 'Không tìm thấy người dùng!',
-//            ]);
-//        }
-//        $roles = $user->roles()->get();
-//
-//        if (!isset($roles)) {
-//            return response()->json([
-//                'code' => 404,
-//                'message' => 'Không thực hiện được hành động này!',
-//            ]);
-//        }
-//
-//        $roles_ids = [];
-//        foreach ($roles as $rol) {
-//            $roles_ids[] = $rol->id;
-//        }
-//
-//        $user->roles()->detach($roles_ids);
-//
-//        // kiểm tra nếu là tài khoản login fb -> xóa liên kết.
-//        $check_account_fb = Social::where(['user_id' => $user_id])->first();
-//        if($check_account_fb) {
-//            $check_account_fb->delete();
-//        }
 
     public function type_user()
     {

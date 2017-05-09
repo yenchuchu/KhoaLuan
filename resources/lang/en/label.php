@@ -53,6 +53,25 @@ return [
             'answer-question' => 'Enter answer',
             'upload_audio' => 'Upload Audio',
             'suggest_answer' => 'Suggest answer'
+        ],
+        'post_details' => [
+            'title' => 'Post detail',
+            'confirmed' => 'Confirmed',
+            'save-confirm' => 'Save and confirm ',
+            'change-audio' => 'Change audio',
+            'default-audio-gg' => 'The audio is being formated Google API',
+        ],
+        'admin' => [
+            'manager_student' => 'Manager student',
+            'manager_author' => 'Manager author',
+            'manager_admin' => 'Manager Admin',
+            'table' => [
+                'order' => 'Order',
+                'full_name' => 'Full name',
+                'email' => 'Email',
+                'class' => 'Class',
+                'action' => 'Action'
+            ]
         ]
     ],
     'frontend' => [

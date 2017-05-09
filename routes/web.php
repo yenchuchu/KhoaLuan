@@ -13,7 +13,7 @@
 
 
 //if (App::environment('remote')) {
-//   URL::forceSchema('https');
+   URL::forceSchema('https');
 //}
 //Route::group(array('prefix' => '{locale}'), function ($locale) {
 //    dd(App::setLocale($locale));

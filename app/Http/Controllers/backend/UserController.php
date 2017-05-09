@@ -71,12 +71,12 @@ class UserController extends Controller
         $user_id = $request->all();
         $user = User::whereId($user_id)->with('roles', 'socials')->first();
 
-        if (count($user) != 1) {
-            return response()->json([
-                'code' => 404,
-                'message' => 'Không tìm thấy người dùng!',
-            ]);
-        }
+//        if (count($user) != 1) {
+//            return response()->json([
+//                'code' => 404,
+//                'message' => 'Không tìm thấy người dùng!',
+//            ]);
+//        }
         $roles = $user->roles()->get();
 
         if (!isset($roles)) {

@@ -70,7 +70,7 @@ class UserController extends Controller
     {
         $user_id = $request->all();
         $user = User::whereId($user_id)->with('roles', 'socials')->first();
-
+dd($user);
         $user_email = $user->email;
         $user_name = $user->user_name;
 

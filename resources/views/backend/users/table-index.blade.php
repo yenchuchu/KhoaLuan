@@ -25,11 +25,11 @@
                             <td>{{$user->email}}</td>
                             <td class="center">
                                 <?php $class = $user->classes()->first();
-                                if($class != null) { ?>
+//                                if($class != null) { ?>
                                 {{$class->title}}
-                                <?php } else { ?>
-                                <span class="huge-null">null</span>
-                                <?php } ?>
+<!--                                --><?php //} else { ?>
+                                <!-- <span class="huge-null">null</span> -->
+<!--                                --><?php //} ?>
                             </td>
                             <td>
 

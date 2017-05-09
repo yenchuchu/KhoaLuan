@@ -439,7 +439,13 @@
 
 Route::get('lang/{lang}', ['as'=>'lang.switch', 'uses'=>'DashboardController@switchLang']);
 
-//Route::post('/language-chooser', 'DashboardController@chooseLanguage')->name('language-chooser');
+Route::get('/send-email', function () {
+    $data = [];
+    return Mail::send('emails.messages-noti', [$data], function ($message)
+    {
+        $message->to('yenchuchu95@gmail.com', 'Thuy Hien')->subject('[EStore] Thông báo khóa tài khoản');
+    });
+});
 
 //Route::get('language-chooser/{locale}', function ($locale) {
 //    App::setLocale($locale);

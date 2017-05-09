@@ -24,7 +24,7 @@
                             <td>{{$user->full_name}}</td>
                             <td>{{$user->email}}</td>
                             <td class="center">
-                                <?php $class = $user->classes()->first();
+                                <?php $class = $user->classes()->first(); dd($class);
                                 if(!empty($class)) { ?>
                                 {{$class->title}}
                                 <?php } else { ?>
@@ -32,13 +32,6 @@
                                 <?php } ?>
                             </td>
                             <td>
-                                <!-- nút hiện form sửa -->
-                            {{--<button class="btn btn-sm btn-primary" id="btn-edit-school">--}}
-                            {{--<a href="#" target="_blank" title="Edit">--}}
-                            {{--<i class="fa fa-pencil" style="color: white" data-toggle="tooltip"--}}
-                            {{--data-placement="top" title="Edit"></i>--}}
-                            {{--</a>--}}
-                            {{--</button>--}}
 
                             <!-- nút xóa gửi ajax lên sau đó remove cả dòng role này đi (thẻ tr) -->
                                 <button class="btn btn-sm btn-danger" id="user_{{$user->id}}" title="Delete"
@@ -84,13 +77,6 @@
                             <td>{{$user->full_name}}</td>
                             <td>{{$user->email}}</td>
                             <td>
-                                <!-- nút hiện form sửa -->
-                            {{--<button class="btn btn-sm btn-primary" id="btn-edit-school">--}}
-                            {{--<a href="#" target="_blank" title="Edit">--}}
-                            {{--<i class="fa fa-pencil" style="color: white" data-toggle="tooltip"--}}
-                            {{--data-placement="top" title="Edit"></i>--}}
-                            {{--</a>--}}
-                            {{--</button>--}}
 
                             <!-- nút xóa gửi ajax lên sau đó remove cả dòng role này đi (thẻ tr) -->
                                 <button class="btn btn-sm btn-danger" id="user_{{$user->id}}" title="Delete"
@@ -136,14 +122,6 @@
                             <td>{{$user->full_name}}</td>
                             <td>{{$user->email}}</td>
                             <td>
-                                <!-- nút hiện form sửa -->
-                            {{--<button class="btn btn-sm btn-primary" id="btn-edit-school">--}}
-                            {{--<a href="#" target="_blank" title="Edit">--}}
-                            {{--<i class="fa fa-pencil" style="color: white" data-toggle="tooltip"--}}
-                            {{--data-placement="top" title="Edit"></i>--}}
-                            {{--</a>--}}
-                            {{--</button>--}}
-
                             <!-- nút xóa gửi ajax lên sau đó remove cả dòng role này đi (thẻ tr) -->
                                 <button class="btn btn-sm btn-danger" id="user_{{$user->id}}" title="Delete"
                                         onclick="deleteUser({{$user->id}})">

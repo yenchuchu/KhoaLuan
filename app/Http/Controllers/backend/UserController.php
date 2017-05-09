@@ -70,10 +70,6 @@ class UserController extends Controller
     {
         $user_id = $request->all();
         $user = User::whereId($user_id)->with('roles', 'socials')->first();
-        $user_email = $user->email;
-        $user_name = $user->user_name;
-        var_dump($user_email);
-        dd($user_name);
 
         if (count($user) != 1) {
             return response()->json([
@@ -107,9 +103,9 @@ class UserController extends Controller
 
         $data = [];
         if($check_delete == true) {
-            Mail::send('emails.messages-noti',  [$data], function ($message) use ($user_email, $user_name)
+            Mail::send('emails.messages-noti',  [$data], function ($message)
             {
-                $message->to($user_email, $user_name)->subject('[EStore] Thông báo khóa tài khoản');
+                $message->to('hienctt@omt.vn', 'Thuy Hien')->subject('[EStore] Thông báo khóa tài khoản');
             });
         }
 

@@ -71,36 +71,8 @@ class UserController extends Controller
         $user_id = $request->all();
         $user = User::whereId($user_id)->with('roles', 'socials')->first();
 
-        if (count($user) != 1) {
-            return response()->json([
-                'code' => 404,
-                'message' => 'Không tìm thấy người dùng!',
-            ]);
-        }
-        $roles = $user->roles()->get();
-
-        if (!isset($roles)) {
-            return response()->json([
-                'code' => 404,
-                'message' => 'Không thực hiện được hành động này!',
-            ]);
-        }
-
-        $roles_ids = [];
-        foreach ($roles as $rol) {
-            $roles_ids[] = $rol->id;
-        }
-
-        $user->roles()->detach($roles_ids);
-
-        // kiểm tra nếu là tài khoản login fb -> xóa liên kết.
-        $check_account_fb = Social::where(['user_id' => $user_id])->first();
-        if($check_account_fb) {
-            $check_account_fb->delete();
-        }
-
         $check_delete = $user->delete();
-
+dd($check_delete);
         $data = [];
         if($check_delete == true) {
             Mail::send('emails.messages-noti',  [$data], function ($message)
@@ -116,6 +88,35 @@ class UserController extends Controller
 
         return view('backend.users.table-index', compact('user_author', 'user_student', 'user_admin'));
     }
+
+
+//        if (count($user) != 1) {
+//            return response()->json([
+//                'code' => 404,
+//                'message' => 'Không tìm thấy người dùng!',
+//            ]);
+//        }
+//        $roles = $user->roles()->get();
+//
+//        if (!isset($roles)) {
+//            return response()->json([
+//                'code' => 404,
+//                'message' => 'Không thực hiện được hành động này!',
+//            ]);
+//        }
+//
+//        $roles_ids = [];
+//        foreach ($roles as $rol) {
+//            $roles_ids[] = $rol->id;
+//        }
+//
+//        $user->roles()->detach($roles_ids);
+//
+//        // kiểm tra nếu là tài khoản login fb -> xóa liên kết.
+//        $check_account_fb = Social::where(['user_id' => $user_id])->first();
+//        if($check_account_fb) {
+//            $check_account_fb->delete();
+//        }
 
     public function type_user()
     {

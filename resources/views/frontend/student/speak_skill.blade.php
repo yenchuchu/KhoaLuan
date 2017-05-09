@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('header')
-    <h1 class="page-header">Test Speak</h1>
-@stop
-
 @section('style-menu-main')
     <style>
         #home-id .col-lg-6 {
@@ -74,14 +70,14 @@
         {{--<div><h3>Listen and repeat</h3></div>--}}
         @if(count($item) == 0)
             {{--<div class="container">--}}
-            <div><h3>Luyện kỹ năng nói</h3></div>
+            <div><h3>{{ trans('label.frontend.heading.test_speaking')  }}</h3></div>
                 <div id="refresh-page-testing">
-                    <p>Chưa cập nhật dữ liệu</p>
+                    <p>{{ trans('label.frontend.no_data')  }}</p>
                 </div>
             {{--</div>--}}
 
         @else
-            <div style="margin-bottom: 20px;"><h3>Luyện kỹ năng nói</h3></div>
+            <div style="margin-bottom: 20px;"><h3>{{ trans('label.frontend.heading.test_speaking')  }}</h3></div>
             <div class="col-lg-12" style="background: #fafaf3; padding: 20px; padding-top: 13px;">
                 <div>
                     <span style="font-size: 17px;font-weight: 700;">Read the sentence and listen to the sample audio below. Then repeat.</span>

@@ -118,15 +118,11 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-lg-8 col-lg-offset-2 text-center">
-                                                <h2 class="section-heading">Hãy đến với chúng tôi</h2>
+                                                <h2 class="section-heading">{{ trans('label.auth.main.session1.title')  }}</h2>
                                                 <hr class="light">
-                                                <p class="text-faded">EStore là nơi để các bạn cùng nhau trao đổi
-                                                    kiến thức môn tiếng Anh các bậc tiểu học, trung học cơ sở và trung
-                                                    học phổ thông. Từ những kiến thức được kiểm duyệt, các em học sinh
-                                                    sẽ tự rèn luyện kỹ năng tiếng Anh của mình với những kiến thức
-                                                    đó. </p>
+                                                <p class="text-faded">{{ trans('label.auth.main.session1.content')  }} </p>
                                                 <a href="{{ url('/register') }}"
-                                                   class="page-scroll btn btn-default btn-xl sr-button">Đăng ký</a>
+                                                   class="page-scroll btn btn-default btn-xl sr-button">{{trans('label.auth.register.title')}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -136,7 +132,7 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-lg-12 text-center">
-                                                <h2 class="section-heading">At Your Service</h2>
+                                                <h2 class="section-heading">{{ trans('label.auth.main.session2.title')  }}</h2>
                                                 <hr class="primary">
                                             </div>
                                         </div>
@@ -145,34 +141,30 @@
                                         <div class="row">
                                             <div class="col-lg-3 col-md-6 text-center">
                                                 <div class="service-box">
-                                                    <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>
-                                                    <h3>Sturdy Templates</h3>
-                                                    <p class="text-muted">Our templates are updated regularly so they
-                                                        don't break.</p>
+                                                    <i class="fa fa-4x fa-book text-primary sr-icons"></i>
+                                                    <h3>{{ trans('label.auth.main.session2.content.one')  }}</h3>
+                                                    <p class="text-muted">{{ trans('label.auth.main.session2.content.title_one')  }}</p>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-6 text-center">
                                                 <div class="service-box">
-                                                    <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
-                                                    <h3>Ready to Ship</h3>
-                                                    <p class="text-muted">You can use this theme as is, or you can make
-                                                        changes!</p>
+                                                    <i class="fa fa-4x fa-share  text-primary sr-icons"></i>
+                                                    <h3>{{ trans('label.auth.main.session2.content.two')  }}</h3>
+                                                    <p class="text-muted">{{ trans('label.auth.main.session2.content.title_two')  }}</p>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-6 text-center">
                                                 <div class="service-box">
-                                                    <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
-                                                    <h3>Up to Date</h3>
-                                                    <p class="text-muted">We update dependencies to keep things
-                                                        fresh.</p>
+                                                    <i class="fa fa-4x fa-globe text-primary sr-icons"></i>
+                                                    <h3>{{ trans('label.auth.main.session2.content.three')  }}</h3>
+                                                    <p class="text-muted">{{ trans('label.auth.main.session2.content.title_three')  }}</p>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-6 text-center">
                                                 <div class="service-box">
                                                     <i class="fa fa-4x fa-heart text-primary sr-icons"></i>
-                                                    <h3>Made with Love</h3>
-                                                    <p class="text-muted">You have to make your websites with love these
-                                                        days!</p>
+                                                    <h3>{{ trans('label.auth.main.session2.content.four')  }}</h3>
+                                                    <p class="text-muted">{{ trans('label.auth.main.session2.content.title_four')  }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -291,9 +283,9 @@
                                 <aside class="bg-dark">
                                     <div class="container text-center">
                                         <div class="call-to-action">
-                                            <h2>Sử dụng miễn phí</h2>
+                                            <h2>{{ trans('label.auth.main.session3.title')  }}</h2>
                                             <a href="{{ url('/login') }}"
-                                               class="btn btn-default btn-xl sr-button">Đăng nhập</a>
+                                               class="btn btn-default btn-xl sr-button">{{trans('label.auth.login.title')}}</a>
                                         </div>
                                     </div>
                                 </aside>
@@ -302,11 +294,9 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-lg-8 col-lg-offset-2 text-center">
-                                                <h2 class="section-heading">Let's Get In Touch!</h2>
+                                                <h2 class="section-heading">{{ trans('label.auth.main.session4.title')  }}</h2>
                                                 <hr class="primary">
-                                                <p>Ready to start your next project with us? That's great! Give us a
-                                                    call or send us an email and we will get back to you as soon as
-                                                    possible!</p>
+                                                <p>{{ trans('label.auth.main.session4.content')  }}</p>
                                             </div>
                                             <div class="col-lg-4 col-lg-offset-2 text-center">
                                                 <i class="fa fa-phone fa-3x sr-contact"></i>

@@ -77,12 +77,29 @@ return [
         'restart' => 'Làm lại',
         'submit' => 'Nộp bài',
         'start' => 'Bắt đầu',
-        'stop' => 'Dừng'
+        'stop' => 'Dừng',
+        'confirm_restart' => 'Bạn có muốn tiếp tục không?',
+        'heading' => [
+            'test_reading' => 'Luyện kỹ năng đọc',
+            'test_listening' => 'Luyện kỹ năng nghe',
+            'test_speaking' => 'Luyện kỹ năng nói',
+            'result' => 'Kết quả',
+        ],
+        'no_data' => 'Chưa có dữ liệu',
     ],
     'skills' => [
         'speaking' => 'Kỹ năng nói',
         'reading' => 'Kỹ năng đọc',
         'listening' => 'Kỹ năng nghe',
+        'title' => [
+            'read' => 'Đọc',
+            'listen' => 'Nghe',
+            'speak' => 'Nói',
+            'scale' => 'Thang điểm',
+            'order' => 'Lần thi',
+            'point' => 'Điểm',
+            'date' => 'Ngày thi'
+        ]
     ],
     'user' => [
         'profile' => 'THÔNG TIN CÁ NHÂN',
@@ -113,6 +130,47 @@ return [
             'student_type' => 'HỌC SINH',
             'author_type' => 'TÁC GIẢ',
             'class' => 'Chọn lớp',
+        ],
+        'main' => [
+            'session1' => [
+                'title' => 'Hãy đến với chúng tôi',
+                'content' => 'EStore là nơi để các bạn cùng nhau trao đổi kiến thức môn tiếng Anh các bậc tiểu học, trung học cơ sở và trung học phổ thông. Từ những kiến thức được kiểm duyệt, các em học sinh sẽ tự rèn luyện kỹ năng tiếng Anh của mình với những kiến thức đó.',
+            ],
+            'session2' => [
+                'title' => 'Cung cấp cho bạn', // AT YOUR SERVICE
+                'content' => [
+                    'one' => 'Luyện các kỹ năng',
+                    'title_one' => 'Các bạn được luyện 3 kỹ năng nghe, đọc và nói theo lớp',
+                    'two' => 'Chia sẻ kiến thức',
+                    'title_two' => 'Bất kỳ ai cũng có thể chia sẻ kiến thức về tiếng Anh các bậc Tiểu học, Trung học cơ sở 
+                    và Trung học phổ thông',
+                    'three' => 'Kết nối mọi người',
+                    'title_three' => 'Là trang mạng xã hội, nơi mọi người có thể gắn kết với nhau',
+                    'four' => 'Cập nhật liên tục',
+                    'title_four' => 'Kiến thức được cập nhật liên tục',
+                ],
+            ],
+            'session3' => [
+                'title' => 'Sử dụng miễn phí', // AT YOUR SERVICE
+                'content' => [
+                    'one' => 'Luyện các kỹ năng',
+                    'two' => 'Chia sẻ kiến thức',
+                    'three' => 'Kết nối mọi người',
+                    'four' => 'Cập nhật liên tục'
+                ],
+            ],
+            'session4' => [
+                'title' => 'Liên hệ', // AT YOUR SERVICE
+                'content' => 'Hãy liên hệ với chúng tôi nếu bạn có bất cứ đóng góp hoặc thắc mắc gì về trang web.',
+            ]
         ]
+    ],
+    'table' => [
+        'view' => 'Xem',
+        'record' => 'kết quả',
+        'search' => 'Tìm kiếm',
+        'no_record' => 'Không có kết quả',
+        'first' => 'Đầu',
+        'last' => 'Cuối'
     ]
 ];

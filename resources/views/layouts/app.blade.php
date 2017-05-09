@@ -341,19 +341,19 @@
             responsive: true,
             language: {
                 "sProcessing": "Đang xử lý...",
-                "sLengthMenu": "Xem _MENU_ kết quả",
-                "sZeroRecords": "Không có kết quả ",
+                "sLengthMenu": "{{ trans('label.table.view')  }}  _MENU_  {{ trans('label.table.record')  }}",
+                "sZeroRecords": "{{ trans('label.table.no_record')  }} ",
                 "sInfo": "",
                 "sInfoEmpty": "",
-                "sInfoFiltered": "(được lọc từ _MAX_ kết quả)",
+                "sInfoFiltered": "",
                 "sInfoPostFix": "",
-                "sSearch": "Tìm kiếm ",
+                "sSearch": "{{ trans('label.table.search')  }} ",
                 "sUrl": "",
                 "oPaginate": {
-                    "sFirst": "Đầu",
+                    "sFirst": "{{ trans('label.table.first')  }} ",
                     "sPrevious": "<<",
                     "sNext": ">>",
-                    "sLast": "Cuối"
+                    "sLast": "{{ trans('label.table.last')  }} "
                 }
             },
             aLengthMenu: [

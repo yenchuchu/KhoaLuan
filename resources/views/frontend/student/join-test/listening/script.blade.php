@@ -259,12 +259,12 @@
 
         swal({
                     title: "",
-                    text: " Bạn có muốn tiếp tục không?",
+                    text: " {{ trans('label.frontend.confirm_restart')  }}",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Làm lại",
-                    cancelButtonText: "Tiếp tục",
+                    confirmButtonText: "{{ trans('label.frontend.restart')  }}",
+                    cancelButtonText: "{{ trans('label.frontend.continue')  }}",
                     closeOnConfirm: true,
                     closeOnCancel: true
                 },

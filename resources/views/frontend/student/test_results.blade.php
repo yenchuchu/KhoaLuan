@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('header')
-    <h1 class="page-header">Test Speak</h1>
-@stop
-
 @section('style-menu-main')
     <style>
         #home-id .col-lg-6 {
@@ -44,22 +40,22 @@
 
 @section('content')
     <div class="container" style="padding-left: 0">
-        <div><h3>Kết quả</h3></div>
+        <div><h3>{{ trans('label.frontend.heading.result')  }}</h3></div>
         <div class="row">
             <div class="col-lg-4">
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Đọc / Thang điểm 30
+                        {{ trans('label.skills.title.read')  }} / {{ trans('label.skills.title.scale')  }} 30
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive" id="reload-table-results">
                             <table class="table table-hover" id="manager_results_users">
                                 <thead>
                                 <tr>
-                                    <th>Lần thi</th>
-                                    <th align="center">Điểm</th>
-                                    <th align="center">Ngày Thi</th>
+                                    <th>{{ trans('label.skills.title.order')  }}</th>
+                                    <th align="center">{{ trans('label.skills.title.point')  }}</th>
+                                    <th align="center">{{ trans('label.skills.title.date')  }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -84,16 +80,16 @@
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Nghe / Thang điểm 30
+                        {{ trans('label.skills.title.listen')  }} / {{ trans('label.skills.title.scale')  }} 30
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive" id="reload-table-listening-results">
                             <table class="table table-hover" id="manager_results_listening_users">
                                 <thead>
                                 <tr>
-                                    <th>Lần thi</th>
-                                    <th align="center">Điểm</th>
-                                    <th align="center">Ngày Thi</th>
+                                    <th>{{ trans('label.skills.title.order')  }}</th>
+                                    <th align="center">{{ trans('label.skills.title.point')  }}</th>
+                                    <th align="center">{{ trans('label.skills.title.date')  }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -118,16 +114,16 @@
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Nói / Thang điểm 10
+                        {{ trans('label.skills.title.speak')  }} / {{ trans('label.skills.title.scale')  }} 10
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive" id="reload-table-speaking-results">
                             <table class="table table-hover" id="manager_results_speaking_users">
                                 <thead>
                                 <tr>
-                                    <th>Lần thi</th>
-                                    <th align="center">Điểm</th>
-                                    <th align="center">Ngày Thi</th>
+                                    <th>{{ trans('label.skills.title.order')  }}</th>
+                                    <th align="center">{{ trans('label.skills.title.point')  }}</th>
+                                    <th align="center">{{ trans('label.skills.title.date')  }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

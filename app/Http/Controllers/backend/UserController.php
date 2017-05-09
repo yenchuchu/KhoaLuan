@@ -70,7 +70,7 @@ class UserController extends Controller
     {
         $user_id = $request->all();
         $user = User::whereId($user_id)->with('roles', 'socials')->first();
-
+dd($user);
 //        if (count($user) != 1) {
 //            return response()->json([
 //                'code' => 404,

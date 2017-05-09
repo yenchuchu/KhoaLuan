@@ -126,6 +126,10 @@ aside {
     background-color: transparent
 }
 
+.navbar-default .change-language i {
+    color: white;
+}
+
 @media (min-width: 768px) {
     .navbar-default {
         background-color:  #222;
@@ -176,6 +180,10 @@ aside {
 
     .navbar-default.affix .nav > li > a:focus:hover, .navbar-default.affix .nav > li > a:hover {
         color: #F05F40
+    }
+
+    .navbar-default.affix .change-language i {
+        color: black;
     }
 }
 

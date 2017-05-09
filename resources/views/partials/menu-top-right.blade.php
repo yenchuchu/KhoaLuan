@@ -1,3 +1,8 @@
+<div class="change-language">
+
+    @include('partials.change-langages')
+</div>
+
 @if (Auth::guest())
     <ul class="nav navbar-nav navbar-right">
         <li class="guest-app"><a href="{{ url('/login') }}">{{trans('label.auth.login.title')}}</a></li>

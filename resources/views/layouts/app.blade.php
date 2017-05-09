@@ -173,6 +173,35 @@
             font-size: 16px;
         }
 
+        .change-language {
+            float: right;
+            margin-top: 18px;
+            margin-left: 35px;
+        }
+
+        .change-language li {
+            list-style: none;
+        }
+        @if (!Auth::guest())
+        @if( Auth::user()->hasRole('AU') ||  Auth::user()->hasRole('ST'))
+
+            .change-language {
+                float: right;
+                margin-top: 23px;
+                position: relative;
+                left: 30px;
+            }
+
+        .change-language a {
+            color: white;
+        }
+        .change-language a:hover {
+            color: #18BC9C;
+        }
+        @endif
+        @endif
+
+
     </style>
 
 </head>

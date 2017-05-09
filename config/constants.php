@@ -28,7 +28,7 @@ return [
 //    'point' => 25,
     'sum_point' => 30,
     'max_exam' => 3, // số bài trong 1 đề, các kỹ năng nghe -đọc có số bài giống nhau.
-    'time_start' => 3600, // 60 phuts cho 1 bai thi
+    'time_start' => 1200, // 60 phuts cho 1 bai thi
     'lama' => [
         '1' => 'I',
         '2' => 'II',

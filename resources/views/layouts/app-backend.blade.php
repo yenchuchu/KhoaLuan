@@ -211,6 +211,28 @@
             border-bottom: 1px solid #ddd;
         }
 
+        @if (!Auth::guest())
+
+            .change-language {
+            float: right !important;
+            margin-top: 20px !important;
+            position: relative;
+            left: 13px;
+        }
+
+        .change-language li {
+            list-style: none;
+        }
+
+        .change-language a {
+            color: white;
+        }
+        .change-language a:hover {
+            color: #18BC9C !important;
+        }
+        @endif
+
+
     </style>
 
 </head>
@@ -609,7 +631,6 @@
 </script>
 
 @yield('script')
-
 </body>
 
 </html>

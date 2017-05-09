@@ -6,6 +6,10 @@ use App\Classes;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
@@ -13,6 +17,7 @@ class DashboardController extends Controller
     public function index()
     {
         $classes = Classes::all();
+//        dd(Config::get('language'));
 //        dd($classes);
         return view('dashboard.test_design');
     }
@@ -69,5 +74,12 @@ class DashboardController extends Controller
         return view('frontend.highschool.index');
     }
 
+    public function switchLang($lang)
+    {
+        if (array_key_exists($lang, Config::get('language'))) {
+            Session::set('applocale', $lang);
+        }
+        return Redirect::back();
+    }
 
 }

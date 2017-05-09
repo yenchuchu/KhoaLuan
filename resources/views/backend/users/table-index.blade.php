@@ -24,8 +24,8 @@
                             <td>{{$user->full_name}}</td>
                             <td>{{$user->email}}</td>
                             <td class="center">
-                                <?php $class = $user->classes()->first(); dd($class);
-                                if(!empty($class)) { ?>
+                                <?php $class = $user->classes()->first();
+                                if($class != null) { ?>
                                 {{$class->title}}
                                 <?php } else { ?>
                                 <span class="huge-null">null</span>

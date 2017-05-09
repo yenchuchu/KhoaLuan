@@ -72,12 +72,12 @@ class UserController extends Controller
         $user = User::whereId($user_id)->with('roles', 'socials')->first();
 
         $check_delete = $user->delete();
-dd($check_delete);
+
         $data = [];
         if($check_delete == true) {
             Mail::send('emails.messages-noti',  [$data], function ($message)
             {
-                $message->to('hienctt@omt.vn', 'Thuy Hien')->subject('[EStore] Thông báo khóa tài khoản');
+                $message->to('xliucuxiux@gmail.com', 'Thuy Hien')->subject('[EStore] Thông báo khóa tài khoản');
             });
         }
 

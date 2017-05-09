@@ -40,11 +40,37 @@ class StudentController extends Controller
 
     public function index()
     {
-        $class_id = Auth::user()->class_id;
+        $user = Auth::user();
+        $class_id = $user->class_id;
         $levels = $this->levels;
         $set_menu = 'Home';
 
-        return view('frontend.student.index', compact('class_id', 'levels', 'set_menu'));
+        $results = UserSkill::where(['user_id' => $user->id])
+            ->orderBy('created_at', 'DESC')->get();
+        foreach ($results as $result) {
+            $max_test_id = explode('_', $result->test_id);
+            $result->test_id = $max_test_id[1];
+            $result->point = $result->point;
+            $result->level_id = $result->level_id;
+        }
+
+        $all_results['Read'] = $results->filter(function ($result) {
+            return $result->skill_id == $this->getSkillIdByCode('Read');
+        });
+        $results_read = $all_results['Read']->first();
+
+        $all_results['Listen'] = $results->filter(function ($result) {
+            return $result->skill_id == $this->getSkillIdByCode('Listen');
+        });
+        $results_listen = $all_results['Listen']->first();
+
+        $all_results['Speak'] = $results->filter(function ($result) {
+            return $result->skill_id == $this->getSkillIdByCode('Speak');
+        });
+        $results_speak = $all_results['Speak']->first();
+
+        return view('frontend.student.index',
+            compact('class_id', 'levels', 'set_menu', 'results_read', 'results_listen', 'results_speak'));
     }
 
     public function learn_speak()
@@ -206,12 +232,17 @@ class StudentController extends Controller
         }
 
         $count_words_old = str_word_count($old);
-        $count_words_similar = $count_words_old - $count_words_diff;
 
-        if ($count_words_diff < $count_words_similar) {
-            $ret['point'] = 10 - ($count_words_diff * 10) / $count_words_similar;
+        if($count_words_diff == 0) {
+            $count_words_similar = str_word_count($ret['check_new']);
+            $ret['point'] = ($count_words_similar * 10) / $count_words_old;
         } else {
-            $ret['point'] = 0;
+            $count_words_similar = $count_words_old - $count_words_diff;
+            if ($count_words_diff < $count_words_similar) {
+                $ret['point'] = 10 - ($count_words_diff * 10) / $count_words_similar;
+            } else {
+                $ret['point'] = 0;
+            }
         }
 
         return $ret;

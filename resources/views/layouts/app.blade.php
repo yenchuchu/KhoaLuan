@@ -124,7 +124,7 @@
         #dropdown-menu-top {
             position: relative;
             display: inline-block;
-            left: 78%;
+            left: 75%;
             margin-top: 15px;
         }
 
@@ -361,7 +361,7 @@
                 [10, 30, 60, 100, "All"]
             ],
             iDisplayLength: 10,
-//            "order": [[1, 'asc']]
+            "order": [[2, 'desc']]
         });
 
 //        set_name.on('order.dt search.dt', function () {

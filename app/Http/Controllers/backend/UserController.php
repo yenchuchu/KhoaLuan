@@ -70,12 +70,14 @@ class UserController extends Controller
     {
         $user_id = $request->all();
         $user = User::whereId($user_id)->with('roles', 'socials')->first();
-//        if (count($user) != 1) {
-//            return response()->json([
-//                'code' => 404,
-//                'message' => 'Không tìm thấy người dùng!',
-//            ]);
-//        }
+        $user_email = $user->email;
+        $user_name = $user->user_name;
+        if (count($user) != 1) {
+            return response()->json([
+                'code' => 404,
+                'message' => 'Không tìm thấy người dùng!',
+            ]);
+        }
         $roles = $user->roles()->get();
 
         if (!isset($roles)) {
@@ -89,7 +91,6 @@ class UserController extends Controller
         foreach ($roles as $rol) {
             $roles_ids[] = $rol->id;
         }
-        dd($roles_ids);
 
         $user->roles()->detach($roles_ids);
 
@@ -101,17 +102,18 @@ class UserController extends Controller
 
         $check_delete = $user->delete();
 
+        $data = [];
         if($check_delete == true) {
-            Mail::send('emails.messages-noti',  ['user' => $user], function ($message) use ($user)
+            Mail::send('emails.messages-noti',  [$data], function ($message) use ($user_email, $user_name)
             {
-                $message->to($user->email, $user->user_name)->subject('[EStore] Thông báo khóa tài khoản');
+                $message->to($user_email, $user_name)->subject('[EStore] Thông báo khóa tài khoản');
             });
         }
 
-        $user = $this->type_user();
-        $user_author = $user['user_author'];
-        $user_student = $user['user_student'];
-        $user_admin = $user['user_admin'];
+        $user_all = $this->type_user();
+        $user_author = $user_all['user_author'];
+        $user_student = $user_all['user_student'];
+        $user_admin = $user_all['user_admin'];
 
         return view('backend.users.table-index', compact('user_author', 'user_student', 'user_admin'));
     }

@@ -70,8 +70,10 @@ class UserController extends Controller
     {
         $user_id = $request->all();
         $user = User::whereId($user_id)->with('roles', 'socials')->first();
+
         $user_email = $user->email;
         $user_name = $user->user_name;
+
         if (count($user) != 1) {
             return response()->json([
                 'code' => 404,

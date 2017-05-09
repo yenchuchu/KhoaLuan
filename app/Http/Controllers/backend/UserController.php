@@ -77,7 +77,6 @@ class UserController extends Controller
 //            ]);
 //        }
         $roles = $user->roles()->get();
-        dd($roles);
 
         if (!isset($roles)) {
             return response()->json([
@@ -90,6 +89,8 @@ class UserController extends Controller
         foreach ($roles as $rol) {
             $roles_ids[] = $rol->id;
         }
+        dd($roles_ids);
+
         $user->roles()->detach($roles_ids);
 
         // kiểm tra nếu là tài khoản login fb -> xóa liên kết.

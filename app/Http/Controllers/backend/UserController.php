@@ -70,6 +70,7 @@ class UserController extends Controller
     {
         $user_id = $request->all();
         $user = User::whereId($user_id)->with('roles', 'socials')->first();
+        $user_id = $user->id;
 
         if (count($user) != 1) {
             return response()->json([
@@ -93,7 +94,7 @@ class UserController extends Controller
         $user->roles()->detach($roles_ids);
 
         // kiểm tra nếu là tài khoản login fb -> xóa liên kết.
-        $check_account_fb = Social::where(['user_id' => $user->id])->first();
+        $check_account_fb = Social::where(['user_id' => $user_id])->first();
         if($check_account_fb) {
             $check_account_fb->delete();
         }

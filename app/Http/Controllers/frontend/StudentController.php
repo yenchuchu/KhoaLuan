@@ -47,27 +47,47 @@ class StudentController extends Controller
 
         $results = UserSkill::where(['user_id' => $user->id])
             ->orderBy('created_at', 'DESC')->get();
-        foreach ($results as $result) {
-            $max_test_id = explode('_', $result->test_id);
-            $result->test_id = $max_test_id[1];
-            $result->point = $result->point;
-            $result->level_id = $result->level_id;
+
+        if(!empty($results)) {
+            foreach ($results as $result) {
+                $max_test_id = explode('_', $result->test_id);
+                $result->test_id = $max_test_id[1];
+                $result->point = $result->point;
+                $result->level_id = $result->level_id;
+            }
+
+            $all_results['Read'] = $results->filter(function ($result) {
+                return $result->skill_id == $this->getSkillIdByCode('Read');
+            });
+            if(!empty($all_results['Read'])) {
+                $results_read = $all_results['Read']->first();
+            } else {
+                $results_read = null;
+            }
+
+            $all_results['Listen'] = $results->filter(function ($result) {
+                return $result->skill_id == $this->getSkillIdByCode('Listen');
+            });
+            if(!empty($all_results['Listen'])) {
+                $results_listen = $all_results['Listen']->first();
+            } else {
+                $results_listen = null;
+            }
+
+            $all_results['Speak'] = $results->filter(function ($result) {
+                return $result->skill_id == $this->getSkillIdByCode('Speak');
+            });
+            if(!empty($all_results['Speak'])) {
+                $results_speak = $all_results['Speak']->first();
+            } else {
+                $results_speak = null;
+            }
+        } else {
+            $results_speak = null;
+            $results_read = null;
+            $results_listen = null;
         }
 
-        $all_results['Read'] = $results->filter(function ($result) {
-            return $result->skill_id == $this->getSkillIdByCode('Read');
-        });
-        $results_read = $all_results['Read']->first();
-
-        $all_results['Listen'] = $results->filter(function ($result) {
-            return $result->skill_id == $this->getSkillIdByCode('Listen');
-        });
-        $results_listen = $all_results['Listen']->first();
-
-        $all_results['Speak'] = $results->filter(function ($result) {
-            return $result->skill_id == $this->getSkillIdByCode('Speak');
-        });
-        $results_speak = $all_results['Speak']->first();
 
         return view('frontend.student.index',
             compact('class_id', 'levels', 'set_menu', 'results_read', 'results_listen', 'results_speak'));
@@ -634,7 +654,7 @@ class StudentController extends Controller
             $add_user_skill->status = 1;
             $add_user_skill->test_id = $test_id;
 
-            $add_user_skill->point = $point;
+            $add_user_skill->point = round($point, 2) ;
             $add_user_skill->skill_id = $skill_id;
 
             $add_user_skill->save();
@@ -997,7 +1017,7 @@ class StudentController extends Controller
             $add_user_skill->status = 1;
             $add_user_skill->test_id = $test_id;
 
-            $add_user_skill->point = $point_total;
+            $add_user_skill->point = round($point_total, 2);
             $add_user_skill->skill_id = $skill_id;
 
             $add_user_skill->save();

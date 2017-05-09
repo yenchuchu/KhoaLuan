@@ -70,7 +70,6 @@ class UserController extends Controller
     {
         $user_id = $request->all();
         $user = User::whereId($user_id)->with('roles', 'socials')->first();
-        $user_id = $user->id;
 
         if (count($user) != 1) {
             return response()->json([
